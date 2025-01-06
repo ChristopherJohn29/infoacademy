@@ -1,5 +1,4 @@
 <?php
-#[AllowDynamicProperties]
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Control extends CI_Controller
