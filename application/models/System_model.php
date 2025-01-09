@@ -103,21 +103,21 @@ class System_model extends CI_Model
     public function fetchAllPublishedTrainingsBySearch($search, $id) {
         $this->db->select('*');
         $this->db->where('status', 1);
-
+    
         if (intval($id) != 0) {
             $this->db->where('category_id', intval($id)); 
         }
-
-        $this->db->like('training_title', $search, 'both');  // 'both' means matches anywhere in the title
+    
+        // Set escape to FALSE to avoid ESCAPE '!'
+        $this->db->like('training_title', $search, 'both', FALSE);
         
         $this->db->from('training');
-
-        
         $result = $this->db->get()->result_array();
-
+    
+        // Debugging the query
         echo $this->db->last_query();
-
-        exit;
+    
+        return $result;
     }
 
     public function fetchAllCoupon(){
