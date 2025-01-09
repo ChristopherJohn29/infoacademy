@@ -272,6 +272,24 @@
                     </tbody>
                 </table>
 
+              
+            </div>
+
+                <!-- /.card-footer-->
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addSubCategoryLabel">
+                        Add Sub Category
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+
+            <div class="card-body">
+           
                 <!-- Subcategories Table -->
                 <table id="subcategoryTable" class="table table-bordered table-striped">
                     <thead>
@@ -332,6 +350,11 @@
 <script>
     $(function () {
         $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+
+        $("#subcategoryTable").DataTable({
             "responsive": true,
             "autoWidth": false,
         });
