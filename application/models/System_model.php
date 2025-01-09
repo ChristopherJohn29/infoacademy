@@ -112,10 +112,12 @@ class System_model extends CI_Model
         
         $this->db->from('training');
 
+        
+        $result = $this->db->get()->result_array();
+
         echo $this->db->last_query();
 
         exit;
-        $result = $this->db->get()->result_array();
     }
 
     public function fetchAllCoupon(){
