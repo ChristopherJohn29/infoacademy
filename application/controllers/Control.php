@@ -26,8 +26,17 @@ class Control extends CI_Controller
     }
 
     public function trainings()
-    {
-        $this->load->view('trainings');
+    {   
+
+        if(isset($_GET['c'])){
+            $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsByCategory($_GET['c']); 
+        } else {
+            $data['trainings'] = $this->System_model->fetchAllPublishedTrainings();
+        }
+
+     
+
+        $this->load->view('trainings', );
     }
 
     public function contact()

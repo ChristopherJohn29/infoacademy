@@ -89,6 +89,17 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function fetchAllPublishedTrainingsByCategory($id = 0)
+    {
+        $this->db->select('*');
+        $this->db->where('status', 1);
+        $this->db->where('category_id', $id);
+        $this->db->from('training');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+    }
+
     public function fetchAllCoupon(){
 
         $this->db->select('*');
