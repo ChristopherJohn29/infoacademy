@@ -103,8 +103,11 @@ class System_model extends CI_Model
     public function fetchAllPublishedTrainingsBySearch($search, $id) {
         $this->db->select('*');
         $this->db->where('status', 1);
-        $this->db->where('category_id', $id);
         
+        if ($id != 0) {
+            $this->db->where('category_id', $id); 
+        }
+
         if (!empty($search)) {
             $this->db->like('training_title', $search);  // Use LIKE for training_title
         }
