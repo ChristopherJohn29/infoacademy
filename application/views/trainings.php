@@ -43,18 +43,23 @@
                 <!-- Trainings Main Content -->
                 <div class="col-lg-8">
                     <div class="courses_search_container">
-                        <form action="<?=base_url('control/trainings')?>" method="post" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+                        <form action="<?= base_url('control/trainings') ?>" method="post" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
                             <input type="search" class="courses_search_input" name="search" placeholder="Search Trainings" required="required">
+                            
                             <select id="courses_search_select" name="category" class="courses_search_select courses_search_input">
                                 <option value="0">All Categories</option>
                                 <?php
                                     $categories = $this->System_model->fetchAllCategories();
-
                                     foreach ($categories as $category) { ?>
-                                        <option value="<?=$category['id']?>"><?= $category['category_name'] ?></option>
-                                    <?php } ?>
+                                        <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                                <?php } ?>
                             </select>
-                            <button action="submit" class="courses_search_button ml-auto">search now</button>
+
+                            <select id="courses_search_subcategory" name="subcategory" class="courses_search_select courses_search_input" disabled>
+                                <option value="0">Select Subcategory</option>
+                            </select>
+
+                            <button type="submit" class="courses_search_button ml-auto">Search Now</button>
                         </form>
                     </div>
                     <div class="courses_container">
@@ -214,5 +219,42 @@
 <script src="<?php echo base_url() . '/assets/unicat/plugins/' ?>parallax-js-master/parallax.min.js"></script>
 <script src="<?php echo base_url() . '/assets/unicat/plugins/' ?>colorbox/jquery.colorbox-min.js"></script>
 <script src="<?php echo base_url() . '/assets/unicat/js/' ?>courses.js"></script>
+<script>
+    $(document).ready(function () {
+        // Listen for category change
+        $('#courses_search_select').on('change', function () {
+            var categoryId = $(this).val();
+            
+            // Reset subcategory dropdown
+            $('#courses_search_subcategory').html('<option value="0">Select Subcategory</option>').prop('disabled', true);
+            
+            // If a category is selected, fetch the subcategories
+            if (categoryId != '0') {
+                $.ajax({
+                    url: '<?= base_url("control/getSubCategories") ?>', // URL to your controller method
+                    method: 'POST',
+                    data: { category_id: categoryId },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            var subcategoryOptions = '<option value="0">Select Subcategory</option>';
+                            $.each(response.subcategories, function (index, subcategory) {
+                                subcategoryOptions += '<option value="' + subcategory.id + '">' + subcategory.name + '</option>';
+                            });
+                            $('#courses_search_subcategory').html(subcategoryOptions).prop('disabled', false);
+                        } else {
+                            alert('No subcategories found.');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while fetching subcategories.');
+                    }
+                });
+            }
+        });
+    });
+
+
+</script>
 </body>
 </html>

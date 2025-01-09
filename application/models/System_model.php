@@ -100,21 +100,30 @@ class System_model extends CI_Model
         return $result;
     }
 
-    public function fetchAllPublishedTrainingsBySearch($search, $id) {
+    public function fetchAllPublishedTrainingsBySearch($subcategory, $category, $searchTerm)
+    {
         $this->db->select('*');
-        $this->db->where('status', 1);
-    
-        if (intval($id) != 0) {
-            $this->db->where('category_id', intval($id)); 
-        }
-    
-        // Set escape to FALSE to avoid ESCAPE '!'
-        $this->db->like('training_title', html_escape($search), 'both', FALSE);
+        $this->db->from('trainings');
         
-        $this->db->from('training');
-        $result = $this->db->get()->result_array();
-    
-        return $result;
+        // Apply search term filtering
+        if (!empty($searchTerm)) {
+            $this->db->like('training_title', html_escape($search), 'both', FALSE);
+        }
+        
+        // Apply category filtering
+        if ($category != '0') {
+            $this->db->where('category_id', $category);
+        }
+        
+        // Apply subcategory filtering
+        if ($subcategory != '0') {
+            $this->db->where('subcategory_id', $subcategory);
+        }
+        
+        $this->db->where('status', 'published');  // assuming you only want published trainings
+        $query = $this->db->get();
+        
+        return $query->result_array();
     }
 
     public function fetchAllCoupon(){
@@ -354,6 +363,14 @@ class System_model extends CI_Model
     public function deleteSubCategory($id) {
         return $this->db->delete('sub_categories', ['id' => $id]);
     }
-  
+    
+    public function fetchSubCategoriesByCategory($categoryId) {
+        $this->db->select('id, name');
+        $this->db->from('sub_categories');
+        $this->db->where('category_id', $categoryId);
+        $query = $this->db->get();
+        
+        return $query->result_array();
+    }
 
 }

@@ -27,17 +27,27 @@ class Control extends CI_Controller
 
     public function trainings()
     {   
-        if(isset($_POST['search'])) {
-            $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsBySearch($_POST['search'], $_POST['category']); 
-        } else if(isset($_GET['c'])){
-            $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsByCategory($_GET['c']); 
-        } else  {
+        // Check if the search form is submitted
+        if (isset($_POST['search'])) {
+            // Retrieve the category and subcategory from the form input
+            $category = $_POST['category'];
+            $subcategory = isset($_POST['subcategory']) && $_POST['subcategory'] != '' ? $_POST['subcategory'] : 0;
+        
+            // Fetch trainings based on search term, category, and subcategory
+            $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsBySearch($subcategory, $category, $_POST['search']);
+        }
+        // If there's a category parameter passed via GET
+        else if (isset($_GET['c'])) {
+            $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsByCategory($_GET['c']);
+        } 
+        else {
+            // Fetch all trainings if no filter is applied
             $data['trainings'] = $this->System_model->fetchAllPublishedTrainings();
         }
-
+    
+        // Load the trainings view with the fetched data
         $this->load->view('trainings', $data);
     }
-
     public function contact()
     {
         $this->load->view('contact');
@@ -431,6 +441,23 @@ class Control extends CI_Controller
 
         } else {
             redirect('control');
+        }
+    }
+
+    public function getSubCategories() {
+        $categoryId = $this->input->post('category_id');
+        
+        // Fetch subcategories based on the selected category
+        $subcategories = $this->System_model->fetchSubCategoriesByCategory($categoryId);
+
+        // Prepare the response
+        if ($subcategories) {
+            echo json_encode([
+                'status' => 'success',
+                'subcategories' => $subcategories
+            ]);
+        } else {
+            echo json_encode(['status' => 'error']);
         }
     }
 }
