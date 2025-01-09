@@ -100,7 +100,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Categroy Name</th>
+                            <th>Category Name</th>
                         </tr>
                         </thead>
                         <tbody>
