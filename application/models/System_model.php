@@ -287,6 +287,17 @@ class System_model extends CI_Model
         // Insert into the database
         return $this->db->insert('categories', $data);
     }
+
+    public function updateCategory($id, $name) {
+        $this->db->where('id', $id);
+        return $this->db->update('categories', ['category_name' => $name]);
+    }
+    
+    public function deleteCategory($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete('categories');
+    }
+    
   
 
 }

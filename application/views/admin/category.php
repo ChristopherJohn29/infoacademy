@@ -119,6 +119,33 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form id="editCategoryForm" data-url="<?= base_url('admin/updateCategory') ?>">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="category_id" id="editCategoryId">
+                                <div class="form-group">
+                                    <label for="editCategoryName">Category Name</label>
+                                    <input type="text" class="form-control" name="category_name" id="editCategoryName" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Default box -->
 
             <div class="row mb-2">
@@ -131,31 +158,39 @@
 
             <div class="card">
 
-            <!-- Button to open the modal -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                         <tr>
                             <th>Category Name</th>
+                            <th>Action</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <?php
                         $categories = $this->System_model->fetchAllCategories();
 
-                        foreach ($categories as $category){
-
-
-                            ?>
+                        foreach ($categories as $category) { ?>
                             <tr>
-                                <td><?= $category['category_name']?></td>
+                                <td><?= $category['category_name'] ?></td>
+                                <td>
+                                    <!-- Edit Button -->
+                                    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editCategoryModal" 
+                                            data-id="<?= $category['id'] ?>" data-name="<?= $category['category_name'] ?>">
+                                        Edit
+                                    </button>
+
+                                    <!-- Delete Button -->
+                                    <button class="btn btn-sm btn-danger delete-category" 
+                                            data-id="<?= $category['id'] ?>">
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
 
                 <!-- /.card-footer-->
             </div>
@@ -230,6 +265,71 @@
             });
         });
     });
+
+    $(document).ready(function () {
+        // Open Edit Modal and populate fields
+        $('#editCategoryModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var name = button.data('name');
+
+            $('#editCategoryId').val(id);
+            $('#editCategoryName').val(name);
+        });
+
+        // Handle Edit Form Submission
+        $('#editCategoryForm').on('submit', function (e) {
+            e.preventDefault();
+
+            var url = $(this).data('url');
+            var data = $(this).serialize();
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while updating the category.');
+                }
+            });
+        });
+
+        // Handle Delete Action
+        $('.delete-category').on('click', function () {
+            if (confirm('Are you sure you want to delete this category?')) {
+                var id = $(this).data('id');
+                var url = '<?= base_url("admin/deleteCategory") ?>';
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while deleting the category.');
+                    }
+                });
+            }
+        });
+    });
+
 
 </script>
 

@@ -87,4 +87,40 @@ class Admin extends CI_Controller
         echo json_encode($response);
     }
 
+    public function updateCategory() {
+        $categoryId = $this->input->post('category_id');
+        $categoryName = $this->input->post('category_name');
+    
+        if (empty($categoryId) || empty($categoryName)) {
+            echo json_encode(['status' => 'error', 'message' => 'Category ID and name are required.']);
+            return;
+        }
+    
+        $result = $this->System_model->updateCategory($categoryId, $categoryName);
+    
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'Category updated successfully!']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to update category.']);
+        }
+    }
+    
+    public function deleteCategory() {
+        $categoryId = $this->input->post('id');
+    
+        if (empty($categoryId)) {
+            echo json_encode(['status' => 'error', 'message' => 'Category ID is required.']);
+            return;
+        }
+    
+        $result = $this->System_model->deleteCategory($categoryId);
+    
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'Category deleted successfully!']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to delete category.']);
+        }
+    }
+    
+
 }
