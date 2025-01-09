@@ -197,32 +197,42 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        $('#addCategoryForm').on('submit', function(e) {
+    $(document).ready(function () {
+        $('#addCategoryForm').on('submit', function (e) {
             e.preventDefault(); // Prevent form from submitting normally
-            
+
             // Get the category name
             var categoryName = $('#categoryName').val();
-            var url = $('#addCategoryForm').data('url');
+            var url = $('#addCategoryForm').data('url'); // Ensure this is set to the controller's URL
 
-            // Perform your AJAX call here
+            // Perform your AJAX call
             $.ajax({
-                url: url, // Replace with your server endpoint
+                url: url,
                 method: 'POST',
                 data: { categoryName: categoryName },
-                success: function(response) {
-                    // Handle success (e.g., show a success message or update the category list)
-                    alert('Category added successfully!');
-                    $('#addCategoryModal').modal('hide'); // Close the modal
-                    $('#addCategoryForm')[0].reset(); // Reset the form
+                dataType: 'json', // Expecting JSON response from the server
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Show success message
+                        alert(response.message);
+
+                        // Optionally update the category list here, if needed
+                        $('#addCategoryModal').modal('hide'); // Close the modal
+                        $('#addCategoryForm')[0].reset(); // Reset the form
+                    } else if (response.status === 'error') {
+                        // Show error message
+                        alert(response.message);
+                    }
                 },
-                error: function(xhr) {
-                    // Handle error
-                    alert('An error occurred while adding the category.');
+                error: function (xhr, status, error) {
+                    // Handle unexpected errors
+                    console.error('AJAX Error:', status, error);
+                    alert('An unexpected error occurred. Please try again later.');
                 }
             });
         });
     });
+
 </script>
 
 </body>

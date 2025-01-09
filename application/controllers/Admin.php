@@ -62,4 +62,29 @@ class Admin extends CI_Controller
         $this->load->view('admin/system');
     }
 
+     // Method to handle form submission
+     public function submitCategory() {
+        // Get the category name from POST request
+        $categoryName = $this->input->post('categoryName', TRUE);
+
+        // Validate the input
+        if (empty($categoryName)) {
+            $response = ['status' => 'error', 'message' => 'Category name is required.'];
+            echo json_encode($response);
+            return;
+        }
+
+        // Save the category using the model
+        $isSaved = $this->System_model->saveCategory($categoryName);
+
+        // Prepare response
+        if ($isSaved) {
+            $response = ['status' => 'success', 'message' => 'Category saved successfully!'];
+        } else {
+            $response = ['status' => 'error', 'message' => 'Failed to save category. Please try again.'];
+        }
+
+        echo json_encode($response);
+    }
+
 }

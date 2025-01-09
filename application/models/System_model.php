@@ -277,6 +277,16 @@ class System_model extends CI_Model
 
         return $result;
     }
+
+    public function saveCategory($categoryName) {
+        $data = [
+            'category_name' => $categoryName,
+            'created_at' => date('Y-m-d H:i:s') // Optional: Add a created timestamp
+        ];
+
+        // Insert into the database
+        return $this->db->insert('categories', $data);
+    }
   
 
 }
