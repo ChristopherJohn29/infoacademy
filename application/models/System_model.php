@@ -325,7 +325,35 @@ class System_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->delete('categories');
     }
+
+    public function fetchAllSubCategories() {
+        $this->db->select('sub_categories.*, categories.category_name');
+        $this->db->from('sub_categories');
+        $this->db->join('categories', 'categories.id = sub_categories.category_id');
+        return $this->db->get()->result_array();
+    }
+
     
+    // Add a subcategory
+    public function addSubCategory($categoryId, $name) {
+        $data = [
+            'category_id' => $categoryId,
+            'name' => $name
+        ];
+        return $this->db->insert('sub_categories', $data);
+    }
+
+    // Update a subcategory
+    public function updateSubCategory($id, $name) {
+        $data = ['name' => $name];
+        $this->db->where('id', $id);
+        return $this->db->update('sub_categories', $data);
+    }
+
+    // Delete a subcategory
+    public function deleteSubCategory($id) {
+        return $this->db->delete('sub_categories', ['id' => $id]);
+    }
   
 
 }

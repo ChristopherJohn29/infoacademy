@@ -172,6 +172,72 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="editSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editSubCategoryModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form id="editSubCategoryForm" data-url="<?= base_url('admin/updateSubCategory') ?>">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editSubCategoryModalLabel">Edit Subcategory</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="editSubCategoryId">
+                                <div class="form-group">
+                                    <label for="editCategory">Category</label>
+                                    <select class="form-control" name="category_id" id="editCategory" required>
+                                        <?php foreach ($categories as $category): ?>
+                                            <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editSubCategoryName">Subcategory Name</label>
+                                    <input type="text" class="form-control" name="name" id="editSubCategoryName" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addSubCategoryLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="addSubCategoryForm" data-url="<?=base_url()?>/admin/addSubCategory">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control" id="category" name="category_id" required>
+                                        <?php foreach ($categories as $category): ?>
+                                            <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subCategoryName">Subcategory Name</label>
+                                    <input type="text" class="form-control" id="subCategoryName" name="name" placeholder="Enter subcategory name" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Subcategory</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
 
             <div class="card-body">
@@ -184,8 +250,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $categories = $this->System_model->fetchAllCategories();
-
+                        
                         foreach ($categories as $category) { ?>
                             <tr>
                                 <td><?= $category['category_name'] ?></td>
@@ -204,6 +269,32 @@
                                 </td>
                             </tr>
                         <?php } ?>
+                    </tbody>
+                </table>
+
+                <!-- Subcategories Table -->
+                <table id="subcategoryTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Subcategory Name</th>
+                            <th class="action-column">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($sub_categories as $subcategory): ?>
+                            <tr>
+                                <td><?= $subcategory['category_name'] ?></td>
+                                <td><?= $subcategory['name'] ?></td>
+                                <td class="action-column">
+                                    <button class="btn btn-sm btn-warning edit-subcategory" 
+                                            data-toggle="modal" data-target="#editSubCategoryModal"
+                                            data-id="<?= $subcategory['id'] ?>" data-name="<?= $subcategory['name'] ?>"
+                                            data-category="<?= $subcategory['category_id'] ?>">Edit</button>
+                                    <button class="btn btn-sm btn-danger delete-subcategory" data-id="<?= $subcategory['id'] ?>">Delete</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -340,6 +431,87 @@
                     },
                     error: function () {
                         alert('An error occurred while deleting the category.');
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        // Add Subcategory Form Submit
+        $('#addSubCategoryForm').on('submit', function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: $(this).data('url'),
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while adding the subcategory.');
+                }
+            });
+        });
+
+        // Edit Subcategory Modal
+        $('#editSubCategoryModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var name = button.data('name');
+            var categoryId = button.data('category');
+
+            $('#editSubCategoryId').val(id);
+            $('#editSubCategoryName').val(name);
+            $('#editCategory').val(categoryId);
+        });
+
+        // Edit Subcategory Form Submit
+        $('#editSubCategoryForm').on('submit', function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: $(this).data('url'),
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while editing the subcategory.');
+                }
+            });
+        });
+
+        // Delete Subcategory
+        $('.delete-subcategory').on('click', function () {
+            var id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this subcategory?')) {
+                $.ajax({
+                    url: '<?= base_url('admin/deleteSubCategory') ?>',
+                    method: 'POST',
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
                     }
                 });
             }

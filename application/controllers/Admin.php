@@ -49,6 +49,8 @@ class Admin extends CI_Controller
 
     public function category()
     {
+        $data['categories'] =  $this->System_model->fetchAllCategories();
+        $data['sub_categories'] = $this->System_model->fetchAllSubCategories();
         $this->load->view('admin/category');
     }
 
@@ -120,6 +122,29 @@ class Admin extends CI_Controller
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Failed to delete category.']);
         }
+    }
+
+    // Add a new subcategory
+    public function addSubCategory() {
+        $categoryId = $this->input->post('category_id');
+        $name = $this->input->post('name');
+        $this->System_model->addSubCategory($categoryId, $name);
+        echo json_encode(['status' => 'success', 'message' => 'Subcategory added successfully']);
+    }
+
+    // Update a subcategory
+    public function updateSubCategory() {
+        $id = $this->input->post('id');
+        $name = $this->input->post('name');
+        $this->System_model->updateSubCategory($id, $name);
+        echo json_encode(['status' => 'success', 'message' => 'Subcategory updated successfully']);
+    }
+
+    // Delete a subcategory
+    public function deleteSubCategory() {
+        $id = $this->input->post('id');
+        $this->System_model->deleteSubCategory($id);
+        echo json_encode(['status' => 'success', 'message' => 'Subcategory deleted successfully']);
     }
     
 
