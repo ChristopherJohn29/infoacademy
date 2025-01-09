@@ -72,7 +72,7 @@
             }
             ?>
             <a href="<?= base_url() . 'admin/category' ?>" class="nav-link <?= $active ?>">
-                <i class="nav-icon fa-solid fa-list"></i>
+                <i class="nav-icon fa fa-list"></i>
                 <p>
                     Category </p>
             </a>
