@@ -121,9 +121,11 @@
 
             <!-- Default box -->
 
-            <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addCategoryModal">
+            <div class="text-right">
+                <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addCategoryModal">
                     Add Category
                 </button>
+            </div>
             <div class="card">
 
             <!-- Button to open the modal -->
