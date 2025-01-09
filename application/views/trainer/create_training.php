@@ -679,24 +679,27 @@
             $.ajax({
                 url: '<?= base_url('trainer/get_subcategories_by_category') ?>', // Update with the correct URL to fetch subcategories
                 type: 'POST',
+                dataType: 'json', // Enforce JSON parsing
                 data: {category_id: category_id},
                 success: function(response) {
-                    console.log(response); // Log the response to check the data structure
-
+                    console.log('Response:', response);
                     var subcategory_select = $('#subcategory');
                     subcategory_select.empty();
                     subcategory_select.append('<option value="0">All Subcategories</option>');
 
-                    // Check if response is an array
                     if (Array.isArray(response)) {
                         $.each(response, function(index, subcategory) {
                             subcategory_select.append('<option value="'+subcategory.id+'">'+subcategory.name+'</option>');
                         });
                     } else {
-                        console.error("Response is not an array", response); // Log the invalid response
+                        console.error("Response is not an array", response);
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
                 }
             });
+
         } else {
             // Clear subcategory options if no category is selected
             $('#subcategory').empty();
