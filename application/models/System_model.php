@@ -103,7 +103,7 @@ class System_model extends CI_Model
     public function fetchAllPublishedTrainingsBySearch($subcategory, $category, $searchTerm)
     {
         $this->db->select('*');
-        $this->db->from('trainings');
+        $this->db->from('training');
         
         // Apply search term filtering
         if (!empty($searchTerm)) {
@@ -120,7 +120,7 @@ class System_model extends CI_Model
             $this->db->where('subcategory_id', $subcategory);
         }
         
-        $this->db->where('status', 'published');  // assuming you only want published trainings
+        $this->db->where('status', 1);  // assuming you only want published trainings
         $query = $this->db->get();
         
         return $query->result_array();
