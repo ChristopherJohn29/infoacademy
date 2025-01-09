@@ -113,11 +113,12 @@
                             <div class="sidebar_section_title">Categories</div>
                             <div class="sidebar_categories">
                                 <ul>
-                                    <li><a href="#">Art & Design</a></li>
-                                    <li><a href="#">Business</a></li>
-                                    <li><a href="#">IT & Software</a></li>
-                                    <li><a href="#">Languages</a></li>
-                                    <li><a href="#">Programming</a></li>
+                                    <?php
+                                    $categories = $this->System_model->fetchAllCategories();
+
+                                    foreach ($categories as $category) { ?>
+                                        <li><a href="<?=base_url("control/trainings/?c=").$category['id']?>"><?= $category['category_name'] ?></a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
