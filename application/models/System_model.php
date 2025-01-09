@@ -117,7 +117,7 @@ class System_model extends CI_Model
         
         // Apply subcategory filtering
         if ($subcategory != '0') {
-            $this->db->where('subcategory_id', $subcategory);
+            $this->db->where('subcategory', $subcategory);
         }
         
         $this->db->where('status', 1);  // assuming you only want published trainings

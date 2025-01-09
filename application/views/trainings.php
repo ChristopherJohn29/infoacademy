@@ -44,7 +44,7 @@
                 <div class="col-lg-8">
                     <div class="courses_search_container">
                         <form action="<?= base_url('control/trainings') ?>" method="post" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-                            <input type="search" class="courses_search_input" name="search" placeholder="Search Trainings" required="required">
+                            <input type="search" class="courses_search_input" name="search" placeholder="Search Trainings">
                             
                             <select id="courses_search_select" name="category" class="courses_search_select courses_search_input" style="margin-right:19px;">
                                 <option value="0">All Categories</option>
