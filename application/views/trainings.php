@@ -59,7 +59,7 @@
                             <!-- Course -->
                             <!-- Course -->
                             <?php
-                            $trainings = $this->System_model->fetchAllPublishedTrainings();
+                            
                             foreach ($trainings as $training) {
                                 $banner = $training['banner'] ? $training['banner'] : 'not_found.jpg';
                                 $trainer = $this->System_model->fetchTrainer($training['author_id']);
