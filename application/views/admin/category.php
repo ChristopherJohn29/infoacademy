@@ -102,7 +102,6 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title" id="addCategoryLabel">Add Category</h4>
                         </div>
                         <form id="addCategoryForm">
                             <div class="modal-body">
@@ -121,14 +120,13 @@
             </div>
 
             <!-- Default box -->
+
+            <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addCategoryModal">
+                    Add Category
+                </button>
             <div class="card">
 
             <!-- Button to open the modal -->
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCategoryModal">
-                Add Category
-            </button>
-
-
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
