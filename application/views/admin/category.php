@@ -280,7 +280,7 @@
 
             <div class="row mb-2">
                 <div class="col-md-12 text-right">
-                    <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addSubCategoryLabel">
+                    <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addSubCategoryModal">
                         Add Sub Category
                     </button>
                 </div>
