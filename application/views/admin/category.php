@@ -49,7 +49,7 @@
         }
 
         .action-column button {
-            margin: 2px; /* Add some spacing between buttons */
+            margin: 1px; /* Add some spacing between buttons */
         }
 
         .btn-sm {
