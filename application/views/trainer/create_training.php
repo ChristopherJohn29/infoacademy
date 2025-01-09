@@ -590,7 +590,7 @@
 
         }
 
-        var step = 2;
+        var step = 3;
         $("#additional-step").click(function (e) {
             step = step + 1;
             $html = '<div class="col-sm-1">' +
