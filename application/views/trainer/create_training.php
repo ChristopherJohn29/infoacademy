@@ -681,12 +681,19 @@
                 type: 'POST',
                 data: {category_id: category_id},
                 success: function(response) {
+                    console.log(response); // Log the response to check its structure
                     var subcategory_select = $('#subcategory');
                     subcategory_select.empty();
                     subcategory_select.append('<option value="0">All Subcategories</option>');
-                    $.each(response, function(index, subcategory) {
-                        subcategory_select.append('<option value="'+subcategory.id+'">'+subcategory.name+'</option>');
-                    });
+                    
+                    // Check if response is an array before appending options
+                    if (Array.isArray(response)) {
+                        $.each(response, function(index, subcategory) {
+                            subcategory_select.append('<option value="'+subcategory.id+'">'+subcategory.name+'</option>');
+                        });
+                    } else {
+                        console.error("Response is not an array");
+                    }
                 }
             });
         } else {
