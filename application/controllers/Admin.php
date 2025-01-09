@@ -51,7 +51,7 @@ class Admin extends CI_Controller
     {
         $data['categories'] =  $this->System_model->fetchAllCategories();
         $data['sub_categories'] = $this->System_model->fetchAllSubCategories();
-        $this->load->view('admin/category');
+        $this->load->view('admin/category', $data);
     }
 
     public function trainer()
