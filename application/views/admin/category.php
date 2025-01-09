@@ -216,9 +216,7 @@
                         // Show success message
                         alert(response.message);
 
-                        // Optionally update the category list here, if needed
-                        $('#addCategoryModal').modal('hide'); // Close the modal
-                        $('#addCategoryForm')[0].reset(); // Reset the form
+                        location.reload();
                     } else if (response.status === 'error') {
                         // Show error message
                         alert(response.message);
