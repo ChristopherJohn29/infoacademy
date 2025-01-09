@@ -115,8 +115,9 @@
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">Categories</div>
                             <div class="sidebar_categories">
-                                <li><a href="<?=base_url("control/trainings/")?>">All</a></li>
+                              
                                 <ul>
+                                    <li><a href="<?=base_url("control/trainings/")?>">All</a></li>
                                     <?php
                                     $categories = $this->System_model->fetchAllCategories();
 
