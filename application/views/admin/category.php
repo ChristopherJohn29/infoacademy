@@ -41,6 +41,22 @@
             background-color: gray;
         }
     </style>
+
+    <style>
+        .action-column {
+            width: 150px; /* Adjust as needed */
+            text-align: center; /* Align content to the center */
+        }
+
+        .action-column button {
+            margin: 2px; /* Add some spacing between buttons */
+        }
+
+        .btn-sm {
+            font-size: 12px; /* Make buttons smaller */
+            padding: 5px 10px; /* Adjust padding for compactness */
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -163,7 +179,7 @@
                     <thead>
                         <tr>
                             <th>Category Name</th>
-                            <th>Action</th>
+                            <th class="action-column">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -173,7 +189,7 @@
                         foreach ($categories as $category) { ?>
                             <tr>
                                 <td><?= $category['category_name'] ?></td>
-                                <td>
+                                <td class="action-column">
                                     <!-- Edit Button -->
                                     <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editCategoryModal" 
                                             data-id="<?= $category['id'] ?>" data-name="<?= $category['category_name'] ?>">
