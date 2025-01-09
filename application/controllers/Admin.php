@@ -47,6 +47,11 @@ class Admin extends CI_Controller
         $this->load->view('admin/coupons');
     }
 
+    public function category()
+    {
+        $this->load->view('admin/category');
+    }
+
     public function trainer()
     {
         $this->load->view('admin/trainer');

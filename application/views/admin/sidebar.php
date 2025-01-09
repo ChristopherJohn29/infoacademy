@@ -65,6 +65,20 @@
         </li>
         <li class="nav-item">
             <?php
+            if ($url == base_url() . 'admin/category') {
+                $active = 'active';
+            } else {
+                $active = '';
+            }
+            ?>
+            <a href="<?= base_url() . 'admin/category' ?>" class="nav-link <?= $active ?>">
+                <i class="nav-icon fa-solid fa-list"></i>
+                <p>
+                    Category </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <?php
             if ($url == base_url() . 'admin/trainer') {
                 $active = 'active';
             } else {
