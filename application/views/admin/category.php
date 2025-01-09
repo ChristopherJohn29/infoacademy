@@ -93,8 +93,41 @@
         </section>
         <!-- Main content -->
        <section class="content">
+
+            <!-- Add Category Modal -->
+            <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="addCategoryLabel">Add Category</h4>
+                        </div>
+                        <form id="addCategoryForm">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="categoryName">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter category name" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add Category</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- Default box -->
             <div class="card">
+
+            <!-- Button to open the modal -->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCategoryModal">
+                Add Category
+            </button>
+
 
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
