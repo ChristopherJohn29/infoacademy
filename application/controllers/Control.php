@@ -36,7 +36,7 @@ class Control extends CI_Controller
 
      
 
-        $this->load->view('trainings', );
+        $this->load->view('trainings', $data);
     }
 
     public function contact()
