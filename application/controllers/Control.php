@@ -35,8 +35,6 @@ class Control extends CI_Controller
             $data['trainings'] = $this->System_model->fetchAllPublishedTrainings();
         }
 
-     
-
         $this->load->view('trainings', $data);
     }
 
