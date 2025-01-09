@@ -28,9 +28,6 @@ class Control extends CI_Controller
     public function trainings()
     {   
         if(isset($_POST['search'])) {
-            echo "Test";
-            echo $_POST['search'];
-            exit;
             $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsBySearch($_POST['search'], $_POST['category']); 
         } else if(isset($_GET['c'])){
             $data['trainings'] = $this->System_model->fetchAllPublishedTrainingsByCategory($_GET['c']); 

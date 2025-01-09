@@ -108,9 +108,13 @@ class System_model extends CI_Model
             $this->db->where('category_id', intval($id)); 
         }
 
-        $this->db->where('training_title', $search, 'both');  // 'both' means matches anywhere in the title
+        $this->db->like('training_title', $search, 'both');  // 'both' means matches anywhere in the title
         
         $this->db->from('training');
+
+        echo $this->db->last_query();
+
+        exit;
         $result = $this->db->get()->result_array();
     }
 
