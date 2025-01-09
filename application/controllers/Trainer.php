@@ -166,7 +166,8 @@ class Trainer extends CI_Controller
                 $count = $count + 1;
             }
 
-
+            $category_id = html_escape($_POST['category']);
+            $subcategory = html_escape($_POST['subcategory']);
 
             $data = [
                 'training_title' => html_escape($_POST['training_title']),
@@ -183,7 +184,9 @@ class Trainer extends CI_Controller
                 'workshop' => json_encode(html_escape($workshop)),
                 'examination' =>json_encode(html_escape($examination)),
                 'ref' => json_encode(html_escape($references)),
-                'author_id' => $_SESSION['id']
+                'author_id' => $_SESSION['id'],
+                'category_id' => $category_id,
+                'subcategory' => $subcategory
             ];
 
             if ($this->System_model->saveTraining($data)) {
@@ -192,6 +195,15 @@ class Trainer extends CI_Controller
                 redirect('trainer/createTraining');
             }
 
+        }
+    }
+
+    public function get_subcategories_by_category()
+    {
+        if (isset($_POST['category_id'])) {
+            $category_id = $_POST['category_id'];
+            $subcategories = $this->System_model->fetchSubcategoriesByCategory($category_id);
+            echo json_encode($subcategories);
         }
     }
 }

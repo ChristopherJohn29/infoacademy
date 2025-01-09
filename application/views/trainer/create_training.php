@@ -126,6 +126,32 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <select name="category" class="form-control" id="category" required>
+                                                        <option value="0">All Categories</option>
+                                                        <?php
+                                                            $categories = $this->System_model->fetchAllCategories();
+                                                            foreach ($categories as $category) { ?>
+                                                                <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
+                                                            <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Subcategory</label>
+                                                    <select name="subcategory" class="form-control" id="subcategory" required>
+                                                        <option value="0">All Subcategories</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
@@ -643,6 +669,32 @@
             return false;
         });
     })
+</script>
+
+<script>
+    // jQuery to dynamically load subcategories based on selected category
+    $('#category').change(function() {
+        var category_id = $(this).val();
+        if(category_id != '0') {
+            $.ajax({
+                url: '<?= base_url('trainer/get_subcategories_by_category') ?>', // Update with the correct URL to fetch subcategories
+                type: 'POST',
+                data: {category_id: category_id},
+                success: function(response) {
+                    var subcategory_select = $('#subcategory');
+                    subcategory_select.empty();
+                    subcategory_select.append('<option value="0">All Subcategories</option>');
+                    $.each(response, function(index, subcategory) {
+                        subcategory_select.append('<option value="'+subcategory.id+'">'+subcategory.name+'</option>');
+                    });
+                }
+            });
+        } else {
+            // Clear subcategory options if no category is selected
+            $('#subcategory').empty();
+            $('#subcategory').append('<option value="0">All Subcategories</option>');
+        }
+    });
 </script>
 </body>
 </html>
