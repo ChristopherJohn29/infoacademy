@@ -105,7 +105,10 @@ class System_model extends CI_Model
         $this->db->select('*');
         $this->db->from('training');
         
-        $this->db->like('training_title', html_escape($search), 'both', FALSE);
+        // Apply search term filtering
+        if (!empty($searchTerm)) {
+            $this->db->like('training_title', html_escape($searchTerm), 'both', FALSE);
+        }
         
         // Apply category filtering
         if ($category != '0') {
