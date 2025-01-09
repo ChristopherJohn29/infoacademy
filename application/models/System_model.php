@@ -109,7 +109,7 @@ class System_model extends CI_Model
         }
     
         // Set escape to FALSE to avoid ESCAPE '!'
-        $this->db->like('training_title', $search, 'both', FALSE);
+        $this->db->like('training_title', html_escape($search), 'both', FALSE);
         
         $this->db->from('training');
         $result = $this->db->get()->result_array();
