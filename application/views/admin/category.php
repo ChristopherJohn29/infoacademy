@@ -103,7 +103,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="addCategoryForm">
+                        <form id="addCategoryForm" data-url="<?=base_url()?>/admin/submitCategory">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="categoryName">Category Name</label>
@@ -121,11 +121,14 @@
 
             <!-- Default box -->
 
-            <div class="text-right">
-                <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addCategoryModal">
-                    Add Category
-                </button>
+            <div class="row mb-2">
+                <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-small btn-success" data-toggle="modal" data-target="#addCategoryModal">
+                        Add Category
+                    </button>
+                </div>
             </div>
+
             <div class="card">
 
             <!-- Button to open the modal -->
@@ -192,5 +195,35 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#addCategoryForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent form from submitting normally
+            
+            // Get the category name
+            var categoryName = $('#categoryName').val();
+            var url = $('#addCategoryForm').data('url');
+
+            // Perform your AJAX call here
+            $.ajax({
+                url: url, // Replace with your server endpoint
+                method: 'POST',
+                data: { categoryName: categoryName },
+                success: function(response) {
+                    // Handle success (e.g., show a success message or update the category list)
+                    alert('Category added successfully!');
+                    $('#addCategoryModal').modal('hide'); // Close the modal
+                    $('#addCategoryForm')[0].reset(); // Reset the form
+                },
+                error: function(xhr) {
+                    // Handle error
+                    alert('An error occurred while adding the category.');
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
