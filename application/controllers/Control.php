@@ -207,6 +207,11 @@ class Control extends CI_Controller
         }
     }
 
+    public function logout(){
+        session_destroy();
+        $this->login('<p style="color:green;">Logout Successfully</p>');
+    }
+
     public function admin($err = false)
     {
         if (isset($_SESSION['account_type'])) {
