@@ -47,9 +47,12 @@
                             <input type="search" class="courses_search_input" placeholder="Search Trainings" required="required">
                             <select id="courses_search_select" class="courses_search_select courses_search_input">
                                 <option>All Categories</option>
-                                <option>Category</option>
-                                <option>Category</option>
-                                <option>Category</option>
+                                <?php
+                                    $categories = $this->System_model->fetchAllCategories();
+
+                                    foreach ($categories as $category) { ?>
+                                        <option value="<?=$category['id']?>"><?= $category['category_name'] ?></option>
+                                    <?php } ?>
                             </select>
                             <button action="submit" class="courses_search_button ml-auto">search now</button>
                         </form>
@@ -112,6 +115,7 @@
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">Categories</div>
                             <div class="sidebar_categories">
+                                <li><a href="<?=base_url("control/trainings/")?>">All</a></li>
                                 <ul>
                                     <?php
                                     $categories = $this->System_model->fetchAllCategories();
