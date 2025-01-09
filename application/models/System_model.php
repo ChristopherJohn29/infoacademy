@@ -96,6 +96,12 @@ class System_model extends CI_Model
         return $this->db->get()->result_array();
 
     }
+    
+    public function fetchAllCategories(){
+        $this->db->select('*');
+        $this->db->from('category');
+        return $this->db->get()->result_array();
+    }
 
     public function fetchCompanyUsingId($id = 1){
         $this->db->select('company_name');
