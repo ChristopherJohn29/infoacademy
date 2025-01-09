@@ -43,9 +43,9 @@
                 <!-- Trainings Main Content -->
                 <div class="col-lg-8">
                     <div class="courses_search_container">
-                        <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
-                            <input type="search" class="courses_search_input" placeholder="Search Trainings" required="required">
-                            <select id="courses_search_select" class="courses_search_select courses_search_input">
+                        <form action="<?=base_url('control/trainings')?>" method="post" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+                            <input type="search" class="courses_search_input" name="search" placeholder="Search Trainings" required="required">
+                            <select id="courses_search_select" name="category" class="courses_search_select courses_search_input">
                                 <option>All Categories</option>
                                 <?php
                                     $categories = $this->System_model->fetchAllCategories();

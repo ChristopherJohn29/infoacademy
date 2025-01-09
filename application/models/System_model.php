@@ -100,6 +100,19 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function fetchAllPublishedTrainingsBySearch($search, $id) {
+        $this->db->select('*');
+        $this->db->where('status', 1);
+        $this->db->where('category_id', $id);
+        
+        if (!empty($search)) {
+            $this->db->like('training_title', $search);  // Use LIKE for training_title
+        }
+
+        $this->db->from('training');
+        $result = $this->db->get()->result_array();
+    }
+
     public function fetchAllCoupon(){
 
         $this->db->select('*');
