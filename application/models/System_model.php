@@ -114,9 +114,6 @@ class System_model extends CI_Model
         $this->db->from('training');
         $result = $this->db->get()->result_array();
     
-        // Debugging the query
-        echo $this->db->last_query();
-    
         return $result;
     }
 
