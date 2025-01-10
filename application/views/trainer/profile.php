@@ -156,13 +156,14 @@
         <div class="content">
             <div class="container">
             <!-- Update Profile Button -->
+            <!-- Update Profile Button -->
             <div class="row" style="display:block; text-align: right; margin:2px;">
                 <a class="btn btn-success btn-sm col-sm-2" href="#" style="margin:10px; margin-left:0px;" data-toggle="modal" data-target="#updateProfileModal">Update Profile</a>
             </div>
 
             <!-- Modal for Updating Profile -->
             <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document"> <!-- Added modal-lg class here -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
@@ -240,6 +241,7 @@
                     </div>
                 </div>
             </div>
+
 
 
                 <!-- User Info -->
