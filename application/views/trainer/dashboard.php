@@ -128,17 +128,9 @@
             </div>
             <?php 
             
-            if(!empty($trainer)){
-
-                if(isset($trainer[0]['photo']) && !empty($trainer[0]['photo'])){
-                    $photo = $trainer[0]['photo'];
-                } else {
-                    $photo = base_url().'/assets/template/dist/img/avatar5.png';
-                }
-            } else {
-                $photo = base_url().'/assets/template/dist/img/avatar5.png';
+            if (!isset($trainer['photo']) && empty($trainer['photo'])) {
+                $trainer['photo'] = base_url() . '/assets/template/dist/img/avatar5.png';
             }
-    
             
             ?>
          

@@ -240,6 +240,16 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function getUserData($user_id)
+    {
+        return $this->db->get_where('user', ['id' => $user_id])->row_array();
+    }
+
+    public function getTrainerProfile($user_id)
+    {
+        return $this->db->get_where('trainer_profile', ['user_id' => $user_id])->row_array();
+    }
+
     public function fetchSingleTraining($id = false)
     {
         $this->db->select('

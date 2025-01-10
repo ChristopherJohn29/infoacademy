@@ -95,18 +95,10 @@
             </div>
             <?php 
             
-            if(!empty($trainer)){
-
-                if(isset($trainer[0]['photo']) && !empty($trainer[0]['photo'])){
-                    $photo = $trainer[0]['photo'];
-                } else {
-                    $photo = base_url().'/assets/template/dist/img/avatar5.png';
-                }
-            } else {
-                $photo = base_url().'/assets/template/dist/img/avatar5.png';
+            if (!isset($trainer['photo']) && empty($trainer['photo'])) {
+                $trainer['photo'] = base_url() . '/assets/template/dist/img/avatar5.png';
             }
     
-            
             ?>
          
 
@@ -149,42 +141,57 @@
     <!-- /.navbar -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark"> My Profile</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Home</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
-        <div class="content">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                           
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
+                    <div class="col-sm-12">
+                        <h1 class="m-0 text-dark">My Profile</h1>
                     </div>
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
-    </div>
+
+        <div class="content">
+            <div class="container">
+                <!-- User Info -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Personal Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> <?= $user['first_name'] . ' ' . $user['middle_name'] . ' ' . $user['last_name'] ?></p>
+                        <p><strong>Address:</strong> <?= $user['street_number'] . ' ' . $user['street_name'] . ', ' . $user['barangay'] . ', ' . $user['city'] . ', ' . $user['region'] . ', ' . $user['zip_code'] ?></p>
+                        <p><strong>Email:</strong> <?= $user['email_address'] ?></p>
+                        <p><strong>Mobile:</strong> <?= $user['mobile_number'] ?></p>
+                        <p><strong>Sex:</strong> <?= $user['sex'] ?></p>
+                        <p><strong>Marital Status:</strong> <?= $user['marital_status'] ?></p>
+                    </div>
+                </div>
+
+                <!-- Trainer Profile -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Trainer Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <?php if (!empty($trainer)): ?>
+                            <p><strong>Key Competencies:</strong> <?= nl2br($trainer['key_competencies']) ?></p>
+                            <p><strong>Educational Background:</strong> <?= nl2br($trainer['educational_background']) ?></p>
+                            <p><strong>Employment History:</strong> <?= nl2br($trainer['employment_history']) ?></p>
+                            <div>
+                                <img src="<?= base_url('uploads/' . $trainer['photo']) ?>" alt="Profile Photo" class="img-thumbnail" width="150">
+                            </div>
+                        <?php else: ?>
+                            <p>No trainer profile information available yet.</p>
+                            <!-- Placeholder for profile photo -->
+                            <img src="<?= base_url('assets/images/default-photo.png') ?>" alt="Default Profile Photo" class="img-thumbnail" width="150">
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>                       
+
     <!-- /.content-wrapper -->
     <!-- Control Sidebar -->
 

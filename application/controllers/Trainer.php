@@ -34,9 +34,8 @@ class Trainer extends CI_Controller
     public function dashboard()
     {
         $user_id = $_SESSION['id'];
-        $data['trainer'] = $this->System_model->fetchTrainerProfile($user_id);
-    
-        
+        $data['user'] = $this->System_model->getUserData($user_id);
+        $data['trainer'] = $this->System_model->getTrainerProfile($user_id);
 
         $this->load->view('trainer/dashboard',$data);
     }
@@ -44,7 +43,7 @@ class Trainer extends CI_Controller
     public function profile()
     {
         $user_id = $_SESSION['id'];
-        $data['trainer'] = $this->System_model->fetchTrainerProfile($user_id);
+        $data['trainer'] = $this->System_model->getTrainerProfile($user_id);
     
         
 
