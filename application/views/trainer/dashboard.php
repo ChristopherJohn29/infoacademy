@@ -165,7 +165,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
+                <a class="nav-link user user-menu" data-toggle="dropdown" href="#">
                     <img src="<?= $photo ?>" class="user-image" alt="User Image">
                     <span class="ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
                 </a>
