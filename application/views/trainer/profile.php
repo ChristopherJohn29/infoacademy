@@ -277,9 +277,7 @@
                     </div>
                     <div class="card-body">
 
-                        <div>
-                            <img src="<?= $photo ?>" alt="Profile Photo" class="img-thumbnail" width="150">
-                        </div>
+                        <img src="<?= $photo ?>" alt="Profile Photo" class="img-thumbnail" width="150">
                         <p><strong>Name:</strong> <?= $user['first_name'] . ' ' . $user['middle_name'] . ' ' . $user['last_name'] ?></p>
                         <p><strong>Address:</strong> <?= $user['street_number'] . ' ' . $user['street_name'] . ', ' . $user['barangay'] . ', ' . $user['city'] . ', ' . $user['region'] . ', ' . $user['zip_code'] ?></p>
                         <p><strong>Email:</strong> <?= $user['email_address'] ?></p>
