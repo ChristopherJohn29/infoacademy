@@ -131,8 +131,9 @@
             if (!isset($trainer['photo']) || empty($trainer['photo'])) {
                 $photo = base_url() . '/assets/template/dist/img/avatar5.png';
             } else {
-                $photo = $trainer['photo'];
+                $photo = base_url('uploads/' . $trainer['photo']);
             }
+    
     
             ?>
          
