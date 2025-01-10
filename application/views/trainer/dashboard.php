@@ -165,22 +165,21 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link user user-menu" data-toggle="dropdown" href="#">
-                    <img src="<?= $photo ?>" class="user-image" alt="User Image">
-                    <span class="ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header"><?= $user['first_name'] . ' ' . $user['last_name'] ?>'s Menu</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="<?= base_url('trainer/profile') ?>" class="dropdown-item">
-                        <i class="fas fa-user mr-2"></i> Profile
+                    <a class="nav-link user user-menu" data-toggle="dropdown" href="#">
+                        <img src="<?= $photo ?>" class="user-image" alt="User Image">
+                        <span class="ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="<?= base_url('trainer/dashboard') ?>" class="dropdown-item">
-                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
-                    </a>
-                </div>
-            </li>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <div class="dropdown-divider"></div>
+                        <a href="<?= base_url('trainer/profile') ?>" class="dropdown-item">
+                            <i class="fas fa-user mr-2"></i> Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?= base_url('trainer/dashboard') ?>" class="dropdown-item">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                        </a>
+                    </div>
+                </li>
               
             </ul>
         </div>
