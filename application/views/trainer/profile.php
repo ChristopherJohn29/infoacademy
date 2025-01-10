@@ -225,6 +225,43 @@
                     </div>
                 </div>
             </div>
+
+                <!-- User Info -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Personal Information</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <img src="<?= $photo ?>" alt="Profile Photo" class="img-thumbnail float-right" width="150">
+                        <p><strong>Name:</strong> <?= $user['first_name'] . ' ' . $user['middle_name'] . ' ' . $user['last_name'] ?></p>
+                        <p><strong>Address:</strong> <?= $user['street_number'] . ' ' . $user['street_name'] . ', ' . $user['barangay'] . ', ' . $user['city'] . ', ' . $user['region'] . ', ' . $user['zip_code'] ?></p>
+                        <p><strong>Email:</strong> <?= $user['email_address'] ?></p>
+                        <p><strong>Mobile:</strong> <?= $user['mobile_number'] ?></p>
+                        <p><strong>Sex:</strong> <?= $user['sex'] ?></p>
+                        <p><strong>Marital Status:</strong> <?= $user['marital_status'] ?></p>
+                    </div>
+                </div>
+
+                <!-- Trainer Profile -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Trainer Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <?php if (!empty($trainer)): ?>
+                         
+                            <p><strong>Educational Background:</strong><br> <?= nl2br($trainer['educational_background']) ?></p>
+                            <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
+                            <p><strong>Employment History:</strong> <br><?= nl2br($trainer['employment_history']) ?></p>
+                           
+                        <?php else: ?>
+                            
+                            <p>No trainer profile information available yet.</p>
+                            <!-- Placeholder for profile photo -->
+                        <?php endif; ?>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
