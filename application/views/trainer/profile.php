@@ -187,8 +187,33 @@
                                     <input type="text" class="form-control" id="lastName" name="last_name" value="<?= $user['last_name'] ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="<?= $user['street_number'] . ' ' . $user['street_name'] . ', ' . $user['barangay'] . ', ' . $user['city'] . ', ' . $user['region'] . ', ' . $user['zip_code'] ?>" required>
+                                    <label for="street_number">Street Number</label>
+                                    <input type="text" class="form-control" id="street_number" name="street_number" value="<?= $user['street_number'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="street_name">Street Name</label>
+                                    <input type="text" class="form-control" id="street_name" name="street_name" value="<?= $user['street_name'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="barangay">Barangay</label>
+                                    <input type="text" class="form-control" id="barangay" name="barangay" value="<?= $user['barangay'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" value="<?= $user['city'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="region">Region</label>
+                                    <input type="text" class="form-control" id="region" name="region" value="<?= $user['region'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="zip_code">Zip Code</label>
+                                    <input type="text" class="form-control" id="zip_code" name="zip_code" value="<?= $user['zip_code'] ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
