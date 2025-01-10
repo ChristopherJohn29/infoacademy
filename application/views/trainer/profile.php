@@ -175,16 +175,18 @@
                     </div>
                     <div class="card-body">
                         <?php if (!empty($trainer)): ?>
-                            <p><strong>Key Competencies:</strong> <?= nl2br($trainer['key_competencies']) ?></p>
-                            <p><strong>Educational Background:</strong> <?= nl2br($trainer['educational_background']) ?></p>
-                            <p><strong>Employment History:</strong> <?= nl2br($trainer['employment_history']) ?></p>
                             <div>
                                 <img src="<?= base_url('uploads/' . $trainer['photo']) ?>" alt="Profile Photo" class="img-thumbnail" width="150">
                             </div>
+                            <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
+                            <p><strong>Educational Background:</strong><br> <?= nl2br($trainer['educational_background']) ?></p>
+                            <p><strong>Employment History:</strong> <br><?= nl2br($trainer['employment_history']) ?></p>
+                           
                         <?php else: ?>
+                            
+                            <img src="<?= base_url() . '/assets/template/dist/img/avatar5.png' ?>" alt="Default Profile Photo" class="img-thumbnail" width="150">
                             <p>No trainer profile information available yet.</p>
                             <!-- Placeholder for profile photo -->
-                            <img src="<?= base_url('assets/images/default-photo.png') ?>" alt="Default Profile Photo" class="img-thumbnail" width="150">
                         <?php endif; ?>
                     </div>
                 </div>
