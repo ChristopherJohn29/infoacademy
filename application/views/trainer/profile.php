@@ -131,11 +131,17 @@
                     </div>
                 </li>
                 <li class="user user-menu">
-                    <a href="<?= base_url('trainer/profile') ?>" class="d-flex align-items-center">
-                        <img src="<?=$photo?>" class="user-image" alt="User Image">
-                        <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
+                    <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
+                        <img src="<?= base_url('uploads/' . $user['photo']) ?>" class="user-image" alt="User Image">
+                        <span class="hidden-xs ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?= base_url('trainer/profile') ?>"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="<?= base_url('trainer/dashboard') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        <!-- Add more options if needed -->
+                    </ul>
                 </li>
+
               
             </ul>
         </div>
