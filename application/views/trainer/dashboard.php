@@ -141,14 +141,7 @@
     
             
             ?>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="user user-menu">
-                    <a href="<?= base_url('profile') ?>" class="d-flex align-items-center">
-                        <img src="<?=$photo?>" class="user-image" alt="User Image">
-                        <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
-                    </a>
-                </li>
-            </ul>
+         
 
 
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,6 +151,12 @@
             <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <!-- Notifications Dropdown Menu -->
+                <li class="user user-menu">
+                    <a href="<?= base_url('profile') ?>" class="d-flex align-items-center">
+                        <img src="<?=$photo?>" class="user-image" alt="User Image">
+                        <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#"> <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span> </a>
