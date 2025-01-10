@@ -51,7 +51,7 @@ class Trainer extends CI_Controller
     }
 
     public function update_profile() {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $_SESSION['id'];
         $user_data = array(
             'first_name'        => $this->input->post('first_name'),
             'middle_name'       => $this->input->post('middle_name'),
