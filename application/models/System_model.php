@@ -235,7 +235,7 @@ class System_model extends CI_Model
     {
         $this->db->select('
             training.*, 
-            categories.name AS category_name, 
+            categories.category_name AS category_name, 
             sub_categories.name AS sub_category_name
         ');
         $this->db->from('training');
