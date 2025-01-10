@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+.<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Trainer | Profile</title>
+    <title>Trainer | Dashboard</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?php echo base_url() . '/assets/template/plugins' ?>/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -76,7 +76,10 @@
             font-weight: 500;
             color: #333;
         }
+
+
     </style>
+    <!-- Google Font: Source Sans Pro -->
 </head>
 <body class="hold-transition layout-top-nav">
 <!-- Modal -->
@@ -90,41 +93,39 @@
                     <div class="logo_text">Info<span>Academy</span></div>
                 </a>
             </div>
-
             <?php 
+            
             if (!isset($trainer['photo']) || empty($trainer['photo'])) {
                 $photo = base_url() . '/assets/template/dist/img/avatar5.png';
             } else {
                 $photo = base_url('uploads/' . $trainer['photo']);
             }
+    
             ?>
+         
+
+
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Right navbar links -->
             <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#"> 
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span> 
-                    </a>
+                    <a class="nav-link" data-toggle="dropdown" href="#"> <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span> </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
+                        <a href="#" class="dropdown-item"> <i class="fas fa-envelope mr-2"></i> 4 new messages
+                            <span class="float-right text-muted text-sm">3 mins</span> </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
+                        <a href="#" class="dropdown-item"> <i class="fas fa-users mr-2"></i> 8 friend requests
+                            <span class="float-right text-muted text-sm">12 hours</span> </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
+                        <a href="#" class="dropdown-item"> <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span> </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
@@ -145,6 +146,8 @@
                         </a>
                     </div>
                 </li>
+
+              
             </ul>
         </div>
     </nav>
@@ -164,13 +167,14 @@
         <div class="content">
             <div class="container">
             <!-- Update Profile Button -->
+            <!-- Update Profile Button -->
             <div class="row" style="display:block; text-align: right; margin:2px;">
                 <a class="btn btn-success btn-sm col-sm-2" href="#" style="margin:10px; margin-left:0px;" data-toggle="modal" data-target="#updateProfileModal">Update Profile</a>
             </div>
 
             <!-- Modal for Updating Profile -->
             <div class="modal fade" id="updateProfileModal" tabindex="-1" role="dialog" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg" role="document"> <!-- Added modal-lg class here -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
@@ -203,28 +207,79 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <select class="form-control" id="country" name="country" required>
-                                        <option value="Philippines" <?= ($user['country'] == 'Philippines') ? 'selected' : ''; ?>>Philippines</option>
+                                    <label for="street_name">Street Name</label>
+                                    <input type="text" class="form-control" id="street_name" name="street_name" value="<?= $user['street_name'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="barangay">Barangay</label>
+                                    <input type="text" class="form-control" id="barangay" name="barangay" value="<?= $user['barangay'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" value="<?= $user['city'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="region">Region</label>
+                                    <input type="text" class="form-control" id="region" name="region" value="<?= $user['region'] ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="zip_code">Zip Code</label>
+                                    <input type="text" class="form-control" id="zip_code" name="zip_code" value="<?= $user['zip_code'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email_address" value="<?= $user['email_address'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile">Mobile Number</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile_number" value="<?= $user['mobile_number'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sex">Sex</label>
+                                    <select class="form-control" id="sex" name="sex">
+                                        <option value="Male" <?= $user['sex'] == 'Male' ? 'selected' : '' ?>>Male</option>
+                                        <option value="Female" <?= $user['sex'] == 'Female' ? 'selected' : '' ?>>Female</option>
+                                        <option value="Other" <?= $user['sex'] == 'Other' ? 'selected' : '' ?>>Other</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="zip">Zip Code</label>
-                                    <input type="text" class="form-control" id="zip" name="zip_code" value="<?= $user['zip_code'] ?>" required>
+                                    <label for="maritalStatus">Marital Status</label>
+                                    <select class="form-control" id="maritalStatus" name="marital_status">
+                                        <option value="Single" <?= $user['marital_status'] == 'Single' ? 'selected' : '' ?>>Single</option>
+                                        <option value="Married" <?= $user['marital_status'] == 'Married' ? 'selected' : '' ?>>Married</option>
+                                        <option value="Divorced" <?= $user['marital_status'] == 'Divorced' ? 'selected' : '' ?>>Divorced</option>
+                                    </select>
+                                </div>
+
+                                <!-- Trainer Profile Form -->
+                                <div class="form-group">
+                                    <label for="keyCompetencies">Key Competencies</label>
+                                    <textarea class="form-control" id="keyCompetencies" name="key_competencies" rows="3"><?= $trainer['key_competencies'] ?></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" value="<?= $user['phone'] ?>" required>
+                                    <label for="educationalBackground">Educational Background</label>
+                                    <textarea class="form-control" id="educationalBackground" name="educational_background" rows="3"><?= $trainer['educational_background'] ?></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label for="employmentHistory">Employment History</label>
+                                    <textarea class="form-control" id="employmentHistory" name="employment_history" rows="3"><?= $trainer['employment_history'] ?></textarea>
+                                </div>
+                             
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="updateProfileSubmitBtn">Save changes</button>
+                            <button type="submit" form="updateProfileForm" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+
 
                 <!-- User Info -->
                 <div class="card">
@@ -262,24 +317,39 @@
                         <?php endif; ?>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- /.content-wrapper -->
-</div>
-<!-- /.wrapper -->
+    </div>                       
 
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+
+    <!-- /.control-sidebar -->
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline"></div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2020 </strong> All rights reserved.
+    </footer>
+</div>
+<!-- ./wrapper -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url() . '/assets/template/plugins' ?>/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap 4 -->
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo base_url() . '/assets/template/plugins' ?>/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?php echo base_url() . '/assets/template/plugins' ?>/select2/js/select2.full.min.js"></script>
+<!-- AdminLTE App -->
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/adminlte.min.js"></script>
-
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
 <script>
-   $(document).ready(function() {
+$(document).ready(function() {
     // Handle form submission
     $('#updateProfileForm').on('submit', function(event) {
         event.preventDefault();
