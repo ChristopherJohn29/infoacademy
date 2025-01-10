@@ -52,8 +52,6 @@ class Trainer extends CI_Controller
 
     public function update_profile() {
         $user_id = $this->session->userdata('user_id');
-
-        // Get form data
         $user_data = array(
             'first_name'        => $this->input->post('first_name'),
             'middle_name'       => $this->input->post('middle_name'),
@@ -69,35 +67,45 @@ class Trainer extends CI_Controller
             'sex'               => $this->input->post('sex'),
             'marital_status'    => $this->input->post('marital_status'),
         );
-
+    
         $trainer_data = array(
             'key_competencies'  => $this->input->post('key_competencies'),
             'educational_background' => $this->input->post('educational_background'),
             'employment_history' => $this->input->post('employment_history'),
         );
-
+    
+        // Debugging - log the data to check if they are correctly received
+        log_message('debug', 'User data: ' . print_r($user_data, true));
+        log_message('debug', 'Trainer data: ' . print_r($trainer_data, true));
+    
         // Handle profile photo
         if ($_FILES['photo']['name']) {
             $upload_path = 'uploads/';
             $config['upload_path'] = $upload_path;
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
             $this->load->library('upload', $config);
-
+    
             if ($this->upload->do_upload('photo')) {
                 $file_data = $this->upload->data();
                 $trainer_data['photo'] = $file_data['file_name'];
+            } else {
+                log_message('debug', 'Upload error: ' . $this->upload->display_errors());
             }
         }
-
+    
         // Update user data
-        $this->System_model->update_user($user_id, $user_data);
-
+        $user_updated = $this->System_model->update_user($user_id, $user_data);
+    
         // Update trainer profile data
-        $this->System_model->update_trainer($user_id, $trainer_data);
-
-        // Return response
-        echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully.']);
+        $trainer_updated = $this->System_model->update_trainer($user_id, $trainer_data);
+    
+        if ($user_updated || $trainer_updated) {
+            echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'No changes made.']);
+        }
     }
+    
 
     public function createTraining()
     {

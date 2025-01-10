@@ -253,14 +253,15 @@ class System_model extends CI_Model
     public function update_user($user_id, $user_data) {
         $this->db->where('user_id', $user_id);
         $this->db->update('users', $user_data);
+        return $this->db->affected_rows() > 0; // Returns true if update was successful
     }
-
-    // Update trainer profile data
+    
     public function update_trainer($user_id, $trainer_data) {
         $this->db->where('user_id', $user_id);
         $this->db->update('trainer_profile', $trainer_data);
+        return $this->db->affected_rows() > 0; // Returns true if update was successful
     }
-
+    
     public function fetchSingleTraining($id = false)
     {
         $this->db->select('
