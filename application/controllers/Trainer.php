@@ -41,6 +41,16 @@ class Trainer extends CI_Controller
         $this->load->view('trainer/dashboard',$data);
     }
 
+    public function profile()
+    {
+        $user_id = $_SESSION['id'];
+        $data['trainer'] = $this->System_model->fetchTrainerProfile($user_id);
+    
+        
+
+        $this->load->view('trainer/dashboard',$data);
+    }
+
     public function createTraining()
     {
         $this->load->view('trainer/create_training');
