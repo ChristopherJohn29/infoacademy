@@ -141,29 +141,36 @@
                                     <div class="feature d-flex flex-row align-items-center justify-content-start">
                                         <div class="feature_title">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i><span>Length:</span></div>
+                                        <div class="feature_text ml-auto"><?=$required_no_of_hours?> Hours</div>
+                                    </div>
+                                    <!-- Feature -->
+                                    <div class="feature d-flex flex-row align-items-center justify-content-start">
+                                        <div class="feature_title">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i><span>Completion Time:</span>
+                                        </div>
                                         <div class="feature_text ml-auto"><?=$validity?> Days</div>
                                     </div>
                                     <!-- Feature -->
                                     <div class="feature d-flex flex-row align-items-center justify-content-start">
                                         <div class="feature_title">
-                                            <i class="fa fa-file-text-o" aria-hidden="true"></i><span>Videos:</span>
+                                            <i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Price:</span>
                                         </div>
-                                        <div class="feature_text ml-auto"><?=count(json_decode($video))?></div>
+                                        <div class="feature_text ml-auto"></div>
                                     </div>
                                     <!-- Feature -->
                                     <div class="feature d-flex flex-row align-items-center justify-content-start">
                                         <div class="feature_title">
-                                            <i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Workshop:</span>
-                                        </div>
-                                        <div class="feature_text ml-auto"><?=count(json_decode($workshop))?></div>
-                                    </div>
-                                    <!-- Feature -->
-                                    <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                        <div class="feature_title">
-                                            <i class="fa fa-list-alt" aria-hidden="true"></i><span>Examinations:</span>
+                                            <i class="fa fa-list-alt" aria-hidden="true"></i><span>Level:</span>
                                         </div>
 
-                                        <div class="feature_text ml-auto"><?= count(json_decode($examination)) ?></div>
+                                        <div class="feature_text ml-auto"><?= $level ?></div>
+                                    </div>
+                                    <div class="feature d-flex flex-row align-items-center justify-content-start">
+                                        <div class="feature_title">
+                                            <i class="fa fa-list-alt" aria-hidden="true"></i><span>Language:</span>
+                                        </div>
+
+                                        <div class="feature_text ml-auto"><?= $language ?></div>
                                     </div>
                                     <!-- Feature -->
                                 </div>
