@@ -81,14 +81,21 @@ class Trainer extends CI_Controller
             $upload_path = 'uploads/';
             $config['upload_path'] = $upload_path;
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        
+            // Generate a unique name for the uploaded file using timestamp or uniqid
+            $file_extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+            $new_file_name = uniqid('trainer_', true) . '.' . $file_extension;
+        
+            // Set the new file name in the upload configuration
+            $config['file_name'] = $new_file_name;
+        
             $this->load->library('upload', $config);
-    
+        
             if ($this->upload->do_upload('photo')) {
                 $file_data = $this->upload->data();
-                $trainer_data['photo'] = $file_data['file_name'];
+                $trainer_data['photo'] = $file_data['file_name']; // Save the new file name in the database
             } else {
-                var_dump($this->upload->display_errors());
-                exit;
+                log_message('debug', 'Upload error: ' . $this->upload->display_errors());
             }
         }
     
