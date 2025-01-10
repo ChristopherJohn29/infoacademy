@@ -240,7 +240,7 @@ class System_model extends CI_Model
         ');
         $this->db->from('training');
         $this->db->join('categories', 'categories.id = training.category_id', 'left');
-        $this->db->join('sub_categories', 'sub_categories.id = training.sub_category_id', 'left');
+        $this->db->join('sub_categories', 'sub_categories.id = training.subcategory', 'left');
         $this->db->where('training.id', $id);
         $this->db->where('training.status', '1');
     
