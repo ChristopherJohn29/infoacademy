@@ -250,6 +250,17 @@ class System_model extends CI_Model
         return $this->db->get_where('trainer_profile', ['user_id' => $user_id])->row_array();
     }
 
+    public function update_user($user_id, $user_data) {
+        $this->db->where('user_id', $user_id);
+        $this->db->update('users', $user_data);
+    }
+
+    // Update trainer profile data
+    public function update_trainer($user_id, $trainer_data) {
+        $this->db->where('user_id', $user_id);
+        $this->db->update('trainer_profile', $trainer_data);
+    }
+
     public function fetchSingleTraining($id = false)
     {
         $this->db->select('

@@ -312,6 +312,40 @@
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
+<script>
+$(document).ready(function() {
+    // Handle form submission
+    $('#updateProfileForm').on('submit', function(event) {
+        event.preventDefault();
 
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '<?= base_url('trainer/update_profile') ?>',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                var data = JSON.parse(response);
+                if (data.status === 'success') {
+                    alert(data.message);
+                    // Close the modal
+                    $('#updateProfileModal').modal('hide');
+                    // Optionally, you can reload the page to reflect the changes
+                    location.reload();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            },
+            error: function() {
+                alert('There was an error processing your request.');
+            }
+        });
+    });
+});
+
+
+</script>
 </body>
 </html>

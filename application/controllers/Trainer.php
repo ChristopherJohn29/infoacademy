@@ -50,6 +50,55 @@ class Trainer extends CI_Controller
         $this->load->view('trainer/profile',$data);
     }
 
+    public function update_profile() {
+        $user_id = $this->session->userdata('user_id');
+
+        // Get form data
+        $user_data = array(
+            'first_name'        => $this->input->post('first_name'),
+            'middle_name'       => $this->input->post('middle_name'),
+            'last_name'         => $this->input->post('last_name'),
+            'street_number'     => $this->input->post('street_number'),
+            'street_name'       => $this->input->post('street_name'),
+            'barangay'          => $this->input->post('barangay'),
+            'city'              => $this->input->post('city'),
+            'region'            => $this->input->post('region'),
+            'zip_code'          => $this->input->post('zip_code'),
+            'email_address'     => $this->input->post('email_address'),
+            'mobile_number'     => $this->input->post('mobile_number'),
+            'sex'               => $this->input->post('sex'),
+            'marital_status'    => $this->input->post('marital_status'),
+        );
+
+        $trainer_data = array(
+            'key_competencies'  => $this->input->post('key_competencies'),
+            'educational_background' => $this->input->post('educational_background'),
+            'employment_history' => $this->input->post('employment_history'),
+        );
+
+        // Handle profile photo
+        if ($_FILES['photo']['name']) {
+            $upload_path = 'uploads/';
+            $config['upload_path'] = $upload_path;
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('photo')) {
+                $file_data = $this->upload->data();
+                $trainer_data['photo'] = $file_data['file_name'];
+            }
+        }
+
+        // Update user data
+        $this->System_model->update_user($user_id, $user_data);
+
+        // Update trainer profile data
+        $this->System_model->update_trainer($user_id, $trainer_data);
+
+        // Return response
+        echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully.']);
+    }
+
     public function createTraining()
     {
         $this->load->view('trainer/create_training');
