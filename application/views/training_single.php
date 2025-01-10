@@ -77,7 +77,7 @@
                             <!-- Course Info Item -->
                             <div class="course_info_item">
                                 <div class="course_info_title">Categories:</div>
-                                <div class="course_info_text"><?=$category_name?> <?=$sub_category_name?></div>
+                                <div class="course_info_text"><?=$trainer[0]['category_name']?> <?=$trainer[0]['sub_category_name']?></div>
                             </div>
                         </div>
                         <!-- Course Image -->
