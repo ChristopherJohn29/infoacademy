@@ -1,4 +1,4 @@
-.<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -143,7 +143,7 @@
                         </a>
                     </div>
                 </li>
-              
+            
             </ul>
         </div>
     </nav>
@@ -301,11 +301,11 @@
                     </div>
                     <div class="card-body">
                         <?php if (!empty($trainer)): ?>
-                         
+                        
                             <p><strong>Educational Background:</strong><br> <?= nl2br($trainer['educational_background']) ?></p>
                             <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
                             <p><strong>Employment History:</strong> <br><?= nl2br($trainer['employment_history']) ?></p>
-                           
+                        
                         <?php else: ?>
                             
                             <p>No trainer profile information available yet.</p>
