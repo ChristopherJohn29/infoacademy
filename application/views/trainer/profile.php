@@ -95,7 +95,7 @@
             </div>
             <?php 
             
-            if (!isset($trainer['photo']) && empty($trainer['photo'])) {
+            if (!isset($trainer['photo']) || empty($trainer['photo'])) {
                 $trainer['photo'] = base_url() . '/assets/template/dist/img/avatar5.png';
             }
     
