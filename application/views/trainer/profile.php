@@ -276,6 +276,10 @@
                         <h3 class="card-title">Personal Information</h3>
                     </div>
                     <div class="card-body">
+
+                        <div>
+                            <img src="<?= $photo ?>" alt="Profile Photo" class="img-thumbnail" width="150">
+                        </div>
                         <p><strong>Name:</strong> <?= $user['first_name'] . ' ' . $user['middle_name'] . ' ' . $user['last_name'] ?></p>
                         <p><strong>Address:</strong> <?= $user['street_number'] . ' ' . $user['street_name'] . ', ' . $user['barangay'] . ', ' . $user['city'] . ', ' . $user['region'] . ', ' . $user['zip_code'] ?></p>
                         <p><strong>Email:</strong> <?= $user['email_address'] ?></p>
@@ -292,16 +296,13 @@
                     </div>
                     <div class="card-body">
                         <?php if (!empty($trainer)): ?>
-                            <div>
-                                <img src="<?= base_url('uploads/' . $trainer['photo']) ?>" alt="Profile Photo" class="img-thumbnail" width="150">
-                            </div>
-                            <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
+                         
                             <p><strong>Educational Background:</strong><br> <?= nl2br($trainer['educational_background']) ?></p>
+                            <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
                             <p><strong>Employment History:</strong> <br><?= nl2br($trainer['employment_history']) ?></p>
                            
                         <?php else: ?>
                             
-                            <img src="<?= base_url() . '/assets/template/dist/img/avatar5.png' ?>" alt="Default Profile Photo" class="img-thumbnail" width="150">
                             <p>No trainer profile information available yet.</p>
                             <!-- Placeholder for profile photo -->
                         <?php endif; ?>
