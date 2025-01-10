@@ -164,17 +164,23 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                <li class="user user-menu">
-                    <a href="#" class="d-flex align-items-center" data-toggle="dropdown">
-                        <img src="<?= base_url('uploads/' . $user['photo']) ?>" class="user-image" alt="User Image">
-                        <span class="hidden-xs ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
+                <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <img src="<?= $photo ?>" class="user-image" alt="User Image">
+                    <span class="ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header"><?= $user['first_name'] . ' ' . $user['last_name'] ?>'s Menu</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('trainer/profile') ?>" class="dropdown-item">
+                        <i class="fas fa-user mr-2"></i> Profile
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<?= base_url('trainer/profile') ?>"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="<?= base_url('trainer/dashboard') ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                        <!-- Add more options if needed -->
-                    </ul>
-                </li>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('trainer/dashboard') ?>" class="dropdown-item">
+                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                    </a>
+                </div>
+            </li>
               
             </ul>
         </div>
