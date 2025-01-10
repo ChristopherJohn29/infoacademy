@@ -231,6 +231,15 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function fetchTrainerProfile($id = false){
+        $this->db->select('*');
+        $this->db->where('user_id', $id);
+        $this->db->from('trainer_profile');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+    }
+
     public function fetchSingleTraining($id = false)
     {
         $this->db->select('
