@@ -187,29 +187,7 @@
                                         <div class="teacher_position">Marketing & Management</div>
                                     </div>
                                 </div>
-                                <div class="teacher_meta_container">
-                                    <!-- Teacher Rating -->
-                                    <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                        <div class="teacher_meta_title">Average Rating:</div>
-                                        <div class="teacher_meta_text ml-auto">
-                                            <span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
-                                    </div>
-                                    <!-- Teacher Review -->
-                                    <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                        <div class="teacher_meta_title">Review:</div>
-                                        <div class="teacher_meta_text ml-auto">
-                                            <span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
-                                    </div>
-                                    <!-- Teacher Quizzes -->
-                                    <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                        <div class="teacher_meta_title">Trainings:</div>
-                                        <div class="teacher_meta_text ml-auto">
-                                            <span><?= count($this->System_model->fetchTrainings($author_id))?></span><i class="fa fa-user" aria-hidden="true"></i></div>
-                                    </div>
-                                </div>
-                                <div class="teacher_info">
-                                    <p>Hi! I am Masion, I’m a marketing & management eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
-                                </div>
+                   
                                 <button data-url="<?=base_url().'/control/enroll/?tid='.$id?>" class="counter_form_button button-enroll">Enroll now</button>
 
                             </div>
