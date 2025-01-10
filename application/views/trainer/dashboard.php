@@ -79,12 +79,27 @@
                     <div class="logo_text">Info<span>Academy</span></div>
                 </a>
             </div>
-            <li class="dropdown user user-menu open">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-              <img src="" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-          </li>
+            <?php 
+            
+            if(!empty($trainer)){
+
+                if(isset($trainer[0]['photo']) && !empty($trainer[0]['photo'])){
+                    $photo = $trainer[0]['photo'];
+                } else {
+                    $photo = base_url().'/assets/template/dist/img/avatar5.png';
+                }
+            } else {
+                $photo = base_url().'/assets/template/dist/img/avatar5.png';
+            }
+    
+            
+            ?>
+            <li class="user user-menu open">
+                <a href="#">
+                <img src="<?=$photo?>" class="user-image" alt="User Image">
+                <span class="hidden-xs"><?= $_SESSION['first_name'].' '.$_SESSION['last_name']?></span>
+                </a>
+            </li>
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
