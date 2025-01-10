@@ -73,15 +73,11 @@
                                 <?php $trainer = $this->System_model->fetchTrainer($author_id); ?>
                                 <div class="course_info_text"><a href="#"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></a></div>
                             </div>
-                            <!-- Course Info Item -->
-                            <div class="course_info_item">
-                                <div class="course_info_title">Reviews:</div>
-                                <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
-                            </div>
+         
                             <!-- Course Info Item -->
                             <div class="course_info_item">
                                 <div class="course_info_title">Categories:</div>
-                                <div class="course_info_text"><a href="#">Languages</a></div>
+                                <div class="course_info_text"><?=$category_name?> <?=$sub_category_name?></div>
                             </div>
                         </div>
                         <!-- Course Image -->
@@ -92,7 +88,6 @@
                         <div class="course_tabs_container">
                             <div class="tabs d-flex flex-row align-items-center justify-content-start">
                                 <div class="tab active">description</div>
-                                <div class="tab">reviews</div>
                             </div>
                             <div class="tab_panels">
                                 <!-- Description -->
@@ -122,196 +117,12 @@
                                             </div>
                                             <?php
                                         } ?>
-                                        <div class="tab_panel_faq">
-                                            <div class="tab_panel_title">FAQ</div>
-                                            <!-- Accordions -->
-                                            <div class="accordions">
-                                                <div class="elements_accordions">
-                                                    <div class="accordion_container">
-                                                        <div class="accordion d-flex flex-row align-items-center">
-                                                            <div>Can I just enroll in a single course?</div>
-                                                        </div>
-                                                        <div class="accordion_panel">
-                                                            <p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion_container">
-                                                        <div class="accordion d-flex flex-row align-items-center active">
-                                                            <div>I'm not interested in the entire Specialization?</div>
-                                                        </div>
-                                                        <div class="accordion_panel">
-                                                            <p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion_container">
-                                                        <div class="accordion d-flex flex-row align-items-center">
-                                                            <div>What is the refund policy?</div>
-                                                        </div>
-                                                        <div class="accordion_panel">
-                                                            <p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion_container">
-                                                        <div class="accordion d-flex flex-row align-items-center">
-                                                            <div>What background knowledge is necessary?</div>
-                                                        </div>
-                                                        <div class="accordion_panel">
-                                                            <p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion_container">
-                                                        <div class="accordion d-flex flex-row align-items-center">
-                                                            <div>Do i need to take the courses in a specific order?</div>
-                                                        </div>
-                                                        <div class="accordion_panel">
-                                                            <p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                 
                                     </div>
                                 </div>
                                 <!-- Curriculum -->
                                 <!-- Reviews -->
-                                <div class="tab_panel tab_panel_3">
-                                    <div class="tab_panel_title">Training Review</div>
-                                    <!-- Rating -->
-                                    <div class="review_rating_container">
-                                        <div class="review_rating">
-                                            <div class="review_rating_num">4.5</div>
-                                            <div class="review_rating_stars">
-                                                <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i>
-                                                </div>
-                                            </div>
-                                            <div class="review_rating_text">(28 Ratings)</div>
-                                        </div>
-                                        <div class="review_rating_bars">
-                                            <ul>
-                                                <li><span>5 Star</span>
-                                                    <div class="review_rating_bar">
-                                                        <div style="width:90%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li><span>4 Star</span>
-                                                    <div class="review_rating_bar">
-                                                        <div style="width:75%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li><span>3 Star</span>
-                                                    <div class="review_rating_bar">
-                                                        <div style="width:32%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li><span>2 Star</span>
-                                                    <div class="review_rating_bar">
-                                                        <div style="width:10%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li><span>1 Star</span>
-                                                    <div class="review_rating_bar">
-                                                        <div style="width:3%;"></div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- Comments -->
-                                    <div class="comments_container">
-                                        <ul class="comments_list">
-                                            <li>
-                                                <div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-                                                    <div class="comment_image">
-                                                        <div><img src="images/comment_1.jpg" alt=""></div>
-                                                    </div>
-                                                    <div class="comment_content">
-                                                        <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                                            <div class="comment_author"><a href="#">Milley Cyrus</a>
-                                                            </div>
-                                                            <div class="comment_rating">
-                                                                <div class="rating_r rating_r_4">
-                                                                    <i></i><i></i><i></i><i></i><i></i></div>
-                                                            </div>
-                                                            <div class="comment_time ml-auto">1 day ago</div>
-                                                        </div>
-                                                        <div class="comment_text">
-                                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-                                                        </div>
-                                                        <div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-                                                            <div class="comment_extra comment_likes">
-                                                                <a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a>
-                                                            </div>
-                                                            <div class="comment_extra comment_reply">
-                                                                <a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul>
-                                                    <li>
-                                                        <div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-                                                            <div class="comment_image">
-                                                                <div><img src="images/comment_2.jpg" alt=""></div>
-                                                            </div>
-                                                            <div class="comment_content">
-                                                                <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                                                    <div class="comment_author">
-                                                                        <a href="#">John Tyler</a></div>
-                                                                    <div class="comment_rating">
-                                                                        <div class="rating_r rating_r_4">
-                                                                            <i></i><i></i><i></i><i></i><i></i></div>
-                                                                    </div>
-                                                                    <div class="comment_time ml-auto">1 day ago</div>
-                                                                </div>
-                                                                <div class="comment_text">
-                                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-                                                                </div>
-                                                                <div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-                                                                    <div class="comment_extra comment_likes">
-                                                                        <a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a>
-                                                                    </div>
-                                                                    <div class="comment_extra comment_reply">
-                                                                        <a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-                                                    <div class="comment_image">
-                                                        <div><img src="images/comment_3.jpg" alt=""></div>
-                                                    </div>
-                                                    <div class="comment_content">
-                                                        <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-                                                            <div class="comment_author"><a href="#">Milley Cyrus</a>
-                                                            </div>
-                                                            <div class="comment_rating">
-                                                                <div class="rating_r rating_r_4">
-                                                                    <i></i><i></i><i></i><i></i><i></i></div>
-                                                            </div>
-                                                            <div class="comment_time ml-auto">1 day ago</div>
-                                                        </div>
-                                                        <div class="comment_text">
-                                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
-                                                        </div>
-                                                        <div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-                                                            <div class="comment_extra comment_likes">
-                                                                <a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a>
-                                                            </div>
-                                                            <div class="comment_extra comment_reply">
-                                                                <a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
+                      
                             </div>
                         </div>
                     </div>

@@ -233,15 +233,21 @@ class System_model extends CI_Model
 
     public function fetchSingleTraining($id = false)
     {
-        $this->db->select('*');
-        $this->db->where('id', $id);
-        $this->db->where('status', '1');
+        $this->db->select('
+            training.*, 
+            categories.name AS category_name, 
+            sub_categories.name AS sub_category_name
+        ');
         $this->db->from('training');
+        $this->db->join('categories', 'categories.id = training.category_id', 'left');
+        $this->db->join('sub_categories', 'sub_categories.id = training.sub_category_id', 'left');
+        $this->db->where('training.id', $id);
+        $this->db->where('training.status', '1');
+    
         $result = $this->db->get()->result_array();
-
         return $result;
     }
-
+    
     public function enrollSubmit($data = array())
     {
         if ($this->db->insert('training_class', $data)) {
