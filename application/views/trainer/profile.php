@@ -175,6 +175,10 @@
                             <!-- User Information Form -->
                             <form id="updateProfileForm">
                                 <div class="form-group">
+                                    <label for="profilePhoto">Profile Photo</label>
+                                    <input type="file" class="form-control-file" id="profilePhoto" name="photo">
+                                </div>
+                                <div class="form-group">
                                     <label for="firstName">First Name</label>
                                     <input type="text" class="form-control" id="firstName" name="first_name" value="<?= $user['first_name'] ?>" required>
                                 </div>
@@ -253,10 +257,7 @@
                                     <label for="employmentHistory">Employment History</label>
                                     <textarea class="form-control" id="employmentHistory" name="employment_history" rows="3"><?= $trainer['employment_history'] ?></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="profilePhoto">Profile Photo</label>
-                                    <input type="file" class="form-control-file" id="profilePhoto" name="photo">
-                                </div>
+                             
                             </form>
                         </div>
                         <div class="modal-footer">
