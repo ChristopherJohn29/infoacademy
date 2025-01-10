@@ -33,7 +33,7 @@ class Trainer extends CI_Controller
 
     public function dashboard()
     {
-        $user_id = $_SESSION['user_id'];
+        $user_id = $_SESSION['id'];
         $data = $this->System_model->fetchTrainerProfile($user_id);
         
         echo "<pre>";
