@@ -32,6 +32,36 @@
             display: inline-flex !important;
         }
     </style>
+    <style>
+        .user-menu a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .user-menu a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .user-menu .user-image {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-menu .hidden-xs {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+    </style>
     <!-- Google Font: Source Sans Pro -->
 </head>
 <body class="hold-transition layout-top-nav">
@@ -94,12 +124,13 @@
     
             
             ?>
-            <li class="user user-menu open">
-                <a href="#">
-                <img src="<?=$photo?>" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?= $_SESSION['first_name'].' '.$_SESSION['last_name']?></span>
+            <li class="user user-menu">
+                <a href="<?= base_url('profile') ?>" class="d-flex align-items-center">
+                    <img src="<?=$photo?>" class="user-image" alt="User Image">
+                    <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
                 </a>
             </li>
+
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
