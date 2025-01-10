@@ -87,7 +87,8 @@ class Trainer extends CI_Controller
                 $file_data = $this->upload->data();
                 $trainer_data['photo'] = $file_data['file_name'];
             } else {
-                log_message('debug', 'Upload error: ' . $this->upload->display_errors());
+                var_dump($this->upload->display_errors());
+                exit;
             }
         }
     
