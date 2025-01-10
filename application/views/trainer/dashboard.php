@@ -33,6 +33,19 @@
         }
     </style>
     <style>
+        /* Remove bullet points for the list */
+        .nav.navbar-nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Align to the right */
+        .navbar-right {
+            margin-left: auto; /* Pushes the content to the right */
+        }
+
+        /* Style for user menu */
         .user-menu a {
             display: flex;
             align-items: center;
@@ -43,10 +56,12 @@
             transition: background-color 0.3s;
         }
 
+        /* Hover effect */
         .user-menu a:hover {
             background-color: #f4f4f4;
         }
 
+        /* Profile image */
         .user-menu .user-image {
             width: 32px;
             height: 32px;
@@ -54,12 +69,14 @@
             object-fit: cover;
         }
 
+        /* User name styling */
         .user-menu .hidden-xs {
             margin-left: 10px;
             font-size: 16px;
             font-weight: 500;
             color: #333;
         }
+
 
     </style>
     <!-- Google Font: Source Sans Pro -->
@@ -124,12 +141,15 @@
     
             
             ?>
-            <li class="user user-menu">
-                <a href="<?= base_url('profile') ?>" class="d-flex align-items-center">
-                    <img src="<?=$photo?>" class="user-image" alt="User Image">
-                    <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
-                </a>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="user user-menu">
+                    <a href="<?= base_url('profile') ?>" class="d-flex align-items-center">
+                        <img src="<?=$photo?>" class="user-image" alt="User Image">
+                        <span class="hidden-xs ml-2"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?></span>
+                    </a>
+                </li>
+            </ul>
+
 
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
