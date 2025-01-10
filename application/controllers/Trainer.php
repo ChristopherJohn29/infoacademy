@@ -48,7 +48,7 @@ class Trainer extends CI_Controller
     
         
 
-        $this->load->view('trainer/dashboard',$data);
+        $this->load->view('trainer/profile',$data);
     }
 
     public function createTraining()
