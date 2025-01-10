@@ -32,7 +32,7 @@
             display: inline-flex !important;
         }
     </style>
-    <style>
+        <style>
         /* Remove bullet points for the list */
         .nav.navbar-nav {
             list-style-type: none;
