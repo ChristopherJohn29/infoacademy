@@ -75,9 +75,13 @@ class Trainer extends CI_Controller
         );
     
         // Debugging - log the data to check if they are correctly received
-        log_message('debug', 'User data: ' . print_r($user_data, true));
-        log_message('debug', 'Trainer data: ' . print_r($trainer_data, true));
-    
+
+            
+            // Dump the user data and trainer data and stop further execution
+        var_dump($user_data); // You can check the output of $user_data here
+        var_dump($trainer_data); // Check the output of $trainer_data here
+        exit(); // Stop the script execution
+        
         // Handle profile photo
         if ($_FILES['photo']['name']) {
             $upload_path = 'uploads/';
