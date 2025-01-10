@@ -77,19 +77,19 @@ class Trainer extends CI_Controller
         // Debugging - log the data to check if they are correctly received
 
         // Handle profile photo
-        if ($_FILES['photo']['name']) {
-            $upload_path = 'uploads/';
-            $config['upload_path'] = $upload_path;
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $this->load->library('upload', $config);
+        // if ($_FILES['photo']['name']) {
+        //     $upload_path = 'uploads/';
+        //     $config['upload_path'] = $upload_path;
+        //     $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        //     $this->load->library('upload', $config);
     
-            if ($this->upload->do_upload('photo')) {
-                $file_data = $this->upload->data();
-                $trainer_data['photo'] = $file_data['file_name'];
-            } else {
-                log_message('debug', 'Upload error: ' . $this->upload->display_errors());
-            }
-        }
+        //     if ($this->upload->do_upload('photo')) {
+        //         $file_data = $this->upload->data();
+        //         $trainer_data['photo'] = $file_data['file_name'];
+        //     } else {
+        //         log_message('debug', 'Upload error: ' . $this->upload->display_errors());
+        //     }
+        // }
     
         // Update user data
         $user_updated = $this->System_model->update_user($user_id, $user_data);
