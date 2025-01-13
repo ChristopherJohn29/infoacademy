@@ -202,8 +202,6 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h5>Trainer Profile</h5>
-                                                <p><strong>Name:</strong> <?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></p>
                                                 <p><strong>Key Competencies:</strong> <?= $trainer[0]['key_competencies'] ?></p>
                                                 <p><strong>Educational Background:</strong> <?= $trainer[0]['educational_background'] ?></p>
                                                 <p><strong>Employment History:</strong> <?= $trainer[0]['employment_history'] ?></p>
