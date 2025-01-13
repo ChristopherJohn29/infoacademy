@@ -180,13 +180,42 @@
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">Trainer</div>
                             <div class="sidebar_teacher">
-                                <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-                                    <div class="teacher_image"><img src="images/teacher.jpg" alt=""></div>
-                                    <div class="teacher_title">
-                                        <div class="teacher_name"><a href="#"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></a></div>
-                                        <div class="teacher_position">Marketing & Management</div>
+                            <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
+                                <?php $trainer = $this->System_model->fetchTrainer($author_id); ?>
+                                <div class="teacher_image"><img src="images/<?= $trainer[0]['profile_picture'] ?>" alt=""></div>
+                                <div class="teacher_title">
+                                    <div class="teacher_name">
+                                        <a href="#" data-toggle="modal" data-target="#trainerProfileModal"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></a>
+                                    </div>
+                                    <div class="teacher_position">Marketing & Management</div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                                <div class="modal fade" id="trainerProfileModal" tabindex="-1" role="dialog" aria-labelledby="trainerProfileModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="trainerProfileModalLabel"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?> - Profile</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>Trainer Profile</h5>
+                                                <p><strong>Name:</strong> <?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></p>
+                                                <p><strong>Key Competencies:</strong> <?= $trainer[0]['key_competencies'] ?></p>
+                                                <p><strong>Educational Background:</strong> <?= $trainer[0]['educational_background'] ?></p>
+                                                <p><strong>Employment History:</strong> <?= $trainer[0]['employment_history'] ?></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
+
                    
                                 <button data-url="<?=base_url().'/control/enroll/?tid='.$id?>" class="counter_form_button button-enroll">Enroll now</button>
 
