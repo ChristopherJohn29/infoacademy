@@ -202,9 +202,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p><strong>Key Competencies:</strong> <?= $trainer[0]['key_competencies'] ?></p>
-                                                <p><strong>Educational Background:</strong> <?= $trainer[0]['educational_background'] ?></p>
-                                                <p><strong>Employment History:</strong> <?= $trainer[0]['employment_history'] ?></p>
+                                                <p><strong>Key Competencies:</strong> <?= nl2br($trainer[0]['key_competencies']) ?></p>
+                                                <p><strong>Educational Background:</strong> <?= nl2br($trainer[0]['educational_background']) ?></p>
+                                                <p><strong>Employment History:</strong> <?= nl2br($trainer[0]['employment_history']) ?></p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
