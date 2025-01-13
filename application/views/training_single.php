@@ -182,12 +182,12 @@
                             <div class="sidebar_teacher">
                             <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
                                 <?php $trainer = $this->System_model->fetchTrainer($author_id); ?>
-                                <div class="teacher_image"><img src="images/<?= $trainer[0]['profile_picture'] ?>" alt=""></div>
+                                <div class="teacher_image"><img src="<?=base_url('uploads')?>/<?= $trainer[0]['photo'] ?>" alt=""></div>
                                 <div class="teacher_title">
                                     <div class="teacher_name">
                                         <a href="#" data-toggle="modal" data-target="#trainerProfileModal"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></a>
                                     </div>
-                                    <div class="teacher_position">Marketing & Management</div>
+                                    <div class="teacher_position"><?= $trainer[0]['position'] ?></div>
                                 </div>
                             </div>
 

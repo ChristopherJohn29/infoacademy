@@ -250,7 +250,10 @@
                                             <option value="Divorced" <?= $user['marital_status'] == 'Divorced' ? 'selected' : '' ?>>Divorced</option>
                                         </select>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="position">Position</label>
+                                        <input type="text" class="form-control" id="position" name="position" value="<?= $trainer['position'] ?>" required>
+                                    </div>
                                     <!-- Trainer Profile Form -->
                                     <div class="form-group">
                                         <label for="keyCompetencies">Key Competencies</label>
@@ -301,7 +304,7 @@
                     </div>
                     <div class="card-body">
                         <?php if (!empty($trainer)): ?>
-                        
+                            <p><strong>Position:</strong><br> <?= nl2br($trainer['position']) ?></p>
                             <p><strong>Educational Background:</strong><br> <?= nl2br($trainer['educational_background']) ?></p>
                             <p><strong>Key Competencies:</strong> <br><?= nl2br($trainer['key_competencies']) ?></p>
                             <p><strong>Employment History:</strong> <br><?= nl2br($trainer['employment_history']) ?></p>

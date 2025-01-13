@@ -70,6 +70,7 @@ class Trainer extends CI_Controller
         );
     
         $trainer_data = array(
+            'position'  => $this->input->post('position'),
             'key_competencies'  => $this->input->post('key_competencies'),
             'educational_background' => $this->input->post('educational_background'),
             'employment_history' => $this->input->post('employment_history'),
