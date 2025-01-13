@@ -321,9 +321,10 @@ class System_model extends CI_Model
 
     public function fetchTrainer($id = false)
     {
-        $this->db->select('*');
-        $this->db->where('id', $id);
+        $this->db->select('user.*, trainer_profile.key_competencies, trainer_profile.educational_background, trainer_profile.employment_history');
         $this->db->from('user');
+        $this->db->join('trainer_profile', 'trainer_profile.user_id = user.id', 'left');
+        $this->db->where('user.id', $id);
         $result = $this->db->get()->result_array();
 
         return $result;
