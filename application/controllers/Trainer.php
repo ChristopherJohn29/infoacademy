@@ -130,7 +130,7 @@ class Trainer extends CI_Controller
                 redirect('trainer/dashboard');
             }
 
-            $training_class = $this->System_model->fetchClassByTrainingID();
+            $training_class = $this->System_model->fetchClassByTrainingID($_GET['id']);
 
             $data['training_class'] = $training_class;
 
