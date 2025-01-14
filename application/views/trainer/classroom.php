@@ -137,6 +137,28 @@
         </div>
         <!-- /.content-header -->
         <!-- Main content -->
+
+        <div class="modal fade" id="completedExamModal" tabindex="-1" role="dialog" aria-labelledby="completedExamModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="completedExamModalLabel">Completed Examination</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Container to display multiple examination files -->
+                        <div id="examFilesContainer"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
         <div class="content">
             <div class="container">
                 <div class="row" style="display:block; text-align: right; margin:2px;">
@@ -170,7 +192,17 @@
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['status']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['workshop_status']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['exam_status']); ?></td> <!-- Replace with the correct field -->
+                                                <td>
+                                                    <?php 
+                                                    if ($class['exam_status'] == 'Completed') {
+                                                        echo '<button class="btn btn-info" onclick="openCompletedExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
+                                                    } elseif ($class['exam_status'] == 'For Checking') {
+                                                        echo '<button class="btn btn-warning" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
+                                                    } else {
+                                                        echo 'No New file to check';
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
                                             </tr>
@@ -232,6 +264,39 @@
             "autoWidth": false,
         });
     });
+
+    function openCompletedExamModal(participant_id, training_id) {
+        // Fetch completed exam data via AJAX
+        $.ajax({
+            url: '<?php echo base_url("trainer/fetchCompletedExamData"); ?>',
+            type: 'POST',
+            data: {
+                training_id: training_id,
+                participant_id: participant_id
+            },
+            success: function(response) {
+                if (response.success) {
+                    var examData = response.data;
+                    // Populate the modal with examination data
+                    $('#examFilesContainer').html('');
+                    examData.forEach(function(exam) {
+                        var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
+                        examHtml += '<p><strong>Status:</strong> ' + exam.status + '</p>';
+                        examHtml += '<p><strong>Date Completed:</strong> ' + exam.date_completed + '</p>';
+                        $('#examFilesContainer').append(examHtml);
+                    });
+                    // Open the modal
+                    $('#completedExamModal').modal('show');
+                } else {
+                    $('#examFilesContainer').html('<p>No data found</p>');
+                    $('#completedExamModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#examFilesContainer').html('<p>An error occurred</p>');
+            }
+        });
+    }
 </script>
 </body>
 </html>

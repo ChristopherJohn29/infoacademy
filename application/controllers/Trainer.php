@@ -204,6 +204,36 @@ class Trainer extends CI_Controller
         }
     }
 
+    public function fetchCompletedExamData() {
+        $training_id = $this->input->post('training_id');
+        $participant_id = $this->input->post('participant_id');
+    
+        // Fetch all examination data for the participant
+        $this->db->select('*');
+        $this->db->from('examination_data');
+        $this->db->where('training_id', $training_id);
+        $this->db->where('participant_id', $participant_id);
+        $query = $this->db->get();
+    
+        // Check if there are results
+        if ($query->num_rows() > 0) {
+            $data = $query->result_array();  // Fetch all rows for this participant
+    
+            // Prepare the response data
+            $exam_data = [];
+            foreach ($data as $row) {
+                $exam_data[] = [
+                    'examination_file' => $row['examination_file'],
+                ];
+            }
+    
+            echo json_encode(['success' => true, 'data' => $exam_data]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No data found']);
+        }
+    }
+    
+
     public function submitTraining()
     {
         if (isset($_POST)) {
