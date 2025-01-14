@@ -119,20 +119,25 @@ class Control extends CI_Controller
         if (isset($_SESSION['id'])) {
             if (isset($_POST['tid'])) {
                 $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'gif|jpg|png';
+                $config['allowed_types'] = 'gif|jpg|png'; // Only allow non-executable image files
                 $config['max_size'] = 2000;
                 $config['max_width'] = 2000;
                 $config['max_height'] = 2000;
                 $this->load->library('upload', $config);
-                $error_check = 0;
 
                 if (!$this->upload->do_upload('proof_of_payment')) {
                     $error = array('error' => $this->upload->display_errors());
                     $proof_of_payment = '';
                 } else {
+                    // Get the uploaded file data
                     $file = array('upload_data' => $this->upload->data());
-                    $proof_of_payment = $file['upload_data']['file_name'];
+                    // Generate a unique name using uniqid() and keep the original file extension
+                    $proof_of_payment = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                    // Rename the file to the unique name
+                    rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $proof_of_payment);
                 }
+
+                // Fetch training data
                 $training = $this->System_model->fetchSingleTraining(html_escape($_POST['tid']));
                 $instruction = $training[0]['instruction'];
 
@@ -150,6 +155,7 @@ class Control extends CI_Controller
                     'status' => 0
                 ];
 
+                // Save the data
                 $success = $this->System_model->enrollSubmit($data);
 
                 if ($success) {
@@ -158,6 +164,7 @@ class Control extends CI_Controller
             }
         }
     }
+
 
     public function detailsPage()
     {

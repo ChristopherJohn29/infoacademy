@@ -130,19 +130,21 @@ class Trainer extends CI_Controller
     public function submitTraining()
     {
         if (isset($_POST)) {
-
+            // Banner file upload
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
             $this->load->library('upload', $config);
-            $error_check = 0;
+            
             if (!$this->upload->do_upload('banner')) {
                 $error = array('error' => $this->upload->display_errors());
                 $banner = '';
             } else {
                 $file = array('upload_data' => $this->upload->data());
-                $banner = $file['upload_data']['file_name'];
+                $banner = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $banner);
             }
 
+            // Process instruction fields
             $instruction = array();
             $instruction_description = html_escape($_POST['instruction']);
             $instruction_section = html_escape($_POST['section']);
@@ -154,11 +156,12 @@ class Trainer extends CI_Controller
                 $instruction[$count]['section'] = $instruction_section[$count];
                 $instruction[$count]['percentage'] = $instruction_percentage[$count];
                 $instruction[$count]['completed'] = 0;
-                $count = $count + 1;
+                $count++;
             }
 
+            // Process video fields
             $video = array();
-            if (isset($_POST['video_title'])){
+            if (isset($_POST['video_title'])) {
                 $video_title = html_escape($_POST['video_title']);
                 $video_url = html_escape($_POST['video_url']);
 
@@ -166,12 +169,13 @@ class Trainer extends CI_Controller
                 foreach ($video_title as $video_value) {
                     $video[$count]['title'] = $video_value;
                     $video[$count]['url'] = $video_url[$count];
-                    $count = $count + 1;
+                    $count++;
                 }
             }
 
+            // Process workshop files
             $workshop = array();
-            if(isset($_POST['workshop_title'])){
+            if (isset($_POST['workshop_title'])) {
                 $workshop_title = html_escape($_POST['workshop_title']);
 
                 $count = 0;
@@ -182,7 +186,7 @@ class Trainer extends CI_Controller
                     $config['upload_path'] = './uploads/';
                     $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
                     $this->load->library('upload', $config);
-                    $error_check = 0;
+                    
                     if (!$this->upload->do_upload('workshop_file_' . $file_count)) {
                         $error = array('error' => $this->upload->display_errors());
                         var_dump('workshop error');
@@ -190,21 +194,18 @@ class Trainer extends CI_Controller
                         $workshop[$count]['file'] = $error;
                     } else {
                         $file = array('upload_data' => $this->upload->data());
-                        $workshop[$count]['file'] = $file['upload_data']['file_name'];
+                        $workshop[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$count]['file']);
                     }
 
-                    $file_count = $file_count + 1;
+                    $file_count++;
                     $count++;
-
                 }
             }
 
-
-
-
+            // Process examination files
             $examination = array();
-
-            if(isset($_POST['examination_title'])){
+            if (isset($_POST['examination_title'])) {
                 $examination_title = html_escape($_POST['examination_title']);
 
                 $count = 0;
@@ -215,7 +216,7 @@ class Trainer extends CI_Controller
                     $config['upload_path'] = './uploads/';
                     $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
                     $this->load->library('upload', $config);
-                    $error_check = 0;
+                    
                     if (!$this->upload->do_upload('examination_file_' . $file_count)) {
                         $error = array('error' => $this->upload->display_errors());
                         var_dump('exam error');
@@ -223,17 +224,16 @@ class Trainer extends CI_Controller
                         $examination[$count]['file'] = $error;
                     } else {
                         $file = array('upload_data' => $this->upload->data());
-                        $examination[$count]['file'] = $file['upload_data']['file_name'];
+                        $examination[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$count]['file']);
                     }
 
-                    $file_count = $file_count + 1;
+                    $file_count++;
                     $count++;
-
                 }
-
             }
 
-
+            // Process reference fields
             $references = array();
             $references_title = html_escape($_POST['reference_title']);
             $references_url = html_escape($_POST['reference_url']);
@@ -242,12 +242,14 @@ class Trainer extends CI_Controller
             foreach ($references_title as $references_value) {
                 $references[$count]['title'] = $references_value;
                 $references[$count]['url'] = $references_url[$count];
-                $count = $count + 1;
+                $count++;
             }
 
+            // Category and Subcategory
             $category_id = html_escape($_POST['category']);
             $subcategory = html_escape($_POST['subcategory']);
 
+            // Save training data
             $data = [
                 'training_title' => html_escape($_POST['training_title']),
                 'required_no_of_hours' => html_escape($_POST['required_no_of_hours']),
@@ -261,7 +263,7 @@ class Trainer extends CI_Controller
                 'instruction' => json_encode(html_escape($instruction)),
                 'video' => json_encode(html_escape($video)),
                 'workshop' => json_encode(html_escape($workshop)),
-                'examination' =>json_encode(html_escape($examination)),
+                'examination' => json_encode(html_escape($examination)),
                 'ref' => json_encode(html_escape($references)),
                 'author_id' => $_SESSION['id'],
                 'category_id' => $category_id,
@@ -273,9 +275,9 @@ class Trainer extends CI_Controller
             } else {
                 redirect('trainer/createTraining');
             }
-
         }
     }
+
 
     public function get_subcategories_by_category()
     {
