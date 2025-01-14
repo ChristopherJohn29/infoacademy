@@ -277,12 +277,16 @@
             success: function(response) {
                 if (response.success) {
                     var examData = response.data;
-                    // Populate the modal with examination data
+                    // Clear the modal content before appending new data
                     $('#examFilesContainer').html('');
+
+                    // Loop through each examination data
                     examData.forEach(function(exam) {
-                        var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
+                        var examHtml = '<p><strong>Examination File:</strong> ';
+                        examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
                         $('#examFilesContainer').append(examHtml);
                     });
+
                     // Open the modal
                     $('#completedExamModal').modal('show');
                 } else {
