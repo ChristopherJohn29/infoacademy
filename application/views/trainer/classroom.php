@@ -194,7 +194,7 @@
                                                 <td><?php echo html_escape($class['workshop_status']); ?></td> <!-- Replace with the correct field -->
                                                 <td>
                                                     <?php 
-                                                    if ($class['exam_status'] == 'Completed') {
+                                                    if ($class['exam_status'] == 'completed') {
                                                         echo '<button class="btn btn-info" onclick="openCompletedExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
                                                     } elseif ($class['exam_status'] == 'For Checking') {
                                                         echo '<button class="btn btn-warning" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
