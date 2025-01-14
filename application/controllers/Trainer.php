@@ -134,12 +134,39 @@ class Trainer extends CI_Controller
 
             foreach ($training_class as &$class) {
                 $class['exam_status'] = $this->getExamStatus($class['training_instruction']);
+                $class['workshop_status'] = $this->getWorkshopStatus($class['training_instruction']);
             }
     
             // Pass the training class data with the exam status to the view
             $data['training_class'] = $training_class;
 
             $this->load->view('trainer/classroom', $data);
+        }
+    }
+
+    public function getWorkshopStatus($training_instruction_json) {
+        $training_instruction = json_decode($training_instruction_json, true);
+        $allCompleted = true;
+        $hasChecking = false;
+
+        foreach ($training_instruction as $instruction) {
+            if ($instruction['section'] == 'workshop') {
+                if ($instruction['completed'] == 2) {
+                    $hasChecking = true;
+                    break;
+                }
+                if ($instruction['completed'] != 1) {
+                    $allCompleted = false;
+                }
+            }
+        }
+
+        if ($hasChecking) {
+            return "for checking";
+        } elseif ($allCompleted) {
+            return "completed";
+        } else {
+            return "No New file to check";
         }
     }
 
