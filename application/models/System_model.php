@@ -79,6 +79,14 @@ class System_model extends CI_Model
         }
     }
 
+    public function saveWorkshop($data = array()){
+        if ($this->db->insert('workshop_data', $data)) {
+            return true;
+        } else {
+            return 0;
+        }
+    }
+
     public function fetchAllPublishedTrainings()
     {
         $this->db->select('*');

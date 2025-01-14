@@ -307,6 +307,62 @@ class Control extends CI_Controller
         }
     }
 
+    public function submitWorkshop()
+    {
+        if($_POST){
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
+            $config['max_size'] = 2000;
+            $config['max_width'] = 2000;
+            $config['max_height'] = 2000;
+            $this->load->library('upload', $config);
+            $error_check = 0;
+
+            if (!$this->upload->do_upload('workshop_file')) {
+                $error = array('error' => $this->upload->display_errors());
+                $workshop_file = '';
+            } else {
+                $file = array('upload_data' => $this->upload->data());
+                $workshop_file = $file['upload_data']['file_name'];
+            }
+            $training_id = $_POST['tid'];
+            $step = $_POST['step'];
+
+            $training_class = $this->System_model->fetchFromTrainingClass($training_id);
+            $instruction = json_decode($training_class[0]['training_instruction']);
+
+            if ($instruction[$step]->section == 'workshop') {
+                $instruction[$step]->completed = 1;
+            } else {
+                redirect('control');
+            }
+
+            $new_instruction = json_encode($instruction);
+
+            $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
+
+            $data = array(
+                'training_id' => $training_id,
+                'step' => $step,
+                'workshop_file' => $workshop_file,
+                'participant_id' => intval($_SESSION['id'])
+            );
+
+            $saveWorkshop = $this->System_model->saveWorkshop(html_escape($data));
+
+            if ($training_class && $saveWorkshop) {
+                redirect('control/classroom/?tid=' . $training_id);
+            } else {
+                redirect('control');
+            }
+
+
+
+        } else {
+            redirect('control');
+        }
+    }
+
     public function submitExamination()
     {
         if($_POST){
@@ -330,8 +386,6 @@ class Control extends CI_Controller
 
             $training_class = $this->System_model->fetchFromTrainingClass($training_id);
             $instruction = json_decode($training_class[0]['training_instruction']);
-
-//            var_dump();
 
             if ($instruction[$step]->section == 'examination') {
                 $instruction[$step]->completed = 1;

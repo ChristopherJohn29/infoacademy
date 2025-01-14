@@ -231,7 +231,6 @@
                         }
                         ?><?php
                         if ($value->section == 'workshop' && $display == 1) {
-//
                             ?>
                             <div class="card card-warning  step-<?= $count ?>" style="margin-top:20px;">
                                 <div class="card-header">
@@ -241,27 +240,35 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <div class="custom-file">
-                                                <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download workshop</a>
-                                            </div>
+                                            <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
+                                            <br/><br/> <label for="customFile">Submit Workshop</label>
+                                            <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
+                                                <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
+                                                <input name="step" type="hidden" value="<?=$count?>">
+                                                <input name="" type="hidden" value="">
+                                                <div class="custom-file">
+                                                    <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf, .jpg, .jpeg, .png " id="customFile-<?= $workshop ?>">
+                                                    <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
+                                                </div>
+                                                <?php
+
+                                                if ($value->completed != 1) {
+
+                                                    ?>
+                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
+                                                    <?php
+                                                }
+
+                                                ?>
+                                            </form>
                                         </div>
                                     </div>
                                     <!-- input states -->
                                 </div>
-                                <?php
-
-                                if ($value->completed != 1) {
-
-                                    ?>
-                                    <button data-url="https://infoacademy.infoadvance.com.ph/control/finishreading?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll finish-reading">Finish reading</button>
-                                    <?php
-                                }
-
-                                ?>
                                 <!-- /.card-body -->
                             </div>
                             <?php
-                            $workshop++;
+                            $examination++;
                         }
                         ?><?php
                         if ($value->section == 'examination' && $display == 1) {
