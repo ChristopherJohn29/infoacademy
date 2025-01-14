@@ -270,6 +270,7 @@
         $.ajax({
             url: '<?php echo base_url("trainer/fetchCompletedExamData"); ?>',
             type: 'POST',
+            dataType: 'json',
             data: {
                 training_id: training_id,
                 participant_id: participant_id
