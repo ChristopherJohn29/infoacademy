@@ -29,7 +29,7 @@ class System_model extends CI_Model
     public function fetchTrainingByAuthorAndID($author = false,$id = false)
     {
         $this->db->select('*');
-        $this->db->where('author_id', $id);
+        $this->db->where('author_id', $author);
         $this->db->where('id', $id);
         $this->db->where('status', 1);
         $this->db->from('training');
