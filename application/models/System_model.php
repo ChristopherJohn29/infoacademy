@@ -26,6 +26,18 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function fetchTrainingByAuthorAndID($author = false,$id = false)
+    {
+        $this->db->select('*');
+        $this->db->where('author_id', $id);
+        $this->db->where('id', $id);
+        $this->db->where('status', 1);
+        $this->db->from('training');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+    }
+
     public function fetchAllTrainings()
     {
         $this->db->select('*');
@@ -41,6 +53,16 @@ class System_model extends CI_Model
         $this->db->select('*');
         $this->db->where('training_id', $id);
         $this->db->where('participant_id', intval($_SESSION['id']));
+        $this->db->from('training_class');
+        $result = $this->db->get()->result_array();
+
+        return $result;
+    }
+
+    public function fetchClassByTrainingID($id = false){
+        $this->db->select('training_class.*, user.first_name, user.last_name');
+        $this->db->where('training_id', $id);
+        $this->db->join('user', 'user.id = training_class.participant_id', 'left');
         $this->db->from('training_class');
         $result = $this->db->get()->result_array();
 

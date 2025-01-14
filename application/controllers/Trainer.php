@@ -123,7 +123,18 @@ class Trainer extends CI_Controller
     public function classroom()
     {
         if (isset($_GET['id'])) {
-            $this->load->view('trainer/classroom');
+            
+            $training = $this->System_model->fetchTrainingByAuthorAndID();
+
+            if(empty($training)){
+                redirect('trainer/dashboard');
+            }
+
+            $training_class = $this->System_model->fetchClassByTrainingID();
+
+            $data['training_class'] = $training_class;
+
+            $this->load->view('trainer/classroom', $data);
         }
     }
 

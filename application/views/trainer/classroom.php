@@ -151,22 +151,34 @@
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
-                                    <tr>
-                                        <th>Participant</th>
-                                        <th>Participant no.</th>
-                                        <th>Date enrolled</th>
-                                        <th>Status</th>
-                                        <th>Output</th>
-                                        <th>Exam</th>
-                                        <th>Date Completed</th>
-                                        <th>Question and answer</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Participant</th>
+                                            <th>Participant no.</th>
+                                            <th>Date enrolled</th>
+                                            <th>Status</th>
+                                            <th>Output</th>
+                                            <th>Exam</th>
+                                            <th>Date Completed</th>
+                                            <th>Question and answer</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php foreach ($training_class as $class): ?>
+                                            <tr>
+                                                <td><?php echo html_escape($class['first_name']) . ' ' . html_escape($class['last_name']); ?></td>
+                                                <td><?php echo html_escape($class['participant_id']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['date_enrolled']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['status']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['output']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['exam']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
+
                             <!-- /.card-body -->
                         </div>
                     </div>
