@@ -132,9 +132,48 @@ class Trainer extends CI_Controller
 
             $training_class = $this->System_model->fetchClassByTrainingID($_GET['id']);
 
+            foreach ($training_class as &$class) {
+                $class['exam_status'] = $this->getExamStatus($class['training_instruction']);
+            }
+    
+            // Pass the training class data with the exam status to the view
             $data['training_class'] = $training_class;
 
             $this->load->view('trainer/classroom', $data);
+        }
+    }
+
+    public function getExamStatus($training_instruction_json) {
+        // Decode the JSON string to an array
+        $training_instruction = json_decode($training_instruction_json, true);
+
+        // Initialize variables for checking conditions
+        $allCompleted = true;
+        $hasChecking = false;
+
+        // Loop through each instruction
+        foreach ($training_instruction as $instruction) {
+            if ($instruction['section'] == 'examination') {
+                // If the completed status is 2, mark for checking
+                if ($instruction['completed'] == 2) {
+                    $hasChecking = true;
+                    break;  // No need to continue looping if we find a "for checking" case
+                }
+
+                // If any section is not completed (i.e., not 1), set allCompleted to false
+                if ($instruction['completed'] != 1) {
+                    $allCompleted = false;
+                }
+            }
+        }
+
+        // Determine the message based on the flags
+        if ($hasChecking) {
+            return "for checking";
+        } elseif ($allCompleted) {
+            return "completed";
+        } else {
+            return "No New file to check";
         }
     }
 
