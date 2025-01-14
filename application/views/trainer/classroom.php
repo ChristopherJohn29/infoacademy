@@ -158,6 +158,26 @@
             </div>
         </div>
 
+
+        <div class="modal fade" id="forCheckingExamModal" tabindex="-1" role="dialog" aria-labelledby="forCheckingExamModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forCheckingExamModalLabel">For Checking Examination</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="examFilesContainer"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
         <div class="content">
             <div class="container">
@@ -300,6 +320,40 @@
             }
         });
     }
+
+    function openForCheckingExamModal(participant_id, training_id) {
+    // Fetch for checking exam data via AJAX
+    $.ajax({
+        url: '<?php echo site_url("your_controller/fetchForCheckingExamData"); ?>',
+        type: 'POST',
+        data: {
+            training_id: training_id,
+            participant_id: participant_id
+        },
+        success: function(response) {
+            if (response.success) {
+                var examData = response.data;
+                // Populate the modal with examination data for checking
+                $('#examFilesContainer').html('');
+                examData.forEach(function(exam) {
+                    var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
+                    examHtml += '<button class="btn btn-success">Accept</button>';
+                    examHtml += '<button class="btn btn-danger">Decline</button>';
+                    examHtml += '<textarea placeholder="Remarks"></textarea>';
+                    $('#examFilesContainer').append(examHtml);
+                });
+                // Open the modal
+                $('#forCheckingExamModal').modal('show');
+            } else {
+                $('#examFilesContainer').html('<p>No data found</p>');
+                $('#forCheckingExamModal').modal('show');
+            }
+        },
+        error: function(xhr, status, error) {
+            $('#examFilesContainer').html('<p>An error occurred</p>');
+        }
+    });
+}
 </script>
 </body>
 </html>
