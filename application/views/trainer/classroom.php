@@ -169,7 +169,7 @@
                                                 <td><?php echo html_escape($class['participant_id']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['status']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['output']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['workshop_status']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['exam_status']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
