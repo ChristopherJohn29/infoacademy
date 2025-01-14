@@ -124,7 +124,7 @@ class Trainer extends CI_Controller
     {
         if (isset($_GET['id'])) {
             
-            $training = $this->System_model->fetchTrainingByAuthorAndID();
+            $training = $this->System_model->fetchTrainingByAuthorAndID($_SESSION['id'], $_GET['id']);
 
             if(empty($training)){
                 redirect('trainer/dashboard');
