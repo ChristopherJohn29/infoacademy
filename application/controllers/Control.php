@@ -309,12 +309,14 @@ class Control extends CI_Controller
 
     public function submitWorkshop()
     {
-        if($_POST){
+        if ($_POST) {
             $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
+            $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx'; // Only allow non-executable files
             $config['max_size'] = 2000;
             $config['max_width'] = 2000;
             $config['max_height'] = 2000;
+
+            // Load the upload library with the new config
             $this->load->library('upload', $config);
             $error_check = 0;
 
@@ -322,15 +324,22 @@ class Control extends CI_Controller
                 $error = array('error' => $this->upload->display_errors());
                 $workshop_file = '';
             } else {
+                // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
-                $workshop_file = $file['upload_data']['file_name'];
+                // Generate a unique name using uniqid() and keep the original file extension
+                $workshop_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                // Rename the file to the unique name
+                rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop_file);
             }
+
             $training_id = $_POST['tid'];
             $step = $_POST['step'];
 
+            // Fetch training class data and instructions
             $training_class = $this->System_model->fetchFromTrainingClass($training_id);
             $instruction = json_decode($training_class[0]['training_instruction']);
 
+            // Check if the step corresponds to workshop
             if ($instruction[$step]->section == 'workshop') {
                 $instruction[$step]->completed = 1;
             } else {
@@ -339,6 +348,7 @@ class Control extends CI_Controller
 
             $new_instruction = json_encode($instruction);
 
+            // Save the updated instruction and training class data
             $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
 
             $data = array(
@@ -348,6 +358,7 @@ class Control extends CI_Controller
                 'participant_id' => intval($_SESSION['id'])
             );
 
+            // Save workshop data
             $saveWorkshop = $this->System_model->saveWorkshop(html_escape($data));
 
             if ($training_class && $saveWorkshop) {
@@ -356,21 +367,22 @@ class Control extends CI_Controller
                 redirect('control');
             }
 
-
-
         } else {
             redirect('control');
         }
     }
 
+
     public function submitExamination()
     {
-        if($_POST){
+        if ($_POST) {
             $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
+            $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx'; // Only allow non-executable files
             $config['max_size'] = 2000;
             $config['max_width'] = 2000;
             $config['max_height'] = 2000;
+
+            // Load the upload library with the new config
             $this->load->library('upload', $config);
             $error_check = 0;
 
@@ -378,15 +390,22 @@ class Control extends CI_Controller
                 $error = array('error' => $this->upload->display_errors());
                 $examination_file = '';
             } else {
+                // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
-                $examination_file = $file['upload_data']['file_name'];
+                // Generate a unique name without prefix by using uniqid() and keep the original file extension
+                $examination_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                // Rename the file to the unique name
+                rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination_file);
             }
+
             $training_id = $_POST['tid'];
             $step = $_POST['step'];
 
+            // Fetch training class data and instructions
             $training_class = $this->System_model->fetchFromTrainingClass($training_id);
             $instruction = json_decode($training_class[0]['training_instruction']);
 
+            // Check if the step corresponds to examination
             if ($instruction[$step]->section == 'examination') {
                 $instruction[$step]->completed = 1;
             } else {
@@ -395,6 +414,7 @@ class Control extends CI_Controller
 
             $new_instruction = json_encode($instruction);
 
+            // Save the updated instruction and training class data
             $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
 
             $data = array(
@@ -404,6 +424,7 @@ class Control extends CI_Controller
                 'participant_id' => intval($_SESSION['id'])
             );
 
+            // Save examination data
             $saveExamination = $this->System_model->saveExamination(html_escape($data));
 
             if ($training_class && $saveExamination) {
@@ -412,12 +433,11 @@ class Control extends CI_Controller
                 redirect('control');
             }
 
-
-
         } else {
             redirect('control');
         }
     }
+
 
     public function classroom($err = false)
     {
