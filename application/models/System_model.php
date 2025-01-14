@@ -314,7 +314,7 @@ class System_model extends CI_Model
     {
         $this->db->where('training_id', $training_id);
         $this->db->where('participant_id', $participant_id);
-        $this->db->where('status', 1);
+        $this->db->where('status !=', 2); // Exclude status 2
         $this->db->from('training_class');
         return $this->db->count_all_results();
     }

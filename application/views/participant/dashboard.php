@@ -99,6 +99,7 @@
                         $option = '';
                         if ($value['status'] == 0) {
                             $status = 'Payment Verification';
+                            $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/control/classroom/?tid='.$value['training_id'].'"> <i class="fa fa-university" aria-hidden="true"></i></a>';
                         } elseif($value['status'] == 1) {
                             $status = 'active';
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/control/classroom/?tid='.$value['training_id'].'"> <i class="fa fa-university" aria-hidden="true"></i></a>';
