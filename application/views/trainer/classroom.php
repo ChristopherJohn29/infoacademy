@@ -281,8 +281,6 @@
                     $('#examFilesContainer').html('');
                     examData.forEach(function(exam) {
                         var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
-                        examHtml += '<p><strong>Status:</strong> ' + exam.status + '</p>';
-                        examHtml += '<p><strong>Date Completed:</strong> ' + exam.date_completed + '</p>';
                         $('#examFilesContainer').append(examHtml);
                     });
                     // Open the modal
