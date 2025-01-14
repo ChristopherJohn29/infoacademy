@@ -348,7 +348,7 @@ class Control extends CI_Controller
 
             // Check if the step corresponds to workshop
             if ($instruction[$step]->section == 'workshop') {
-                $instruction[$step]->completed = 1;
+                $instruction[$step]->completed = 2;
             } else {
                 redirect('control');
             }
@@ -414,7 +414,7 @@ class Control extends CI_Controller
 
             // Check if the step corresponds to examination
             if ($instruction[$step]->section == 'examination') {
-                $instruction[$step]->completed = 1;
+                $instruction[$step]->completed = 2;
             } else {
                 redirect('control');
             }
