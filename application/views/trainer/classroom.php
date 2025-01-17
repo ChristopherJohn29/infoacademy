@@ -223,7 +223,7 @@
                                                     <?php 
                                                     if ($class['workshop_status'] == 'completed') {
                                                         echo '<button class="btn btn-sm btn-info" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
-                                                    } elseif ($class['exam_status'] == 'for checking') {
+                                                    } elseif ($class['workshop_status'] == 'for checking') {
                                                         echo '<button class="btn btn-sm btn-warning" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
                                                     } else {
                                                         echo '<button class="btn btn-sm btn-default" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">No New file to check</button>';
