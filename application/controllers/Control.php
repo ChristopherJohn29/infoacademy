@@ -362,7 +362,8 @@ class Control extends CI_Controller
                 'training_id' => $training_id,
                 'step' => $step,
                 'workshop_file' => $workshop_file,
-                'participant_id' => intval($_SESSION['id'])
+                'participant_id' => intval($_SESSION['id']),
+                'status' => 2
             );
 
             // Save workshop data
@@ -428,7 +429,8 @@ class Control extends CI_Controller
                 'training_id' => $training_id,
                 'step' => $step,
                 'examination_file' => $examination_file,
-                'participant_id' => intval($_SESSION['id'])
+                'participant_id' => intval($_SESSION['id']),
+                'status' => 2
             );
 
             // Save examination data

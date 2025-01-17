@@ -288,7 +288,7 @@
     function openCompletedExamModal(participant_id, training_id) {
         // Fetch completed exam data via AJAX
         $.ajax({
-            url: '<?php echo base_url("trainer/fetchCompletedExamData"); ?>',
+            url: '<?php echo base_url("trainer/fetchExamData"); ?>',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -324,7 +324,7 @@
     function openForCheckingExamModal(participant_id, training_id) {
     // Fetch for checking exam data via AJAX
     $.ajax({
-        url: '<?php echo site_url("your_controller/fetchForCheckingExamData"); ?>',
+        url: '<?php echo base_url("trainer/fetchExamData"); ?>',
         type: 'POST',
         data: {
             training_id: training_id,
@@ -336,11 +336,21 @@
                 // Populate the modal with examination data for checking
                 $('#examFilesContainer').html('');
                 examData.forEach(function(exam) {
-                    var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
-                    examHtml += '<button class="btn btn-success">Accept</button>';
-                    examHtml += '<button class="btn btn-danger">Decline</button>';
-                    examHtml += '<textarea placeholder="Remarks"></textarea>';
-                    $('#examFilesContainer').append(examHtml);
+
+                    if(exam.status = 2){
+                        var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
+                        examHtml += '<button class="btn btn-success">Accept</button>';
+                        examHtml += '<button class="btn btn-danger">Decline</button>';
+                        examHtml += '<textarea placeholder="Remarks"></textarea>';
+                        $('#examFilesContainer').append(examHtml);
+                    }
+
+                    if(exam.status = 1){
+                        var examHtml = '<p><strong>Examination File:</strong> ';
+                        examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
+                        $('#examFilesContainer').append(examHtml);
+                    }
+                  
                 });
                 // Open the modal
                 $('#forCheckingExamModal').modal('show');

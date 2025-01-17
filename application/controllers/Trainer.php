@@ -204,7 +204,7 @@ class Trainer extends CI_Controller
         }
     }
 
-    public function fetchCompletedExamData() {
+    public function fetchExamData() {
         $training_id = $this->input->post('training_id');
         $participant_id = $this->input->post('participant_id');
     
