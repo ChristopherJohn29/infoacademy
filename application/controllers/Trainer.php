@@ -76,37 +76,37 @@ class Trainer extends CI_Controller
             $this->db->where('id', $exam_id);
             $this->db->update('examination_data', $data);
             
-            // If the action is "accept", update the participant's progress in the training class JSON
-            if ($action == 'accept') {
-                // Fetch the training class for the participant
-                $this->db->where('participant_id', $participant_id);
-                $this->db->where('training_id', $training_id);
-                $trainingClass = $this->db->get('training_class')->row_array();
-    
-                if ($trainingClass && isset($trainingClass['training_instruction'])) {
-                    // Decode the JSON data from training_instruction field
-                    $trainingInstruction = json_decode($trainingClass['training_instruction'], true);
-                    
-                    // Get the step position from $examData
-                    $stepPosition = (int)$examData['step']; // 
-                    
-                    // Check if the position exists in the array
-                    if (isset($trainingInstruction[$stepPosition])) {
-                        // Update the 'completed' field for the relevant step
+            // Fetch the training class for the participant
+            $this->db->where('participant_id', $participant_id);
+            $this->db->where('training_id', $training_id);
+            $trainingClass = $this->db->get('training_class')->row_array();
+
+            if ($trainingClass && isset($trainingClass['training_instruction'])) {
+                // Decode the JSON data from training_instruction field
+                $trainingInstruction = json_decode($trainingClass['training_instruction'], true);
+                
+                // Get the step position from $examData
+                $stepPosition = (int)$examData['step']; // 
+                
+                // Check if the position exists in the array
+                if (isset($trainingInstruction[$stepPosition])) {
+                    // Update the 'completed' field for the relevant step
+                    if ($action == 'accept') {
                         $trainingInstruction[$stepPosition]['completed'] = 1;  // Mark it as completed (since we accepted the exam)
-    
-                        // Encode the updated training_instruction array back to JSON
-                        $updatedTrainingInstruction = json_encode($trainingInstruction);
-                        
-                        // Update the training_instruction field in the database
-                        $this->db->set('training_instruction', $updatedTrainingInstruction);
-                        $this->db->where('participant_id', $participant_id);
-                        $this->db->where('training_id', $training_id);
-                        $this->db->update('training_class');
+                    } else {
+                        $trainingInstruction[$stepPosition]['completed'] = 0;  
                     }
+                    // Encode the updated training_instruction array back to JSON
+                    $updatedTrainingInstruction = json_encode($trainingInstruction);
+                    
+                    // Update the training_instruction field in the database
+                    $this->db->set('training_instruction', $updatedTrainingInstruction);
+                    $this->db->where('participant_id', $participant_id);
+                    $this->db->where('training_id', $training_id);
+                    $this->db->update('training_class');
                 }
             }
-    
+            
             // Respond with success
             echo json_encode(['success' => true]);
         } else {
