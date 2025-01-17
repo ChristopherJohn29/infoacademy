@@ -349,6 +349,7 @@ class Control extends CI_Controller
             // Check if the step corresponds to workshop
             if ($instruction[$step]->section == 'workshop') {
                 $instruction[$step]->completed = 2;
+                $file_desc = $instruction[$step]->desciption;
             } else {
                 redirect('control');
             }
@@ -359,6 +360,7 @@ class Control extends CI_Controller
             $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
 
             $data = array(
+                'file_desc' => $file_desc,
                 'training_id' => $training_id,
                 'step' => $step,
                 'workshop_file' => $workshop_file,
