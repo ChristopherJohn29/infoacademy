@@ -30,6 +30,9 @@
         .form-control {
             color: black;
         }
+        #forCheckingExamModal.modal-lg {
+            max-width: 90%; /* Set the width to 90% of the viewport */
+        }
     </style>
     <!-- Google Font: Source Sans Pro -->
 </head>
