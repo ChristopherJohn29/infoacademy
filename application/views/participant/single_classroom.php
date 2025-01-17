@@ -302,23 +302,55 @@
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
                                                 </form>
                                             <?php else: ?>
-                                                <!-- Display examination status -->
-                                                <?php
-                                                $statusText = '';
-                                                $badgeClass = '';
-                        
-                                                if ($value->exam_status == "2") {
-                                                    $statusText = 'For Checking';
-                                                    $badgeClass = 'warning'; // For Checking
-                                                } elseif ($value->exam_status == "3") {
-                                                    $statusText = 'Declined';
-                                                    $badgeClass = 'danger'; // Declined
-                                                } else {
-                                                    $statusText = 'Completed';
-                                                    $badgeClass = 'success'; // Completed
-                                                }
-                                                ?>
-                                                <p><strong>Status:</strong> <span class="badge badge-<?= $badgeClass ?>"><?= $statusText ?></span></p>
+
+                                                <?php if (!empty($examination_data)) { ?>
+                                                    <h5>Submitted Examination Files:</h5>
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Examination File</th>
+                                                                <th>Status</th>
+                                                                <th>Remarks</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($examination_data as $exam) { ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php if (!empty($exam['examination_file'])) { ?>
+                                                                            <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['examination_file'] ?></a>
+                                                                        <?php } else { ?>
+                                                                            No file submitted
+                                                                        <?php } ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php 
+                                                                            if ($exam['status'] == 2) {
+                                                                                echo '<span class="badge badge-warning">For Checking</span>';
+                                                                            } elseif ($exam['status'] == 1) {
+                                                                                echo '<span class="badge badge-success">Completed</span>';
+                                                                            } else {
+                                                                                echo '<span class="badge badge-danger">Declined</span>';
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php 
+                                                                            if ($exam['remarks']) {
+                                                                                echo htmlspecialchars($exam['remarks']);
+                                                                            } else {
+                                                                                echo 'No remarks provided';
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } else { ?>
+                                                    <p>No examination data found.</p>
+                                                <?php } ?>
+                                              
                                             <?php endif; ?>
                                         </div>
                                     </div>
