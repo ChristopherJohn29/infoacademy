@@ -159,17 +159,20 @@
         </div>
 
 
+       <!-- For Checking Exam Modal -->
         <div class="modal fade" id="forCheckingExamModal" tabindex="-1" role="dialog" aria-labelledby="forCheckingExamModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="forCheckingExamModalLabel">For Checking Examination</h5>
+                        <h5 class="modal-title" id="forCheckingExamModalLabel">For Checking Examination Files</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="examFilesContainerForChecking"></div>
+                        <div id="examFilesContainerForChecking">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -177,6 +180,7 @@
                 </div>
             </div>
         </div>
+
 
         
         <div class="content">
@@ -338,7 +342,8 @@
                     $('#examFilesContainerForChecking').html('');
                     
                     // Create a table structure for displaying exam data
-                    var tableHtml = '<table class="table table-striped"><thead><tr><th>Examination File</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
+                    var tableHtml = '<table class="table table-bordered table-striped"><thead><tr>';
+                    tableHtml += '<th>Examination File</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
 
                     examData.forEach(function(exam) {
                         tableHtml += '<tr>';
@@ -351,19 +356,22 @@
                         }
 
                         // Status (can be "Pending", "Completed", etc. based on exam status)
-                        var statusText = (exam.status == "2") ? 'Pending' : 'Completed';
-                        tableHtml += '<td>' + statusText + '</td>';
+                        var statusText = (exam.status == "2") ? 'For Checking' : 'Completed';
+                        tableHtml += '<td><span class="badge badge-' + (exam.status == "2" ? 'warning' : 'success') + '">' + statusText + '</span></td>';
 
                         // Action Buttons (Accept and Decline)
                         if (exam.status == "2") {
-                            tableHtml += '<td><button class="btn btn-success">Accept</button> <button class="btn btn-danger">Decline</button></td>';
+                            tableHtml += '<td>';
+                            tableHtml += '<button class="btn btn-sm btn-success mr-2">Accept</button>';
+                            tableHtml += '<button class="btn btn-sm btn-danger">Decline</button>';
+                            tableHtml += '</td>';
                         } else {
                             tableHtml += '<td>-</td>'; // No actions for completed exams
                         }
 
                         // Remarks (textarea for pending exams)
                         if (exam.status == "2") {
-                            tableHtml += '<td><textarea placeholder="Enter remarks"></textarea></td>';
+                            tableHtml += '<td><textarea class="form-control" placeholder="Enter remarks"></textarea></td>';
                         } else {
                             tableHtml += '<td>-</td>'; // No remarks field for completed exams
                         }
@@ -379,15 +387,16 @@
                     // Open the modal
                     $('#forCheckingExamModal').modal('show');
                 } else {
-                    $('#examFilesContainer').html('<p>No data found</p>');
+                    $('#examFilesContainerForChecking').html('<p>No data found</p>');
                     $('#forCheckingExamModal').modal('show');
                 }
             },
             error: function(xhr, status, error) {
-                $('#examFilesContainer').html('<p>An error occurred</p>');
+                $('#examFilesContainerForChecking').html('<p>An error occurred</p>');
             }
         });
     }
+
 
 </script>
 </body>
