@@ -343,7 +343,7 @@
                     
                     // Create a table structure for displaying exam data
                     var tableHtml = '<table class="table table-bordered table-striped"><thead><tr>';
-                    tableHtml += '<th>Examination File</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
+                    tableHtml += '<th>Examination File</th><th>Date Submitted</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
 
                     examData.forEach(function(exam) {
                         tableHtml += '<tr>';
@@ -351,6 +351,7 @@
                         // Examination File
                         if (exam.status == "2") {
                             tableHtml += '<td>' + exam.examination_file + '</td>';
+                            tableHtml += '<td>' + exam.date_submitted + '</td>';
                         } else if (exam.status == "1") {
                             tableHtml += '<td><a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
                         }

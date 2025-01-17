@@ -225,6 +225,7 @@ class Trainer extends CI_Controller
                 $exam_data[] = [
                     'examination_file' => $row['examination_file'],
                     'status' => $row['status'],
+                    'date_submitted' => (new DateTime($row['date_submitted']))->format('F j, Y g:iA'),  // Format date
                 ];
             }
     
