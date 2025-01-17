@@ -249,60 +249,7 @@
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
 
-                                            <?php if (!empty($workshop_data)) { ?>
-                                                    <br>
-                                                    <h5 style="margin:10px;">Submitted Workshop Files:</h5>
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Workshop File</th>
-                                                                <th>Status</th>
-                                                                <th>Remarks</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($workshop_data as $workshop) { ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php if (!empty($workshop['workshop_file'])) { ?>
-                                                                            <a href="<?= base_url('uploads/' . $workshop['workshop_file']) ?>" target="_blank"><?= $workshop['file_desc'] ?></a>
-                                                                        <?php } else { ?>
-                                                                            No file submitted
-                                                                        <?php } ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($workshop['status'] == 2) {
-                                                                                $checking = 1;
-                                                                                echo '<span class="badge badge-warning">For Checking</span>';
-                                                                            } elseif ($workshop['status'] == 1) {
-                                                                                echo '<span class="badge badge-success">Completed</span>';
-                                                                            } else {
-                                                                                echo '<span class="badge badge-danger">Declined</span>';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($workshop['remarks']) {
-                                                                                echo htmlspecialchars($workshop['remarks']);
-                                                                            } else {
-                                                                                echo 'No remarks provided';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                <?php } else { ?>
-                                                    <p>No workshop data found.</p>
-                                                <?php } ?>
-
-
-                          
-
-                            
+                       
                                               
                                         </div>
                                     </div>
