@@ -223,7 +223,7 @@
                                                     } elseif ($class['exam_status'] == 'for checking') {
                                                         echo '<button class="btn btn-sm btn-warning" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
                                                     } else {
-                                                        echo 'No New file to check';
+                                                        echo '<button class="btn btn-sm btn-default" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">No New file to check</button>';
                                                     }
                                                     ?>
                                                 </td>
