@@ -536,7 +536,7 @@
             type: 'POST',
             dataType: 'json',
             data: {
-                workshopId: workshopId,
+                workshop_id: workshopId,
                 action: action,
                 remarks: remarks,
                 participant_id: participant_id, // Pass participant_id
