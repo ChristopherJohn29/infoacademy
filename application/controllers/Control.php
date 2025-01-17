@@ -314,19 +314,7 @@ class Control extends CI_Controller
         }
     }
 
-    public function getExaminationData($training_id, $step) {
-        $participant_id = $_SESSION['id']; // Get participant ID from session
-    
-        // Fetch examination data for the participant
-        $this->db->select('*');
-        $this->db->from('examination_data');
-        $this->db->where('training_id', $training_id);
-        $this->db->where('step', $step);
-        $this->db->where('participant_id', $participant_id);
-        $query = $this->db->get();
-    
-        return $query->result_array(); // Return as an array
-    }
+
 
     public function submitWorkshop()
     {

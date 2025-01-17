@@ -276,7 +276,7 @@
 
                             <?php
                             // Pass data from controller to view
-                            $examination_data = $this->getExaminationData($training[0]['id'], $count); // Example method call
+                            $examination_data = $this->System_model->getExaminationData($training[0]['id'], $count); // Example method call
                             ?>
                         
                             <div class="card card-warning step-<?= $count ?>" style="margin-top:20px;">
