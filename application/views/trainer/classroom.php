@@ -403,11 +403,11 @@
                     if (action == "accept") {
                         row.find('td:nth-child(3) span').text('Completed').removeClass('badge-warning').addClass('badge-success');
                         row.find('td:nth-child(4)').html('-'); // No actions for completed exams
-                        row.find('td:nth-child(5)').html('-'); // No remarks field for completed exams
+                        row.find('td:nth-child(5)').html(remarks); // No remarks field for completed exams
                     } else if (action == "decline") {
                         row.find('td:nth-child(3) span').text('Declined').removeClass('badge-warning').addClass('badge-danger');
                         row.find('td:nth-child(4)').html('-'); // No actions for declined exams
-                        row.find('td:nth-child(5)').html('-'); // No remarks field for declined exams
+                        row.find('td:nth-child(5)').html(remarks); // No remarks field for declined exams
                     }
 
                     // Optional: you can also reset the textarea for remarks
