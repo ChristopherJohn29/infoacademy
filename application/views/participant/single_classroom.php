@@ -295,8 +295,6 @@
                                                             <?php } ?>
                                                         </tbody>
                                                     </table>
-                                                <?php } else { ?>
-                                                    <p>No workshop data found.</p>
                                                 <?php } ?>
 
 
@@ -391,8 +389,6 @@
                                                             <?php } ?>
                                                         </tbody>
                                                     </table>
-                                                <?php } else { ?>
-                                                    <p>No examination data found.</p>
                                                 <?php } ?>
                                             <?php if ($value->completed != 1 && $checking != 1){ ?>
                                                 <br/><br/><label for="customFile">Submit Examination</label>
