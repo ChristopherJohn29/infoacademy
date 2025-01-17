@@ -271,16 +271,7 @@
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td>
-                                                                        <?php 
-                                                                            if ($workshop['status'] == 2) {
-                                                                                $checking = 1;
-                                                                                echo '<span class="badge badge-warning">For Checking</span>';
-                                                                            } elseif ($workshop['status'] == 1) {
-                                                                                echo '<span class="badge badge-success">Completed</span>';
-                                                                            } else {
-                                                                                echo '<span class="badge badge-danger">Declined</span>';
-                                                                            }
-                                                                        ?>
+                                                           
                                                                     </td>
                                                                     <td>
                                                    
