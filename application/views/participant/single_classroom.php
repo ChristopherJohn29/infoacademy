@@ -305,7 +305,7 @@
 
                                                 <?php if (!empty($examination_data)) { ?>
                                                     <br>
-                                                    <h5>Submitted Examination Files:</h5>
+                                                    <h5 style="margin:10px;">Submitted Examination Files:</h5>
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
