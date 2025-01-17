@@ -138,25 +138,7 @@
         <!-- /.content-header -->
         <!-- Main content -->
 
-        <div class="modal fade" id="completedExamModal" tabindex="-1" role="dialog" aria-labelledby="completedExamModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="completedExamModalLabel">Completed Examination</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Container to display multiple examination files -->
-                        <div id="examFilesContainer"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
 
        <!-- For Checking Exam Modal -->
@@ -171,6 +153,28 @@
                     </div>
                     <div class="modal-body">
                         <div id="examFilesContainerForChecking">
+                            <!-- Dynamic content will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- For Checking Workshop Modal -->
+        <div class="modal fade" id="forCheckingWorkshopModal" tabindex="-1" role="dialog" aria-labelledby="forCheckingWorkshopModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forCheckingWorkshopModalLabel">For Checking Workshop Files</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="workshopFilesContainerForChecking">
                             <!-- Dynamic content will be loaded here -->
                         </div>
                     </div>
@@ -215,7 +219,17 @@
                                                 <td><?php echo html_escape($class['participant_id']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['status']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['workshop_status']); ?></td> <!-- Replace with the correct field -->
+                                                <td>
+                                                    <?php 
+                                                    if ($class['workshop_status'] == 'completed') {
+                                                        echo '<button class="btn btn-sm btn-info" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
+                                                    } elseif ($class['exam_status'] == 'for checking') {
+                                                        echo '<button class="btn btn-sm btn-warning" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
+                                                    } else {
+                                                        echo '<button class="btn btn-sm btn-default" onclick="openForCheckingWorkshopModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">No New file to check</button>';
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php 
                                                     if ($class['exam_status'] == 'completed') {
@@ -422,6 +436,137 @@
         });
     }
 
+
+    function openForCheckingWorkshopModal(participant_id, training_id) {
+        // Fetch for checking workshop data via AJAX
+        $.ajax({
+            url: '<?php echo base_url("trainer/fetchWorkshopData"); ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                training_id: training_id,
+                participant_id: participant_id
+            },
+            success: function(response) {
+                if (response.success) {
+                    var workshopData = response.data;
+                    // Clear previous workshop data
+                    $('#workshopFilesContainerForChecking').html('');
+                    
+                    // Create a table structure for displaying workshop data
+                    var tableHtml = '<table class="table table-striped"><thead><tr><th>Workshop File</th><th>Date Submitted</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
+                    
+                    workshopData.forEach(function(workshop) {
+                        tableHtml += '<tr data-workshop-id="' + workshop.id + '" data-participant-id="' + participant_id + '" data-training-id="' + training_id + '">';
+
+                        // Workshop File
+                        if (workshop.status == "2") {
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
+                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                        } else if (workshop.status == "1") {
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
+                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                        } else if (workshop.status == "3") {
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
+                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                        }
+
+                        // Status
+                        var statusText = '';
+                        var badgeClass = '';
+
+                        if (workshop.status == "2") {
+                            statusText = 'For Checking';
+                            badgeClass = 'warning';
+                        } else if (workshop.status == "3") {
+                            statusText = 'Declined';
+                            badgeClass = 'danger';  // Declined workshops will have a red badge
+                        } else {
+                            statusText = 'Completed';
+                            badgeClass = 'success';  // Completed workshops will have a green badge
+                        }
+
+                        tableHtml += '<td><span class="badge badge-' + badgeClass + '">' + statusText + '</span></td>';
+
+
+                        // Action Buttons (Accept and Decline)
+                        if (workshop.status == "2") {
+                            tableHtml += '<td>';
+                            tableHtml += '<button class="btn btn-sm btn-success mr-2" onclick="handleAcceptDeclineWorkshop(' + workshop.id + ', \'accept\', ' + participant_id + ', ' + training_id + ')">Accept</button>';
+                            tableHtml += '<button class="btn btn-sm btn-danger" onclick="handleAcceptDeclineWorkshop(' + workshop.id + ', \'decline\', ' + participant_id + ', ' + training_id + ')">Decline</button>';
+                            tableHtml += '</td>';
+                        } else {
+                            tableHtml += '<td>-</td>'; // No actions for completed workshops
+                        }
+
+                        // Remarks (textarea for pending workshops)
+                        if (workshop.status == "2") {
+                            tableHtml += '<td><textarea class="form-control remarks" data-workshop-id="' + workshop.id + '" placeholder="Enter remarks"></textarea></td>';
+                        } else {
+                            tableHtml += '<td>' + workshop.remarks + '</td>'; // No remarks field for completed workshops
+                        }
+
+                        tableHtml += '</tr>';
+                    });
+
+                    tableHtml += '</tbody></table>';
+                    
+                    // Append the generated table to the container
+                    $('#workshopFilesContainerForChecking').html(tableHtml);
+
+                    // Open the modal
+                    $('#forCheckingWorkshopModal').modal('show');
+                } else {
+                    $('#workshopFilesContainerForChecking').html('<p>No data found</p>');
+                    $('#forCheckingWorkshopModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#workshopFilesContainerForChecking').html('<p>An error occurred</p>');
+            }
+        });
+    }
+
+    // Handle Accept/Decline actions
+    function handleAcceptDeclineWorkshop(workshopId, action, participant_id, training_id) {
+        var remarks = $('textarea[data-workshop-id="' + workshopId + '"]').val();
+
+        $.ajax({
+            url: '<?php echo base_url("trainer/updateWorkshopStatus"); ?>', // Update this URL with your controller method
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                workshopId: workshopId,
+                action: action,
+                remarks: remarks,
+                participant_id: participant_id, // Pass participant_id
+                training_id: training_id        // Pass training_id
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Update the status in the table (for workshopple)
+                    var row = $('tr[data-workshop-id="' + workshopId + '"]');
+                    if (action == "accept") {
+                        row.find('td:nth-child(3) span').text('Completed').removeClass('badge-warning').addClass('badge-success');
+                        row.find('td:nth-child(4)').html('-'); // No actions for completed workshops
+                        row.find('td:nth-child(5)').html(remarks); // No remarks field for completed workshops
+                    } else if (action == "decline") {
+                        row.find('td:nth-child(3) span').text('Declined').removeClass('badge-warning').addClass('badge-danger');
+                        row.find('td:nth-child(4)').html('-'); // No actions for declined workshops
+                        row.find('td:nth-child(5)').html(remarks); // No remarks field for declined workshops
+                    }
+
+                    // Optional: you can also reset the textarea for remarks
+                    $('textarea[data-workshop-id="' + workshopId + '"]').val('');
+                } else {
+                    alert('Error updating status');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('An error occurred');
+            }
+        });
+    }
 
 
 </script>

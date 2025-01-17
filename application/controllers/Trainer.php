@@ -114,6 +114,70 @@ class Trainer extends CI_Controller
             echo json_encode(['success' => false, 'message' => 'Exam not found']);
         }
     }
+
+    public function updateWorkshopStatus() {
+        $workshop_id = $this->input->post('workshop_id');
+        $action = $this->input->post('action');  // 'accept' or 'decline'
+        $remarks = $this->input->post('remarks');
+        $participant_id = $this->input->post('participant_id'); // Get participant_id
+        $training_id = $this->input->post('training_id');       // Get training_id
+        
+        // Check if the workshop exists and update the status
+        $this->db->where('id', $workshop_id);
+        $workshopData = $this->db->get('workshop_data')->row_array();
+        
+        if ($workshopData) {
+            // Determine the new status based on action (accept or decline)
+            $status = ($action == 'accept') ? '1' : '3';
+            
+            // Prepare the data to update the workshop status and remarks
+            $data = [
+                'status' => $status,
+                'remarks' => $remarks // Save remarks if provided
+            ];
+    
+            // Update the workshop status and remarks in the database
+            $this->db->where('id', $workshop_id);
+            $this->db->update('workshop_data', $data);
+            
+            // Fetch the training class for the participant
+            $this->db->where('participant_id', $participant_id);
+            $this->db->where('training_id', $training_id);
+            $trainingClass = $this->db->get('training_class')->row_array();
+
+            if ($trainingClass && isset($trainingClass['training_instruction'])) {
+                // Decode the JSON data from training_instruction field
+                $trainingInstruction = json_decode($trainingClass['training_instruction'], true);
+                
+                // Get the step position from $workshopData
+                $stepPosition = (int)$workshopData['step']; // 
+                
+                // Check if the position exists in the array
+                if (isset($trainingInstruction[$stepPosition])) {
+                    // Update the 'completed' field for the relevant step
+                    if ($action == 'accept') {
+                        $trainingInstruction[$stepPosition]['completed'] = 1;  // Mark it as completed (since we accepted the workshop)
+                    } else {
+                        $trainingInstruction[$stepPosition]['completed'] = 0;  
+                    }
+                    // Encode the updated training_instruction array back to JSON
+                    $updatedTrainingInstruction = json_encode($trainingInstruction);
+                    
+                    // Update the training_instruction field in the database
+                    $this->db->set('training_instruction', $updatedTrainingInstruction);
+                    $this->db->where('participant_id', $participant_id);
+                    $this->db->where('training_id', $training_id);
+                    $this->db->update('training_class');
+                }
+            }
+
+            // Respond with success
+            echo json_encode(['success' => true]);
+        } else {
+            // Respond with failure if workshop not found
+            echo json_encode(['success' => false, 'message' => 'Workshop not found']);
+        }
+    }
     
 
     public function update_profile() {
@@ -291,6 +355,40 @@ class Trainer extends CI_Controller
                     'id' => $row['id'],
                     'file_desc' => $row['file_desc'],
                     'examination_file' => $row['examination_file'],
+                    'status' => $row['status'],
+                    'remarks' => $row['remarks'],
+                    'date_submitted' => (new DateTime($row['date_submitted']))->format('F j, Y g:iA'),  // Format date
+                ];
+            }
+    
+            echo json_encode(['success' => true, 'data' => $exam_data]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No data found']);
+        }
+    }
+
+    public function fetchWorkshopData() {
+        $training_id = $this->input->post('training_id');
+        $participant_id = $this->input->post('participant_id');
+    
+        // Fetch all examination data for the participant
+        $this->db->select('*');
+        $this->db->from('workshop_data');
+        $this->db->where('training_id', $training_id);
+        $this->db->where('participant_id', $participant_id);
+        $query = $this->db->get();
+    
+        // Check if there are results
+        if ($query->num_rows() > 0) {
+            $data = $query->result_array();  // Fetch all rows for this participant
+    
+            // Prepare the response data
+            $exam_data = [];
+            foreach ($data as $row) {
+                $exam_data[] = [
+                    'id' => $row['id'],
+                    'file_desc' => $row['file_desc'],
+                    'workshop_file' => $row['workshop_file'],
                     'status' => $row['status'],
                     'remarks' => $row['remarks'],
                     'date_submitted' => (new DateTime($row['date_submitted']))->format('F j, Y g:iA'),  // Format date
