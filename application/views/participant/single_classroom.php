@@ -230,9 +230,14 @@
                             $video++;
                         }
                         ?><?php
-                        if ($value->section == 'workshop' && $display == 1) {
+                        if ($value->section == 'workshop' && $display == 1): ?>
+
+                            <?php
+                            // Pass data from controller to view
+                            $workshop_data = $this->System_model->getWorkshopData($training[0]['id'], $count); // Example method call
                             ?>
-                            <div class="card card-warning  step-<?= $count ?>" style="margin-top:20px;">
+                        
+                            <div class="card card-warning step-<?= $count ?>" style="margin-top:20px;">
                                 <div class="card-header">
                                     <h3 class="card-title"><?= $training_section[$workshop]->title ?></h3>
                                 </div>
@@ -241,35 +246,79 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
-                                            <br/><br/> <label for="customFile">Submit Workshop</label>
-                                            <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
-                                                <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
-                                                <input name="step" type="hidden" value="<?=$count?>">
-                                                <input name="" type="hidden" value="">
-                                                <div class="custom-file">
-                                                    <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf, .jpg, .jpeg, .png " id="customFile-<?= $workshop ?>">
-                                                    <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
-                                                </div>
-                                                <?php
-
-                                                if ($value->completed != 1) {
-
-                                                    ?>
+                        
+                                            <?php if ($value->completed != 1): ?>
+                                                <br/><br/><label for="customFile">Submit Workshop</label>
+                                                <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
+                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
+                                                    <input name="step" type="hidden" value="<?= $count ?>">
+                                                    <input name="" type="hidden" value="">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
+                                                        <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
+                                                    </div>
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
-                                                    <?php
-                                                }
+                                                </form>
+                                            <?php else: ?>
 
-                                                ?>
-                                            </form>
+                                                <?php if (!empty($workshop_data)) { ?>
+                                                    <br>
+                                                    <h5 style="margin:10px;">Submitted Workshop Files:</h5>
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Workshop File</th>
+                                                                <th>Status</th>
+                                                                <th>Remarks</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($workshop_data as $workshop) { ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php if (!empty($workshop['workshop_file'])) { ?>
+                                                                            <a href="<?= base_url('uploads/' . $workshop['workshop_file']) ?>" target="_blank"><?= $workshop['file_desc'] ?></a>
+                                                                        <?php } else { ?>
+                                                                            No file submitted
+                                                                        <?php } ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php 
+                                                                            if ($workshop['status'] == 2) {
+                                                                                echo '<span class="badge badge-warning">For Checking</span>';
+                                                                            } elseif ($workshop['status'] == 1) {
+                                                                                echo '<span class="badge badge-success">Completed</span>';
+                                                                            } else {
+                                                                                echo '<span class="badge badge-danger">Declined</span>';
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php 
+                                                                            if ($workshop['remarks']) {
+                                                                                echo htmlspecialchars($workshop['remarks']);
+                                                                            } else {
+                                                                                echo 'No remarks provided';
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } else { ?>
+                                                    <p>No workshop data found.</p>
+                                                <?php } ?>
+                                              
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                    <!-- input states -->
                                 </div>
                                 <!-- /.card-body -->
                             </div>
-                            <?php
-                            $examination++;
-                        }
+                            <?php $workshop++; 
+                        
+                        endif; 
                         ?><?php 
                         
                         if ($value->section == 'examination' && $display == 1): ?>
