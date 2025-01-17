@@ -426,6 +426,8 @@
                             $display = 0;
                         }
 
+                        echo $display;
+
                         $count++;
                         if ($step == $count) {
                             if ($value->completed == 1) {
