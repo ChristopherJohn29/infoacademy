@@ -235,6 +235,8 @@
                             <?php
                             // Pass data from controller to view
                             $workshop_data = $this->System_model->getWorkshopData($training[0]['id'], $count); // Example method call
+
+                            var_dump($workshop_data);
                             ?>
                         
                             <div class="card card-warning step-<?= $count ?>" style="margin-top:20px;">
