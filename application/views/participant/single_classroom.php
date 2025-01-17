@@ -304,6 +304,7 @@
                                             <?php else: ?>
 
                                                 <?php if (!empty($examination_data)) { ?>
+                                                    <br>
                                                     <h5>Submitted Examination Files:</h5>
                                                     <table class="table table-striped">
                                                         <thead>
@@ -318,7 +319,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <?php if (!empty($exam['examination_file'])) { ?>
-                                                                            <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['examination_file'] ?></a>
+                                                                            <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['file_desc'] ?></a>
                                                                         <?php } else { ?>
                                                                             No file submitted
                                                                         <?php } ?>
