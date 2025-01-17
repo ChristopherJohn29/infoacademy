@@ -230,7 +230,7 @@
                             $video++;
                         }
                         ?><?php
-                        if ($value->section == 'workshop' && $display == 1): ?>
+                        if ($value->section == 'workshop' && $display == 1){ ?>
 
                             <?php
                             // Pass data from controller to view
@@ -323,10 +323,10 @@
                             </div>
                             <?php $workshop++; 
                         
-                        endif; 
+                        }
                         ?><?php 
                         
-                        if ($value->section == 'examination' && $display == 1): ?>
+                        if ($value->section == 'examination' && $display == 1){ ?>
 
                             <?php
                             // Pass data from controller to view
@@ -417,8 +417,8 @@
                             </div>
                             <?php $examination++; 
                         
-                        endif; 
-                        
+                        } 
+
 
                         if ($value->completed == 1) {
                             $display = 1;
