@@ -283,13 +283,7 @@
                                                                         ?>
                                                                     </td>
                                                                     <td>
-                                                                        <?php 
-                                                                            if ($workshop['remarks']) {
-                                                                                echo htmlspecialchars($workshop['remarks']);
-                                                                            } else {
-                                                                                echo 'No remarks provided';
-                                                                            }
-                                                                        ?>
+                                                   
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
