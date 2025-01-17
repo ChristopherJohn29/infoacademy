@@ -106,7 +106,7 @@ class Trainer extends CI_Controller
                     $this->db->update('training_class');
                 }
             }
-            
+
             // Respond with success
             echo json_encode(['success' => true]);
         } else {
@@ -289,6 +289,7 @@ class Trainer extends CI_Controller
             foreach ($data as $row) {
                 $exam_data[] = [
                     'id' => $row['id'],
+                    'file_desc' => $row['file_desc'],
                     'examination_file' => $row['examination_file'],
                     'status' => $row['status'],
                     'date_submitted' => (new DateTime($row['date_submitted']))->format('F j, Y g:iA'),  // Format date

@@ -415,6 +415,7 @@ class Control extends CI_Controller
 
             // Check if the step corresponds to examination
             if ($instruction[$step]->section == 'examination') {
+                $file_desc = $instruction[$step]->description;
                 $instruction[$step]->completed = 2;
             } else {
                 redirect('control');
@@ -426,6 +427,7 @@ class Control extends CI_Controller
             $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
 
             $data = array(
+                'file_desc' =>  $file_desc,
                 'training_id' => $training_id,
                 'step' => $step,
                 'examination_file' => $examination_file,
