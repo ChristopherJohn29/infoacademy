@@ -315,7 +315,7 @@ class Control extends CI_Controller
     }
 
     public function getExaminationData($training_id, $step) {
-        $participant_id = $this->session->userdata('id'); // Get participant ID from session
+        $participant_id = $_SESSION['id']; // Get participant ID from session
     
         // Fetch examination data for the participant
         $this->db->select('*');
