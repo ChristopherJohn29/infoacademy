@@ -264,11 +264,7 @@
                                                             <?php foreach ($workshop_data as $workshop) { ?>
                                                                 <tr>
                                                                     <td>
-                                                                        <?php if (!empty($workshop['workshop_file'])) { ?>
-                                                                            <a href="<?= base_url('uploads/' . $workshop['workshop_file']) ?>" target="_blank"><?= $workshop['file_desc'] ?></a>
-                                                                        <?php } else { ?>
-                                                                            No file submitted
-                                                                        <?php } ?>
+                                                      
                                                                     </td>
                                                                     <td>
                                                            
