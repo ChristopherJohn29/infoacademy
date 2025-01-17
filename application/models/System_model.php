@@ -73,6 +73,20 @@ class System_model extends CI_Model
         return $query->result_array(); // Return as an array
     }
 
+    public function getWorkshopData($training_id, $step) {
+        $participant_id = $_SESSION['id']; // Get participant ID from session
+    
+        // Fetch workshop data for the participant
+        $this->db->select('*');
+        $this->db->from('workshop_data');
+        $this->db->where('training_id', $training_id);
+        $this->db->where('step', $step);
+        $this->db->where('participant_id', $participant_id);
+        $query = $this->db->get();
+    
+        return $query->result_array(); // Return as an array
+    }
+
     public function fetchClassByTrainingID($id = false){
         $this->db->select('training_class.*, user.first_name, user.last_name');
         $this->db->where('training_id', $id);
