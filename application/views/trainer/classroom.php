@@ -322,49 +322,73 @@
     }
 
     function openForCheckingExamModal(participant_id, training_id) {
-    // Fetch for checking exam data via AJAX
-    $.ajax({
-        url: '<?php echo base_url("trainer/fetchExamData"); ?>',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            training_id: training_id,
-            participant_id: participant_id
-        },
-        success: function(response) {
-            if (response.success) {
-                var examData = response.data;
-                // Populate the modal with examination data for checking
-                $('#examFilesContainerForChecking').html('');
-                examData.forEach(function(exam) {
+        // Fetch for checking exam data via AJAX
+        $.ajax({
+            url: '<?php echo base_url("trainer/fetchExamData"); ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                training_id: training_id,
+                participant_id: participant_id
+            },
+            success: function(response) {
+                if (response.success) {
+                    var examData = response.data;
+                    // Clear previous exam data
+                    $('#examFilesContainerForChecking').html('');
+                    
+                    // Create a table structure for displaying exam data
+                    var tableHtml = '<table class="table table-striped"><thead><tr><th>Examination File</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
 
-                    if(exam.status == "2"){
-                        var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
-                        examHtml += '<button class="btn btn-success">Accept</button>';
-                        examHtml += '<button class="btn btn-danger">Decline</button>';
-                        examHtml += '<textarea placeholder="Remarks"></textarea>';
-                        $('#examFilesContainerForChecking').append(examHtml);
-                    }
+                    examData.forEach(function(exam) {
+                        tableHtml += '<tr>';
 
-                    if(exam.status == "1"){
-                        var examHtml = '<p><strong>Examination File:</strong> ';
-                        examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
-                        $('#examFilesContainerForChecking').append(examHtml);
-                    }
-                  
-                });
-                // Open the modal
-                $('#forCheckingExamModal').modal('show');
-            } else {
-                $('#examFilesContainer').html('<p>No data found</p>');
-                $('#forCheckingExamModal').modal('show');
+                        // Examination File
+                        if (exam.status == "2") {
+                            tableHtml += '<td>' + exam.examination_file + '</td>';
+                        } else if (exam.status == "1") {
+                            tableHtml += '<td><a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
+                        }
+
+                        // Status (can be "Pending", "Completed", etc. based on exam status)
+                        var statusText = (exam.status == "2") ? 'Pending' : 'Completed';
+                        tableHtml += '<td>' + statusText + '</td>';
+
+                        // Action Buttons (Accept and Decline)
+                        if (exam.status == "2") {
+                            tableHtml += '<td><button class="btn btn-success">Accept</button> <button class="btn btn-danger">Decline</button></td>';
+                        } else {
+                            tableHtml += '<td>-</td>'; // No actions for completed exams
+                        }
+
+                        // Remarks (textarea for pending exams)
+                        if (exam.status == "2") {
+                            tableHtml += '<td><textarea placeholder="Enter remarks"></textarea></td>';
+                        } else {
+                            tableHtml += '<td>-</td>'; // No remarks field for completed exams
+                        }
+
+                        tableHtml += '</tr>';
+                    });
+
+                    tableHtml += '</tbody></table>';
+                    
+                    // Append the generated table to the container
+                    $('#examFilesContainerForChecking').html(tableHtml);
+
+                    // Open the modal
+                    $('#forCheckingExamModal').modal('show');
+                } else {
+                    $('#examFilesContainer').html('<p>No data found</p>');
+                    $('#forCheckingExamModal').modal('show');
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#examFilesContainer').html('<p>An error occurred</p>');
             }
-        },
-        error: function(xhr, status, error) {
-            $('#examFilesContainer').html('<p>An error occurred</p>');
-        }
-    });
-}
+        });
+    }
+
 </script>
 </body>
 </html>
