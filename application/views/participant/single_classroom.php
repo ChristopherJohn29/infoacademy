@@ -310,7 +310,7 @@
                                                         <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
                                                         <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
                                                     </div>
-                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
+                                                    <button type="submit" data-url="<?=base_url()?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
                                                 </form>
                                             <?php } ?>
 
@@ -404,7 +404,7 @@
                                                         <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
                                                         <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
                                                     </div>
-                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
+                                                    <button type="submit" data-url="<?=base_url()?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
                                                 </form>
                                  
                                               
@@ -418,7 +418,8 @@
                             <?php $examination++; 
                         
                         } 
-
+                        
+                        echo $display;
 
                         if ($value->completed == 1) {
                             $display = 1;
@@ -426,7 +427,7 @@
                             $display = 0;
                         }
 
-                        echo $display;
+                       
 
                         $count++;
                         if ($step == $count) {
