@@ -319,6 +319,7 @@
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
                         } else if (exam.status == "1") {
                             tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td>' + exam.date_submitted + '</td>';
                         }
 
                         // Status
