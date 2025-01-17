@@ -236,6 +236,7 @@
                             // Pass data from controller to view
                             $workshop_data = $this->System_model->getWorkshopData($training[0]['id'], $count); // Example method call
 
+                            $checking = 0;
                             ?>
                         
                             <div class="card card-warning step-<?= $count ?>" style="margin-top:20px;">
@@ -247,21 +248,6 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
-                        
-                                            <?php if ($value->completed != 1): ?>
-                                                <br/><br/><label for="customFile">Submit Workshop</label>
-                                                <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
-                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
-                                                    <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <input name="" type="hidden" value="">
-                                                    <div class="custom-file">
-                                                        <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
-                                                        <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
-                                                    </div>
-                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
-                                                </form>
-                                            <?php else: ?>
-                                            <?php endif; ?>
 
                                             <?php if (!empty($workshop_data)) { ?>
                                                     <br>
@@ -287,6 +273,7 @@
                                                                     <td>
                                                                         <?php 
                                                                             if ($workshop['status'] == 2) {
+                                                                                $checking = 1;
                                                                                 echo '<span class="badge badge-warning">For Checking</span>';
                                                                             } elseif ($workshop['status'] == 1) {
                                                                                 echo '<span class="badge badge-success">Completed</span>';
@@ -311,6 +298,24 @@
                                                 <?php } else { ?>
                                                     <p>No workshop data found.</p>
                                                 <?php } ?>
+
+
+                                            <?php if ($value->completed != 1 && $checking != 1): ?>
+                                                <br/><br/><label for="customFile">Submit Workshop</label>
+                                                <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
+                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
+                                                    <input name="step" type="hidden" value="<?= $count ?>">
+                                                    <input name="" type="hidden" value="">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
+                                                        <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
+                                                    </div>
+                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
+                                                </form>
+                                            <?php else: ?>
+                                            <?php endif; ?>
+
+                            
                                               
                                         </div>
                                     </div>
@@ -327,6 +332,7 @@
                             <?php
                             // Pass data from controller to view
                             $examination_data = $this->System_model->getExaminationData($training[0]['id'], $count); // Example method call
+                            $checking = 0;
                             ?>
                         
                             <div class="card card-warning step-<?= $count ?>" style="margin-top:20px;">
@@ -339,24 +345,7 @@
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$examination]->file ?>" download="download">Download Examination</a>
                         
-                                            <?php if ($value->completed != 1): ?>
-                                                <br/><br/><label for="customFile">Submit Examination</label>
-                                                <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
-                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
-                                                    <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <input name="" type="hidden" value="">
-                                                    <div class="custom-file">
-                                                        <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
-                                                        <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
-                                                    </div>
-                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
-                                                </form>
-                                            <?php else: ?>
-
-                                 
-                                              
-                                            <?php endif; ?>
-
+                                            
                                             <?php if (!empty($examination_data)) { ?>
                                                     <br>
                                                     <h5 style="margin:10px;">Submitted Examination Files:</h5>
@@ -382,6 +371,7 @@
                                                                         <?php 
                                                                             if ($exam['status'] == 2) {
                                                                                 echo '<span class="badge badge-warning">For Checking</span>';
+                                                                                $checking = 1;
                                                                             } elseif ($exam['status'] == 1) {
                                                                                 echo '<span class="badge badge-success">Completed</span>';
                                                                             } else {
@@ -405,6 +395,24 @@
                                                 <?php } else { ?>
                                                     <p>No examination data found.</p>
                                                 <?php } ?>
+                                            <?php if ($value->completed != 1 && $checking != 1): ?>
+                                                <br/><br/><label for="customFile">Submit Examination</label>
+                                                <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
+                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
+                                                    <input name="step" type="hidden" value="<?= $count ?>">
+                                                    <input name="" type="hidden" value="">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
+                                                        <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
+                                                    </div>
+                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
+                                                </form>
+                                            <?php else: ?>
+
+                                 
+                                              
+                                            <?php endif; ?>
+
                                         </div>
                                     </div>
                                 </div>
