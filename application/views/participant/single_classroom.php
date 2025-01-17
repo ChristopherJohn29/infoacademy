@@ -300,19 +300,7 @@
                                                 <?php } ?>
 
 
-                                            <?php if ($value->completed != 1 && $checking != 1){ ?>
-                                                <br/><br/><label for="customFile">Submit Workshop</label>
-                                                <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
-                                                    <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
-                                                    <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <input name="" type="hidden" value="">
-                                                    <div class="custom-file">
-                                                        <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
-                                                        <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
-                                                    </div>
-                                                    <button type="submit" data-url="<?=base_url()?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
-                                                </form>
-                                            <?php } ?>
+                          
 
                             
                                               
@@ -419,7 +407,6 @@
                         
                         } 
                         
-                        echo $display;
 
                         if ($value->completed == 1) {
                             $display = 1;
