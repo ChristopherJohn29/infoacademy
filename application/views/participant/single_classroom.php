@@ -273,6 +273,13 @@
                         ?><?php
                         if ($value->section == 'examination' && $display == 1) {
                             ?>
+
+                            <?php
+                            // Pass data from controller to view
+                            $examination_data = $this->getExaminationData($training[0]['id'], $count); // Example method call
+                            ?>
+
+
                             <div class="card card-warning  step-<?= $count ?>" style="margin-top:20px;">
                                 <div class="card-header">
                                     <h3 class="card-title"><?= $training_section[$examination]->title ?></h3>
@@ -280,32 +287,76 @@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$examination]->file ?>" download="download">Download Examination</a>
-                                            <br/><br/> <label for="customFile">Submit Examination</label>
-                                            <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
+                                        <!-- Add the Download Examination button here -->
+                                        <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$examination]->file ?>" download="download">Download Examination</a>
+                                        
+                                        <?php
+                                        // Check if there is already submitted examination data
+                                        if (!empty($examination_data)) { ?>
+                                            <h5>Submitted Examination Files:</h5>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Examination File</th>
+                                                        <th>Status</th>
+                                                        <th>Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($examination_data as $exam) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php if (!empty($exam['examination_file'])) { ?>
+                                                                    <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['examination_file'] ?></a>
+                                                                <?php } else { ?>
+                                                                    No file submitted
+                                                                <?php } ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php 
+                                                                    if ($exam['status'] == 2) {
+                                                                        echo '<span class="badge badge-warning">For Checking</span>';
+                                                                    } elseif ($exam['status'] == 1) {
+                                                                        echo '<span class="badge badge-success">Completed</span>';
+                                                                    } else {
+                                                                        echo '<span class="badge badge-danger">Declined</span>';
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php 
+                                                                    if ($exam['remarks']) {
+                                                                        echo htmlspecialchars($exam['remarks']);
+                                                                    } else {
+                                                                        echo 'No remarks provided';
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        <?php } else { ?>
+                                            <p>No examination data found.</p>
+                                        <?php } ?>
+
+                                        <!-- Check if the examination is not completed yet and allow submission -->
+                                        <?php if ($value->completed != 1) { ?>
+                                            <br/><br/>
+                                            <label for="customFile">Submit Examination</label>
+                                            <form action="<?= base_url('control/submitExamination') ?>" method="POST" enctype="multipart/form-data">
                                                 <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
-                                                <input name="step" type="hidden" value="<?=$count?>">
-                                                <input name="" type="hidden" value="">
+                                                <input name="step" type="hidden" value="<?= $count ?>">
                                                 <div class="custom-file">
-                                                    <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf, .jpg, .jpeg, .png " id="customFile-<?= $examination ?>">
+                                                    <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
                                                     <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
                                                 </div>
-                                                <?php
-
-                                                if ($value->completed != 1) {
-
-                                                    ?>
-                                                    <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
-                                                    <?php
-                                                }
-
-                                                ?>
+                                                <button type="submit" data-url="<?= base_url() ?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
                                             </form>
-                                        </div>
+                                        <?php } ?>
                                     </div>
-                                    <!-- input states -->
                                 </div>
+
                                 <!-- /.card-body -->
                             </div>
                             <?php
