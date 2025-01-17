@@ -219,7 +219,7 @@
                                                 <td>
                                                     <?php 
                                                     if ($class['exam_status'] == 'completed') {
-                                                        echo '<button class="btn btn-sm btn-info" onclick="openCompletedExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
+                                                        echo '<button class="btn btn-sm btn-info" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">Completed</button>';
                                                     } elseif ($class['exam_status'] == 'for checking') {
                                                         echo '<button class="btn btn-sm btn-warning" onclick="openForCheckingExamModal(' . $class['participant_id'] . ', ' . $class['training_id'] . ')">For Checking</button>';
                                                     } else {
@@ -289,41 +289,7 @@
         });
     });
 
-    function openCompletedExamModal(participant_id, training_id) {
-        // Fetch completed exam data via AJAX
-        $.ajax({
-            url: '<?php echo base_url("trainer/fetchExamData"); ?>',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                training_id: training_id,
-                participant_id: participant_id
-            },
-            success: function(response) {
-                if (response.success) {
-                    var examData = response.data;
-                    // Clear the modal content before appending new data
-                    $('#examFilesContainer').html('');
 
-                    // Loop through each examination data
-                    examData.forEach(function(exam) {
-                        var examHtml = '<p><strong>Examination File:</strong> ';
-                        examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
-                        $('#examFilesContainer').append(examHtml);
-                    });
-
-                    // Open the modal
-                    $('#completedExamModal').modal('show');
-                } else {
-                    $('#examFilesContainer').html('<p>No data found</p>');
-                    $('#completedExamModal').modal('show');
-                }
-            },
-            error: function(xhr, status, error) {
-                $('#examFilesContainer').html('<p>An error occurred</p>');
-            }
-        });
-    }
 
     function openForCheckingExamModal(participant_id, training_id) {
         // Fetch for checking exam data via AJAX
@@ -342,32 +308,28 @@
                     $('#examFilesContainerForChecking').html('');
                     
                     // Create a table structure for displaying exam data
-                    var tableHtml = '<table class="table table-bordered table-striped"><thead><tr>';
-                    tableHtml += '<th>Examination File</th><th>Date Submitted</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
-
+                    var tableHtml = '<table class="table table-striped"><thead><tr><th>Examination File</th><th>Date Submitted</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
+                    
                     examData.forEach(function(exam) {
-                        tableHtml += '<tr>';
+                        tableHtml += '<tr data-exam-id="' + exam.id + '">';
 
                         // Examination File
                         if (exam.status == "2") {
-                            tableHtml += '<td>' + 
-                            '<a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a>' + 
-                            '</td>';
-
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
                         } else if (exam.status == "1") {
-                            tableHtml += '<td><a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
                         }
 
-                        // Status (can be "Pending", "Completed", etc. based on exam status)
+                        // Status
                         var statusText = (exam.status == "2") ? 'For Checking' : 'Completed';
                         tableHtml += '<td><span class="badge badge-' + (exam.status == "2" ? 'warning' : 'success') + '">' + statusText + '</span></td>';
 
                         // Action Buttons (Accept and Decline)
                         if (exam.status == "2") {
                             tableHtml += '<td>';
-                            tableHtml += '<button class="btn btn-sm btn-success mr-2">Accept</button>';
-                            tableHtml += '<button class="btn btn-sm btn-danger">Decline</button>';
+                            tableHtml += '<button class="btn btn-sm btn-success mr-2" onclick="handleAcceptDecline(' + exam.id + ', \'accept\')">Accept</button>';
+                            tableHtml += '<button class="btn btn-sm btn-danger" onclick="handleAcceptDecline(' + exam.id + ', \'decline\')">Decline</button>';
                             tableHtml += '</td>';
                         } else {
                             tableHtml += '<td>-</td>'; // No actions for completed exams
@@ -375,7 +337,7 @@
 
                         // Remarks (textarea for pending exams)
                         if (exam.status == "2") {
-                            tableHtml += '<td><textarea class="form-control" placeholder="Enter remarks"></textarea></td>';
+                            tableHtml += '<td><textarea class="form-control remarks" data-exam-id="' + exam.id + '" placeholder="Enter remarks"></textarea></td>';
                         } else {
                             tableHtml += '<td>-</td>'; // No remarks field for completed exams
                         }
@@ -400,6 +362,46 @@
             }
         });
     }
+
+    // Handle Accept/Decline actions
+    function handleAcceptDecline(examId, action) {
+        var remarks = $('textarea[data-exam-id="' + examId + '"]').val();
+
+        $.ajax({
+            url: '<?php echo base_url("trainer/updateExamStatus"); ?>', // Update this URL with your controller method
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                exam_id: examId,
+                action: action,
+                remarks: remarks
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Update the status in the table (for example)
+                    var row = $('tr[data-exam-id="' + examId + '"]');
+                    if (action == "accept") {
+                        row.find('td:nth-child(3) span').text('Completed').removeClass('badge-warning').addClass('badge-success');
+                        row.find('td:nth-child(4)').html('-'); // No actions for completed exams
+                        row.find('td:nth-child(5)').html('-'); // No remarks field for completed exams
+                    } else if (action == "decline") {
+                        row.find('td:nth-child(3) span').text('Declined').removeClass('badge-warning').addClass('badge-danger');
+                        row.find('td:nth-child(4)').html('-'); // No actions for declined exams
+                        row.find('td:nth-child(5)').html('-'); // No remarks field for declined exams
+                    }
+
+                    // Optional: you can also reset the textarea for remarks
+                    $('textarea[data-exam-id="' + examId + '"]').val('');
+                } else {
+                    alert('Error updating status');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('An error occurred');
+            }
+        });
+    }
+
 
 
 </script>

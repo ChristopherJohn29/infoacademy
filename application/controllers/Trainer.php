@@ -51,6 +51,34 @@ class Trainer extends CI_Controller
         $this->load->view('trainer/profile',$data);
     }
 
+    public function updateExamStatus() {
+        $exam_id = $this->input->post('exam_id');
+        $action = $this->input->post('action');  // 'accept' or 'decline'
+        $remarks = $this->input->post('remarks');
+    
+        // Check if the exam exists and update the status
+        $this->db->where('id', $exam_id);
+        $examData = $this->db->get('examination_data')->row_array();
+    
+        if ($examData) {
+            $status = ($action == 'accept') ? '1' : '3';
+            $data = [
+                'status' => $status,
+                'remarks' => $remarks // Save remarks if provided
+            ];
+    
+            // Update the exam status and remarks in the database
+            $this->db->where('id', $exam_id);
+            $this->db->update('examination_data', $data);
+    
+            // Respond with success
+            echo json_encode(['success' => true]);
+        } else {
+            // Respond with failure
+            echo json_encode(['success' => false, 'message' => 'Exam not found']);
+        }
+    }
+
     public function update_profile() {
         $user_id = $_SESSION['id'];
         $user_data = array(
