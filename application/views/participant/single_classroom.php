@@ -312,7 +312,6 @@
                                                     </div>
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
                                                 </form>
-                                            <?php else: ?>
                                             <?php endif; ?>
 
                             
@@ -407,8 +406,6 @@
                                                     </div>
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
                                                 </form>
-                                            <?php else: ?>
-
                                  
                                               
                                             <?php endif; ?>
