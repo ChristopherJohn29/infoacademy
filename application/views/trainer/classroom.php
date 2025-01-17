@@ -169,7 +169,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="examFilesContainer"></div>
+                        <div id="examFilesContainerForChecking"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -335,7 +335,7 @@
             if (response.success) {
                 var examData = response.data;
                 // Populate the modal with examination data for checking
-                $('#examFilesContainer').html('');
+                $('#examFilesContainerForChecking').html('');
                 examData.forEach(function(exam) {
 
                     if(exam.status == "2"){
@@ -343,13 +343,13 @@
                         examHtml += '<button class="btn btn-success">Accept</button>';
                         examHtml += '<button class="btn btn-danger">Decline</button>';
                         examHtml += '<textarea placeholder="Remarks"></textarea>';
-                        $('#examFilesContainer').append(examHtml);
+                        $('#examFilesContainerForChecking').append(examHtml);
                     }
 
                     if(exam.status == "1"){
                         var examHtml = '<p><strong>Examination File:</strong> ';
                         examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
-                        $('#examFilesContainer').append(examHtml);
+                        $('#examFilesContainerForChecking').append(examHtml);
                     }
                   
                 });
