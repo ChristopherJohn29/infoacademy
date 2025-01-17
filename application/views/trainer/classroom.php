@@ -30,9 +30,6 @@
         .form-control {
             color: black;
         }
-        #forCheckingExamModal.modal-lg {
-            max-width: 90%; /* Set the width to 90% of the viewport */
-        }
     </style>
     <!-- Google Font: Source Sans Pro -->
 </head>
@@ -164,7 +161,7 @@
 
        <!-- For Checking Exam Modal -->
         <div class="modal fade" id="forCheckingExamModal" tabindex="-1" role="dialog" aria-labelledby="forCheckingExamModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="forCheckingExamModalLabel">For Checking Examination Files</h5>
