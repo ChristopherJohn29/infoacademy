@@ -314,8 +314,6 @@ class Control extends CI_Controller
         }
     }
 
-
-
     public function submitWorkshop()
     {
         if ($_POST) {
@@ -335,7 +333,7 @@ class Control extends CI_Controller
             } else {
                 // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
-                // Generate a unique name using uniqid() and keep the original file extension
+                // Generate a unique name without prefix by using uniqid() and keep the original file extension
                 $workshop_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
                 // Rename the file to the unique name
                 rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop_file);
@@ -350,8 +348,8 @@ class Control extends CI_Controller
 
             // Check if the step corresponds to workshop
             if ($instruction[$step]->section == 'workshop') {
+                $file_desc = $instruction[$step]->description;
                 $instruction[$step]->completed = 2;
-                $file_desc = $instruction[$step]->desciption;
             } else {
                 redirect('control');
             }
@@ -362,7 +360,7 @@ class Control extends CI_Controller
             $training_class = $this->System_model->saveFromTrainingClass($training_id, $new_instruction);
 
             $data = array(
-                'file_desc' => $file_desc,
+                'file_desc' =>  $file_desc,
                 'training_id' => $training_id,
                 'step' => $step,
                 'workshop_file' => $workshop_file,
