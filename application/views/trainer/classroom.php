@@ -311,7 +311,7 @@
                     var tableHtml = '<table class="table table-striped"><thead><tr><th>Examination File</th><th>Date Submitted</th><th>Status</th><th>Actions</th><th>Remarks</th></tr></thead><tbody>';
                     
                     examData.forEach(function(exam) {
-                        tableHtml += '<tr data-exam-id="' + exam.id + '">';
+                        tableHtml += '<tr data-exam-id="' + exam.id + '" data-participant-id="' + participant_id + '" data-training-id="' + training_id + '">';
 
                         // Examination File
                         if (exam.status == "2") {
@@ -329,8 +329,8 @@
                         // Action Buttons (Accept and Decline)
                         if (exam.status == "2") {
                             tableHtml += '<td>';
-                            tableHtml += '<button class="btn btn-sm btn-success mr-2" onclick="handleAcceptDecline(' + exam.id + ', \'accept\')">Accept</button>';
-                            tableHtml += '<button class="btn btn-sm btn-danger" onclick="handleAcceptDecline(' + exam.id + ', \'decline\')">Decline</button>';
+                            tableHtml += '<button class="btn btn-sm btn-success mr-2" onclick="handleAcceptDecline(' + exam.id + ', \'accept\', ' + participant_id + ', ' + training_id + ')">Accept</button>';
+                            tableHtml += '<button class="btn btn-sm btn-danger" onclick="handleAcceptDecline(' + exam.id + ', \'decline\', ' + participant_id + ', ' + training_id + ')">Decline</button>';
                             tableHtml += '</td>';
                         } else {
                             tableHtml += '<td>-</td>'; // No actions for completed exams
@@ -365,7 +365,7 @@
     }
 
     // Handle Accept/Decline actions
-    function handleAcceptDecline(examId, action) {
+    function handleAcceptDecline(examId, action, participant_id, training_id) {
         var remarks = $('textarea[data-exam-id="' + examId + '"]').val();
 
         $.ajax({
@@ -375,7 +375,9 @@
             data: {
                 exam_id: examId,
                 action: action,
-                remarks: remarks
+                remarks: remarks,
+                participant_id: participant_id, // Pass participant_id
+                training_id: training_id        // Pass training_id
             },
             success: function(response) {
                 if (response.success) {

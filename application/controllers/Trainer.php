@@ -55,13 +55,18 @@ class Trainer extends CI_Controller
         $exam_id = $this->input->post('exam_id');
         $action = $this->input->post('action');  // 'accept' or 'decline'
         $remarks = $this->input->post('remarks');
-    
+        $participant_id = $this->input->post('participant_id'); // Get participant_id
+        $training_id = $this->input->post('training_id');       // Get training_id
+        
         // Check if the exam exists and update the status
         $this->db->where('id', $exam_id);
         $examData = $this->db->get('examination_data')->row_array();
-    
+        
         if ($examData) {
+            // Determine the new status based on action (accept or decline)
             $status = ($action == 'accept') ? '1' : '3';
+            
+            // Prepare the data to update the exam status and remarks
             $data = [
                 'status' => $status,
                 'remarks' => $remarks // Save remarks if provided
@@ -70,14 +75,46 @@ class Trainer extends CI_Controller
             // Update the exam status and remarks in the database
             $this->db->where('id', $exam_id);
             $this->db->update('examination_data', $data);
+            
+            // If the action is "accept", update the participant's progress in the training class JSON
+            if ($action == 'accept') {
+                // Fetch the training class for the participant
+                $this->db->where('participant_id', $participant_id);
+                $this->db->where('training_id', $training_id);
+                $trainingClass = $this->db->get('training_class')->row_array();
+    
+                if ($trainingClass && isset($trainingClass['training_instruction'])) {
+                    // Decode the JSON data from training_instruction field
+                    $trainingInstruction = json_decode($trainingClass['training_instruction'], true);
+                    
+                    // Get the step position from $examData
+                    $stepPosition = (int)$examData['step']; // 
+                    
+                    // Check if the position exists in the array
+                    if (isset($trainingInstruction[$stepPosition])) {
+                        // Update the 'completed' field for the relevant step
+                        $trainingInstruction[$stepPosition]['completed'] = 1;  // Mark it as completed (since we accepted the exam)
+    
+                        // Encode the updated training_instruction array back to JSON
+                        $updatedTrainingInstruction = json_encode($trainingInstruction);
+                        
+                        // Update the training_instruction field in the database
+                        $this->db->set('training_instruction', $updatedTrainingInstruction);
+                        $this->db->where('participant_id', $participant_id);
+                        $this->db->where('training_id', $training_id);
+                        $this->db->update('training_class');
+                    }
+                }
+            }
     
             // Respond with success
             echo json_encode(['success' => true]);
         } else {
-            // Respond with failure
+            // Respond with failure if exam not found
             echo json_encode(['success' => false, 'message' => 'Exam not found']);
         }
     }
+    
 
     public function update_profile() {
         $user_id = $_SESSION['id'];
