@@ -300,7 +300,7 @@
                                                 <?php } ?>
 
 
-                                            <?php if ($value->completed != 1 && $checking != 1): ?>
+                                            <?php if ($value->completed != 1 && $checking != 1){ ?>
                                                 <br/><br/><label for="customFile">Submit Workshop</label>
                                                 <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
@@ -312,7 +312,7 @@
                                                     </div>
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
                                                 </form>
-                                            <?php endif; ?>
+                                            <?php } ?>
 
                             
                                               
@@ -394,7 +394,7 @@
                                                 <?php } else { ?>
                                                     <p>No examination data found.</p>
                                                 <?php } ?>
-                                            <?php if ($value->completed != 1 && $checking != 1): ?>
+                                            <?php if ($value->completed != 1 && $checking != 1){ ?>
                                                 <br/><br/><label for="customFile">Submit Examination</label>
                                                 <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
@@ -408,7 +408,7 @@
                                                 </form>
                                  
                                               
-                                            <?php endif; ?>
+                                            <?php }?>
 
                                         </div>
                                     </div>
