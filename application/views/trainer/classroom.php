@@ -315,13 +315,13 @@
 
                         // Examination File
                         if (exam.status == "2") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.file_desc + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
                         } else if (exam.status == "1") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.file_desc + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
                         } else if (exam.status == "3") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.file_desc + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
                         }
 
