@@ -320,11 +320,28 @@
                         } else if (exam.status == "1") {
                             tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
                             tableHtml += '<td>' + exam.date_submitted + '</td>';
+                        } else if (exam.status == "3") {
+                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></td>';
+                            tableHtml += '<td>' + exam.date_submitted + '</td>';
                         }
 
                         // Status
-                        var statusText = (exam.status == "2") ? 'For Checking' : 'Completed';
-                        tableHtml += '<td><span class="badge badge-' + (exam.status == "2" ? 'warning' : 'success') + '">' + statusText + '</span></td>';
+                        var statusText = '';
+                        var badgeClass = '';
+
+                        if (exam.status == "2") {
+                            statusText = 'For Checking';
+                            badgeClass = 'warning';
+                        } else if (exam.status == "3") {
+                            statusText = 'Declined';
+                            badgeClass = 'danger';  // Declined exams will have a red badge
+                        } else {
+                            statusText = 'Completed';
+                            badgeClass = 'success';  // Completed exams will have a green badge
+                        }
+
+                        tableHtml += '<td><span class="badge badge-' + badgeClass + '">' + statusText + '</span></td>';
+
 
                         // Action Buttons (Accept and Decline)
                         if (exam.status == "2") {
