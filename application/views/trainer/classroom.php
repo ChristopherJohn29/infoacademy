@@ -326,6 +326,7 @@
     $.ajax({
         url: '<?php echo base_url("trainer/fetchExamData"); ?>',
         type: 'POST',
+        dataType: 'json',
         data: {
             training_id: training_id,
             participant_id: participant_id
