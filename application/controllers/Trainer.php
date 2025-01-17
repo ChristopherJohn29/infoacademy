@@ -224,6 +224,7 @@ class Trainer extends CI_Controller
             foreach ($data as $row) {
                 $exam_data[] = [
                     'examination_file' => $row['examination_file'],
+                    'status' => $row['status'],
                 ];
             }
     
