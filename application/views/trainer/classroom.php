@@ -338,7 +338,7 @@
                 $('#examFilesContainer').html('');
                 examData.forEach(function(exam) {
 
-                    if(exam.status = 2){
+                    if(exam.status == "2"){
                         var examHtml = '<p><strong>Examination File:</strong> ' + exam.examination_file + '</p>';
                         examHtml += '<button class="btn btn-success">Accept</button>';
                         examHtml += '<button class="btn btn-danger">Decline</button>';
@@ -346,7 +346,7 @@
                         $('#examFilesContainer').append(examHtml);
                     }
 
-                    if(exam.status = 1){
+                    if(exam.status == "1"){
                         var examHtml = '<p><strong>Examination File:</strong> ';
                         examHtml += '<a href="path_to_files/' + exam.examination_file + '" target="_blank">' + exam.examination_file + '</a></p>';
                         $('#examFilesContainer').append(examHtml);
