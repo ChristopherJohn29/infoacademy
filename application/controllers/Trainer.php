@@ -292,6 +292,7 @@ class Trainer extends CI_Controller
                     'file_desc' => $row['file_desc'],
                     'examination_file' => $row['examination_file'],
                     'status' => $row['status'],
+                    'remarks' => $row['remarks'],
                     'date_submitted' => (new DateTime($row['date_submitted']))->format('F j, Y g:iA'),  // Format date
                 ];
             }

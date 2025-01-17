@@ -357,7 +357,7 @@
                         if (exam.status == "2") {
                             tableHtml += '<td><textarea class="form-control remarks" data-exam-id="' + exam.id + '" placeholder="Enter remarks"></textarea></td>';
                         } else {
-                            tableHtml += '<td>-</td>'; // No remarks field for completed exams
+                            tableHtml += '<td>' + exam.remarks + '</td>'; // No remarks field for completed exams
                         }
 
                         tableHtml += '</tr>';
