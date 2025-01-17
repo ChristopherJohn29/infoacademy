@@ -262,8 +262,9 @@
                                                     <button type="submit" data-url="https://infoacademy.infoadvance.com.ph/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
                                                 </form>
                                             <?php else: ?>
+                                            <?php endif; ?>
 
-                                                <?php if (!empty($workshop_data)) { ?>
+                                            <?php if (!empty($workshop_data)) { ?>
                                                     <br>
                                                     <h5 style="margin:10px;">Submitted Workshop Files:</h5>
                                                     <table class="table table-striped">
@@ -312,7 +313,6 @@
                                                     <p>No workshop data found.</p>
                                                 <?php } ?>
                                               
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +354,11 @@
                                                 </form>
                                             <?php else: ?>
 
-                                                <?php if (!empty($examination_data)) { ?>
+                                 
+                                              
+                                            <?php endif; ?>
+
+                                            <?php if (!empty($examination_data)) { ?>
                                                     <br>
                                                     <h5 style="margin:10px;">Submitted Examination Files:</h5>
                                                     <table class="table table-striped">
@@ -402,8 +406,6 @@
                                                 <?php } else { ?>
                                                     <p>No examination data found.</p>
                                                 <?php } ?>
-                                              
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
