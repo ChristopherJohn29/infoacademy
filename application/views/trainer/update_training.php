@@ -107,22 +107,21 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <!-- text input -->
                                                 <div class="form-group">
-                                                    <label>Title of Traning</label>
-                                                    <input type="text" class="form-control" name="training_title" required>
+                                                    <label>Title of Training</label>
+                                                    <input type="text" class="form-control" name="training_title" value="<?= $training_data['training_title'] ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>No. of training hours</label>
-                                                    <input type="number" name="required_no_of_hours" class="form-control" required>
+                                                    <input type="number" name="required_no_of_hours" class="form-control" value="<?= $training_data['required_no_of_hours'] ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Validity</label>
-                                                    <input type="text" name="validity" class="form-control" required>
+                                                    <input type="text" name="validity" class="form-control" value="<?= $training_data['validity'] ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,10 +133,11 @@
                                                     <select name="category" class="form-control" id="category" required>
                                                         <option value="0">All Categories</option>
                                                         <?php
-                                                            $categories = $this->System_model->fetchAllCategories();
-                                                            foreach ($categories as $category) { ?>
-                                                                <option value="<?= $category['id'] ?>"><?= $category['category_name'] ?></option>
-                                                            <?php } ?>
+                                                        $categories = $this->System_model->fetchAllCategories();
+                                                        foreach ($categories as $category) { 
+                                                            $selected = ($category['id'] == $training_data['category_id']) ? 'selected' : ''; ?>
+                                                            <option value="<?= $category['id'] ?>" <?= $selected ?>><?= $category['category_name'] ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -147,17 +147,19 @@
                                                     <label>Subcategory</label>
                                                     <select name="subcategory" class="form-control" id="subcategory" required>
                                                         <option value="0">All Subcategories</option>
+                                                        <option value="<?= $training_data['subcategory'] ?>" selected><?= $training_data['subcategory'] ?></option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Level</label>
                                                     <select name="level" class="form-control" required>
-                                                        <option value="Easy">Easy</option>
+                                                        <option value="Intermediate" <?= ($training_data['level'] == 'Intermediate') ? 'selected' : '' ?>>Intermediate</option>
+                                                        <option value="Easy" <?= ($training_data['level'] == 'Easy') ? 'selected' : '' ?>>Easy</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -165,20 +167,21 @@
                                                 <div class="form-group">
                                                     <label>Language</label>
                                                     <select name="language" class="form-control" required>
-                                                        <option value="English">English</option>
-                                                        <option value="Filipino">Filipino</option>
+                                                        <option value="English" <?= ($training_data['language'] == 'English') ? 'selected' : '' ?>>English</option>
+                                                        <option value="Filipino" <?= ($training_data['language'] == 'Filipino') ? 'selected' : '' ?>>Filipino</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Banner</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" name="banner" class="custom-file-input" id="banner" accept="image/*" required>
-                                                            <label class="custom-file-label" for="banner">Choose file</label>
+                                                            <input type="file" name="banner" class="custom-file-input" id="banner" accept="image/*">
+                                                            <label class="custom-file-label" for="banner"><?= $training_data['banner'] ?></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,7 +191,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Description</label>
-                                                    <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                                    <textarea name="description" class="form-control" rows="3" required><?= $training_data['description'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +199,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Requirements</label>
-                                                    <textarea name="requirements" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                                    <textarea name="requirements" class="form-control" rows="3"><?= $training_data['requirements'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,11 +207,12 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Target Participant</label>
-                                                    <textarea name="target_participant" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                                    <textarea name="target_participant" class="form-control" rows="3"><?= $training_data['target_participant'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="card">
                                     <div class="card-header"><strong> Steps, instruction and percentage </strong>
