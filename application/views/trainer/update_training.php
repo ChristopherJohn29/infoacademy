@@ -363,7 +363,12 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" required>
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
+                                                                        <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
