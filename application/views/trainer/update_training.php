@@ -410,7 +410,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <div class="form-group">
+                                                            <div class="custom-file">
                                                                 <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" required>
                                                             </div>
                                                         </div>
