@@ -219,6 +219,9 @@
                                         <strong>Steps, Instruction, and Percentage</strong>
                                     </div>
                                     <div class="card-body">
+                                        <?php 
+                                        var_dump(json_decode($training_data['instruction']));
+                                        ?>
                                         <div class="row" id="repeatable-instruction">
                                             <?php foreach (json_decode($training_data['instruction']) as $key => $data): ?>
                                                 <div class="col-sm-1">
