@@ -83,7 +83,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item">
                                 <a href="<?php echo base_url() . '/trainer/dashboard' ?>">Home</a></li>
-                            <li class="breadcrumb-item active">Create Training</li>
+                            <li class="breadcrumb-item active">Update Training</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -97,7 +97,7 @@
                     <div class="col-12">
                         <div class="card">
                             <!-- /.card-header -->
-                            <div class="card-header"><h3 class="m-0 text-dark"> Create Training</h3></div>
+                            <div class="card-header"><h3 class="m-0 text-dark"> Update Training</h3></div>
                             <div class="card-body" style="background: #f4f4f4">
                                 <?php echo form_open_multipart('trainer/submitTraining'); ?>
                                 <div class="card">
