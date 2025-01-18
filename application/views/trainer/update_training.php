@@ -220,7 +220,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-instruction">
-                                            <?php foreach ($training_data['instruction'] as $key => $data): ?>
+                                            <?php foreach (json_decode($training_data['instruction']) as $key => $data): ?>
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
                                                         <label>Steps</label>
