@@ -220,46 +220,48 @@
                                     </div>
                                     <div class="card-body">
                                         <?php 
-                                        var_dump(json_decode($training_data['instruction']));
+                                        $instructions = json_decode($training_data['instruction']); // Decode JSON once and reuse it
+                                        var_dump($instructions); // Check the structure
                                         ?>
                                         <div class="row" id="repeatable-instruction">
-                                            <?php foreach (json_decode($training_data['instruction']) as $key => $data): ?>
+                                            <?php foreach ($instructions as $key => $data): ?>
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
                                                         <label>Steps</label>
-                                                        <input type="text" class="form-control" name="step[]" value="<?= $data['step'] ?>" disabled>
+                                                        <input type="text" class="form-control" name="step[]" value="<?= $key + 1 ?>" disabled> <!-- Display step number -->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Instructions</label>
-                                                        <input type="text" name="instruction[]" class="form-control" value="<?= $data['description'] ?>" required>
+                                                        <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label>Section</label>
                                                         <select name="section[]" class="form-control" required>
-                                                            <option value="video" <?= $data['section'] == 'video' ? 'selected' : '' ?>>Video</option>
-                                                            <option value="workshop" <?= $data['section'] == 'workshop' ? 'selected' : '' ?>>Workshop</option>
-                                                            <option value="examination" <?= $data['section'] == 'examination' ? 'selected' : '' ?>>Examination</option>
+                                                            <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
+                                                            <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
+                                                            <option value="examination" <?= $data->section == 'examination' ? 'selected' : '' ?>>Examination</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label>Percentage</label>
-                                                        <input type="number" name="percentage[]" class="form-control" value="<?= $data['percentage'] ?>" required>
+                                                        <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>
                                         <div class="row" style="display: block; text-align: right; margin: 2px;">
                                             <div class="form-group">
-                                                <a class="btn btn-sm btn-primary" id="additional-step" href="">Add additional step</a>
+                                                <a class="btn btn-sm btn-primary" id="additional-step" href="#">Add additional step</a>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
