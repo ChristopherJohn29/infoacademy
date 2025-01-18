@@ -215,31 +215,45 @@
 
                                 </div>
                                 <div class="card">
-                                    <div class="card-header">
-                                        <strong>Steps, Instruction, and Percentage</strong>
-                                    </div>
+                                    <div class="card-header"><strong>Steps, instruction and percentage</strong></div>
                                     <div class="card-body">
-                                        <?php 
-                                        $instructions = json_decode($training_data['instruction']); // Decode JSON once and reuse it
-                                        var_dump($instructions); // Check the structure
-                                        ?>
+                                        <div class="row">
+                                            <!-- Label Row (Do not repeat labels) -->
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Steps</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Instructions</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Section</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label>Percentage</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row" id="repeatable-instruction">
                                             <?php foreach ($instructions as $key => $data): ?>
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
-                                                        <label>Steps</label>
-                                                        <input type="text" class="form-control" name="step[]" value="<?= $key + 1 ?>" disabled> <!-- Display step number -->
+                                                        <input type="text" class="form-control" name="step[]" value="# <?= $key + 1 ?>" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Instructions</label>
                                                         <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label>Section</label>
                                                         <select name="section[]" class="form-control" required>
                                                             <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
                                                             <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
@@ -249,7 +263,6 @@
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
-                                                        <label>Percentage</label>
                                                         <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
                                                     </div>
                                                 </div>
@@ -261,8 +274,8 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+
                                 <div class="card">
                                     <div class="card-header">
                                         <strong> Training Videos </strong>
