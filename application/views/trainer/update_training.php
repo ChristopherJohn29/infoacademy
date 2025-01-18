@@ -215,88 +215,43 @@
 
                                 </div>
                                 <div class="card">
-                                    <div class="card-header"><strong> Steps, instruction and percentage </strong>
+                                    <div class="card-header">
+                                        <strong>Steps, Instruction, and Percentage</strong>
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-instruction">
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <label>Steps</label>
-                                                    <input type="text" class="form-control" name="step[]" value="# 1" disabled="">
+                                            <?php foreach ($training_data['instruction'] as $key => $data): ?>
+                                                <div class="col-sm-1">
+                                                    <div class="form-group">
+                                                        <label>Steps</label>
+                                                        <input type="text" class="form-control" name="step[]" value="<?= $data['step'] ?>" disabled>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Instructions</label>
-                                                    <input type="text" name="instruction[]" class="form-control" required>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Instructions</label>
+                                                        <input type="text" name="instruction[]" class="form-control" value="<?= $data['description'] ?>" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>Section</label>
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video" selected>Video</option>
-                                                        <option value="workshop">Workshop</option>
-                                                        <option value="examination">Examination</option>
-                                                    </select>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label>Section</label>
+                                                        <select name="section[]" class="form-control" required>
+                                                            <option value="video" <?= $data['section'] == 'video' ? 'selected' : '' ?>>Video</option>
+                                                            <option value="workshop" <?= $data['section'] == 'workshop' ? 'selected' : '' ?>>Workshop</option>
+                                                            <option value="examination" <?= $data['section'] == 'examination' ? 'selected' : '' ?>>Examination</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label>Percentage</label>
-                                                    <input type="number" name="percentage[]" class="form-control" required>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Percentage</label>
+                                                        <input type="number" name="percentage[]" class="form-control" value="<?= $data['percentage'] ?>" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" value="# 2" disabled="">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="instruction[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video">Video</option>
-                                                        <option value="workshop" selected>Workshop</option>
-                                                        <option value="examination">Examination</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <input type="number" name="percentage[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" value="# 3" disabled="">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="instruction[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video">Video</option>
-                                                        <option value="workshop">Workshop</option>
-                                                        <option value="examination" selected>Examination</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <input type="number" name="percentage[]" class="form-control" required>
-                                                </div>
-                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
-                                        <div class="row" style="display:block; text-align:right; margin:2px;">
+                                        <div class="row" style="display: block; text-align: right; margin: 2px;">
                                             <div class="form-group">
                                                 <a class="btn btn-sm btn-primary" id="additional-step" href="">Add additional step</a>
                                             </div>
