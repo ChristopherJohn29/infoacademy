@@ -215,6 +215,7 @@
 
                                 </div>
                                 <div class="card">
+                                    <?php $instructions = json_decode($training_data['instruction']); ?>
                                     <div class="card-header"><strong>Steps, instruction and percentage</strong></div>
                                     <div class="card-body">
                                         <div class="row">
