@@ -249,6 +249,17 @@ class Trainer extends CI_Controller
         $this->load->view('trainer/create_training');
     }
 
+    public function updateTraining(){
+        $training_id = $this->input->get('id'); 
+        $training_data = $this->System_model->get_training_by_id($training_id);
+
+        echo "<pre>";
+        var_dump($training_data);
+        echo "</pre>";
+
+        $this->load->view('trainer/update_training', $training_data);
+    }
+
     public function classroom()
     {
         if (isset($_GET['id'])) {

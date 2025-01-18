@@ -353,6 +353,23 @@ class System_model extends CI_Model
 
     }
 
+    public function get_training_by_id($id)
+    {
+        // Ensure the ID is sanitized
+        $this->db->where('id', $id);
+
+        // Fetch the training data
+        $query = $this->db->get('training');
+
+        // Check if a result exists
+        if ($query->num_rows() > 0) {
+            return $query->row_array(); // Return the result as an associative array
+        } else {
+            return false; // Return false if no data is found
+        }
+    }
+
+
     public function fetchEnrollees($id = false)
     {
         $this->db->where('training_id', $id);
