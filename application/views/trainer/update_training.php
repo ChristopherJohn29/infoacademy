@@ -279,10 +279,25 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong> Training Videos </strong>
+                                        <strong>Training Videos</strong>
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-video">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Video no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Video Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Video Youtube link</label>
+                                                </div>
+                                            </div>
                                             <?php
                                             $videos = json_decode($training_data['video'], true);
                                             if (!empty($videos)) {
@@ -290,19 +305,16 @@
                                                     <div class="repeatable">
                                                         <div class="col-sm-1">
                                                             <div class="form-group">
-                                                                <label>Video no.</label>
                                                                 <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label>Video Title</label>
                                                                 <input type="text" name="video_title[]" class="form-control" value="<?= $video['title'] ?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <label>Video Youtube link</label>
                                                                 <input type="url" name="video_url[]" class="form-control" value="<?= $video['url'] ?>" required>
                                                             </div>
                                                         </div>
@@ -319,6 +331,21 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-workshop">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>W. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Workshop Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Workshop File</label>
+                                                </div>
+                                            </div>
                                             <?php
                                             $workshops = json_decode($training_data['workshop'], true);
                                             if (!empty($workshops)) {
@@ -326,25 +353,17 @@
                                                     <div class="repeatable">
                                                         <div class="col-sm-1">
                                                             <div class="form-group">
-                                                                <label>W. no.</label>
                                                                 <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label>Workshop Title</label>
                                                                 <input type="text" name="workshop_title[]" class="form-control" value="<?= $workshop['title'] ?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <label for="exampleInputFile">Workshop File</label>
-                                                                <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
-                                                                        <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
-                                                                </div>
+                                                                <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -360,6 +379,21 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-examination">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Exam. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Examination Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Examination File</label>
+                                                </div>
+                                            </div>
                                             <?php
                                             $examinations = json_decode($training_data['examination'], true);
                                             if (!empty($examinations)) {
@@ -367,25 +401,17 @@
                                                     <div class="repeatable">
                                                         <div class="col-sm-1">
                                                             <div class="form-group">
-                                                                <label>Exam. no.</label>
                                                                 <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label>Examination Title</label>
                                                                 <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <label for="exampleInputFile">Examination File</label>
-                                                                <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
-                                                                        <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
-                                                                </div>
+                                                                <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -397,30 +423,44 @@
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong> Training References and Example </strong>
+                                        <strong>Training References and Example</strong>
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-reference">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Ref. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Reference Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Reference link</label>
+                                                </div>
+                                            </div>
                                             <?php
                                             $references = json_decode($training_data['ref'], true);
                                             if (!empty($references)) {
                                                 foreach ($references as $index => $reference) { ?>
-                                                    <div class="col-sm-1">
-                                                        <div class="form-group">
-                                                            <label>Ref. no.</label>
-                                                            <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                    <div class="repeatable">
+                                                        <div class="col-sm-1">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>Reference Title</label>
-                                                            <input type="text" name="reference_title[]" class="form-control" value="<?= $reference['title'] ?>">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="reference_title[]" class="form-control" value="<?= $reference['title'] ?>">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-5">
-                                                        <div class="form-group">
-                                                            <label>Reference link</label>
-                                                            <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>">
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                                <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 <?php }
@@ -433,6 +473,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="row" style="display:block; text-align:right; margin:2px;">
                                     <div class="form-group">
