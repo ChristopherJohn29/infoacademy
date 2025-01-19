@@ -247,19 +247,16 @@
                                                 <div class="row repeatable-row col-12">
                                                     <div class="col-sm-1">
                                                         <div class="form-group">
-                                                            <label>Steps</label>
                                                             <input type="text" class="form-control" name="step[]" value="# <?= $key + 1 ?>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label>Instructions</label>
                                                             <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <label>Section</label>
                                                             <select name="section[]" class="form-control" required>
                                                                 <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
                                                                 <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
@@ -269,7 +266,6 @@
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <div class="form-group">
-                                                            <label>Percentage</label>
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
                                                                 <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
