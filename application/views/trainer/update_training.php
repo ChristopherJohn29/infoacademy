@@ -373,7 +373,7 @@
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
-                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
+                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                                                         <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
                                                                     </div>
                                                                 </div>
@@ -419,7 +419,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>" required>
+                                                                <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
