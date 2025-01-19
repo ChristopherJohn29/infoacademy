@@ -494,10 +494,12 @@
                                         <strong>Training Fee</strong>
                                     </div>
                                     <div class="card-body">
-                                        <form action="/submit_training" method="post">
+
+                                        <form action="admin/submit_training" method="post">
+                                           <input type="hidden" name="tid" value="<?=$_GET['tid']?>">
                                             <!-- Training Fee -->
                                             <div class="form-group">
-                                                <label for="trainingFee">Training Fee (in USD):</label>
+                                                <label for="trainingFee">Training Fee (in PHP):</label>
                                                 <input type="number" step="0.01" class="form-control" id="trainingFee" name="training_fee" placeholder="Enter training fee" required>
                                             </div>
 
@@ -506,8 +508,8 @@
                                                 <label for="approvalStatus">Approval Status:</label>
                                                 <select class="form-control" id="approvalStatus" name="approval_status" required>
                                                     <option value="">Select an option</option>
-                                                    <option value="approve">Approve</option>
-                                                    <option value="decline">Decline</option>
+                                                    <option value="1">Approve</option>
+                                                    <option value="3">Decline</option>
                                                 </select>
                                             </div>
 

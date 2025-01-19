@@ -150,6 +150,34 @@ class Admin extends CI_Controller
         $this->System_model->deleteSubCategory($id);
         echo json_encode(['status' => 'success', 'message' => 'Subcategory deleted successfully']);
     }
+
+    public function submit_training() {
+        // Get form data
+        $training_id = $this->input->post('tid');
+        $training_fee = $this->input->post('training_fee');
+        $approval_status = $this->input->post('approval_status');
+        $notes = $this->input->post('notes');
+
+        // Prepare data for insertion/update
+        $data = [
+            'training_fee' => $training_fee,
+            'status' => $approval_status,
+            'notes' => $notes,
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        // Save to database
+        if ($this->System_model->updateTraining($training_id, $data)) {
+            // Success message
+            $this->session->set_flashdata('success', 'Training details updated successfully.');
+        } else {
+            // Error message
+            $this->session->set_flashdata('error', 'Failed to update training details. Please try again.');
+        }
+
+        // Redirect to the desired page (e.g., training list)
+        redirect('admin/trainings');
+    }
     
 
 }
