@@ -495,7 +495,7 @@
                                     </div>
                                     <div class="card-body">
 
-                                        <form action="admin/submit_training" method="post">
+                                        <form action="<?=base_url('admin/submit_training')?>" method="post">
                                            <input type="hidden" name="tid" value="<?=$_GET['tid']?>">
                                             <!-- Training Fee -->
                                             <div class="form-group">
