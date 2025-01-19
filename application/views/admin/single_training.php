@@ -500,7 +500,7 @@
                                             <!-- Training Fee -->
                                             <div class="form-group">
                                                 <label for="trainingFee">Training Fee (in PHP):</label>
-                                                <input type="number" step="0.01" class="form-control" id="trainingFee" name="training_fee" placeholder="Enter training fee" required>
+                                                <input type="number" step="0.01" class="form-control" id="trainingFee" name="training_fee" value="<?= $training_data['training_fee'] ?>" placeholder="Enter training fee" required>
                                             </div>
 
                                             <!-- Approval Options -->
@@ -508,15 +508,15 @@
                                                 <label for="approvalStatus">Approval Status:</label>
                                                 <select class="form-control" id="approvalStatus" name="approval_status" required>
                                                     <option value="">Select an option</option>
-                                                    <option value="1">Approve</option>
-                                                    <option value="3">Decline</option>
+                                                    <option value="1" <?= ($training_data['status'] == '1') ? 'selected' : '' ?>>Approve</option>
+                                                    <option value="3" <?= ($training_data['status'] == '3') ? 'selected' : '' ?>>Decline</option>
                                                 </select>
                                             </div>
 
                                             <!-- Additional Notes -->
                                             <div class="form-group">
                                                 <label for="notes">Additional Notes:</label>
-                                                <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Enter any additional notes"></textarea>
+                                                <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Enter any additional notes"><?= $training_data['notes'] ?></textarea>
                                             </div>
 
                                             <!-- Submit Button -->
