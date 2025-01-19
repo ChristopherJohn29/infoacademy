@@ -220,7 +220,7 @@
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
                                                         <label>Steps</label>
-                                                        <input type="text" class="form-control" value="# 1" disabled="">
+                                                        <input type="text" class="form-control step" value="# 1" disabled="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -517,7 +517,7 @@
             $html = '<div class="row repeatable-row col-12">' + // Added "repeatable-row" class for grouping
                 '<div class="col-sm-1">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" value="# ' + step + '" disabled="">' +
+                '<input type="text" class="form-control step" value="# ' + step + '" disabled="">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-6">' +
@@ -552,6 +552,11 @@
         // Event delegation for dynamically added delete buttons
         $("#repeatable-instruction").on("click", ".delete-row", function () {
             $(this).closest(".repeatable-row").remove(); // Remove the closest parent row with class "repeatable-row"
+
+            $("#repeatable-instruction .repeatable-row").each(function (index) {
+                // Update the value of the input with the current step number
+                $(this).find(".step").val("# " + (index + 1));
+            });
         });
 
         var references = 1;
