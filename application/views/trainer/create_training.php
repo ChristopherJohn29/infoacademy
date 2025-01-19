@@ -570,26 +570,49 @@
         });
 
         var references = 1;
+
+        // Add new reference row
         $("#additional-references").click(function (e) {
-            references = references + 1;
-            $html = '<div class="col-sm-1"> ' +
-                '<div class="form-group">' +
-                '<input type="text" class="form-control" value="# ' + references + '" disabled="">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-6">' +
-                '<div class="form-group">' +
-                '<input type="text" name="reference_title[]" class="form-control">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-5">' +
-                '<div class="form-group">' +
-                '<input type="url" name="reference_url[]" class="form-control">' +
-                '</div>' +
-                '</div>';
+            e.preventDefault(); // Prevent default behavior of the button
+            references = jQuery('.repeatable-reference').length + 1;
+            const $html = `
+                <div class="row repeatable-reference col-12">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control reference-number" value="# ${references}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" name="reference_title[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input type="url" name="reference_url[]" class="form-control">
+                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
             $("#repeatable-reference").append($html);
-            return false;
         });
+
+        // Delete reference row and update reference numbers
+        $("#repeatable-reference").on("click", ".delete-reference", function () {
+            // Remove the clicked row
+            $(this).closest(".repeatable-reference").remove();
+
+            // Recalculate and update the reference numbers
+            $("#repeatable-reference .repeatable-reference").each(function (index) {
+                $(this).find(".reference-number").val("# " + (index + 1));
+            });
+
+            // Decrement references count
+            references = $("#repeatable-reference .repeatable-reference").length;
+        });
+
     })
 </script>
 
