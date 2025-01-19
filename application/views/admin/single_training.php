@@ -77,179 +77,445 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+        <div class="content">
             <div class="container">
-                <?php
-                $training_id = html_escape($_GET['tid']);
-                $training = $this->System_model->fetchAllStatusSingleTraining($training_id);
-                ?>
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1><?= $training[0]['training_title']; ?></h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-header"><h3 class="m-0 text-dark"> Update Training</h3></div>
+
+                            <div class="card-body" style="background: #f4f4f4">
+                                <div class="">
+                                    <?php if ($this->session->flashdata('success_message')): ?>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <?= $this->session->flashdata('success_message'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->flashdata('error_message')): ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?= $this->session->flashdata('error_message'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+                                </div>
+                                <?php echo form_open_multipart('trainer/submitUpdateTraining'); ?>
+                                <input type="hidden" name="tid" value="<?=$_GET['id']?>">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong> Training Information </strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Title of Training</label>
+                                                    <input type="text" class="form-control" name="training_title" value="<?= $training_data['training_title'] ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>No. of training hours</label>
+                                                    <input type="number" name="required_no_of_hours" class="form-control" value="<?= $training_data['required_no_of_hours'] ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Validity</label>
+                                                    <input type="text" name="validity" class="form-control" value="<?= $training_data['validity'] ?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <select name="category" class="form-control" id="category" required>
+                                                        <option value="0">All Categories</option>
+                                                        <?php
+                                                        $categories = $this->System_model->fetchAllCategories();
+                                                        foreach ($categories as $category) { 
+                                                            $selected = ($category['id'] == $training_data['category_id']) ? 'selected' : ''; ?>
+                                                            <option value="<?= $category['id'] ?>" <?= $selected ?>><?= $category['category_name'] ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Subcategory</label>
+                                                    <select name="subcategory" class="form-control" id="subcategory" required>
+                                                        <option value="0">All Subcategories</option>
+                                                        <option value="<?= $training_data['subcategory'] ?>" selected><?= $training_data['subcategory'] ?></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Level</label>
+                                                    <select name="level" class="form-control" required>
+                                                        <option value="Intermediate" <?= ($training_data['level'] == 'Intermediate') ? 'selected' : '' ?>>Intermediate</option>
+                                                        <option value="Easy" <?= ($training_data['level'] == 'Easy') ? 'selected' : '' ?>>Easy</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Language</label>
+                                                    <select name="language" class="form-control" required>
+                                                        <option value="English" <?= ($training_data['language'] == 'English') ? 'selected' : '' ?>>English</option>
+                                                        <option value="Filipino" <?= ($training_data['language'] == 'Filipino') ? 'selected' : '' ?>>Filipino</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Banner</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" name="banner" class="custom-file-input" id="banner" accept="image/*">
+                                                            <label class="custom-file-label" for="banner"><?= $training_data['banner'] ?></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <textarea name="description" class="form-control" rows="3" required><?= $training_data['description'] ?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Requirements</label>
+                                                    <textarea name="requirements" class="form-control" rows="3"><?= $training_data['requirements'] ?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Target Participant</label>
+                                                    <textarea name="target_participant" class="form-control" rows="3"><?= $training_data['target_participant'] ?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card">
+                                    <?php $instructions = json_decode($training_data['instruction']); ?>
+                                    <div class="card-header"><strong>Steps, instruction and percentage</strong></div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!-- Label Row (Do not repeat labels) -->
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Steps</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Instructions</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label>Section</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label>Percentage</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="repeatable-instruction">
+                                            <?php foreach ($instructions as $key => $data): ?>
+
+                                                <div class="row repeatable-row col-12">
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="step[]" value="# <?= $key + 1 ?>" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <select name="section[]" class="form-control" required>
+                                                                <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
+                                                                <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
+                                                                <option value="examination" <?= $data->section == 'examination' ? 'selected' : '' ?>>Examination</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
+                                                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="row" style="display: block; text-align: right; margin: 2px;">
+                                            <div class="form-group">
+                                                <a class="btn btn-sm btn-primary" id="additional-step" href="#">Add additional step</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Training Videos</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row" id="repeatable-video">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Video no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Video Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Video Youtube link</label>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $videos = json_decode($training_data['video'], true);
+                                            if (!empty($videos)) {
+                                                foreach ($videos as $index => $video) { ?>
+                                                    <div class="repeatable">
+                                                        <div class="col-sm-1">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="video_title[]" class="form-control" value="<?= $video['title'] ?>" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                                <input type="url" name="video_url[]" class="form-control" value="<?= $video['url'] ?>" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php }
+                                            } ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Training Workshop</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row" id="repeatable-workshop">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>W. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Workshop Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Workshop File</label>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $workshops = json_decode($training_data['workshop'], true);
+                                            if (!empty($workshops)) {
+                                                foreach ($workshops as $index => $workshop) { ?>
+                                                    <div class="repeatable">
+                                                        <div class="col-sm-1">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="workshop_title[]" class="form-control" value="<?= $workshop['title'] ?>" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                                        <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php }
+                                            } ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Training Examination</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row" id="repeatable-examination">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Exam. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Examination Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Examination File</label>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $examinations = json_decode($training_data['examination'], true);
+                                            if (!empty($examinations)) {
+                                                foreach ($examinations as $index => $examination) { ?>
+                                                    <div class="repeatable">
+                                                        <div class="col-sm-1">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                                                        <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php }
+                                            } ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Training References and Example</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row" id="repeatable-reference">
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>Ref. no.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Reference Title</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label>Reference link</label>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            $references = json_decode($training_data['ref'], true);
+                                            if (!empty($references)) {
+                                                foreach ($references as $index => $reference) { ?>
+                                                    <div class="row repeatable-reference col-12">
+                                                        <div class="col-sm-1">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input type="text" name="reference_title[]" class="form-control" value="<?= $reference['title'] ?>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>">
+                                                                    <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php }
+                                            } ?>
+                                        </div>
+                                        <div class="row" style="display:block; text-align:right; margin:2px;">
+                                            <div class="form-group">
+                                                <a class="btn btn-sm btn-primary" id="additional-references" href="">Add additional references</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="display:block; text-align:right; margin:2px;">
+                                    <div class="form-group">
+                                        <button class="btn btn-sm btn-success">Update Training</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
                     </div>
                 </div>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">General information</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                            <i class="fas fa-minus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="inputName">Training course</label>
-                                        <input type="text" id="inputName" class="form-control" value="<?= $training[0]['training_title']; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputDescription">Training description</label>
-                                        <textarea id="inputDescription" class="form-control" rows="4"><?= $training[0]['description']; ?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputDescription">Target participant</label>
-                                        <textarea id="inputDescription" class="form-control" rows="4"><?= $training[0]['target_participant']; ?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputClientCompany">Author</label>
-                                        <input type="text" id="inputClientCompany" class="form-control" value="<?= $training[0]['author_id']; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputProjectLeader">Training Instruction</label>
-
-                                        <?php
-
-                                        $instructions = json_encode($training[0]['instruction']);
-
-//                                        foreach ($instructions as $instruction){
-//                                            var_dump($instruction);
-//                                        }
-                                        ?>
-
-
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card card-secondary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Budget</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                            <i class="fas fa-minus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="inputEstimatedBudget">Estimated budget</label>
-                                        <input type="number" id="inputEstimatedBudget" class="form-control" value="2300" step="1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSpentBudget">Total amount spent</label>
-                                        <input type="number" id="inputSpentBudget" class="form-control" value="2000" step="1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEstimatedDuration">Estimated project duration</label>
-                                        <input type="number" id="inputEstimatedDuration" class="form-control" value="20" step="0.1">
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                            <div class="card card-info">
-                                <div class="card-header">
-                                    <h3 class="card-title">Files</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                            <i class="fas fa-minus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body p-0">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>File Name</th>
-                                            <th>File Size</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Functional-requirements.docx</td>
-                                            <td>49.8005 kb</td>
-                                            <td class="text-right py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        <tr>
-                                            <td>UAT.pdf</td>
-                                            <td>28.4883 kb</td>
-                                            <td class="text-right py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        <tr>
-                                            <td>Email-from-flatbal.mln</td>
-                                            <td>57.9003 kb</td>
-                                            <td class="text-right py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        <tr>
-                                            <td>Logo.png</td>
-                                            <td>50.5190 kb</td>
-                                            <td class="text-right py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        <tr>
-                                            <td>Contract-10_12_2014.docx</td>
-                                            <td>44.9715 kb</td>
-                                            <td class="text-right py-0 align-middle">
-                                                <div class="btn-group btn-group-sm">
-                                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="#" class="btn btn-secondary">Cancel</a>
-                            <input type="submit" value="Save Changes" class="btn btn-success float-right">
-                        </div>
-                    </div>
-                </section>
-                <pre>
-                       <?php
-                       print_r($training);
-                       ?>
-                    </pre>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Trainings</li>
-                    </ol>
-                </div>
+                <!-- /.row -->
             </div><!-- /.container-fluid -->
+        </div>
         </section>
         <!-- Main content -->
         <section class="content">

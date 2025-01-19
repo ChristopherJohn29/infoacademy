@@ -31,7 +31,11 @@ class Admin extends CI_Controller
     public function training()
     {
         if ($_GET['tid']) {
-            $this->load->view('admin/single_training');
+
+            $training_id = $this->input->get('tid'); 
+            $data['training_data'] = $this->System_model->get_training_by_id($training_id);
+
+            $this->load->view('admin/single_training', $data);
         } else{
             redirect('admin/trainings');
         }
