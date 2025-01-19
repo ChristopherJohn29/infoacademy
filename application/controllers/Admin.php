@@ -170,13 +170,15 @@ class Admin extends CI_Controller
         if ($this->System_model->updateTraining($training_id, $data)) {
             // Success message
             $this->session->set_flashdata('success', 'Training details updated successfully.');
+            redirect('admin/trainings');
         } else {
             // Error message
             $this->session->set_flashdata('error', 'Failed to update training details. Please try again.');
+            redirect('admin/training/?tid='.$training_id);
         }
 
         // Redirect to the desired page (e.g., training list)
-        redirect('admin/trainings');
+       
     }
     
 
