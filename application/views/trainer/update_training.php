@@ -463,7 +463,7 @@
                                             $references = json_decode($training_data['ref'], true);
                                             if (!empty($references)) {
                                                 foreach ($references as $index => $reference) { ?>
-                                                    <div class="repeatable">
+                                                    <div class="row repeatable-reference col-12">
                                                         <div class="col-sm-1">
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control" value="# <?= $index + 1 ?>" disabled>
@@ -476,7 +476,10 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
+                                                                <div class="d-flex justify-content-between align-items-center">
                                                                 <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>">
+                                                                    <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
