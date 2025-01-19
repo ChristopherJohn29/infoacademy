@@ -619,7 +619,8 @@
         var step = 3;
         $("#additional-step").click(function (e) {
             step = step + 1;
-            $html = '<div class="col-sm-1">' +
+            $html = '<div class="row repeatable-row">' + // Added "repeatable-row" class for grouping
+                '<div class="col-sm-1">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" value="# ' + step + '" disabled="">' +
                 '</div>' +
@@ -641,12 +642,23 @@
                 '</div>' +
                 '<div class="col-sm-2">' +
                 '<div class="form-group">' +
+                '<div class="d-flex justify-content-between align-items-center">' +
                 '<input type="text" name="percentage[]" class="form-control" required>' +
+                '<button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>' + // Delete button
+                '</div>' +
+                '</div>' +
                 '</div>' +
                 '</div>';
             $("#repeatable-instruction").append($html);
             return false;
         });
+
+
+        // Event delegation for dynamically added delete buttons
+        $("#repeatable-instruction").on("click", ".delete-row", function () {
+            $(this).closest(".repeatable-row").remove(); // Remove the closest parent row with class "repeatable-row"
+        });
+
         var references = 1;
         $("#additional-references").click(function (e) {
             references = references + 1;
