@@ -243,30 +243,41 @@
                                         </div>
                                         <div class="row" id="repeatable-instruction">
                                             <?php foreach ($instructions as $key => $data): ?>
-                                                <div class="col-sm-1">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="step[]" value="# <?= $key + 1 ?>" disabled>
+
+                                                <div class="row repeatable-row col-12">
+                                                    <div class="col-sm-1">
+                                                        <div class="form-group">
+                                                            <label>Steps</label>
+                                                            <input type="text" class="form-control" name="step[]" value="# <?= $key + 1 ?>" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Instructions</label>
+                                                            <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label>Section</label>
+                                                            <select name="section[]" class="form-control" required>
+                                                                <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
+                                                                <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
+                                                                <option value="examination" <?= $data->section == 'examination' ? 'selected' : '' ?>>Examination</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>Percentage</label>
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
+                                                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group">
-                                                        <select name="section[]" class="form-control" required>
-                                                            <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
-                                                            <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
-                                                            <option value="examination" <?= $data->section == 'examination' ? 'selected' : '' ?>>Examination</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <div class="form-group">
-                                                        <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
-                                                    </div>
-                                                </div>
+
                                             <?php endforeach; ?>
                                         </div>
                                         <div class="row" style="display: block; text-align: right; margin: 2px;">
@@ -544,6 +555,11 @@
     jQuery(document).ready(function () {
         bsCustomFileInput.init();
         $('#repeatable-instruction').on('change', 'select', function () {
+            updateEachRepeatable();
+
+        });
+
+        function updateEachRepeatable () {
             let $counter = 0;
             let $video = 0;
             let $workshop = 0;
@@ -571,8 +587,7 @@
             generateRepeatable('workshop', workshop_input, $workshop);
             generateRepeatable('examination', examination_input, $examination);
             bsCustomFileInput.init();
-
-        });
+        }
 
 
         function generateRepeatable($kind, $inputNumber, $actualNumber){
@@ -673,12 +688,13 @@
 
         }
 
-        var step = 3;
+        
         $("#additional-step").click(function (e) {
-            step = step + 1;
-            $html = '<div class="col-sm-1">' +
+            step = jQuery('.repeatable-row').length + 1;
+            $html = '<div class="row repeatable-row col-12">' + // Added "repeatable-row" class for grouping
+                '<div class="col-sm-1">' +
                 '<div class="form-group">' +
-                '<input type="text" class="form-control" value="# ' + step + '" disabled="">' +
+                '<input type="text" class="form-control step" value="# ' + step + '" disabled="">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-6">' +
@@ -698,33 +714,78 @@
                 '</div>' +
                 '<div class="col-sm-2">' +
                 '<div class="form-group">' +
+                '<div class="d-flex justify-content-between align-items-center">' +
                 '<input type="text" name="percentage[]" class="form-control" required>' +
+                '<button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>' + // Delete button
+                '</div>' +
+                '</div>' +
                 '</div>' +
                 '</div>';
             $("#repeatable-instruction").append($html);
             return false;
         });
-        var references = 1;
-        $("#additional-references").click(function (e) {
-            references = references + 1;
-            $html = '<div class="col-sm-1"> ' +
-                '<div class="form-group">' +
-                '<input type="text" class="form-control" value="# ' + references + '" disabled="">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-6">' +
-                '<div class="form-group">' +
-                '<input type="text" name="reference_title[]" class="form-control">' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-5">' +
-                '<div class="form-group">' +
-                '<input type="url" name="reference_url[]" class="form-control">' +
-                '</div>' +
-                '</div>';
-            $("#repeatable-reference").append($html);
-            return false;
+
+
+        // Event delegation for dynamically added delete buttons
+        $("#repeatable-instruction").on("click", ".delete-row", function () {
+            $(this).closest(".repeatable-row").remove(); // Remove the closest parent row with class "repeatable-row"
+
+            $("#repeatable-instruction .repeatable-row").each(function (index) {
+                // Update the value of the input with the current step number
+                $(this).find(".step").val("# " + (index + 1));
+            });
+
+            bsCustomFileInput.init();
+            updateEachRepeatable();
+            
+
+
         });
+
+        var references = 1;
+
+        // Add new reference row
+        $("#additional-references").click(function (e) {
+            e.preventDefault(); // Prevent default behavior of the button
+            references = jQuery('.repeatable-reference').length + 1;
+            const $html = `
+                <div class="row repeatable-reference col-12">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control reference-number" value="# ${references}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" name="reference_title[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input type="url" name="reference_url[]" class="form-control">
+                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            $("#repeatable-reference").append($html);
+        });
+
+        // Delete reference row and update reference numbers
+        $("#repeatable-reference").on("click", ".delete-reference", function () {
+            // Remove the clicked row
+            $(this).closest(".repeatable-reference").remove();
+
+            // Recalculate and update the reference numbers
+            $("#repeatable-reference .repeatable-reference").each(function (index) {
+                $(this).find(".reference-number").val("# " + (index + 1));
+            });
+
+            // Decrement references count
+            references = $("#repeatable-reference .repeatable-reference").length;
+        });
+
     })
 </script>
 
