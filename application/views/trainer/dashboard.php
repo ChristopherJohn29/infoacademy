@@ -204,7 +204,7 @@
             
             <div class="container">
 
-                <div class="row">
+                <div class="">
                     <?php if ($this->session->flashdata('success_message')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $this->session->flashdata('success_message'); ?>
@@ -223,7 +223,7 @@
                     </div>
                 <?php endif; ?>
                 </div>
-                
+
                 <div class="row" style="display:block; text-align: right; margin:2px;">
                     <a class="btn btn-success btn-sm col-sm-2" href="<?php echo base_url() . '/trainer/createTraining' ?>" style="margin:10px; margin-left:0px;">Create Training</a>
                 </div>
