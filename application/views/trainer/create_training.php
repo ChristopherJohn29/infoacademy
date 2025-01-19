@@ -267,26 +267,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-video">
-                                            <div class="repeatable">
-                                                <div class="col-sm-1">
-                                                    <div class="form-group">
-                                                        <label>Video no.</label>
-                                                        <input type="text" class="form-control" value="# 1" disabled="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Video Title</label>
-                                                        <input type="text" name="video_title[]" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <label>Video Youtube link</label>
-                                                        <input type="url" name="video_url[]" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    
                                         </div>
                                     </div>
                                 </div>
