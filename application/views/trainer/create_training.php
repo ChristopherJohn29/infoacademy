@@ -557,6 +557,18 @@
                 // Update the value of the input with the current step number
                 $(this).find(".step").val("# " + (index + 1));
             });
+
+
+            video_input = jQuery('#repeatable-video').find('.repeatable').length;
+            workshop_input = jQuery('#repeatable-workshop').find('.repeatable').length;
+            examination_input = jQuery('#repeatable-examination').find('.repeatable').length;
+
+            generateRepeatable('video', video_input, $video);
+            generateRepeatable('workshop', workshop_input, $workshop);
+            generateRepeatable('examination', examination_input, $examination);
+            bsCustomFileInput.init();
+
+            
         });
 
         var references = 1;
