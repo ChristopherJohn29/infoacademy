@@ -581,7 +581,7 @@
         var step = 3;
         $("#additional-step").click(function (e) {
             step = step + 1;
-            $html = '<div class="row repeatable-row">' + // Added "repeatable-row" class for grouping
+            $html = '<div class="row repeatable-row col-12">' + // Added "repeatable-row" class for grouping
                 '<div class="col-sm-1">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" value="# ' + step + '" disabled="">' +
