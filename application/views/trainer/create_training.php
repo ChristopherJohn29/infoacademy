@@ -313,8 +313,10 @@
                                                 <div class="col-sm-5">
                                                     <div class="form-group">
                                                         <label>Reference link</label>
-                                                        <input type="url" name="reference_url[]" class="form-control">
-                                                        <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <input type="url" name="reference_url[]" class="form-control">
+                                                            <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
