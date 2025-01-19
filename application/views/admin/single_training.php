@@ -40,6 +40,11 @@
         .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
             background-color: gray;
         }
+
+        .repeatable {
+            width: 100%;
+            display: inline-flex;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
