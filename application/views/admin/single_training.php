@@ -560,6 +560,278 @@
             "autoWidth": false,
         });
     });
+    jQuery(document).ready(function () {
+        bsCustomFileInput.init();
+        $('#repeatable-instruction').on('change', 'select', function () {
+            updateEachRepeatable();
+
+        });
+
+        function updateEachRepeatable () {
+            let $counter = 0;
+            let $video = 0;
+            let $workshop = 0;
+            let $examination = 0;
+            let video_input = 0;
+            let workshop_input = 0;
+            let examination_input = 0;
+            $('#repeatable-instruction').find('select').each(function () {
+                $counter++;
+                if ($(this).val() === 'video') {
+                    $video++;
+                }
+                if ($(this).val() === 'workshop') {
+                    $workshop++;
+                }
+                if ($(this).val() === 'examination') {
+                    $examination++;
+                }
+            });
+            video_input = jQuery('#repeatable-video').find('.repeatable').length;
+            workshop_input = jQuery('#repeatable-workshop').find('.repeatable').length;
+            examination_input = jQuery('#repeatable-examination').find('.repeatable').length;
+
+            generateRepeatable('video', video_input, $video);
+            generateRepeatable('workshop', workshop_input, $workshop);
+            generateRepeatable('examination', examination_input, $examination);
+            bsCustomFileInput.init();
+        }
+
+
+        function generateRepeatable($kind, $inputNumber, $actualNumber){
+            let $html = '';
+            if($kind === 'video'){
+                while ($inputNumber < $actualNumber) {
+                    $html = '<div class="repeatable">' +
+                        '<div class="col-sm-1"> ' +
+                        '<div class="form-group">' +
+                        '<input type="text" class="form-control" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-6">' +
+                        '<div class="form-group">' +
+                        '<input required type="text" name="video_title[]" class="form-control">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-5">' +
+                        '<div class="form-group">' +
+                        '<input required type="url" name="video_url[]" class="form-control">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    $("#repeatable-video").append($html);
+                    $inputNumber++;
+                }
+                while ($inputNumber > $actualNumber) {
+                    $("#repeatable-video .repeatable").last().remove();
+                    $inputNumber--;
+                }
+            }
+
+            if($kind === 'workshop'){
+                while ($inputNumber < $actualNumber) {
+                    $html = '<div class="repeatable">' +
+                        '<div class="col-sm-1">' +
+                        '<div class="form-group">' +
+                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-6">' +
+                        '<div class="form-group">' +
+                        '<input required type="text" name="workshop_title[]" class="form-control">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-5">' +
+                        '<div class="form-group">' +
+                        '<div class="input-group">' +
+                        '<div class="custom-file">' +
+                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="workshop_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="workshop' + parseInt($inputNumber+1) + '">' +
+                        '<label class="custom-file-label" for="workshop' + parseInt($inputNumber+1) + '">Choose file</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    $("#repeatable-workshop").append($html);
+                    $inputNumber++;
+                }
+                while ($inputNumber > $actualNumber) {
+                    $("#repeatable-workshop .repeatable").last().remove();
+                    $inputNumber--;
+                }
+            }
+
+            if($kind === 'examination'){
+                while ($inputNumber < $actualNumber) {
+                    $html = '<div class="repeatable">' +
+                        '<div class="col-sm-1">' +
+                        '<div class="form-group">' +
+                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-6">' +
+                        '<div class="form-group">' +
+                        '<input required type="text" name="examination_title[]" class="form-control">' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-5">' +
+                        '<div class="form-group">' +
+                        '<div class="input-group">' +
+                        '<div class="custom-file">' +
+                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="examination_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="examination' + parseInt($inputNumber+1) + '">' +
+                        '<label class="custom-file-label" for="examination' + parseInt($inputNumber+1) + '">Choose file</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    $("#repeatable-examination").append($html);
+                    $inputNumber++;
+                }
+                while ($inputNumber > $actualNumber) {
+                    $("#repeatable-examination .repeatable").last().remove();
+                    $inputNumber--;
+                }
+            }
+
+        }
+
+        
+        $("#additional-step").click(function (e) {
+            step = jQuery('.repeatable-row').length + 1;
+            $html = '<div class="row repeatable-row col-12">' + // Added "repeatable-row" class for grouping
+                '<div class="col-sm-1">' +
+                '<div class="form-group">' +
+                '<input type="text" class="form-control step" value="# ' + step + '" disabled="">' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-6">' +
+                '<div class="form-group">' +
+                '<input type="text" name="instruction[]" class="form-control" required>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-3">' +
+                '<div class="form-group">' +
+                '<select name="section[]" class="form-control" required>' +
+                '<option value="" selected disabled></option>' +
+                '<option value="video">Video</option>' +
+                '<option value="workshop">Workshop</option>' +
+                '<option value="examination">Examination</option>' +
+                '</select>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-2">' +
+                '<div class="form-group">' +
+                '<div class="d-flex justify-content-between align-items-center">' +
+                '<input type="text" name="percentage[]" class="form-control" required>' +
+                '<button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>' + // Delete button
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+            $("#repeatable-instruction").append($html);
+            return false;
+        });
+
+
+        // Event delegation for dynamically added delete buttons
+        $("#repeatable-instruction").on("click", ".delete-row", function () {
+            $(this).closest(".repeatable-row").remove(); // Remove the closest parent row with class "repeatable-row"
+
+            $("#repeatable-instruction .repeatable-row").each(function (index) {
+                // Update the value of the input with the current step number
+                $(this).find(".step").val("# " + (index + 1));
+            });
+
+            bsCustomFileInput.init();
+            updateEachRepeatable();
+            
+
+
+        });
+
+        var references = 1;
+
+        // Add new reference row
+        $("#additional-references").click(function (e) {
+            e.preventDefault(); // Prevent default behavior of the button
+            references = jQuery('.repeatable-reference').length + 1;
+            const $html = `
+                <div class="row repeatable-reference col-12">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control reference-number" value="# ${references}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" name="reference_title[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input type="url" name="reference_url[]" class="form-control">
+                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            $("#repeatable-reference").append($html);
+        });
+
+        // Delete reference row and update reference numbers
+        $("#repeatable-reference").on("click", ".delete-reference", function () {
+            // Remove the clicked row
+            $(this).closest(".repeatable-reference").remove();
+
+            // Recalculate and update the reference numbers
+            $("#repeatable-reference .repeatable-reference").each(function (index) {
+                $(this).find(".reference-number").val("# " + (index + 1));
+            });
+
+            // Decrement references count
+            references = $("#repeatable-reference .repeatable-reference").length;
+        });
+
+    })
+</script>
+
+<script>
+    // jQuery to dynamically load subcategories based on selected category
+    $('#category').change(function() {
+        var category_id = $(this).val();
+        if(category_id != '0') {
+            $.ajax({
+                url: '<?= base_url('trainer/get_subcategories_by_category') ?>', // Update with the correct URL to fetch subcategories
+                type: 'POST',
+                dataType: 'json', // Enforce JSON parsing
+                data: {category_id: category_id},
+                success: function(response) {
+                    console.log('Response:', response);
+                    var subcategory_select = $('#subcategory');
+                    subcategory_select.empty();
+                    subcategory_select.append('<option value="0">All Subcategories</option>');
+
+                    if (Array.isArray(response)) {
+                        $.each(response, function(index, subcategory) {
+                            subcategory_select.append('<option value="'+subcategory.id+'">'+subcategory.name+'</option>');
+                        });
+                    } else {
+                        console.error("Response is not an array", response);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                }
+            });
+
+        } else {
+            // Clear subcategory options if no category is selected
+            $('#subcategory').empty();
+            $('#subcategory').append('<option value="0">All Subcategories</option>');
+        }
+    });
 </script>
 </body>
 </html>
