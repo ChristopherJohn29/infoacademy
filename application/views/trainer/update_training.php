@@ -97,7 +97,7 @@
                     <div class="col-12">
                         <div class="card">
                             <!-- /.card-header -->
-                            <div class="card-header"><h3 class="m-0 text-dark"> Update Training</h3></div>
+                            <div class="card-header"><h3 class="m-0 text-dark"> <h3> Update Training</h3></div>
 
                             <div class="card-body" style="background: #f4f4f4">
                                 <div class="">
