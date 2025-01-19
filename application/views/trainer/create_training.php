@@ -215,89 +215,51 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-instruction">
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <label>Steps</label>
-                                                    <input type="text" class="form-control" name="step[]" value="# 1" disabled="">
+                                            <!-- Existing Rows -->
+                                            <div class="row repeatable-row col-12">
+                                                <div class="col-sm-1">
+                                                    <div class="form-group">
+                                                        <label>Steps</label>
+                                                        <input type="text" class="form-control" value="# 1" disabled="">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Instructions</label>
-                                                    <input type="text" name="instruction[]" class="form-control" required>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Instructions</label>
+                                                        <input type="text" name="instruction[]" class="form-control" required="">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>Section</label>
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video" selected>Video</option>
-                                                        <option value="workshop">Workshop</option>
-                                                        <option value="examination">Examination</option>
-                                                    </select>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label>Section</label>
+                                                        <select name="section[]" class="form-control" required="">
+                                                            <option value="" selected="" disabled=""></option>
+                                                            <option value="video">Video</option>
+                                                            <option value="workshop">Workshop</option>
+                                                            <option value="examination">Examination</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <label>Percentage</label>
-                                                    <input type="number" name="percentage[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" value="# 2" disabled="">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="instruction[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video">Video</option>
-                                                        <option value="workshop" selected>Workshop</option>
-                                                        <option value="examination">Examination</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <input type="number" name="percentage[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" value="# 3" disabled="">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" name="instruction[]" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <select name="section[]" class="form-control" required>
-                                                        <option value="video">Video</option>
-                                                        <option value="workshop">Workshop</option>
-                                                        <option value="examination" selected>Examination</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <input type="number" name="percentage[]" class="form-control" required>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label>Percentage</label>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <input type="text" name="percentage[]" class="form-control" required="">
+                                                            <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" style="display:block; text-align:right; margin:2px;">
+
+                                        <!-- Add Step Button -->
+                                        <div class="row" style="display: block; text-align: right; margin: 2px;">
                                             <div class="form-group">
-                                                <a class="btn btn-sm btn-primary" id="additional-step" href="">Add additional step</a>
+                                                <a class="btn btn-sm btn-primary" id="additional-step" href="#">Add additional step</a>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
