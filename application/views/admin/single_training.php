@@ -276,7 +276,7 @@
                                                     <div class="col-sm-2">
                                                         <div class="form-group">
                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
+                                                                <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" disabled>
                                                                 <button type="button" class="btn btn-danger btn-sm ml-2 delete-row" disabled>Delete</button>
                                                             </div>
                                                         </div>
