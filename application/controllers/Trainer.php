@@ -553,6 +553,7 @@ class Trainer extends CI_Controller
             ];
 
             if ($this->System_model->saveTraining($data)) {
+                $this->session->set_flashdata('success_message', 'Create successful!');
                 redirect('trainer/dashboard');
             } else {
                 redirect('trainer/createTraining');
