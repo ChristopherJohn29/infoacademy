@@ -296,31 +296,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-workshop">
-                                            <div class="repeatable">
-                                                <div class="col-sm-1">
-                                                    <div class="form-group">
-                                                        <label>W. no.</label>
-                                                        <input type="text" class="form-control" value="# 1" disabled="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Workshop Title</label>
-                                                        <input type="text" name="workshop_title[]" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">Workshop File</label>
-                                                        <div class="input-group">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="workshop_file_1" class="custom-file-input" id="workshop1" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
-                                                                <label class="custom-file-label" for="workshop1">Choose file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                     
                                         </div>
                                     </div>
                                 </div>
@@ -330,31 +306,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row" id="repeatable-examination">
-                                            <div class="repeatable">
-                                                <div class="col-sm-1">
-                                                    <div class="form-group">
-                                                        <label>Exam. no.</label>
-                                                        <input type="text" class="form-control" value="# 1" disabled="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Examination Title</label>
-                                                        <input type="text" name="examination_title[]" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">Examination File</label>
-                                                        <div class="input-group">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="examination_file_1" class="custom-file-input" id="examination1" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
-                                                                <label class="custom-file-label" for="examination1">Choose file</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        
                                         </div>
                                     </div>
                                 </div>
