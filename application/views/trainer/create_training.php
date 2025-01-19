@@ -99,6 +99,25 @@
                             <!-- /.card-header -->
                             <div class="card-header"><h3 class="m-0 text-dark"> Create Training</h3></div>
                             <div class="card-body" style="background: #f4f4f4">
+                                <div class="">
+                                    <?php if ($this->session->flashdata('success_message')): ?>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <?= $this->session->flashdata('success_message'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->flashdata('error_message')): ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?= $this->session->flashdata('error_message'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+                                </div>
                                 <?php echo form_open_multipart('trainer/submitTraining'); ?>
                                 <div class="card">
                                     <div class="card-header">

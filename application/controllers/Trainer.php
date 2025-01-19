@@ -556,6 +556,7 @@ class Trainer extends CI_Controller
                 $this->session->set_flashdata('success_message', 'Create successful!');
                 redirect('trainer/dashboard');
             } else {
+                $this->session->set_flashdata('error_message', 'Create failed. Please try again.');
                 redirect('trainer/createTraining');
             }
         }
@@ -684,6 +685,7 @@ class Trainer extends CI_Controller
                 $this->session->set_flashdata('success_message', 'Update successful!');
                 redirect('trainer/dashboard');
             } else {
+                $this->session->set_flashdata('error_message', 'Update failed. Please try again.');
                 redirect('trainer/updateTraining/?id=' . $training_id);
             }
         }
