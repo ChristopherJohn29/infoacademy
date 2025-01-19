@@ -612,6 +612,11 @@ class Trainer extends CI_Controller
 
             // Process workshop files
             $workshop = array();
+
+            if (is_string($existingTraining['workshop'])) {
+                $existingTraining['workshop'] = json_decode($existingTraining['workshop'], true);
+            }
+
             if (isset($_POST['workshop_title'])) {
                 $workshop_title = html_escape($_POST['workshop_title']);
 
@@ -630,6 +635,11 @@ class Trainer extends CI_Controller
 
             // Process examination files
             $examination = array();
+
+            if (is_string($existingTraining['workshop'])) {
+                $existingTraining['examination'] = json_decode($existingTraining['examination'], true);
+            }
+
             if (isset($_POST['examination_title'])) {
                 $examination_title = html_escape($_POST['examination_title']);
 
