@@ -296,7 +296,7 @@
                                         <strong> Training References and Example </strong>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row" id="repeatable-reference">
+                                        <div class="row repeatable-reference col-12" id="repeatable-reference">
                                             <div class="col-sm-1">
                                                 <div class="form-group">
                                                     <label>Ref. no.</label>
@@ -313,6 +313,7 @@
                                                 <div class="form-group">
                                                     <label>Reference link</label>
                                                     <input type="url" name="reference_url[]" class="form-control">
+                                                    <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
                                                 </div>
                                             </div>
                                         </div>
