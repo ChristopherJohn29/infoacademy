@@ -636,7 +636,7 @@ class Trainer extends CI_Controller
             // Process examination files
             $examination = array();
 
-            if (is_string($existingTraining['workshop'])) {
+            if (is_string($existingTraining['examination'])) {
                 $existingTraining['examination'] = json_decode($existingTraining['examination'], true);
             }
 
