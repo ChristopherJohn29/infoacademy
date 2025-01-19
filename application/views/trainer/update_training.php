@@ -426,7 +426,7 @@
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
-                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" required>
+                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                                                         <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
                                                                     </div>
                                                                 </div>
