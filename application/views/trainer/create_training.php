@@ -245,7 +245,7 @@
                                                         <label>Percentage</label>
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <input type="text" name="percentage[]" class="form-control" required="">
-                                                            <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
+                                                            <button type="button" class="btn btn-danger btn-sm ml-2 delete-row" disabled>Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
