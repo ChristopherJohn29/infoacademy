@@ -353,6 +353,23 @@ class System_model extends CI_Model
 
     }
 
+    public function updateTraining($training_id, $data = array())
+    {
+        // Ensure the $training_id is provided
+        if (empty($training_id)) {
+            return false;
+        }
+
+        // Update the training record in the database
+        $this->db->where('id', $training_id);
+        if ($this->db->update('training', $data)) {
+            return true;
+        }
+
+        // Return false if the update fails
+        return false;
+    }
+
     public function get_training_by_id($id)
     {
         // Ensure the ID is sanitized

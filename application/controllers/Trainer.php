@@ -561,6 +561,134 @@ class Trainer extends CI_Controller
     }
 
 
+    public function submitUpdateTraining()
+    {
+        if (isset($_POST)) {
+
+            $training_id = $_POST['tid'];
+            // Retrieve existing training data
+            $existingTraining = $this->System_model->getTrainingById($training_id);
+
+            // Banner file upload
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('banner')) {
+                $error = array('error' => $this->upload->display_errors());
+                $banner = $existingTraining['banner']; // Retain existing banner if no new file is uploaded
+            } else {
+                $file = array('upload_data' => $this->upload->data());
+                $banner = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $banner);
+            }
+
+            // Process instruction fields
+            $instruction = array();
+            $instruction_description = html_escape($_POST['instruction']);
+            $instruction_section = html_escape($_POST['section']);
+            $instruction_percentage = html_escape($_POST['percentage']);
+
+            foreach ($instruction_description as $index => $instruction_value) {
+                $instruction[$index]['description'] = $instruction_value;
+                $instruction[$index]['section'] = $instruction_section[$index];
+                $instruction[$index]['percentage'] = $instruction_percentage[$index];
+                $instruction[$index]['completed'] = 0;
+            }
+
+            // Process video fields
+            $video = array();
+            if (isset($_POST['video_title'])) {
+                $video_title = html_escape($_POST['video_title']);
+                $video_url = html_escape($_POST['video_url']);
+
+                foreach ($video_title as $index => $video_value) {
+                    $video[$index]['title'] = $video_value;
+                    $video[$index]['url'] = $video_url[$index];
+                }
+            }
+
+            // Process workshop files
+            $workshop = array();
+            if (isset($_POST['workshop_title'])) {
+                $workshop_title = html_escape($_POST['workshop_title']);
+
+                foreach ($workshop_title as $index => $workshop_value) {
+                    $workshop[$index]['title'] = $workshop_value;
+
+                    if (!$this->upload->do_upload('workshop_file_' . ($index + 1))) {
+                        $workshop[$index]['file'] = $existingTraining['workshop'][$index]['file'] ?? null; // Retain existing file if no new file is uploaded
+                    } else {
+                        $file = array('upload_data' => $this->upload->data());
+                        $workshop[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$index]['file']);
+                    }
+                }
+            }
+
+            // Process examination files
+            $examination = array();
+            if (isset($_POST['examination_title'])) {
+                $examination_title = html_escape($_POST['examination_title']);
+
+                foreach ($examination_title as $index => $examination_value) {
+                    $examination[$index]['title'] = $examination_value;
+
+                    if (!$this->upload->do_upload('examination_file_' . ($index + 1))) {
+                        $examination[$index]['file'] = $existingTraining['examination'][$index]['file'] ?? null; // Retain existing file if no new file is uploaded
+                    } else {
+                        $file = array('upload_data' => $this->upload->data());
+                        $examination[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$index]['file']);
+                    }
+                }
+            }
+
+            // Process reference fields
+            $references = array();
+            $references_title = html_escape($_POST['reference_title']);
+            $references_url = html_escape($_POST['reference_url']);
+
+            foreach ($references_title as $index => $references_value) {
+                $references[$index]['title'] = $references_value;
+                $references[$index]['url'] = $references_url[$index];
+            }
+
+            // Category and Subcategory
+            $category_id = html_escape($_POST['category']);
+            $subcategory = html_escape($_POST['subcategory']);
+
+            // Update training data
+            $data = [
+                'training_title' => html_escape($_POST['training_title']),
+                'required_no_of_hours' => html_escape($_POST['required_no_of_hours']),
+                'validity' => html_escape($_POST['validity']),
+                'level' => html_escape($_POST['level']),
+                'language' => html_escape($_POST['language']),
+                'description' => html_escape($_POST['description']),
+                'requirements' => html_escape($_POST['requirements']),
+                'target_participant' => html_escape($_POST['target_participant']),
+                'banner' => html_escape($banner),
+                'instruction' => json_encode(html_escape($instruction)),
+                'video' => json_encode(html_escape($video)),
+                'workshop' => json_encode(html_escape($workshop)),
+                'examination' => json_encode(html_escape($examination)),
+                'ref' => json_encode(html_escape($references)),
+                'author_id' => $_SESSION['id'],
+                'category_id' => $category_id,
+                'subcategory' => $subcategory
+            ];
+
+            if ($this->System_model->updateTraining($training_id, $data)) {
+                redirect('trainer/dashboard');
+            } else {
+                redirect('trainer/updateTraining/?id=' . $training_id);
+            }
+        }
+    }
+
+
+
     public function get_subcategories_by_category()
     {
         if (isset($_POST['category_id'])) {

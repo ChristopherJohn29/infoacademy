@@ -99,7 +99,8 @@
                             <!-- /.card-header -->
                             <div class="card-header"><h3 class="m-0 text-dark"> Update Training</h3></div>
                             <div class="card-body" style="background: #f4f4f4">
-                                <?php echo form_open_multipart('trainer/submitTraining'); ?>
+                                <?php echo form_open_multipart('trainer/submitUpdateTraining'); ?>
+                                <input type="hidden" name="tid" value="<?=$_GET['id']?>">
                                 <div class="card">
                                     <div class="card-header">
                                         <strong> Training Information </strong>
@@ -497,7 +498,7 @@
 
                                 <div class="row" style="display:block; text-align:right; margin:2px;">
                                     <div class="form-group">
-                                        <button class="btn btn-sm btn-success">Submit Training</button>
+                                        <button class="btn btn-sm btn-success">Update Training</button>
                                     </div>
                                 </div>
                                 </form>
