@@ -513,7 +513,7 @@
 
         
         $("#additional-step").click(function (e) {
-            step = jQuery('.repeatable-row').length;
+            step = jQuery('.repeatable-row').length + 1;
             $html = '<div class="row repeatable-row col-12">' + // Added "repeatable-row" class for grouping
                 '<div class="col-sm-1">' +
                 '<div class="form-group">' +
