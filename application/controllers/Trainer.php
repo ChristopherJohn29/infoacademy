@@ -680,6 +680,7 @@ class Trainer extends CI_Controller
             ];
 
             if ($this->System_model->updateTraining($training_id, $data)) {
+                $this->session->set_flashdata('success_message', 'Update successful!');
                 redirect('trainer/dashboard');
             } else {
                 redirect('trainer/updateTraining/?id=' . $training_id);
