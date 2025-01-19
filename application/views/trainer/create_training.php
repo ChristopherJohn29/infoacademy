@@ -382,6 +382,11 @@
     jQuery(document).ready(function () {
         bsCustomFileInput.init();
         $('#repeatable-instruction').on('change', 'select', function () {
+            updateEachRepeatable();
+
+        });
+
+        function updateEachRepeatable () {
             let $counter = 0;
             let $video = 0;
             let $workshop = 0;
@@ -409,8 +414,7 @@
             generateRepeatable('workshop', workshop_input, $workshop);
             generateRepeatable('examination', examination_input, $examination);
             bsCustomFileInput.init();
-
-        });
+        }
 
 
         function generateRepeatable($kind, $inputNumber, $actualNumber){
@@ -558,17 +562,11 @@
                 $(this).find(".step").val("# " + (index + 1));
             });
 
-
-            video_input = jQuery('#repeatable-video').find('.repeatable').length;
-            workshop_input = jQuery('#repeatable-workshop').find('.repeatable').length;
-            examination_input = jQuery('#repeatable-examination').find('.repeatable').length;
-
-            generateRepeatable('video', video_input, $video);
-            generateRepeatable('workshop', workshop_input, $workshop);
-            generateRepeatable('examination', examination_input, $examination);
             bsCustomFileInput.init();
-
+            updateEachRepeatable();
             
+
+
         });
 
         var references = 1;
