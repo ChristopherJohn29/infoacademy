@@ -191,10 +191,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Banner</label>
                                                     <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" name="banner" class="custom-file-input" id="banner" accept="image/*">
-                                                            <label class="custom-file-label" for="banner"><?= $training_data['banner'] ?></label>
-                                                        </div>
+                                                        <a href=" <?= base_url('uploads/').$training_data['banner'] ?>" target="_blank">  <?= $training_data['banner'] ?> </a> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +277,7 @@
                                                         <div class="form-group">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <input type="number" name="percentage[]" class="form-control" value="<?= $data->percentage ?>" required>
-                                                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-row">Delete</button>
+                                                                <button type="button" class="btn btn-danger btn-sm ml-2 delete-row" disabled>Delete</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -288,11 +285,7 @@
 
                                             <?php endforeach; ?>
                                         </div>
-                                        <div class="row" style="display: block; text-align: right; margin: 2px;">
-                                            <div class="form-group">
-                                                <a class="btn btn-sm btn-primary" id="additional-step" href="#">Add additional step</a>
-                                            </div>
-                                        </div>
+                             
                                     </div>
                                 </div>
 
@@ -383,10 +376,7 @@
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
                                                                 <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                                                                        <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
+                                                                    <a href=" <?= base_url('uploads/').$workshop['file'] ?>" target="_blank">  <?= $workshop['file'] ?> </a> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -436,10 +426,7 @@
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
                                                                 <div class="input-group">
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                                                                        <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
+                                                                    <a href=" <?= base_url('uploads/').$examination['file'] ?>" target="_blank">  <?= $examination['file'] ?> </a> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -498,11 +485,7 @@
                                                 <?php }
                                             } ?>
                                         </div>
-                                        <div class="row" style="display:block; text-align:right; margin:2px;">
-                                            <div class="form-group">
-                                                <a class="btn btn-sm btn-primary" id="additional-references" href="">Add additional references</a>
-                                            </div>
-                                        </div>
+                            
                                     </div>
                                 </div>
 
