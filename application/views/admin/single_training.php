@@ -110,7 +110,6 @@
                                     </div>
                                 <?php endif; ?>
                                 </div>
-                                <?php echo form_open_multipart('trainer/submitUpdateTraining'); ?>
                                 <input type="hidden" name="tid" value="<?=$_GET['id']?>">
                                 <div class="card">
                                     <div class="card-header">
@@ -488,14 +487,6 @@
                             
                                     </div>
                                 </div>
-
-
-                                <div class="row" style="display:block; text-align:right; margin:2px;">
-                                    <div class="form-group">
-                                        <button class="btn btn-sm btn-success">Update Training</button>
-                                    </div>
-                                </div>
-                                </form>
                             </div>
                             <!-- /.card-body -->
                         </div>
