@@ -391,8 +391,8 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <label> <a href=" <?= base_url('uploads/').$workshop['file'] ?>" target="_blank">  <?= $workshop['file'] ?> </a> </label>
                                                                 <div class="input-group">
+                                                                    <label style="margin-right:10px; margin-top:10px;"> <a href=" <?= base_url('uploads/').$workshop['file'] ?>" target="_blank">  <?= $workshop['file'] ?> </a> </label>
                                                                     <div class="custom-file">
                                                                         <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                                                         <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
@@ -445,9 +445,9 @@
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <label> <a href=" <?= base_url('uploads/').$examination['file'] ?>" target="_blank">  <?= $examination['file'] ?> </a> </label>
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
+                                                                        <label style="margin-right:10px; margin-top:10px;"> <a href=" <?= base_url('uploads/').$examination['file'] ?>" target="_blank">  <?= $examination['file'] ?> </a> </label>
                                                                         <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                                                         <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
                                                                     </div>
