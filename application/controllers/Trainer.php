@@ -567,7 +567,7 @@ class Trainer extends CI_Controller
 
             $training_id = $_POST['tid'];
             // Retrieve existing training data
-            $existingTraining = $this->System_model->getTrainingById($training_id);
+            $existingTraining = $this->System_model->get_training_by_id($training_id);
 
             // Banner file upload
             $config['upload_path'] = './uploads/';
