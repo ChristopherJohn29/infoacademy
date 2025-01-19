@@ -296,27 +296,30 @@
                                         <strong> Training References and Example </strong>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row repeatable-reference col-12" id="repeatable-reference">
-                                            <div class="col-sm-1">
-                                                <div class="form-group">
-                                                    <label>Ref. no.</label>
-                                                    <input type="text" class="form-control" value="# 1" disabled="">
+                                        <div  id="repeatable-reference">
+                                            <div class="row repeatable-reference col-12">
+                                                <div class="col-sm-1">
+                                                    <div class="form-group">
+                                                        <label>Ref. no.</label>
+                                                        <input type="text" class="form-control" value="# 1" disabled="">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Reference Title</label>
-                                                    <input type="text" name="reference_title[]" class="form-control">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Reference Title</label>
+                                                        <input type="text" name="reference_title[]" class="form-control">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <label>Reference link</label>
-                                                    <input type="url" name="reference_url[]" class="form-control">
-                                                    <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <label>Reference link</label>
+                                                        <input type="url" name="reference_url[]" class="form-control">
+                                                        <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="row" style="display:block; text-align:right; margin:2px;">
                                             <div class="form-group">
                                                 <a class="btn btn-sm btn-primary" id="additional-references" href="">Add additional references</a>
