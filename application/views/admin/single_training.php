@@ -121,19 +121,19 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Title of Training</label>
-                                                    <input type="text" class="form-control" name="training_title" value="<?= $training_data['training_title'] ?>" required>
+                                                    <input type="text" class="form-control" name="training_title" value="<?= $training_data['training_title'] ?>" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>No. of training hours</label>
-                                                    <input type="number" name="required_no_of_hours" class="form-control" value="<?= $training_data['required_no_of_hours'] ?>" required>
+                                                    <input type="number" name="required_no_of_hours" class="form-control" value="<?= $training_data['required_no_of_hours'] ?>" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Validity</label>
-                                                    <input type="text" name="validity" class="form-control" value="<?= $training_data['validity'] ?>" required>
+                                                    <input type="text" name="validity" class="form-control" value="<?= $training_data['validity'] ?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +142,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Category</label>
-                                                    <select name="category" class="form-control" id="category" required>
+                                                    <select name="category" class="form-control" id="category" disabled>
                                                         <option value="0">All Categories</option>
                                                         <?php
                                                         $categories = $this->System_model->fetchAllCategories();
@@ -157,7 +157,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Subcategory</label>
-                                                    <select name="subcategory" class="form-control" id="subcategory" required>
+                                                    <select name="subcategory" class="form-control" id="subcategory" disabled>
                                                         <option value="0">All Subcategories</option>
                                                         <option value="<?= $training_data['subcategory'] ?>" selected><?= $training_data['subcategory'] ?></option>
                                                     </select>
@@ -169,7 +169,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Level</label>
-                                                    <select name="level" class="form-control" required>
+                                                    <select name="level" class="form-control" disabled>
                                                         <option value="Intermediate" <?= ($training_data['level'] == 'Intermediate') ? 'selected' : '' ?>>Intermediate</option>
                                                         <option value="Easy" <?= ($training_data['level'] == 'Easy') ? 'selected' : '' ?>>Easy</option>
                                                     </select>
@@ -178,7 +178,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Language</label>
-                                                    <select name="language" class="form-control" required>
+                                                    <select name="language" class="form-control" disabled>
                                                         <option value="English" <?= ($training_data['language'] == 'English') ? 'selected' : '' ?>>English</option>
                                                         <option value="Filipino" <?= ($training_data['language'] == 'Filipino') ? 'selected' : '' ?>>Filipino</option>
                                                     </select>
@@ -200,7 +200,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Description</label>
-                                                    <textarea name="description" class="form-control" rows="3" required><?= $training_data['description'] ?></textarea>
+                                                    <textarea name="description" class="form-control" rows="3" disabled><?= $training_data['description'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,7 +208,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Requirements</label>
-                                                    <textarea name="requirements" class="form-control" rows="3"><?= $training_data['requirements'] ?></textarea>
+                                                    <textarea name="requirements" class="form-control" rows="3" disabled><?= $training_data['requirements'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,7 +216,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Target Participant</label>
-                                                    <textarea name="target_participant" class="form-control" rows="3"><?= $training_data['target_participant'] ?></textarea>
+                                                    <textarea name="target_participant" class="form-control" rows="3" disabled><?= $training_data['target_participant'] ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,12 +261,12 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" required>
+                                                            <input type="text" name="instruction[]" class="form-control" value="<?= $data->description ?>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="form-group">
-                                                            <select name="section[]" class="form-control" required>
+                                                            <select name="section[]" class="form-control" disabled>
                                                                 <option value="video" <?= $data->section == 'video' ? 'selected' : '' ?>>Video</option>
                                                                 <option value="workshop" <?= $data->section == 'workshop' ? 'selected' : '' ?>>Workshop</option>
                                                                 <option value="examination" <?= $data->section == 'examination' ? 'selected' : '' ?>>Examination</option>
@@ -322,12 +322,12 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="video_title[]" class="form-control" value="<?= $video['title'] ?>" required>
+                                                                <input type="text" name="video_title[]" class="form-control" value="<?= $video['title'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
-                                                                <input type="url" name="video_url[]" class="form-control" value="<?= $video['url'] ?>" required>
+                                                                <input type="url" name="video_url[]" class="form-control" value="<?= $video['url'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -370,7 +370,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="workshop_title[]" class="form-control" value="<?= $workshop['title'] ?>" required>
+                                                                <input type="text" name="workshop_title[]" class="form-control" value="<?= $workshop['title'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
@@ -420,7 +420,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>">
+                                                                <input type="text" name="examination_title[]" class="form-control" value="<?= $examination['title'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
@@ -470,13 +470,13 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <input type="text" name="reference_title[]" class="form-control" value="<?= $reference['title'] ?>">
+                                                                <input type="text" name="reference_title[]" class="form-control" value="<?= $reference['title'] ?>" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
                                                                 <div class="d-flex justify-content-between align-items-center">
-                                                                <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>">
+                                                                <input type="url" name="reference_url[]" class="form-control" value="<?= $reference['url'] ?>" disabled>
                                                                     <button type="button" class="btn btn-danger btn-sm ml-2 delete-reference" disabled>Delete</button>
                                                                 </div>
                                                             </div>
