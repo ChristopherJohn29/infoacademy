@@ -134,7 +134,7 @@
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">Training Feature</div>
                             <div class="sidebar_feature">
-                                <div class="course_price">$180</div>
+                                <div class="course_price">₱<?=number_format($training_fee)?></div>
                                 <!-- Features -->
                                 <div class="feature_list">
                                     <!-- Feature -->

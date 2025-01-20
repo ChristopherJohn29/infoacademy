@@ -97,7 +97,7 @@
                                                 <div class="course_info">
                                                     <i class="fa fa-star" aria-hidden="true"></i> <span>5 Ratings</span>
                                                 </div>
-                                                <div class="course_price ml-auto"><span>₱320</span>₱220</div>
+                                                <div class="course_price ml-auto">₱<?=number_format($training['training_fee'])?></div>
                                             </div>
                                         </div>
                                     </div>
