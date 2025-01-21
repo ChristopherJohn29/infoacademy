@@ -549,7 +549,8 @@ class Trainer extends CI_Controller
                 'ref' => json_encode(html_escape($references)),
                 'author_id' => $_SESSION['id'],
                 'category_id' => $category_id,
-                'subcategory' => $subcategory
+                'subcategory' => $subcategory,
+                'date_created' => date("Y-m-d h:i:s")
             ];
 
             if ($this->System_model->saveTraining($data)) {

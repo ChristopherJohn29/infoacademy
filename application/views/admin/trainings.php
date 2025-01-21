@@ -136,7 +136,7 @@
                             <tr>
                                 <td><?= $training['training_title'] ?></td>
                                 <td><?= $training['author_id'] ?> </td>
-                                <td><?= $training['date_created'] ?></td>
+                                <td><?= (new DateTime($training['date_created']))->format('F j, Y g:iA') ?></td>
                                 <td><?= $training['status'] ?></td>
                                 <td><a href="<?= base_url().'/admin/training/?tid='.$training['id'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a></td>
                             </tr>
