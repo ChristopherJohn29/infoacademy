@@ -246,12 +246,16 @@ class Trainer extends CI_Controller
 
     public function createTraining()
     {
-        $this->load->view('trainer/create_training');
+        $user_id = $_SESSION['id'];
+        $data['user'] = $this->System_model->getUserData($user_id);
+        $this->load->view('trainer/create_training',$data);
     }
 
     public function updateTraining(){
         $training_id = $this->input->get('id'); 
         $data['training_data'] = $this->System_model->get_training_by_id($training_id);
+        $user_id = $_SESSION['id'];
+        $data['user'] = $this->System_model->getUserData($user_id);
 
         $this->load->view('trainer/update_training', $data);
     }
@@ -275,6 +279,9 @@ class Trainer extends CI_Controller
     
             // Pass the training class data with the exam status to the view
             $data['training_class'] = $training_class;
+
+            $user_id = $_SESSION['id'];
+            $data['user'] = $this->System_model->getUserData($user_id);
 
             $this->load->view('trainer/classroom', $data);
         }
