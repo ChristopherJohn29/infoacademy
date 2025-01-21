@@ -54,3 +54,8 @@
     </ul>
 
 </nav>
+<style>
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: lightblue;
+}
+</style>
