@@ -138,7 +138,7 @@
                                 <td><?= $training['author_id'] ?> </td>
                                 <td><?= $training['date_created'] ?></td>
                                 <td><?= $training['status'] ?></td>
-                                <td><a href="<?= base_url().'/admin/training/?tid='.$training['id'] ?>" class="btn btn-primary btn-sm">View Module</a></td>
+                                <td><a href="<?= base_url().'/admin/training/?tid='.$training['id'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a></td>
                             </tr>
                             <?php
                         }
