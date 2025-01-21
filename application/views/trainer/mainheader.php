@@ -111,7 +111,7 @@
                         <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="<?= base_url('trainer/logout') ?>" class="dropdown-item">
+                    <a href="<?= base_url('control/logout') ?>" class="dropdown-item">
                         <i class="nav-icon fas fa-sign-out-alt"></i> Logout
                     </a>
                 </div>
