@@ -136,7 +136,7 @@
                             ?>
                             <tr>
                                 <td><?= $training['training_title'] ?></td>
-                                <td><?= $training['author_id'] ?> </td>
+                                <td><?= $training['author_name'] ?> </td>
                                 <td><?= (new DateTime($training['date_created']))->format('F j, Y g:iA') ?></td>
                                 <td><?= $training['status'] ?></td>
                                 <td><?= $training['training_fee'] ? '₱'.number_format($training['training_fee']) : 0 ?></td>

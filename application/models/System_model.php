@@ -40,8 +40,9 @@ class System_model extends CI_Model
 
     public function fetchAllTrainings()
     {
-        $this->db->select('*');
+        $this->db->select('training.*,CONCAT(user.first_name, " ", user.last_name) as author_name');
         $this->db->from('training');
+        $this->db->join('user', 'user.id = training.author_id', 'left');
         $result = $this->db->get()->result_array();
 
         return $result;
