@@ -31,9 +31,7 @@
             min-height: 55px;
         }
 
-        .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
-            background-color: gray;
-        }
+     
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -50,7 +48,7 @@
     </nav>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-light elevation-4">
         <!-- Brand Logo -->
         <div class="logo_container">
             <a href="#">
