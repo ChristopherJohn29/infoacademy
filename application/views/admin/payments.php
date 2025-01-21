@@ -117,6 +117,7 @@
                                     <td><?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?> </td>
                                     <td><?= $class['status'] ?></td>
                                     <td>
+
                                         <button 
                                             type="button" 
                                             class="btn btn-primary btn-sm" 
@@ -131,8 +132,9 @@
                                             data-date="<?= (new DateTime($class['payment_date']))->format('F j, Y g:iA') ?>"
                                             data-proof="<?= base_url('uploads/'.$class['proof_of_payment']) ?>"
                                         >
-                                            View Payment
+                                            <i class="fas fa-eye"></i>
                                         </button>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
