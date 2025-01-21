@@ -164,7 +164,7 @@
                                 <p><strong>Transaction Number:</strong> <span id="modalTransaction"></span></p>
                                 <p><strong>Payment Date:</strong> <span id="modalDate"></span></p>
                                 <p><strong>Proof of Payment:</strong> <a href="#" target="_blank" id="modalProof">View</a></p>
-                                <div class="form-group mt-5">
+                                <div class="form-group mt-2">
                                     <label for="paymentStatus">Validate Payment:</label>
                                     <select id="paymentStatus" class="form-control">
                                         <option value="validate">Validate</option>
