@@ -31,6 +31,53 @@
             color: black;
         }
     </style>
+        <style>
+        /* Remove bullet points for the list */
+        .nav.navbar-nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Align to the right */
+        .navbar-right {
+            margin-left: auto; /* Pushes the content to the right */
+        }
+
+        /* Style for user menu */
+        .user-menu a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover effect */
+        .user-menu a:hover {
+            background-color: #f4f4f4;
+        }
+
+        /* Profile image */
+        .user-menu .user-image {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* User name styling */
+        .user-menu .hidden-xs {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+
+    </style>
     <!-- Google Font: Source Sans Pro -->
 </head>
 <body class="hold-transition layout-top-nav">
