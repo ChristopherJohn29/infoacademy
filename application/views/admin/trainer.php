@@ -25,17 +25,13 @@
         .logo_text {
             font-size: 25px;
             padding-top: 20px;
-            color: white;
         }
 
         .navbar-expand .navbar-nav {
             min-height: 55px;
         }
 
-        .nav-link p {
-            color: white;
-            font-weight: bold;
-        }
+
 
         .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
             background-color: gray;

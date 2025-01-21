@@ -25,7 +25,6 @@
         .logo_text {
             font-size: 25px;
             padding-top: 20px;
-            color: white;
         }
 
         .navbar-expand .navbar-nav {
