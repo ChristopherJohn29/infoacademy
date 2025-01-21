@@ -126,8 +126,8 @@
                                             data-name="<?= $class['participant_name'] ?>"
                                             data-number="<?= $class['participant_id'] ?>"
                                             data-enrolled="<?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?>"
-                                            data-payment="<?= $class['mode_of_payment'] ?>"
-                                            data-transaction="<?= $class['transaction_number'] ?>"
+                                            data-payment="<?= $class['payment_option'] ?>"
+                                            data-transaction="<?= $class['transaction_no'] ?>"
                                             data-date="<?= (new DateTime($class['payment_date']))->format('F j, Y g:iA') ?>"
                                             data-proof="<?= $class['proof_of_payment'] ?>"
                                         >
@@ -164,7 +164,7 @@
                                 <p><strong>Transaction Number:</strong> <span id="modalTransaction"></span></p>
                                 <p><strong>Payment Date:</strong> <span id="modalDate"></span></p>
                                 <p><strong>Proof of Payment:</strong> <a href="#" target="_blank" id="modalProof">View</a></p>
-                                <div class="form-group">
+                                <div class="form-group mt-5">
                                     <label for="paymentStatus">Validate Payment:</label>
                                     <select id="paymentStatus" class="form-control">
                                         <option value="validate">Validate</option>
