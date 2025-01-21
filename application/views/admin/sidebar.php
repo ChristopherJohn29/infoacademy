@@ -1,3 +1,4 @@
+
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
@@ -53,8 +54,3 @@
     </ul>
 
 </nav>
-<style>
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-    background-color: lightblue !important;
-}
-</stlye>
