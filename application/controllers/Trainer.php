@@ -248,6 +248,7 @@ class Trainer extends CI_Controller
     {
         $user_id = $_SESSION['id'];
         $data['user'] = $this->System_model->getUserData($user_id);
+        $data['trainer'] = $this->System_model->getTrainerProfile($user_id);
         $this->load->view('trainer/create_training',$data);
     }
 
@@ -256,6 +257,7 @@ class Trainer extends CI_Controller
         $data['training_data'] = $this->System_model->get_training_by_id($training_id);
         $user_id = $_SESSION['id'];
         $data['user'] = $this->System_model->getUserData($user_id);
+        $data['trainer'] = $this->System_model->getTrainerProfile($user_id);
 
         $this->load->view('trainer/update_training', $data);
     }
@@ -282,6 +284,7 @@ class Trainer extends CI_Controller
 
             $user_id = $_SESSION['id'];
             $data['user'] = $this->System_model->getUserData($user_id);
+            $data['trainer'] = $this->System_model->getTrainerProfile($user_id);
 
             $this->load->view('trainer/classroom', $data);
         }

@@ -79,6 +79,15 @@
                     <div class="logo_text">Info<span>Academy</span></div>
                 </a>
             </div>
+            <?php 
+            
+            if (!isset($trainer['photo']) || empty($trainer['photo'])) {
+                $photo = base_url() . '/assets/template/dist/img/avatar5.png';
+            } else {
+                $photo = base_url('uploads/' . $trainer['photo']);
+            }
+    
+            ?>
             <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
