@@ -97,76 +97,89 @@
             <div class="card">
 
                 <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Participant Number</th>
-                            <th>Name</th>
-                            <th>Training Enrolled</th>
-                            <th>Date Enrolled</th>
-                            <th>Payment Status</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($training_class as $class): ?>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                <td><?= $class['participant_id'] ?></td>
-                                <td><?= $class['participant_name'] ?> </td>
-                                <td><?= $class['training_title'] ?> </td>
-                                <td><?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?> </td>
-                                <td><?= $class['status'] ?></td>
-                                <td>
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-primary btn-sm" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#paymentModal<?= $class['id'] ?>"
-                                    >
-                                        View Payment
-                                    </button>
-                                </td>
+                                <th>Participant Number</th>
+                                <th>Name</th>
+                                <th>Training Enrolled</th>
+                                <th>Date Enrolled</th>
+                                <th>Payment Status</th>
+                                <th>Options</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($training_class as $class): ?>
+                                <tr>
+                                    <td><?= $class['participant_id'] ?></td>
+                                    <td><?= $class['participant_name'] ?> </td>
+                                    <td><?= $class['training_title'] ?> </td>
+                                    <td><?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?> </td>
+                                    <td><?= $class['status'] ?></td>
+                                    <td>
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-primary btn-sm" 
+                                            data-toggle="modal" 
+                                            data-target="#paymentModal"
+                                            data-id="<?= $class['id'] ?>"
+                                            data-name="<?= $class['participant_name'] ?>"
+                                            data-number="<?= $class['participant_id'] ?>"
+                                            data-enrolled="<?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?>"
+                                            data-payment="<?= $class['mode_of_payment'] ?>"
+                                            data-transaction="<?= $class['transaction_number'] ?>"
+                                            data-date="<?= (new DateTime($class['payment_date']))->format('F j, Y g:iA') ?>"
+                                            data-proof="<?= $class['proof_of_payment'] ?>"
+                                        >
+                                            View Payment
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
 
-                            <!-- Modal -->
-                            <div 
-                                class="modal fade" 
-                                id="paymentModal<?= $class['id'] ?>" 
-                                tabindex="-1" 
-                                role="dialog" 
-                                aria-labelledby="paymentModalLabel<?= $class['id'] ?>" 
-                                aria-hidden="true"
-                            >
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="paymentModalLabel<?= $class['id'] ?>">
-                                                Payment Details for <?= $class['participant_name'] ?>
-                                            </h5>
-                                            <button 
-                                                type="button" 
-                                                class="close" 
-                                                data-dismiss="modal" 
-                                                aria-label="Close"
-                                            >
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- Modal Content -->
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
+                <div 
+                    class="modal fade" 
+                    id="paymentModal" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="paymentModalLabel" 
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Participant Name:</strong> <span id="modalName"></span></p>
+                                <p><strong>Participant Number:</strong> <span id="modalNumber"></span></p>
+                                <p><strong>Date Enrolled:</strong> <span id="modalEnrolled"></span></p>
+                                <p><strong>Mode of Payment:</strong> <span id="modalPayment"></span></p>
+                                <p><strong>Transaction Number:</strong> <span id="modalTransaction"></span></p>
+                                <p><strong>Payment Date:</strong> <span id="modalDate"></span></p>
+                                <p><strong>Proof of Payment:</strong> <a href="#" target="_blank" id="modalProof">View</a></p>
+                                <div class="form-group">
+                                    <label for="paymentStatus">Validate Payment:</label>
+                                    <select id="paymentStatus" class="form-control">
+                                        <option value="validate">Validate</option>
+                                        <option value="decline">Decline</option>
+                                    </select>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <!-- /.card-footer-->
             </div>
@@ -203,6 +216,31 @@
         $("#example1").DataTable({
             "responsive": true,
             "autoWidth": false,
+        });
+    });
+
+    $(document).ready(function () {
+        $('#paymentModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            
+            // Extract info from data-* attributes
+            var name = button.data('name');
+            var number = button.data('number');
+            var enrolled = button.data('enrolled');
+            var payment = button.data('payment');
+            var transaction = button.data('transaction');
+            var date = button.data('date');
+            var proof = button.data('proof');
+            
+            // Update modal content
+            var modal = $(this);
+            modal.find('#modalName').text(name);
+            modal.find('#modalNumber').text(number);
+            modal.find('#modalEnrolled').text(enrolled);
+            modal.find('#modalPayment').text(payment);
+            modal.find('#modalTransaction').text(transaction);
+            modal.find('#modalDate').text(date);
+            modal.find('#modalProof').attr('href', proof);
         });
     });
 </script>
