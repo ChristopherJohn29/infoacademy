@@ -167,14 +167,14 @@
                                 <div class="form-group mt-2">
                                     <label for="paymentStatus">Validate Payment:</label>
                                     <select id="paymentStatus" class="form-control">
-                                        <option value="validate">Validate</option>
-                                        <option value="decline">Decline</option>
+                                        <option value="1">Validate</option>
+                                        <option value="3">Decline</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-success" id="submitPayment">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -222,8 +222,9 @@
     $(document).ready(function () {
         $('#paymentModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
-            
+
             // Extract info from data-* attributes
+            var id = button.data('id'); // Payment ID
             var name = button.data('name');
             var number = button.data('number');
             var enrolled = button.data('enrolled');
@@ -231,7 +232,7 @@
             var transaction = button.data('transaction');
             var date = button.data('date');
             var proof = button.data('proof');
-            
+
             // Update modal content
             var modal = $(this);
             modal.find('#modalName').text(name);
@@ -241,8 +242,46 @@
             modal.find('#modalTransaction').text(transaction);
             modal.find('#modalDate').text(date);
             modal.find('#modalProof').attr('href', proof);
+
+            // Attach the payment ID to the submit button as a data attribute
+            modal.find('#submitPayment').data('id', id);
+        });
+
+        // Handle the submission
+        $('#submitPayment').on('click', function () {
+            var payment_id = $(this).data('id'); // Retrieve the payment ID
+            var status = $('#paymentStatus').val(); // Get the selected status
+
+            if (!status) {
+                alert('Please select a status.');
+                return;
+            }
+
+            // AJAX request to submit payment status
+            $.ajax({
+                url: '<?= base_url('admin/submit_payment') ?>', // Replace 'controller' with your actual controller name
+                type: 'POST',
+                data: {
+                    payment_id: payment_id,
+                    status: status
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status) {
+                        alert(response.message);
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while updating payment status.');
+                }
+            });
         });
     });
+
 </script>
+
 </body>
 </html>

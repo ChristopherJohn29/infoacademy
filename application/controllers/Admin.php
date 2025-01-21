@@ -183,6 +183,49 @@ class Admin extends CI_Controller
         // Redirect to the desired page (e.g., training list)
        
     }
+
+    public function submit_payment()
+    {
+        // Load the required model
+
+        // Retrieve POST data
+        $payment_id = $this->input->post('payment_id');
+        $status = $this->input->post('status');
+
+        // Validate the inputs
+        if (!$payment_id || !$status) {
+            $response = [
+                'status' => false,
+                'message' => 'Invalid input data provided.'
+            ];
+            echo json_encode($response);
+            return;
+        }
+
+        // Update payment status in the database
+        $update_data = [
+            'status' => $status, // Example: 'validate' or 'decline'
+            'validate_date' => date('Y-m-d H:i:s')
+        ];
+
+        $update_result = $this->System_model->update_payment_status($payment_id, $update_data);
+
+        if ($update_result) {
+            $response = [
+                'status' => true,
+                'message' => 'Payment status updated successfully.'
+            ];
+        } else {
+            $response = [
+                'status' => false,
+                'message' => 'Failed to update payment status. Please try again.'
+            ];
+        }
+
+        // Send response
+        echo json_encode($response);
+    }
+
     
 
 }
