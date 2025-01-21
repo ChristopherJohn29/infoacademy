@@ -116,7 +116,7 @@
                                 <tr>
                                     <td><?= $class['participant_id'] ?></td>
                                     <td><?= $class['participant_name'] ?> </td>
-                                    <td><?= $class['training_name'] ?> </td>
+                                    <td><?= $class['training_title'] ?> </td>
                                     <td><?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA')?> </td>
                                     <td><?= $class['status'] ?></td>
                                     <td><a href="<?= base_url().'/admin/training/?tid='.$class['id'] ?>" class="btn btn-primary btn-sm">View Module</a></td>
