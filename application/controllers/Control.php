@@ -241,7 +241,7 @@ class Control extends CI_Controller
     {
         if (isset($_SESSION['account_type'])) {
             if ($_SESSION['account_type'] == 3) {
-                redirect('admin/dashboard');
+                redirect('admin/trainings');
             }
         }
     }
