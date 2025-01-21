@@ -168,7 +168,7 @@
                                     <label for="paymentStatus">Validate Payment:</label>
                                     <select id="paymentStatus" class="form-control">
                                         <option value="1">Validate</option>
-                                        <option value="3">Decline</option>
+                                        <option value="2">Decline</option>
                                     </select>
                                 </div>
                             </div>
