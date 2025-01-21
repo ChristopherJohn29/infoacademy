@@ -139,7 +139,7 @@
                                 <td><?= $training['author_id'] ?> </td>
                                 <td><?= (new DateTime($training['date_created']))->format('F j, Y g:iA') ?></td>
                                 <td><?= $training['status'] ?></td>
-                                <td><?= $training['training_fee'] ?></td>
+                                <td><?= $training['training_fee'] ? '₱'.number_format($training['training_fee']) : 0 ?></td>
                                 <td><a href="<?= base_url().'/admin/training/?tid='.$training['id'] ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a></td>
                             </tr>
                             <?php
