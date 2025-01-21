@@ -517,12 +517,8 @@ class System_model extends CI_Model
         return $query->result_array();
     }
 
-    public function update_payment_status($payment_id, $status) {
-        // Update the payment status
-        $data = array(
-            'status' => $status
-        );
-
+    public function update_payment_status($payment_id, $data) {
+        
         // Use active record to update the table
         $this->db->where('id', $payment_id);
         $this->db->update('training_class', $data);
