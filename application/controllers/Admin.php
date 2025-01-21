@@ -43,7 +43,10 @@ class Admin extends CI_Controller
 
     public function payments()
     {
-        $this->load->view('admin/payments');
+
+        $data['training_class'] = $this->System_model->fetchAllTrainingClass();
+
+        $this->load->view('admin/payments', $data);
     }
 
     public function coupons()

@@ -99,33 +99,31 @@
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
-                        <tr>
-                            <th>Training Course</th>
-                            <th>Author</th>
-                            <th>Date Created</th>
-                            <th>Status</th>
-                            <th>Training fee</th>
-                            <th>Options</th>
-                        </tr>
+                            <tr>
+                                <th>Participant Number</th>
+                                <th>Name</th>
+                                <th>Training Enrolled</th>
+                                <th>Date Enrolled</th>
+                                <th>Payment Status</th>
+                                <th>Options</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php
-
-                        $trainings = $this->System_model->fetchAllTrainings();
-
-                        foreach ($trainings as $training) {
-                            ?>
-                            <tr>
-                                <td><?= $training['training_title'] ?></td>
-                                <td><?= $training['author_id'] ?> </td>
-                                <td><?= $training['date_created'] ?></td>
-                                <td><?= $training['status'] ?></td>
-                                <td><?= $training['training_fee'] ?></td>
-                                <td><a href="<?= base_url().'/admin/training/?tid='.$training['id'] ?>" class="btn btn-primary btn-sm">View Module</a></td>
-                            </tr>
                             <?php
-                        }
-                        ?>
+
+                            foreach ($training_class as $class) {
+                                ?>
+                                <tr>
+                                    <td><?= $class['participant_id'] ?></td>
+                                    <td><?= $class['participant_name'] ?> </td>
+                                    <td><?= $class['training_name'] ?> </td>
+                                    <td><?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA')?> </td>
+                                    <td><?= $class['status'] ?></td>
+                                    <td><a href="<?= base_url().'/admin/training/?tid='.$class['id'] ?>" class="btn btn-primary btn-sm">View Module</a></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
