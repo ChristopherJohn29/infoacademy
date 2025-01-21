@@ -133,38 +133,30 @@
                                 class="modal fade" 
                                 id="paymentModal<?= $class['id'] ?>" 
                                 tabindex="-1" 
+                                role="dialog" 
                                 aria-labelledby="paymentModalLabel<?= $class['id'] ?>" 
                                 aria-hidden="true"
                             >
-                                <div class="modal-dialog">
+                                <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="paymentModalLabel<?= $class['id'] ?>">
                                                 Payment Details for <?= $class['participant_name'] ?>
                                             </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button 
+                                                type="button" 
+                                                class="close" 
+                                                data-dismiss="modal" 
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p><strong>Participant Name:</strong> <?= $class['participant_name'] ?></p>
-                                            <p><strong>Participant Number:</strong> <?= $class['participant_id'] ?></p>
-                                            <p><strong>Date Enrolled:</strong> <?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?></p>
-                                            <p><strong>Mode of Payment:</strong> <?= $class['mode_of_payment'] ?></p>
-                                            <p><strong>Transaction Number:</strong> <?= $class['transaction_number'] ?></p>
-                                            <p><strong>Payment Date:</strong> <?= (new DateTime($class['payment_date']))->format('F j, Y g:iA') ?></p>
-                                            <p><strong>Proof of Payment:</strong> <a href="<?= $class['proof_of_payment'] ?>" target="_blank">View</a></p>
-                                            <div class="form-group">
-                                                <label for="paymentStatus<?= $class['id'] ?>">Validate Payment:</label>
-                                                <select 
-                                                    id="paymentStatus<?= $class['id'] ?>" 
-                                                    class="form-control"
-                                                >
-                                                    <option value="validate">Validate</option>
-                                                    <option value="decline">Decline</option>
-                                                </select>
-                                            </div>
+                                            <!-- Modal Content -->
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-success">Submit</button>
                                         </div>
                                     </div>
