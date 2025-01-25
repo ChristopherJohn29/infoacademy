@@ -230,12 +230,11 @@
                             $video++;
                         }
                         ?><?php
-                        if ($value->section == 'workshop' && $display == 1){ ?>
-
+                        if ($value->section == 'workshop' && $display == 1) { ?>
+                        
                             <?php
                             // Pass data from controller to view
                             $workshop_data = $this->System_model->getWorkshopData($training[0]['id'], $count); // Example method call
-
                             $checking = 0;
                             ?>
                         
@@ -248,83 +247,86 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
-
+                        
                                             <?php if (!empty($workshop_data)) { ?>
-                                                    <br>
-                                                    <h5 style="margin:10px;">Submitted Workshop Files:</h5>
-                                                    <table class="table table-striped">
-                                                        <thead>
+                                                <br>
+                                                <h5 style="margin:10px;">Submitted Workshop Files or Links:</h5>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Workshop File/Link</th>
+                                                            <th>Status</th>
+                                                            <th>Remarks</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($workshop_data as $workshops) { ?>
                                                             <tr>
-                                                                <th>Workshop File</th>
-                                                                <th>Status</th>
-                                                                <th>Remarks</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($workshop_data as $workshops) { ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php if (!empty($workshops['workshop_file'])) { ?>
-                                                                            <a href="<?= base_url('uploads/' . $workshops['workshop_file']) ?>" target="_blank"><?= $workshops['file_desc'] ?></a>
+                                                                <td>
+                                                                    <?php if (!empty($workshops['workshop_file'])) { ?>
+                                                                        <?php if (filter_var($workshops['workshop_file'], FILTER_VALIDATE_URL)) { ?>
+                                                                            <!-- Display as a clickable link if it's a URL -->
+                                                                            <a href="<?= $workshops['workshop_file'] ?>" target="_blank"><?= $workshops['workshop_file'] ?></a>
                                                                         <?php } else { ?>
-                                                                            No file submitted
+                                                                            <!-- Otherwise, display as a downloadable file -->
+                                                                            <a href="<?= base_url('uploads/' . $workshops['workshop_file']) ?>" target="_blank"><?= $workshops['file_desc'] ?></a>
                                                                         <?php } ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($workshops['status'] == 2) {
-                                                                                $checking = 1;
-                                                                                echo '<span class="badge badge-warning">For Checking</span>';
-                                                                            } elseif ($workshops['status'] == 1) {
-                                                                                echo '<span class="badge badge-success">Completed</span>';
-                                                                            } else {
-                                                                                echo '<span class="badge badge-danger">Declined</span>';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($workshops['remarks']) {
-                                                                                echo htmlspecialchars($workshops['remarks']);
-                                                                            } else {
-                                                                                echo 'No remarks provided';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                <?php } ?>
-
-
-                                            <?php if ($value->completed != 1 && $checking != 1){ ?>
+                                                                    <?php } else { ?>
+                                                                        No file or link submitted
+                                                                    <?php } ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php 
+                                                                    if ($workshops['status'] == 2) {
+                                                                        $checking = 1;
+                                                                        echo '<span class="badge badge-warning">For Checking</span>';
+                                                                    } elseif ($workshops['status'] == 1) {
+                                                                        echo '<span class="badge badge-success">Completed</span>';
+                                                                    } else {
+                                                                        echo '<span class="badge badge-danger">Declined</span>';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php 
+                                                                    if ($workshops['remarks']) {
+                                                                        echo htmlspecialchars($workshops['remarks']);
+                                                                    } else {
+                                                                        echo 'No remarks provided';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php } ?>
+                        
+                                            <?php if ($value->completed != 1 && $checking != 1) { ?>
                                                 <br/><br/><label for="customFile">Submit Workshop</label>
                                                 <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
                                                     <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <input name="" type="hidden" value="">
+                                                    <div class="form-group">
+                                                        <label for="workshopLinkOrFile">Submit a File or External Link</label>
+                                                        <input type="text" name="workshop_link" class="form-control" placeholder="Enter External Link (Optional)" />
+                                                    </div>
                                                     <div class="custom-file">
                                                         <input type="file" name="workshop_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $workshop ?>">
                                                         <label class="custom-file-label" for="customFile-<?= $workshop ?>">Choose file</label>
                                                     </div>
-                                                    <button type="submit" data-url="<?=base_url()?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
+                                                    <button type="submit" data-url="<?= base_url() ?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Workshop</button>
                                                 </form>
                                             <?php } ?>
-
-                            
-                                              
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
-                            <?php $workshop++; 
+                            <?php $workshop++; ?>
                         
-                        }
-                        ?><?php 
-                        
-                        if ($value->section == 'examination' && $display == 1){ ?>
+                        <?php } ?>
+                        <?php if ($value->section == 'examination' && $display == 1) { ?>
 
                             <?php
                             // Pass data from controller to view
@@ -342,78 +344,85 @@
                                         <div class="form-group">
                                             <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$examination]->file ?>" download="download">Download Examination</a>
                         
-                                            
                                             <?php if (!empty($examination_data)) { ?>
-                                                    <br>
-                                                    <h5 style="margin:10px;">Submitted Examination Files:</h5>
-                                                    <table class="table table-striped">
-                                                        <thead>
+                                                <br>
+                                                <h5 style="margin:10px;">Submitted Examination Files or Links:</h5>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Examination File/Link</th>
+                                                            <th>Status</th>
+                                                            <th>Remarks</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($examination_data as $exam) { ?>
                                                             <tr>
-                                                                <th>Examination File</th>
-                                                                <th>Status</th>
-                                                                <th>Remarks</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($examination_data as $exam) { ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php if (!empty($exam['examination_file'])) { ?>
-                                                                            <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['file_desc'] ?></a>
+                                                                <td>
+                                                                    <?php if (!empty($exam['examination_file'])) { ?>
+                                                                        <?php if (filter_var($exam['examination_file'], FILTER_VALIDATE_URL)) { ?>
+                                                                            <!-- If the file is a URL, display it as a clickable link -->
+                                                                            <a href="<?= $exam['examination_file'] ?>" target="_blank"><?= $exam['examination_file'] ?></a>
                                                                         <?php } else { ?>
-                                                                            No file submitted
+                                                                            <!-- Otherwise, display it as a downloadable file -->
+                                                                            <a href="<?= base_url('uploads/' . $exam['examination_file']) ?>" target="_blank"><?= $exam['file_desc'] ?></a>
                                                                         <?php } ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($exam['status'] == 2) {
-                                                                                echo '<span class="badge badge-warning">For Checking</span>';
-                                                                                $checking = 1;
-                                                                            } elseif ($exam['status'] == 1) {
-                                                                                echo '<span class="badge badge-success">Completed</span>';
-                                                                            } else {
-                                                                                echo '<span class="badge badge-danger">Declined</span>';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            if ($exam['remarks']) {
-                                                                                echo htmlspecialchars($exam['remarks']);
-                                                                            } else {
-                                                                                echo 'No remarks provided';
-                                                                            }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                <?php } ?>
-                                            <?php if ($value->completed != 1 && $checking != 1){ ?>
+                                                                    <?php } else { ?>
+                                                                        No file or link submitted
+                                                                    <?php } ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php 
+                                                                    if ($exam['status'] == 2) {
+                                                                        echo '<span class="badge badge-warning">For Checking</span>';
+                                                                        $checking = 1;
+                                                                    } elseif ($exam['status'] == 1) {
+                                                                        echo '<span class="badge badge-success">Completed</span>';
+                                                                    } else {
+                                                                        echo '<span class="badge badge-danger">Declined</span>';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php 
+                                                                    if ($exam['remarks']) {
+                                                                        echo htmlspecialchars($exam['remarks']);
+                                                                    } else {
+                                                                        echo 'No remarks provided';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php } ?>
+                                            <?php if ($value->completed != 1 && $checking != 1) { ?>
                                                 <br/><br/><label for="customFile">Submit Examination</label>
                                                 <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
                                                     <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <input name="" type="hidden" value="">
+                                                    <div class="form-group">
+                                                        <label for="examinationLinkOrFile">Submit a File or Google Link</label>
+                                                        <input type="text" name="examination_link" class="form-control" placeholder="Enter Google Link (Optional)" />
+                                                    </div>
                                                     <div class="custom-file">
                                                         <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
                                                         <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
                                                     </div>
-                                                    <button type="submit" data-url="<?=base_url()?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
+                                                    <button type="submit" data-url="<?= base_url() ?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
                                                 </form>
-                                 
-                                              
-                                            <?php }?>
-
+                                            <?php } ?>
+                        
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
-                            <?php $examination++; 
+                            <?php $examination++; ?>
                         
-                        } 
+                        <?php } 
+                        
 
 
                         if ($value->completed == 1) {
