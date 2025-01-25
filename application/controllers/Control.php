@@ -325,18 +325,23 @@ class Control extends CI_Controller
 
             // Load the upload library with the new config
             $this->load->library('upload', $config);
+            $workshop_file = '';
             $error_check = 0;
 
-            if (!$this->upload->do_upload('workshop_file')) {
-                $error = array('error' => $this->upload->display_errors());
-                $workshop_file = '';
-            } else {
+            // Check if a file is uploaded
+            if ($this->upload->do_upload('workshop_file')) {
                 // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
                 // Generate a unique name without prefix by using uniqid() and keep the original file extension
                 $workshop_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
                 // Rename the file to the unique name
                 rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop_file);
+            } elseif (!empty($_POST['workshop_link']) && filter_var($_POST['workshop_link'], FILTER_VALIDATE_URL)) {
+                // Validate and use the provided link
+                $workshop_file = $_POST['workshop_link'];
+            } else {
+                // Redirect if neither file nor valid link is provided
+                redirect('control');
             }
 
             $training_id = $_POST['tid'];
@@ -383,6 +388,7 @@ class Control extends CI_Controller
     }
 
 
+
     public function submitExamination()
     {
         if ($_POST) {
@@ -394,18 +400,23 @@ class Control extends CI_Controller
 
             // Load the upload library with the new config
             $this->load->library('upload', $config);
+            $examination_file = '';
             $error_check = 0;
 
-            if (!$this->upload->do_upload('examination_file')) {
-                $error = array('error' => $this->upload->display_errors());
-                $examination_file = '';
-            } else {
+            // Check if a file is uploaded
+            if ($this->upload->do_upload('examination_file')) {
                 // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
                 // Generate a unique name without prefix by using uniqid() and keep the original file extension
                 $examination_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
                 // Rename the file to the unique name
                 rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination_file);
+            } elseif (!empty($_POST['examination_link']) && filter_var($_POST['examination_link'], FILTER_VALIDATE_URL)) {
+                // Validate and use the provided link
+                $examination_file = $_POST['examination_link'];
+            } else {
+                // Redirect if neither file nor valid link is provided
+                redirect('control');
             }
 
             $training_id = $_POST['tid'];
@@ -450,7 +461,6 @@ class Control extends CI_Controller
             redirect('control');
         }
     }
-
 
     public function classroom($err = false)
     {
