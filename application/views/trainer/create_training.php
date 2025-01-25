@@ -439,71 +439,50 @@
                 }
             }
 
-            if($kind === 'workshop'){
+            if ($kind === 'examination' || $kind === 'workshop') {
+                const repeatableId = $kind === 'examination' ? "#repeatable-examination" : "#repeatable-workshop";
+                const titleName = $kind === 'examination' ? "examination_title[]" : "workshop_title[]";
+                const fileName = $kind === 'examination' ? "examination_file_" : "workshop_file_";
+                const inputIdPrefix = $kind === 'examination' ? "examination" : "workshop";
+                const linkName = $kind === 'examination' ? "google_docs_link_" : "google_docs_link_";
+
                 while ($inputNumber < $actualNumber) {
                     $html = '<div class="repeatable">' +
                         '<div class="col-sm-1">' +
                         '<div class="form-group">' +
-                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
+                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber + 1) + '" disabled="">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-6">' +
                         '<div class="form-group">' +
-                        '<input required type="text" name="workshop_title[]" class="form-control">' +
+                        '<input required type="text" name="' + titleName + '" class="form-control" placeholder="Title">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-5">' +
                         '<div class="form-group">' +
                         '<div class="input-group">' +
                         '<div class="custom-file">' +
-                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="workshop_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="workshop' + parseInt($inputNumber+1) + '">' +
-                        '<label class="custom-file-label" for="workshop' + parseInt($inputNumber+1) + '">Choose file</label>' +
+                        '<input type="file" required accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" name="' + fileName + parseInt($inputNumber + 1) + '" class="custom-file-input" id="' + inputIdPrefix + parseInt($inputNumber + 1) + '">' +
+                        '<label class="custom-file-label" for="' + inputIdPrefix + parseInt($inputNumber + 1) + '">Choose file</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-group mt-2">' +
+                        '<label for="googleDocsLink' + parseInt($inputNumber + 1) + '">OR provide Google Docs link</label>' +
+                        '<input type="url" name="' + linkName + parseInt($inputNumber + 1) + '" class="form-control" id="googleDocsLink' + parseInt($inputNumber + 1) + '" placeholder="https://docs.google.com/...">' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>';
-                    $("#repeatable-workshop").append($html);
+                    $(repeatableId).append($html);
                     $inputNumber++;
                 }
                 while ($inputNumber > $actualNumber) {
-                    $("#repeatable-workshop .repeatable").last().remove();
+                    $(repeatableId + " .repeatable").last().remove();
                     $inputNumber--;
                 }
             }
 
-            if($kind === 'examination'){
-                while ($inputNumber < $actualNumber) {
-                    $html = '<div class="repeatable">' +
-                        '<div class="col-sm-1">' +
-                        '<div class="form-group">' +
-                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-sm-6">' +
-                        '<div class="form-group">' +
-                        '<input required type="text" name="examination_title[]" class="form-control">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-sm-5">' +
-                        '<div class="form-group">' +
-                        '<div class="input-group">' +
-                        '<div class="custom-file">' +
-                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="examination_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="examination' + parseInt($inputNumber+1) + '">' +
-                        '<label class="custom-file-label" for="examination' + parseInt($inputNumber+1) + '">Choose file</label>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
-                    $("#repeatable-examination").append($html);
-                    $inputNumber++;
-                }
-                while ($inputNumber > $actualNumber) {
-                    $("#repeatable-examination .repeatable").last().remove();
-                    $inputNumber--;
-                }
-            }
 
         }
 
