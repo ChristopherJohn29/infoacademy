@@ -469,61 +469,83 @@ class Trainer extends CI_Controller
             $workshop = array();
             if (isset($_POST['workshop_title'])) {
                 $workshop_title = html_escape($_POST['workshop_title']);
-
                 $count = 0;
                 $file_count = 1;
                 foreach ($workshop_title as $workshop_value) {
                     $workshop[$count]['title'] = $workshop_value;
-
+            
+                    // Check if Google Docs link is provided
+                    $google_docs_link_key = 'google_docs_link_workshop_' . $file_count;
+                    $google_docs_link = isset($_POST[$google_docs_link_key]) ? trim($_POST[$google_docs_link_key]) : '';
+            
+                    // File upload configuration
                     $config['upload_path'] = './uploads/';
                     $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
                     $this->load->library('upload', $config);
-                    
-                    if (!$this->upload->do_upload('workshop_file_' . $file_count)) {
-                        $error = array('error' => $this->upload->display_errors());
-                        var_dump('workshop error');
-                        exit;
-                        $workshop[$count]['file'] = $error;
+            
+                    if (!empty($_FILES['workshop_file_' . $file_count]['name'])) {
+                        // File upload process
+                        if (!$this->upload->do_upload('workshop_file_' . $file_count)) {
+                            $error = array('error' => $this->upload->display_errors());
+                            $workshop[$count]['file'] = $error;
+                        } else {
+                            $file = array('upload_data' => $this->upload->data());
+                            $workshop[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                            rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$count]['file']);
+                        }
+                    } elseif (!empty($google_docs_link)) {
+                        // Save the Google Docs link if no file is uploaded
+                        $workshop[$count]['file'] = $google_docs_link;
                     } else {
-                        $file = array('upload_data' => $this->upload->data());
-                        $workshop[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$count]['file']);
+                        // Handle the case where neither a file nor a link is provided
+                        $workshop[$count]['file'] = 'No file or link provided';
                     }
-
+            
                     $file_count++;
                     $count++;
                 }
-            }
+            }            
 
             // Process examination files
             $examination = array();
             if (isset($_POST['examination_title'])) {
                 $examination_title = html_escape($_POST['examination_title']);
-
                 $count = 0;
                 $file_count = 1;
                 foreach ($examination_title as $examination_value) {
                     $examination[$count]['title'] = $examination_value;
-
+            
+                    // Check if Google Docs link is provided
+                    $google_docs_link_key = 'google_docs_link_' . $file_count;
+                    $google_docs_link = isset($_POST[$google_docs_link_key]) ? trim($_POST[$google_docs_link_key]) : '';
+            
+                    // File upload configuration
                     $config['upload_path'] = './uploads/';
                     $config['allowed_types'] = 'gif|jpg|png|pdf|pptx|ppt|docx|xls|xlsx|doc|docx';
                     $this->load->library('upload', $config);
-                    
-                    if (!$this->upload->do_upload('examination_file_' . $file_count)) {
-                        $error = array('error' => $this->upload->display_errors());
-                        var_dump('exam error');
-                        exit;
-                        $examination[$count]['file'] = $error;
+            
+                    if (!empty($_FILES['examination_file_' . $file_count]['name'])) {
+                        // File upload process
+                        if (!$this->upload->do_upload('examination_file_' . $file_count)) {
+                            $error = array('error' => $this->upload->display_errors());
+                            $examination[$count]['file'] = $error;
+                        } else {
+                            $file = array('upload_data' => $this->upload->data());
+                            $examination[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                            rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$count]['file']);
+                        }
+                    } elseif (!empty($google_docs_link)) {
+                        // Save the Google Docs link if no file is uploaded
+                        $examination[$count]['file'] = $google_docs_link;
                     } else {
-                        $file = array('upload_data' => $this->upload->data());
-                        $examination[$count]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$count]['file']);
+                        // Handle the case where neither a file nor a link is provided
+                        $examination[$count]['file'] = 'No file or link provided';
                     }
-
+            
                     $file_count++;
                     $count++;
                 }
-            }
+            }            
 
             // Process reference fields
             $references = array();
@@ -630,16 +652,27 @@ class Trainer extends CI_Controller
 
             if (isset($_POST['workshop_title'])) {
                 $workshop_title = html_escape($_POST['workshop_title']);
-
+            
                 foreach ($workshop_title as $index => $workshop_value) {
                     $workshop[$index]['title'] = $workshop_value;
-
-                    if (!$this->upload->do_upload('workshop_file_' . ($index + 1))) {
-                        $workshop[$index]['file'] = $existingTraining['workshop'][$index]['file'] ?? null; // Retain existing file if no new file is uploaded
+            
+                    // Check if a Google Docs link is provided
+                    $googleDocsLink = $_POST['google_docs_link_' . ($index + 1)] ?? null;
+            
+                    if (!empty($googleDocsLink) && filter_var($googleDocsLink, FILTER_VALIDATE_URL)) {
+                        // Save the Google Docs link if it's valid
+                        $workshop[$index]['file'] = $googleDocsLink;
                     } else {
-                        $file = array('upload_data' => $this->upload->data());
-                        $workshop[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$index]['file']);
+                        // Handle file upload
+                        if (!$this->upload->do_upload('workshop_file_' . ($index + 1))) {
+                            // Retain existing file if no new file is uploaded
+                            $workshop[$index]['file'] = $existingTraining['workshop'][$index]['file'] ?? null;
+                        } else {
+                            // Process the new uploaded file
+                            $file = array('upload_data' => $this->upload->data());
+                            $workshop[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                            rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop[$index]['file']);
+                        }
                     }
                 }
             }
@@ -653,19 +686,30 @@ class Trainer extends CI_Controller
 
             if (isset($_POST['examination_title'])) {
                 $examination_title = html_escape($_POST['examination_title']);
-
+            
                 foreach ($examination_title as $index => $examination_value) {
                     $examination[$index]['title'] = $examination_value;
-
-                    if (!$this->upload->do_upload('examination_file_' . ($index + 1))) {
-                        $examination[$index]['file'] = $existingTraining['examination'][$index]['file'] ?? null; // Retain existing file if no new file is uploaded
+            
+                    // Check if a Google Docs link is provided
+                    $googleDocsLink = $_POST['google_docs_link_' . ($index + 1)] ?? null;
+            
+                    if (!empty($googleDocsLink) && filter_var($googleDocsLink, FILTER_VALIDATE_URL)) {
+                        // Save the Google Docs link if it's valid
+                        $examination[$index]['file'] = $googleDocsLink;
                     } else {
-                        $file = array('upload_data' => $this->upload->data());
-                        $examination[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$index]['file']);
+                        // Handle file upload
+                        if (!$this->upload->do_upload('examination_file_' . ($index + 1))) {
+                            // Retain existing file if no new file is uploaded
+                            $examination[$index]['file'] = $existingTraining['examination'][$index]['file'] ?? null;
+                        } else {
+                            // Process the new uploaded file
+                            $file = array('upload_data' => $this->upload->data());
+                            $examination[$index]['file'] = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                            rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $examination[$index]['file']);
+                        }
                     }
                 }
-            }
+            }            
 
             // Process reference fields
             $references = array();

@@ -359,17 +359,29 @@
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
                                                                 <div class="input-group">
-                                                                    <label style="margin-right:10px; margin-top:10px;"> <a href=" <?= base_url('uploads/').$workshop['file'] ?>" target="_blank">  <?= $workshop['file'] ?> </a> </label>
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                                                                        <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
+                                                                    <?php if (filter_var($workshop['file'], FILTER_VALIDATE_URL)) { ?>
+                                                                        <!-- Display Google Docs link if file is a URL -->
+                                                                        <label style="margin-right:10px; margin-top:10px;">
+                                                                            <a href="<?= $workshop['file'] ?>" target="_blank"><?= $workshop['file'] ?></a>
+                                                                        </label>
+                                                                        <input type="url" name="google_docs_link_workshop_<?= $index + 1 ?>" class="form-control mt-2" placeholder="Google Docs Link" value="<?= $workshop['file'] ?>">
+                                                                    <?php } else { ?>
+                                                                        <!-- Display file upload if file is not a URL -->
+                                                                        <label style="margin-right:10px; margin-top:10px;">
+                                                                            <a href="<?= base_url('uploads/') . $workshop['file'] ?>" target="_blank"><?= $workshop['file'] ?></a>
+                                                                        </label>
+                                                                        <div class="custom-file">
+                                                                            <input type="file" name="workshop_file_<?= $index + 1 ?>" class="custom-file-input" id="workshop<?= $index + 1 ?>" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf">
+                                                                            <label class="custom-file-label" for="workshop<?= $index + 1 ?>">Choose file</label>
+                                                                        </div>
+                                                                    <?php } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 <?php }
                                             } ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -395,7 +407,7 @@
                                                     <label>Examination File</label>
                                                 </div>
                                             </div>
-                                            <?php
+                                            <?php 
                                             $examinations = json_decode($training_data['examination'], true);
                                             if (!empty($examinations)) {
                                                 foreach ($examinations as $index => $examination) { ?>
@@ -413,17 +425,29 @@
                                                         <div class="col-sm-5">
                                                             <div class="form-group">
                                                                 <div class="input-group">
-                                                                    <label style="margin-right:10px; margin-top:10px;"> <a href=" <?= base_url('uploads/').$examination['file'] ?>" target="_blank">  <?= $examination['file'] ?> </a> </label>
-                                                                    <div class="custom-file">
-                                                                        <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                                                                        <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
-                                                                    </div>
+                                                                    <?php if (filter_var($examination['file'], FILTER_VALIDATE_URL)) { ?>
+                                                                        <!-- Display Google Docs link if file is a URL -->
+                                                                        <label style="margin-right:10px; margin-top:10px;">
+                                                                            <a href="<?= $examination['file'] ?>" target="_blank"><?= $examination['file'] ?></a>
+                                                                        </label>
+                                                                        <input type="url" name="google_docs_link_<?= $index + 1 ?>" class="form-control mt-2" placeholder="Google Docs Link" value="<?= $examination['file'] ?>">
+                                                                    <?php } else { ?>
+                                                                        <!-- Display file upload if file is not a URL -->
+                                                                        <label style="margin-right:10px; margin-top:10px;">
+                                                                            <a href="<?= base_url('uploads/') . $examination['file'] ?>" target="_blank"><?= $examination['file'] ?></a>
+                                                                        </label>
+                                                                        <div class="custom-file">
+                                                                            <input type="file" name="examination_file_<?= $index + 1 ?>" class="custom-file-input" id="examination<?= $index + 1 ?>" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf">
+                                                                            <label class="custom-file-label" for="examination<?= $index + 1 ?>">Choose file</label>
+                                                                        </div>
+                                                                    <?php } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 <?php }
                                             } ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -609,72 +633,67 @@
                 }
             }
 
-            if($kind === 'workshop'){
+            if ($kind === 'examination' || $kind === 'workshop') {
+                const repeatableId = $kind === 'examination' ? "#repeatable-examination" : "#repeatable-workshop";
+                const titleName = $kind === 'examination' ? "examination_title[]" : "workshop_title[]";
+                const fileName = $kind === 'examination' ? "examination_file_" : "workshop_file_";
+                const inputIdPrefix = $kind === 'examination' ? "examination" : "workshop";
+                const linkName = $kind === 'examination' ? "google_docs_link_" : "google_docs_link_workshop_";
+
                 while ($inputNumber < $actualNumber) {
                     $html = '<div class="repeatable">' +
                         '<div class="col-sm-1">' +
                         '<div class="form-group">' +
-                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
+                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber + 1) + '" disabled="">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-6">' +
                         '<div class="form-group">' +
-                        '<input required type="text" name="workshop_title[]" class="form-control">' +
+                        '<input required type="text" name="' + titleName + '" class="form-control" placeholder="Title">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-5">' +
                         '<div class="form-group">' +
                         '<div class="input-group">' +
                         '<div class="custom-file">' +
-                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="workshop_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="workshop' + parseInt($inputNumber+1) + '">' +
-                        '<label class="custom-file-label" for="workshop' + parseInt($inputNumber+1) + '">Choose file</label>' +
+                        '<input type="file" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" name="' + fileName + parseInt($inputNumber + 1) + '" class="custom-file-input" id="' + inputIdPrefix + parseInt($inputNumber + 1) + '">' +
+                        '<label class="custom-file-label" for="' + inputIdPrefix + parseInt($inputNumber + 1) + '">Choose file</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-group mt-2">' +
+                        '<label for="googleDocsLink' + parseInt($inputNumber + 1) + '">OR provide Google Docs link</label>' +
+                        '<input type="url" name="' + linkName + parseInt($inputNumber + 1) + '" class="form-control" id="googleDocsLink' + parseInt($inputNumber + 1) + '" placeholder="https://docs.google.com/...">' +
+                        '</div>' +
+                        '<div class="form-check">' +
+                        '<input class="form-check-input" type="checkbox" id="optionalCheck' + parseInt($inputNumber + 1) + '" onchange="toggleRequired(this, \'' + inputIdPrefix + parseInt($inputNumber + 1) + '\', \'' + 'googleDocsLink' + parseInt($inputNumber + 1) + '\')">' +
+                        '<label class="form-check-label" for="optionalCheck' + parseInt($inputNumber + 1) + '">Check if you are providing only one (file or link)</label>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>';
-                    $("#repeatable-workshop").append($html);
+                    $(repeatableId).append($html);
                     $inputNumber++;
                 }
                 while ($inputNumber > $actualNumber) {
-                    $("#repeatable-workshop .repeatable").last().remove();
+                    $(repeatableId + " .repeatable").last().remove();
                     $inputNumber--;
                 }
             }
 
-            if($kind === 'examination'){
-                while ($inputNumber < $actualNumber) {
-                    $html = '<div class="repeatable">' +
-                        '<div class="col-sm-1">' +
-                        '<div class="form-group">' +
-                        '<input type="text" class="form-control" name="" value="# ' + parseInt($inputNumber+1) + '" disabled="">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-sm-6">' +
-                        '<div class="form-group">' +
-                        '<input required type="text" name="examination_title[]" class="form-control">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-sm-5">' +
-                        '<div class="form-group">' +
-                        '<div class="input-group">' +
-                        '<div class="custom-file">' +
-                        '<input type="file" required accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" name="examination_file_' + parseInt($inputNumber+1) + '" class="custom-file-input" id="examination' + parseInt($inputNumber+1) + '">' +
-                        '<label class="custom-file-label" for="examination' + parseInt($inputNumber+1) + '">Choose file</label>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
-                    $("#repeatable-examination").append($html);
-                    $inputNumber++;
-                }
-                while ($inputNumber > $actualNumber) {
-                    $("#repeatable-examination .repeatable").last().remove();
-                    $inputNumber--;
-                }
-            }
+        }
 
+        function toggleRequired(checkbox, fileId, linkId) {
+            const fileInput = document.getElementById(fileId);
+            const linkInput = document.getElementById(linkId);
+
+            if (checkbox.checked) {
+                fileInput.removeAttribute('required');
+                linkInput.removeAttribute('required');
+            } else {
+                fileInput.setAttribute('required', 'required');
+                linkInput.setAttribute('required', 'required');
+            }
         }
 
         

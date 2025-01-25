@@ -444,7 +444,7 @@
                 const titleName = $kind === 'examination' ? "examination_title[]" : "workshop_title[]";
                 const fileName = $kind === 'examination' ? "examination_file_" : "workshop_file_";
                 const inputIdPrefix = $kind === 'examination' ? "examination" : "workshop";
-                const linkName = $kind === 'examination' ? "google_docs_link_" : "google_docs_link_";
+                const linkName = $kind === 'examination' ? "google_docs_link_" : "google_docs_link_workshop_";
 
                 while ($inputNumber < $actualNumber) {
                     $html = '<div class="repeatable">' +
@@ -462,13 +462,17 @@
                         '<div class="form-group">' +
                         '<div class="input-group">' +
                         '<div class="custom-file">' +
-                        '<input type="file" required accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" name="' + fileName + parseInt($inputNumber + 1) + '" class="custom-file-input" id="' + inputIdPrefix + parseInt($inputNumber + 1) + '">' +
+                        '<input type="file" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf" name="' + fileName + parseInt($inputNumber + 1) + '" class="custom-file-input" id="' + inputIdPrefix + parseInt($inputNumber + 1) + '">' +
                         '<label class="custom-file-label" for="' + inputIdPrefix + parseInt($inputNumber + 1) + '">Choose file</label>' +
                         '</div>' +
                         '</div>' +
                         '<div class="form-group mt-2">' +
                         '<label for="googleDocsLink' + parseInt($inputNumber + 1) + '">OR provide Google Docs link</label>' +
                         '<input type="url" name="' + linkName + parseInt($inputNumber + 1) + '" class="form-control" id="googleDocsLink' + parseInt($inputNumber + 1) + '" placeholder="https://docs.google.com/...">' +
+                        '</div>' +
+                        '<div class="form-check">' +
+                        '<input class="form-check-input" type="checkbox" id="optionalCheck' + parseInt($inputNumber + 1) + '" onchange="toggleRequired(this, \'' + inputIdPrefix + parseInt($inputNumber + 1) + '\', \'' + 'googleDocsLink' + parseInt($inputNumber + 1) + '\')">' +
+                        '<label class="form-check-label" for="optionalCheck' + parseInt($inputNumber + 1) + '">Check if you are providing only one (file or link)</label>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -583,6 +587,19 @@
             // Decrement references count
             references = $("#repeatable-reference .repeatable-reference").length;
         });
+
+        function toggleRequired(checkbox, fileId, linkId) {
+            const fileInput = document.getElementById(fileId);
+            const linkInput = document.getElementById(linkId);
+
+            if (checkbox.checked) {
+                fileInput.removeAttribute('required');
+                linkInput.removeAttribute('required');
+            } else {
+                fileInput.setAttribute('required', 'required');
+                linkInput.setAttribute('required', 'required');
+            }
+        }
 
     })
 </script>
