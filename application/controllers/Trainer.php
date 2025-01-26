@@ -767,53 +767,10 @@ class Trainer extends CI_Controller
         }
     }
 
-    public function generate_certificate()
-    {
-        // Load FPDF library
-        // error_reporting(E_ALL);
-        // ini_set('display_errors', 1);
-        $this->load->library('Pdf');
-
-        // Data to populate the certificate
-        $name = "EUGENIO A. MENDILLO II";
-        $course = "Basic Microsoft Office Online Training";
-        $date = "April 30, 2020";
-        $signatory = "Aurelio L. Ebita, CPA";
-
-        // Create PDF
-        $pdf = new Pdf();
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(0, 10, 'CERTIFICATE OF TRAINING', 0, 1, 'C');
-        $pdf->Ln(20);
-
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(0, 10, 'Presented to', 0, 1, 'C');
-        $pdf->Ln(10);
-
-        $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, $name, 0, 1, 'C');
-        $pdf->Ln(10);
-
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->MultiCell(0, 10, "For having successfully completed the " . strtoupper($course), 0, 'C');
-        $pdf->Ln(5);
-
-        $pdf->Cell(0, 10, "on " . $date, 0, 1, 'C');
-        $pdf->Ln(20);
-
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(0, 10, $signatory, 0, 1, 'C');
-        $pdf->Cell(0, 10, 'Authorized Signatory', 0, 1, 'C');
-
-        // Output PDF
-        $pdf->Output('D', 'Certificate.pdf'); // D: Download
-    }
-
     public function view_certificate()
     {
         $data = [
-            'name' => 'Eugenio A. Mendillo II',
+            'name' => 'Eugenio A. Mendillo IIs',
             'course' => 'Basic Microsoft Office Online Training',
             'date' => 'April 30, 2020',
             'signatory' => 'Aurelio L. Ebita, CPA'
