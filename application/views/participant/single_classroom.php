@@ -247,8 +247,18 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$workshop]->file ?>" download="download">Download Workshop</a>
-                        
+                                            <?php 
+                                            $file = $training_section[$workshop]->file;
+
+                                            // Check if $file is a URL
+                                            if (filter_var($file, FILTER_VALIDATE_URL)) {
+                                                // Render as a clickable link
+                                                echo '<a class="btn btn-default btn-sm" href="' . $file . '" target="_blank">Open Workshop</a>';
+                                            } else {
+                                                // Render as a download link
+                                                echo '<a class="btn btn-default btn-sm" href="'.base_url().'/uploads/' . $file . '" download="download">Download Workshop</a>';
+                                            }
+                                            ?>
                                             <?php if (!empty($workshop_data)) { ?>
                                                 <br>
                                                 <h5 style="margin:10px;">Submitted Workshop Files or Links:</h5>
@@ -343,8 +353,18 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <a class="btn btn-default btn-sm" href="<?= base_url() ?>/uploads/<?= $training_section[$examination]->file ?>" download="download">Download Examination</a>
-                        
+                                            <?php 
+                                            $file = $training_section[$examination]->file;
+
+                                            // Check if $file is a URL
+                                            if (filter_var($file, FILTER_VALIDATE_URL)) {
+                                                // Render as a clickable link
+                                                echo '<a class="btn btn-default btn-sm" href="' . $file . '" target="_blank">Open Examination</a>';
+                                            } else {
+                                                // Render as a download link
+                                                echo '<a class="btn btn-default btn-sm" href="'.base_url(). '/uploads/' . $file . '" download="download">Download Examination</a>';
+                                            }
+                                            ?>
                                             <?php if (!empty($examination_data)) { ?>
                                                 <br>
                                                 <h5 style="margin:10px;">Submitted Examination Files or Links:</h5>
