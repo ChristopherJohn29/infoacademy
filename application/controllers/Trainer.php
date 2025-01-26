@@ -809,4 +809,15 @@ class Trainer extends CI_Controller
         // Output PDF
         $pdf->Output('D', 'Certificate.pdf'); // D: Download
     }
+
+    public function view_certificate()
+    {
+        $data = [
+            'name' => 'Eugenio A. Mendillo II',
+            'course' => 'Basic Microsoft Office Online Training',
+            'date' => 'April 30, 2020',
+            'signatory' => 'Aurelio L. Ebita, CPA'
+        ];
+        $this->load->view('certificate', $data);
+    }
 }
