@@ -1,5 +1,5 @@
 <?php
-require_once APPPATH . '/fpdf/fpdf.php';
+require_once APPPATH . '/libraries/fpdf/fpdf.php';
 
 class Pdf extends FPDF
 {
