@@ -532,10 +532,9 @@
     }
 
     function viewCertificate(participantId, trainingId, authorId) {
-        // Redirect to the certificate view page, passing the participant_id and training_id
-        window.location.href = '/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId;
+        // Open the certificate view page in a new tab
+        window.open('/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId, '_blank');
     }
-
 
 </script>
 </body>
