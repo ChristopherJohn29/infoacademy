@@ -75,6 +75,7 @@ class System_model extends CI_Model
         $this->db->from('training_class');
         $this->db->where('participant_id', $participantId);
         $this->db->where('training_id', $trainingId);
+        $this->db->where('is_complete', 1);
         $this->db->join('user', 'user.id = training_class.participant_id', 'left');
         $this->db->join('training', 'training.id = training_class.training_id', 'left');
         

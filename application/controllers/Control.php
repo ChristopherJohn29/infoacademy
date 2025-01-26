@@ -561,26 +561,29 @@ class Control extends CI_Controller
     public function view_certificate($participantId, $trainingId) {
         // Fetch data for the participant and the training
  
-        $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
+        if($_SESSION['id'] == $participantId || $_SESSION['id'] ==  $trainingId){
+            $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
         
-        // Example query in the model:
-        // SELECT first_name, last_name, course_name, date_enrolled, date_completed, signatory FROM participants WHERE participant_id = $participantId AND training_id = $trainingId;
-    
-        if ($participantData) {
-            // Pass the data to the view
-            $data = [
-                'name' => $participantData['participant_name'],
-                'course' => $participantData['training_title'],
-                'date_enrolled' => $participantData['date_enrolled'],
-                'date_completed' => $participantData['date_completed'],
-                'signatory' => "Aurelio L. Ebita, CPA" // You can load this dynamically or set a default
-            ];
-            
-            $this->load->view('certificate', $data);
+     
+            if ($participantData) {
+                // Pass the data to the view
+                $data = [
+                    'name' => $participantData['participant_name'],
+                    'course' => $participantData['training_title'],
+                    'date_enrolled' => $participantData['date_enrolled'],
+                    'date_completed' => $participantData['date_completed'],
+                    'signatory' => "Aurelio L. Ebita, CPA" // You can load this dynamically or set a default
+                ];
+                
+                $this->load->view('certificate', $data);
+            } else {
+                // Handle case where no participant data was found
+                show_404();
+            }
         } else {
-            // Handle case where no participant data was found
             show_404();
         }
+        
     }
     
 }

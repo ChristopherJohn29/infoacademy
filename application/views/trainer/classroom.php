@@ -203,7 +203,9 @@
                                                 <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
                                                 <td>
-                                                    <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>)">View Certificate</button>
+                                                    <?php if ($class['is_complete'] == 1): ?>
+                                                        <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>)">View Certificate</button>
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
