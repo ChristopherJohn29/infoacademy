@@ -470,11 +470,6 @@
                         '<label for="googleDocsLink' + parseInt($inputNumber + 1) + '">OR provide Google Docs link</label>' +
                         '<input type="url" name="' + linkName + parseInt($inputNumber + 1) + '" class="form-control" id="googleDocsLink' + parseInt($inputNumber + 1) + '" placeholder="https://docs.google.com/...">' +
                         '</div>' +
-                        '<div class="form-check">' +
-                        '<input class="form-check-input" type="checkbox" id="optionalCheck' + parseInt($inputNumber + 1) + '" onchange="toggleRequired(this, \'' + inputIdPrefix + parseInt($inputNumber + 1) + '\', \'' + 'googleDocsLink' + parseInt($inputNumber + 1) + '\')">' +
-                        '<label class="form-check-label" for="optionalCheck' + parseInt($inputNumber + 1) + '">Check if you are providing only one (file or link)</label>' +
-                        '</div>' +
-                        '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>';
@@ -588,18 +583,28 @@
             references = $("#repeatable-reference .repeatable-reference").length;
         });
 
-        function toggleRequired(checkbox, fileId, linkId) {
-            const fileInput = document.getElementById(fileId);
-            const linkInput = document.getElementById(linkId);
+        function validateForm() {
+            let isValid = true;
 
-            if (checkbox.checked) {
-                fileInput.removeAttribute('required');
-                linkInput.removeAttribute('required');
-            } else {
-                fileInput.setAttribute('required', 'required');
-                linkInput.setAttribute('required', 'required');
-            }
+            $('.repeatable').each(function () {
+                const fileInput = $(this).find('.custom-file-input');
+                const linkInput = $(this).find('input[type="url"]');
+
+                if (!fileInput.val() && !linkInput.val()) {
+                    isValid = false;
+                    alert('Please provide at least one file or a Google Docs link.');
+                    return false; // Exit loop
+                }
+            });
+
+            return isValid;
         }
+
+        $('form').on('submit', function (e) {
+            if (!validateForm()) {
+                e.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
 
     })
 </script>
