@@ -770,8 +770,8 @@ class Trainer extends CI_Controller
     public function generate_certificate()
     {
         // Load FPDF library
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+        // error_reporting(E_ALL);
+        // ini_set('display_errors', 1);
         $this->load->library('Pdf');
 
         // Data to populate the certificate
