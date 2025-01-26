@@ -767,14 +767,4 @@ class Trainer extends CI_Controller
         }
     }
 
-    public function view_certificate()
-    {
-        $data = [
-            'name' => 'Eugenio A. Mendillo IIs',
-            'course' => 'Basic Microsoft Office Online Training',
-            'date' => 'April 30, 2020',
-            'signatory' => 'Aurelio L. Ebita, CPA'
-        ];
-        $this->load->view('certificate', $data);
-    }
 }
