@@ -113,7 +113,7 @@
 
                         
                         if ($value['is_complete'] == 1 && $value['status'] == 1): 
-                            $option .= ' <i class="fas fa-certificate btn btn-sm btn-primary mb-5" onclick="viewCertificate(' . $_SESSION["id"] . ', ' . $training[0]["id"] . ', 0)" style="cursor: pointer;"></i>';
+                            $option .= ' <i class="fas fa-certificate" onclick="viewCertificate(' . $_SESSION["id"] . ', ' . $training[0]["id"] . ', 0)" style="cursor: pointer;"></i>';
                         endif;
 
 
