@@ -560,8 +560,8 @@ class Control extends CI_Controller
 
     public function view_certificate($participantId, $trainingId) {
         // Fetch data for the participant and the training
-        $this->load->model('Training_model');
-        $participantData = $this->Training_model->get_participant_data($participantId, $trainingId);
+ 
+        $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
         
         // Example query in the model:
         // SELECT first_name, last_name, course_name, date_enrolled, date_completed, signatory FROM participants WHERE participant_id = $participantId AND training_id = $trainingId;
