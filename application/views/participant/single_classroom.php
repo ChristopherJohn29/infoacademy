@@ -461,7 +461,9 @@
                                 ?>
                                 <div class="section_title_container text-center" style="margin-top: 80px">
                                     <h2 class="section_title">Training Completed</h2>
+                                    <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $_SESSION['id']; ?>, <?php echo $training[0]['id']; ?>, <?php echo 0 ?>)">View Certificate</button>
                                 </div>
+                                
                                 <?php
                             }
                         }
@@ -507,6 +509,11 @@
             window.location.href = url;
         });
     });
+
+    function viewCertificate(participantId, trainingId, authorId) {
+        // Open the certificate view page in a new tab
+        window.open('/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId, '_blank');
+    }
 </script>
 </body>
 </html>
