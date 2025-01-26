@@ -64,6 +64,26 @@ class System_model extends CI_Model
         return $result;
     }
 
+    
+    public function get_participant_data($participantId, $trainingId) {
+        // Query to fetch the participant's data
+        $this->db->select('
+            training_class.*,
+            CONCAT(user.first_name, " ", user.last_name) as participant_name,
+            training.training_title
+        ');
+        $this->db->from('training_class');
+        $this->db->where('participant_id', $participantId);
+        $this->db->where('training_id', $trainingId);
+        $this->db->join('user', 'user.id = training_class.participant_id', 'left');
+        $this->db->join('training', 'training.id = training_class.training_id', 'left');
+        
+        $query = $this->db->get();
+        
+        // Return the result as an associative array
+        return $query->row_array();
+    }
+
     public function fetchFromTrainingClass($id = false){
         $this->db->select('*');
         $this->db->where('training_id', $id);

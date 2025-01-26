@@ -168,6 +168,7 @@
                                             <th>Exam</th>
                                             <th>Date Completed</th>
                                             <th>Question and answer</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -201,6 +202,9 @@
                                                 </td>
                                                 <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
                                                 <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>)">View Certificate</button>
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -523,6 +527,11 @@
                 alert('An error occurred');
             }
         });
+    }
+
+    function viewCertificate(participantId, trainingId) {
+        // Redirect to the certificate view page, passing the participant_id and training_id
+        window.location.href = '/control/view_certificate/' + participantId + '/' + trainingId;
     }
 
 
