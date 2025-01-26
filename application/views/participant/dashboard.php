@@ -113,7 +113,9 @@
 
                         
                         if ($value['is_complete'] == 1 && $value['status'] == 1): 
-                            $option .= ' <i class="fas fa-certificate" onclick="viewCertificate(' . $_SESSION["id"] . ', ' . $training[0]["id"] . ', 0)" style="cursor: pointer;"></i>';
+                            $option .= '<a style="margin-left: 2px" data-toggle="tooltip" data-placement="top" title="Certificate" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="viewCertificate(' . $_SESSION["id"] . ', ' . $training[0]["id"] . ', 0)">
+                                            <i class="fa fa-certificate" aria-hidden="true"></i>
+                                         </a>';
                         endif;
 
 
