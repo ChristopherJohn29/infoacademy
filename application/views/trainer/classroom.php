@@ -204,7 +204,7 @@
                                                 <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
                                                 <td>
                                                     <?php if ($class['is_complete'] == 1): ?>
-                                                        <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>)">View Certificate</button>
+                                                        <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>, <?php echo $class['author_id']; ?>)">View Certificate</button>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -531,9 +531,9 @@
         });
     }
 
-    function viewCertificate(participantId, trainingId) {
+    function viewCertificate(participantId, trainingId, authorId) {
         // Redirect to the certificate view page, passing the participant_id and training_id
-        window.location.href = '/control/view_certificate/' + participantId + '/' + trainingId;
+        window.location.href = '/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId;
     }
 
 

@@ -124,9 +124,10 @@ class System_model extends CI_Model
     }
 
     public function fetchClassByTrainingID($id = false){
-        $this->db->select('training_class.*, user.first_name, user.last_name');
+        $this->db->select('training_class.*, user.first_name, user.last_name, training.author_id');
         $this->db->where('training_id', $id);
         $this->db->join('user', 'user.id = training_class.participant_id', 'left');
+        $this->db->join('training', 'training.id = training_class.training_id', 'left');
         $this->db->from('training_class');
         $result = $this->db->get()->result_array();
 

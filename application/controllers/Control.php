@@ -558,10 +558,10 @@ class Control extends CI_Controller
         }
     }
 
-    public function view_certificate($participantId, $trainingId) {
+    public function view_certificate($participantId, $trainingId, $author_id) {
         // Fetch data for the participant and the training
  
-        if($_SESSION['id'] == $participantId || $_SESSION['id'] ==  $trainingId){
+        if($_SESSION['id'] == $participantId || $_SESSION['id'] ==  $author_id){
             $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
         
      
