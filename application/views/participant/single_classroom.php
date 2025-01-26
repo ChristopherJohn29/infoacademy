@@ -461,7 +461,12 @@
                                 ?>
                                 <div class="section_title_container text-center" style="margin-top: 80px">
                                     <h2 class="section_title">Training Completed</h2>
-                                    <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $_SESSION['id']; ?>, <?php echo $training[0]['id']; ?>, <?php echo 0 ?>)">View Certificate</button>
+                                   
+
+                                    <?php if ($class['is_complete'] == 1 || $class['status'] == 1): ?>
+                                        <button class="btn btn-sm btn-primary mb-5" onclick="viewCertificate(<?php echo $_SESSION['id']; ?>, <?php echo $training[0]['id']; ?>, <?php echo 0 ?>)">View Certificate</button>
+                                    <?php endif; ?>
+                                
                                 </div>
                                 
                                 <?php

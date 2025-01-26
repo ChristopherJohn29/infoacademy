@@ -110,6 +110,13 @@
                             $status = 'Completed';
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Certificate" class="btn btn-default btn-sm" href="' . base_url() . '"> <i class="fa fa-file" aria-hidden="true"></i></a>';
                         }
+
+                        
+                        if ($class['is_complete'] == 1 || $class['status'] == 1): 
+                            $option .= ' <i class="fas fa-certificate btn btn-sm btn-primary mb-5" onclick="viewCertificate(' . $_SESSION["id"] . ', ' . $training[0]["id"] . ', 0)" style="cursor: pointer;"></i>';
+                        endif;
+
+
                         $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="' . base_url() . '"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
 
 
@@ -159,6 +166,11 @@
         });
     });
     $('[data-toggles="tooltip"]').tooltip();
+
+    function viewCertificate(participantId, trainingId, authorId) {
+        // Open the certificate view page in a new tab
+        window.open('/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId, '_blank');
+    }
 </script>
 </body>
 </html>
