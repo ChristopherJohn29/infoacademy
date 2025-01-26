@@ -285,16 +285,16 @@
                     examData.forEach(function(exam) {
                         tableHtml += '<tr data-exam-id="' + exam.id + '" data-participant-id="' + participant_id + '" data-training-id="' + training_id + '">';
 
+                      
                         // Examination File
-                        if (exam.status == "2") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
-                            tableHtml += '<td>' + exam.date_submitted + '</td>';
-                        } else if (exam.status == "1") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
-                            tableHtml += '<td>' + exam.date_submitted + '</td>';
-                        } else if (exam.status == "3") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
-                            tableHtml += '<td>' + exam.date_submitted + '</td>';
+                        if (exam.status == "2" || exam.status == "1" || exam.status == "3") {
+                            if (exam.examination_file === "Google Form Submitted") {
+                                tableHtml += '<td>' + exam.file_desc + ' (Google Form Submitted)' + '</td>';
+                                tableHtml += '<td>' + exam.date_submitted + '</td>';
+                            } else {
+                                tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + exam.examination_file + '" target="_blank">' + exam.file_desc + '</a></td>';
+                                tableHtml += '<td>' + exam.date_submitted + '</td>';
+                            }
                         }
 
                         // Status
@@ -418,15 +418,14 @@
                         tableHtml += '<tr data-workshop-id="' + workshop.id + '" data-participant-id="' + participant_id + '" data-training-id="' + training_id + '">';
 
                         // Workshop File
-                        if (workshop.status == "2") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
-                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
-                        } else if (workshop.status == "1") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
-                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
-                        } else if (workshop.status == "3") {
-                            tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
-                            tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                        if (workshop.status == "2" || workshop.status == "1" || workshop.status == "3") {
+                            if (workshop.workshopination_file === "Google Form Submitted") {
+                                tableHtml += '<td>' + workshop.file_desc + ' (Google Form Submitted)' + '</td>';
+                                tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                            } else {
+                                tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
+                                tableHtml += '<td>' + workshop.date_submitted + '</td>';
+                            }
                         }
 
                         // Status

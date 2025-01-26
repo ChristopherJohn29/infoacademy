@@ -416,7 +416,7 @@ class Control extends CI_Controller
                 $examination_file = $_POST['examination_link'];
             } else {
                 // Redirect if neither file nor valid link is provided
-                redirect('control');
+                $examination_file = "Google Form Submitted";
             }
 
             $training_id = $_POST['tid'];

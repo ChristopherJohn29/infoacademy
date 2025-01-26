@@ -229,7 +229,8 @@
                             <?php
                             $video++;
                         }
-                        ?><?php
+                        ?>
+                        <?php
                         if ($value->section == 'workshop' && $display == 1) { ?>
                         
                             <?php
@@ -403,7 +404,7 @@
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
                                                     <input name="step" type="hidden" value="<?= $count ?>">
                                                     <div class="form-group">
-                                                        <label for="examinationLinkOrFile">Submit a File or Google Link</label>
+                                                        <label for="examinationLinkOrFile">Submit a File or Google Link (If form just click submit)</label>
                                                         <input type="text" name="examination_link" class="form-control" placeholder="Enter Google Link (Optional)" />
                                                     </div>
                                                     <div class="custom-file">
