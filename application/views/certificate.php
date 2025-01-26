@@ -41,6 +41,27 @@
             margin-top: 50px;
             font-size: 16px;
         }
+
+        /* Print specific styles */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+            }
+
+            .certificate-container {
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+                border: none;
+                box-shadow: none;
+                page-break-before: always;
+            }
+
+            @page {
+                size: landscape;
+            }
+        }
     </style>
 </head>
 <body>
@@ -50,13 +71,13 @@
         </div>
         <div class="certificate-body">
             <p>Presented to</p>
-            <p><strong>Eugenio A. Mendillo II</strong></p>
+            <p><strong><?php echo $name; ?></strong></p>
             <p>For having successfully completed the</p>
-            <p><strong>Basic Microsoft Office Online Training</strong></p>
-            <p>on April 30, 2020</p>
+            <p><strong><?php echo $course; ?></strong></p>
+            <p>on <?php echo $date; ?></p>
         </div>
         <div class="certificate-footer">
-            <p>Aurelio L. Ebita, CPA</p>
+            <p><?php echo $signatory; ?></p>
             <p>Authorized Signatory</p>
         </div>
     </div>
