@@ -42,6 +42,60 @@
             border-color: #ddd;
             color: #444;
         }
+
+        /* Message container styling */
+        .message-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+        }
+
+        /* Message bubble styling */
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 75%;
+        }
+
+        /* Sent message bubble styling */
+        .message-sent {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+
+        /* Received message bubble styling */
+        .message-received {
+            background-color: #e9ecef;
+            color: #495057;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+        }
+
+        /* Message header */
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Message body */
+        .message-body {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* Time format styling */
+        .message small.text-muted {
+            font-size: 12px;
+            font-weight: normal;
+        }
+
     </style>
 </head>
 <body>
@@ -99,6 +153,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <div class="row my-profile-row">
@@ -225,31 +280,50 @@
         $.ajax({
             url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
-            dataType: 'json',  // Expecting JSON response
+            dataType: 'json',
             data: { training_id: trainingId },
             success: function(response) {
-                // Directly use the response since it's already a parsed JSON object
                 const messages = response.messages;
                 let messageHtml = '';
 
                 // Loop through each message and create HTML content
                 messages.forEach(function(message) {
                     const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Trainer';
+                    const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
+
                     messageHtml += `
-                        <div class="message">
-                            <strong>${sender}:</strong> ${message.message}
-                            <small>${message.timestamp}</small>
+                        <div class="message ${senderClass}">
+                            <div class="message-header">
+                                <strong>${sender}</strong>
+                                <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
+                            </div>
+                            <div class="message-body">${message.message}</div>
                         </div>
                     `;
                 });
 
                 // Update the message container with the new messages
                 $('#messageContainer').html(messageHtml);
+
+                // Auto-scroll to the bottom
+                $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight);
             },
             error: function() {
                 alert('Error fetching messages.');
             }
         });
+    }
+
+    // Format timestamp to "X minutes ago"
+    function formatTimestamp(timestamp) {
+        const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
+        const minutes = Math.floor(diff / 60);
+        const hours = Math.floor(diff / 3600);
+        const days = Math.floor(diff / 86400);
+
+        if (days > 0) return days + " day(s) ago";
+        if (hours > 0) return hours + " hour(s) ago";
+        return minutes + " minute(s) ago";
     }
 
 
