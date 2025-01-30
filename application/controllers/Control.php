@@ -600,6 +600,20 @@ class Control extends CI_Controller
         $messages = $this->System_model->getMessagesByTraining($training_id);
         echo json_encode($messages);
     }
+
+    
+    public function send() {
+        $sender_id   = $this->input->post('sender_id');
+        $receiver_id = $this->input->post('receiver_id');
+        $message     = $this->input->post('message');
+        $training_id = $this->input->post('training_id');
+    
+        // Call sendMessage method
+        $response = $this->System_model->sendMessage($sender_id, $receiver_id, $message, $training_id);
+    
+        // Return the response to the front end
+        echo json_encode($response);
+    }
     
     
 }

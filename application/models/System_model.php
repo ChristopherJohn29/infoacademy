@@ -554,18 +554,6 @@ class System_model extends CI_Model
         }
     }
 
-    public function sendMessage($sender_id, $receiver_id, $message, $training_id) {
-        // Prepare data for insertion
-        $data = [
-            'sender_id'   => $sender_id,
-            'receiver_id' => $receiver_id,
-            'training_id' => $training_id,
-            'message'     => $message
-        ];
-        
-        // Insert message into the 'messages' table
-        $this->db->insert('messages', $data);
-    }
     public function getMessagesByTraining($training_id) {
         $this->db->where('training_id', $training_id);
         $query = $this->db->get('messages');
@@ -581,5 +569,28 @@ class System_model extends CI_Model
         // Return true if enrolled, otherwise false
         return $query->num_rows() > 0;
     }
+
+    public function sendMessage($sender_id, $receiver_id, $message, $training_id) {
+        // First, check if the sender (participant) is enrolled in the specific training
+        if (!$this->isEnrolled($sender_id, $training_id)) {
+            // If the participant is not enrolled, return an error
+            return ['status' => 'error', 'message' => 'You must be enrolled in this training to send a message.'];
+        }
+    
+        // Prepare data for insertion into the 'messages' table
+        $data = [
+            'sender_id'   => $sender_id,   // ID of the sender (participant)
+            'receiver_id' => $receiver_id, // ID of the receiver (trainer)
+            'training_id' => $training_id, // ID of the training session
+            'message'     => $message      // Message content
+        ];
+    
+        // Insert the message into the 'messages' table
+        $this->db->insert('messages', $data);
+    
+        // Return success response
+        return ['status' => 'success', 'message' => 'Message sent successfully.'];
+    }
+    
     
 }
