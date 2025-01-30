@@ -117,6 +117,29 @@
                 <div class="row" style="display:block; text-align: right; margin:2px;">
                     <a class="btn btn-success btn-sm col-sm-2" href="<?php echo base_url() . '/trainer/createTraining' ?>" style="margin:10px; margin-left:0px;">Create Training</a>
                 </div>
+
+                <!-- Message Modal -->
+                <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="messageModalLabel">Message Enrollees</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="messageContainer" class="message-container">
+                                    <!-- Messages will be dynamically loaded here -->
+                                </div>
+                                <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
               
                 <div class="row">
                     <div class="col-12">
@@ -137,43 +160,48 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                    $trainings = $this->System_model->fetchTrainings($_SESSION['id']);
+                                        <?php
+                                        $trainings = $this->System_model->fetchTrainings($_SESSION['id']);
+                                        $html = '';
+                                        foreach ($trainings as $value) {
+                                            $trainer = $this->System_model->fetchTrainer($value['author_id']);
+                                            $trainer_col1 = $this->System_model->fetchTrainer($value['collaborator1']);
+                                            $trainer_col2 = $this->System_model->fetchTrainer($value['collaborator2']);
+                                            $col = '';
 
+                                            if ($trainer_col1) {
+                                                $col .= $trainer_col1[0]['first_name'] . ' ' . $trainer_col1[0]['last_name'];
+                                            }
 
-                                    $html = '';
-                                    foreach ($trainings as $value) {
-                                        $trainer = $this->System_model->fetchTrainer($value['author_id']);
+                                            if ($trainer_col2) {
+                                                $col .= ', ' . $trainer_col2[0]['first_name'] . ' ' . $trainer_col2[0]['last_name'];
+                                            }
 
-                                        $trainer_col1 = $this->System_model->fetchTrainer($value['collaborator1']);
-                                        $trainer_col2 = $this->System_model->fetchTrainer($value['collaborator2']);
+                                            $enrollees_count = $this->System_model->fetchEnrollees($value['id']);
+                                            $enrollees_completion = $this->System_model->fetchEnrolleesCompletion($value['id']);
+                                            $status = $value['status'] == 1 ? 'Approved' : 'Pending';
 
-                                        $col = '';
-                                        if ($trainer_col1) {
-                                            $col .= '' . $trainer_col1[0]['first_name'] . ' ' . $trainer_col1[0]['last_name'] . '';
+                                            $html .= '<tr>
+                                                <td>' . $value['training_title'] . '</td>
+                                                <td>' . $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] . '</td>
+                                                <td>' . $col . '</td>
+                                                <td>' . $value['required_no_of_hours'] . '</td>
+                                                <td>' . $enrollees_count . '</td>
+                                                <td>' . $enrollees_completion . '</td>
+                                                <td>' . $status . '</td>
+                                                <td class="option">
+                                                    <a data-toggles="tooltip" data-placement="top" title="Update" class="btn btn-sm btn-default" href="' . base_url() . '/trainer/updateTraining/?id=' . $value['id'] . '"><i class="fa fa-sync" aria-hidden="true"></i></a>
+                                                    <a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/trainer/classroom/?id=' . $value['id'] . '"> <i class="fa fa-university" aria-hidden="true"></i></a>
+                                                    <button class="btn-sm btn btn-default add-collaborator-btn" data-toggle="modal" data-target="#modal-addcollaborator" data-toggles="tooltip" title="Add Collaborator" style="margin-left: 2px" data-id="' . $value['id'] . '"><i class="fa fa-user" aria-hidden="true"></i></button>
+                                                    <!-- Add Message Button -->
+                                                    <button class="btn-sm btn btn-default message-btn" data-toggle="modal" data-target="#messageModal" data-training-id="' . $value['id'] . '" data-toggles="tooltip" title="Message Enrollees"><i class="fa fa-comment" aria-hidden="true"></i></button>
+                                                </td>
+                                            </tr>';
                                         }
-
-                                        if ($trainer_col2) {
-                                            $col .= ', ' . $trainer_col2[0]['first_name'] . ' ' . $trainer_col2[0]['last_name'] . '';
-                                        }
-
-                                        $enrollees_count = $this->System_model->fetchEnrollees($value['id']);
-                                        $enrollees_completion = $this->System_model->fetchEnrolleesCompletion($value['id']);
-                                        $status = $value['status'] == 1 ? 'Approved' : 'Pending';
-                                        $html .= '<tr>
-                                        <td>' . $value['training_title'] . '</td>' .
-                                            '<td>' . $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] . '</td>
-                                        <td>' . $col . '</td>
-                                        <td>' . $value['required_no_of_hours'] . '</td>
-                                        <td>' . $enrollees_count . '</td>
-                                        <td>' . $enrollees_completion . '</td>
-                                        <td>' . $status . '</td>
-                                        <td class="option"><a data-toggles="tooltip" data-placement="top" title="Update" class="btn btn-sm btn-default" href="' . base_url() . '/trainer/updateTraining/?id=' . $value['id'] . '"><i class="fa fa-sync" aria-hidden="true"></i></a><a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/trainer/classroom/?id=' . $value['id'] . '"> <i class="fa fa-university" aria-hidden="true"></i></a><button class="btn-sm btn btn-default add-collaborator-btn" data-toggle="modal" data-target="#modal-addcollaborator"  data-toggles="tooltip" title="Add Collaborator" style="margin-left: 2px" data-id="' . $value['id'] . '"><i class="fa fa-user" aria-hidden="true"></i></button></td>
-                                    </tr>';
-                                    }
-                                    echo $html;
-                                    ?>
+                                        echo $html;
+                                        ?>
                                     </tbody>
+
                                 </table>
                             </div>
                             <!-- /.card-body -->
@@ -229,6 +257,94 @@
             "autoWidth": false,
         });
     });
+
+    $(document).ready(function() {
+        // When the message button is clicked, pass the training ID to the modal
+        $('.message-btn').on('click', function() {
+            var trainingId = $(this).data('training-id');
+            fetchMessages(trainingId);  // Call the function to fetch messages
+        });
+
+        // Function to fetch messages based on training ID
+        function fetchMessages(trainingId) {
+            $.ajax({
+                url: '<?= base_url('control/fetchMessages') ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: { training_id: trainingId },
+                success: function(response) {
+                    const messages = response.messages;
+                    let messageHtml = '';
+
+                    messages.forEach(function(message) {
+                        const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Participant';
+                        const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
+
+                        messageHtml += `
+                            <div class="message ${senderClass}">
+                                <div class="message-header">
+                                    <strong>${sender}</strong>
+                                    <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
+                                </div>
+                                <div class="message-body">${message.message}</div>
+                            </div>
+                        `;
+                    });
+
+                    $('#messageContainer').html(messageHtml);
+                    $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
+                },
+                error: function() {
+                    alert('Error fetching messages.');
+                }
+            });
+        }
+
+        // Function to format timestamp (same as before)
+        function formatTimestamp(timestamp) {
+            const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
+            const minutes = Math.floor(diff / 60);
+            const hours = Math.floor(diff / 3600);
+            const days = Math.floor(diff / 86400);
+
+            if (days > 0) return days + " day(s) ago";
+            if (hours > 0) return hours + " hour(s) ago";
+            return minutes + " minute(s) ago";
+        }
+
+        // Function to send a new message
+        function sendMessage() {
+            const trainingId = $('#messageModal').data('training-id');  // Get the training ID
+            const message = $('#messageContent').val().trim();
+            
+            if (!message) {
+                alert('Please enter a message!');
+                return;
+            }
+
+            $.ajax({
+                url: '<?= base_url('control/sendMessage') ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: { 
+                    training_id: trainingId, 
+                    message: message 
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        $('#messageContent').val('');  // Clear the message input
+                        fetchMessages(trainingId);  // Refresh the messages
+                    } else {
+                        alert('Error sending message.');
+                    }
+                },
+                error: function() {
+                    alert('Error sending message.');
+                }
+            });
+        }
+    });
+
 </script>
 </body>
 </html>
