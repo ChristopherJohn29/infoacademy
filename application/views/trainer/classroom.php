@@ -30,6 +30,102 @@
         .form-control {
             color: black;
         }
+
+                /* General modal body styling */
+                .modal-body {
+            background-color: #fafafa; /* Light background for better contrast */
+            padding: 20px;
+        }
+
+        /* Message container styling */
+        .message-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9; /* Light grey background */
+            border-radius: 10px;
+            border: 1px solid #ddd; /* Subtle border for separation */
+            margin-bottom: 15px;
+        }
+
+        /* Individual message bubble styling */
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 15px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+
+        /* Sent message bubble styling */
+        .message-sent {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Received message bubble styling */
+        .message-received {
+            background-color: #e9ecef;
+            color: #495057;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            box-shadow: 0 2px 8px rgba(233, 236, 239, 0.6);
+        }
+
+        /* Message header styling (sender name and timestamp) */
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Timestamp text styling */
+        .message small.text-muted {
+            font-size: 12px;
+            font-weight: normal;
+            color: darkslategray;
+        }
+
+        /* Message body text */
+        .message-body {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Input area styling for typing messages */
+        textarea#messageContent {
+            resize: none;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            padding: 10px;
+            background-color: #fff;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Footer button styling */
+        .modal-footer .btn {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+
+        /* Close button in modal header */
+        .close {
+            font-size: 1.5rem;
+            color: #aaa;
+        }
+        .close:hover {
+            color: #000;
+        }
     </style>
         
     <!-- Google Font: Source Sans Pro -->
@@ -96,8 +192,28 @@
         <!-- /.content-header -->
         <!-- Main content -->
 
-
-
+    
+        <!-- Modal for sending message -->
+        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="messageModalLabel">Message Participant</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="messageContainer" class="message-container">
+                            <!-- Messages will be dynamically loaded here -->
+                        </div>
+                        <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
        <!-- For Checking Exam Modal -->
         <div class="modal fade" id="forCheckingExamModal" tabindex="-1" role="dialog" aria-labelledby="forCheckingExamModalLabel" aria-hidden="true">
@@ -157,7 +273,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Participant</th>
@@ -175,9 +291,9 @@
                                         <?php foreach ($training_class as $class): ?>
                                             <tr>
                                                 <td><?php echo html_escape($class['first_name']) . ' ' . html_escape($class['last_name']); ?></td>
-                                                <td><?php echo html_escape($class['participant_id']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['date_enrolled']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['status']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['participant_id']); ?></td>
+                                                <td><?php echo html_escape($class['date_enrolled']); ?></td>
+                                                <td><?php echo html_escape($class['status']); ?></td>
                                                 <td>
                                                     <?php 
                                                     if ($class['workshop_status'] == 'completed') {
@@ -200,12 +316,14 @@
                                                     }
                                                     ?>
                                                 </td>
-                                                <td><?php echo html_escape($class['date_completed']); ?></td> <!-- Replace with the correct field -->
-                                                <td><?php echo html_escape($class['question_answer']); ?></td> <!-- Replace with the correct field -->
+                                                <td><?php echo html_escape($class['date_completed']); ?></td>
+                                                <td><?php echo html_escape($class['question_answer']); ?></td>
                                                 <td>
                                                     <?php if ($class['is_complete'] == 1): ?>
                                                         <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>, <?php echo $class['author_id']; ?>)">View Certificate</button>
                                                     <?php endif; ?>
+                                                    <!-- Add Message Button -->
+                                                    <button class="btn btn-sm btn-success message-btn" data-training-id="<?php echo $class['training_id']; ?>" data-participant-id="<?php echo $class['participant_id']; ?>" data-toggle="modal" data-target="#messageModal">Message</button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -534,6 +652,108 @@
     function viewCertificate(participantId, trainingId, authorId) {
         // Open the certificate view page in a new tab
         window.open('/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId, '_blank');
+    }
+
+</script>
+
+<script>
+    // Open the modal and load messages when the "Message" button is clicked
+    $('.message-btn').on('click', function() {
+        var trainingId = $(this).data('training-id');
+        var participantId = $(this).data('participant-id');
+        
+        // Store the training ID and participant ID in the modal for later use
+        $('#messageModal').data('training-id', trainingId);
+        $('#messageModal').data('participant-id', participantId);
+
+        // Fetch messages for this training and participant
+        fetchMessages(trainingId, participantId);
+    });
+
+    // Function to fetch messages based on training ID and participant ID
+    function fetchMessages(trainingId, participantId) {
+        $.ajax({
+            url: '<?= base_url('control/fetchMessages') ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: { 
+                training_id: trainingId, 
+                participant_id: participantId 
+            },
+            success: function(response) {
+                const messages = response.messages;
+                let messageHtml = '';
+
+                messages.forEach(function(message) {
+                    const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Participant';
+                    const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
+
+                    messageHtml += `
+                        <div class="message ${senderClass}">
+                            <div class="message-header">
+                                <strong>${sender}</strong>
+                                <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
+                            </div>
+                            <div class="message-body">${message.message}</div>
+                        </div>
+                    `;
+                });
+
+                $('#messageContainer').html(messageHtml);
+                $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
+            },
+            error: function() {
+                alert('Error fetching messages.');
+            }
+        });
+    }
+
+    // Function to format timestamp (same as before)
+    function formatTimestamp(timestamp) {
+        const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
+        const minutes = Math.floor(diff / 60);
+        const hours = Math.floor(diff / 3600);
+        const days = Math.floor(diff / 86400);
+
+        if (days > 0) return days + " day(s) ago";
+        if (hours > 0) return hours + " hour(s) ago";
+        return minutes + " minute(s) ago";
+    }
+
+    // Function to send a new message
+    function sendMessage() {
+        const trainingId = $('#messageModal').data('training-id');  // Get the training ID
+        const participantId = $('#messageModal').data('participant-id');  // Get the participant ID (receiver)
+        const message = $('#messageContent').val().trim();  // Get the message content
+        const senderId = <?= $_SESSION['id'] ?>;  // Get the sender ID (trainer ID)
+
+        if (!message) {
+            alert('Please enter a message!');
+            return;
+        }
+
+        $.ajax({
+            url: '<?= base_url('control/send') ?>',  // Updated to use the 'send' method in the controller
+            type: 'POST',
+            dataType: 'json',
+            data: { 
+                sender_id: senderId, 
+                receiver_id: participantId,  // Participant is the receiver
+                message: message, 
+                training_id: trainingId
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#messageContent').val('');  // Clear the message input
+                    fetchMessages(trainingId, participantId);  // Refresh the messages
+                } else {
+                    alert('Error sending message.');
+                }
+            },
+            error: function() {
+                alert('Error sending message.');
+            }
+        });
     }
 
 </script>

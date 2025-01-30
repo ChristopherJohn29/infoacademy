@@ -32,101 +32,7 @@
             display: inline-flex !important;
         }
 
-        /* General modal body styling */
-        .modal-body {
-            background-color: #fafafa; /* Light background for better contrast */
-            padding: 20px;
-        }
 
-        /* Message container styling */
-        .message-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 15px;
-            background-color: #f9f9f9; /* Light grey background */
-            border-radius: 10px;
-            border: 1px solid #ddd; /* Subtle border for separation */
-            margin-bottom: 15px;
-        }
-
-        /* Individual message bubble styling */
-        .message {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-            padding: 12px;
-            border-radius: 15px;
-            max-width: 75%;
-            word-wrap: break-word;
-        }
-
-        /* Sent message bubble styling */
-        .message-sent {
-            background-color: #007bff;
-            color: white;
-            align-self: flex-end;
-            border-top-right-radius: 0;
-            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
-        }
-
-        /* Received message bubble styling */
-        .message-received {
-            background-color: #e9ecef;
-            color: #495057;
-            align-self: flex-start;
-            border-top-left-radius: 0;
-            box-shadow: 0 2px 8px rgba(233, 236, 239, 0.6);
-        }
-
-        /* Message header styling (sender name and timestamp) */
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        /* Timestamp text styling */
-        .message small.text-muted {
-            font-size: 12px;
-            font-weight: normal;
-            color: darkslategray;
-        }
-
-        /* Message body text */
-        .message-body {
-            font-size: 16px;
-            line-height: 1.4;
-        }
-
-        /* Input area styling for typing messages */
-        textarea#messageContent {
-            resize: none;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            padding: 10px;
-            background-color: #fff;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        /* Footer button styling */
-        .modal-footer .btn {
-            font-size: 14px;
-            padding: 8px 15px;
-        }
-
-        /* Close button in modal header */
-        .close {
-            font-size: 1.5rem;
-            color: #aaa;
-        }
-        .close:hover {
-            color: #000;
-        }
     </style>
  
     <!-- Google Font: Source Sans Pro -->
@@ -214,29 +120,6 @@
                     <a class="btn btn-success btn-sm col-sm-2" href="<?php echo base_url() . '/trainer/createTraining' ?>" style="margin:10px; margin-left:0px;">Create Training</a>
                 </div>
 
-                <!-- Message Modal -->
-                <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="messageModalLabel">Message Enrollees</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="messageContainer" class="message-container">
-                                    <!-- Messages will be dynamically loaded here -->
-                                </div>
-                                <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
               
                 <div class="row">
@@ -292,7 +175,6 @@
                                                     <a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/trainer/classroom/?id=' . $value['id'] . '"> <i class="fa fa-university" aria-hidden="true"></i></a>
                                                     <button class="btn-sm btn btn-default add-collaborator-btn" data-toggle="modal" data-target="#modal-addcollaborator" data-toggles="tooltip" title="Add Collaborator" style="margin-left: 2px" data-id="' . $value['id'] . '"><i class="fa fa-user" aria-hidden="true"></i></button>
                                                     <!-- Add Message Button -->
-                                                    <button class="btn-sm btn btn-default message-btn" data-toggle="modal" data-target="#messageModal" data-training-id="' . $value['id'] . '" data-toggles="tooltip" title="Message Enrollees"><i class="fa fa-comment" aria-hidden="true"></i></button>
                                                 </td>
                                             </tr>';
                                         }
@@ -338,93 +220,6 @@
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
-<script>
-    // When the message button is clicked, pass the training ID to the modal
-    $('.message-btn').on('click', function() {
-        var trainingId = $(this).data('training-id');
-        $('#messageModal').data('training-id', trainingId); // Store the training ID in the modal
-        fetchMessages(trainingId);  // Call the function to fetch messages
-    });
-
-    // Function to fetch messages based on training ID
-    function fetchMessages(trainingId) {
-        $.ajax({
-            url: '<?= base_url('control/fetchMessages') ?>',
-            type: 'POST',
-            dataType: 'json',
-            data: { training_id: trainingId },
-            success: function(response) {
-                const messages = response.messages;
-                let messageHtml = '';
-
-                messages.forEach(function(message) {
-                    const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Participant';
-                    const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
-
-                    messageHtml += `
-                        <div class="message ${senderClass}">
-                            <div class="message-header">
-                                <strong>${sender}</strong>
-                                <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
-                            </div>
-                            <div class="message-body">${message.message}</div>
-                        </div>
-                    `;
-                });
-
-                $('#messageContainer').html(messageHtml);
-                $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
-            },
-            error: function() {
-                alert('Error fetching messages.');
-            }
-        });
-    }
-
-    // Function to format timestamp
-    function formatTimestamp(timestamp) {
-        const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
-        const minutes = Math.floor(diff / 60);
-        const hours = Math.floor(diff / 3600);
-        const days = Math.floor(diff / 86400);
-
-        if (days > 0) return days + " day(s) ago";
-        if (hours > 0) return hours + " hour(s) ago";
-        return minutes + " minute(s) ago";
-    }
-
-    // Function to send a new message
-    function sendMessage() {
-        const trainingId = $('#messageModal').data('training-id');  // Get the training ID from the modal's data attribute
-        const message = $('#messageContent').val().trim();
-        
-        if (!message) {
-            alert('Please enter a message!');
-            return;
-        }
-
-        $.ajax({
-            url: '<?= base_url('control/send') ?>',  // Updated to use the 'send' method in the controller
-            type: 'POST',
-            dataType: 'json',
-            data: { 
-                training_id: trainingId, 
-                message: message 
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    $('#messageContent').val('');  // Clear the message input
-                    fetchMessages(trainingId);  // Refresh the messages
-                } else {
-                    alert('Error sending message.');
-                }
-            },
-            error: function() {
-                alert('Error sending message.');
-            }
-        });
-    }
-</script>
 
 <script>
     $(function () {
