@@ -340,8 +340,6 @@
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
 <script>
 
-    
-$(document).ready(function() {
         // When the message button is clicked, pass the training ID to the modal
         $('.message-btn').on('click', function() {
             var trainingId = $(this).data('training-id');
@@ -426,7 +424,6 @@ $(document).ready(function() {
                 }
             });
         }
-    });
 
 </script>
 <script>
