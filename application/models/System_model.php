@@ -606,12 +606,18 @@ class System_model extends CI_Model
     
     // Helper method to insert the message into the database
     private function insertMessage($sender_id, $receiver_id, $message, $training_id) {
+
+        $manilaTime = new DateTime("now", new DateTimeZone('Asia/Manila'));
+
+        // Format it for the database
+        $timestamp = $manilaTime->format('Y-m-d H:i:s');
         // Prepare data for insertion into the 'messages' table
         $data = [
             'sender_id'   => $sender_id,   // ID of the sender (trainer or participant)
             'receiver_id' => $receiver_id, // ID of the receiver (trainer or participant)
             'training_id' => $training_id, // ID of the training session
-            'message'     => $message      // Message content
+            'message'     => $message,      // Message content
+            'timestamp'   => $timestamp
         ];
     
         // Insert the message into the 'messages' table
