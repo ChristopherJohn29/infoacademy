@@ -103,6 +103,7 @@
         .message small.text-muted {
             font-size: 12px;
             font-weight: normal;
+            color: darkslategray;
         }
 
         /* Message body text */
