@@ -555,18 +555,31 @@ class System_model extends CI_Model
     }
 
     public function sendMessage($sender_id, $receiver_id, $message, $training_id) {
+        // Prepare data for insertion
         $data = [
-            'sender_id' => $sender_id,
+            'sender_id'   => $sender_id,
             'receiver_id' => $receiver_id,
             'training_id' => $training_id,
-            'message' => $message
+            'message'     => $message
         ];
+        
+        // Insert message into the 'messages' table
         $this->db->insert('messages', $data);
     }
-
     public function getMessagesByTraining($training_id) {
         $this->db->where('training_id', $training_id);
         $query = $this->db->get('messages');
         return $query->result_array();
     }
+
+    public function isEnrolled($participant_id, $training_id) {
+        // Check if the participant is enrolled in the specified training
+        $this->db->where('user_id', $participant_id);
+        $this->db->where('training_id', $training_id);
+        $query = $this->db->get('training_class');
+        
+        // Return true if enrolled, otherwise false
+        return $query->num_rows() > 0;
+    }
+    
 }

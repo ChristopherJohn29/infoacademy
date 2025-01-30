@@ -586,6 +586,16 @@ class Control extends CI_Controller
         
     }
 
+    public function checkEnrollment() {
+        $participant_id = $this->input->post('participant_id');
+        $training_id = $this->input->post('training_id');
+    
+        // Check if the participant is enrolled in the training
+        $is_enrolled = $this->System_model->isEnrolled($participant_id, $training_id);
+    
+        echo json_encode(['enrolled' => $is_enrolled]);
+    }
+
     public function fetchMessages($training_id) {
         $messages = $this->System_model->getMessagesByTraining($training_id);
         echo json_encode($messages);
