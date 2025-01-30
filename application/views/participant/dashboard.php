@@ -349,11 +349,10 @@
                 // Update the message container with the new messages
                 $('#messageContainer').html(messageHtml);
 
-                // Auto-scroll to the bottom
                 setTimeout(function() {
                 var messageContainer = $('#messageContainer')[0];
                 messageContainer.scrollTop = messageContainer.scrollHeight;  // Scroll to the bottom
-                }, 0); 
+                }, 10); 
             },
             error: function() {
                 alert('Error fetching messages.');
