@@ -596,7 +596,8 @@ class Control extends CI_Controller
         echo json_encode(['enrolled' => $is_enrolled]);
     }
 
-    public function fetchMessages($training_id) {
+    public function fetchMessages() {
+        $training_id = $this->input->post('training_id');
         $messages = $this->System_model->getMessagesByTraining($training_id);
         echo json_encode($messages);
     }
