@@ -195,7 +195,7 @@
 
     function openMessageModal(trainerId, trainingId) {
         $.ajax({
-            url: '<?= base_url('messages/checkEnrollment') ?>',
+            url: '<?= base_url('control/checkEnrollment') ?>',
             type: 'POST',
             data: {
                 participant_id: <?= $_SESSION['id'] ?>, 
@@ -219,7 +219,7 @@
 
     function fetchMessages(trainingId) {
         $.ajax({
-            url: '<?= base_url('messages/fetchMessages') ?>',
+            url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
             data: { training_id: trainingId },
             success: function(response) {
@@ -257,7 +257,7 @@
         }
 
         $.ajax({
-            url: '<?= base_url('messages/send') ?>',
+            url: '<?= base_url('control/send') ?>',
             type: 'POST',
             data: {
                 sender_id: participantId,
