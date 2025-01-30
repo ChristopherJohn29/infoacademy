@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        date_default_timezone_set('Asia/Manila');
         $this->load->model('System_model');
         if (isset($_SESSION['account_type'])) {
             if ($_SESSION['account_type'] == 3) {
@@ -16,6 +17,7 @@ class Admin extends CI_Controller
         } else {
             redirect('control');
         }
+        
     }
 
     public function dashboard()
