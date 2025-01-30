@@ -225,10 +225,11 @@
         $.ajax({
             url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
-            dataType: 'json',
+            dataType: 'json',  // Expecting JSON response
             data: { training_id: trainingId },
             success: function(response) {
-                const messages = JSON.parse(response);
+                // Directly use the response since it's already a parsed JSON object
+                const messages = response.messages;
                 let messageHtml = '';
 
                 // Loop through each message and create HTML content
@@ -250,6 +251,7 @@
             }
         });
     }
+
 
     function sendMessage() {
         const messageContent = $('#messageContent').val();
