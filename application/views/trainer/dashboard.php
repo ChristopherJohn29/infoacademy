@@ -394,7 +394,7 @@
     }
 
     // Function to send a new message
-    function send() {
+    function sendMessage() {
         const trainingId = $('#messageModal').data('training-id');  // Get the training ID from the modal's data attribute
         const message = $('#messageContent').val().trim();
         
