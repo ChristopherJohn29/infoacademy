@@ -323,11 +323,22 @@
                                                 <td><?php echo html_escape($class['question_answer']); ?></td>
                                                 <td>
                                                     <?php if ($class['is_complete'] == 1): ?>
-                                                        <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>, <?php echo $class['author_id']; ?>)">View Certificate</button>
+                                                        <!-- View Certificate Button with Icon -->
+                                                        <button class="btn btn-sm btn-primary" onclick="viewCertificate(<?php echo $class['participant_id']; ?>, <?php echo $class['training_id']; ?>, <?php echo $class['author_id']; ?>)">
+                                                            <i class="fa fa-certificate" aria-hidden="true"></i> <!-- Font Awesome Certificate Icon -->
+                                                        </button>
                                                     <?php endif; ?>
-                                                    <!-- Add Message Button -->
-                                                    <button class="btn btn-sm btn-success message-btn" data-training-id="<?php echo $class['training_id']; ?>" data-participant-id="<?php echo $class['participant_id']; ?>" data-toggle="modal" data-target="#messageModal">Message</button>
+                                                    
+                                                    <!-- Message Button with Icon -->
+                                                    <button class="btn btn-sm btn-success message-btn" 
+                                                            data-training-id="<?php echo $class['training_id']; ?>" 
+                                                            data-participant-id="<?php echo $class['participant_id']; ?>" 
+                                                            data-toggle="modal" 
+                                                            data-target="#messageModal">
+                                                        <i class="fa fa-comment" aria-hidden="true"></i> <!-- Font Awesome Comment Icon -->
+                                                    </button>
                                                 </td>
+
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
