@@ -141,7 +141,7 @@
                         endif;
 
 
-                        $option .= '<a style="margin-left: 2px" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $trainer['author_id'] . ', ' . $value['training_id'] . ')"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
+                        $option .= '<a style="margin-left: 2px" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $training[0]['author_id'] . ', ' . $value['training_id'] . ')"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
                         ?>
                         <tr>
                             <td><?= $training_title ?></td>
