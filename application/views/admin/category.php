@@ -370,7 +370,6 @@
                 url: url,
                 method: 'POST',
                 data: { categoryName: categoryName },
-                dataType: 'json', // Expecting JSON response from the server
                 success: function (response) {
                     if (response.status === 'success') {
                         // Show success message
