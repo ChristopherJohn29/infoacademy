@@ -82,7 +82,9 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="messageModalLabel">Message Trainer</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div id="messageContainer" class="message-container">
@@ -91,12 +93,13 @@
                             <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="row my-profile-row">
                 <table id="example1" class="table table-bordered table-striped">
