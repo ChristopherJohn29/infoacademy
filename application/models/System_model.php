@@ -574,7 +574,7 @@ class System_model extends CI_Model
 
     public function isEnrolled($participant_id, $training_id) {
         // Check if the participant is enrolled in the specified training
-        $this->db->where('user_id', $participant_id);
+        $this->db->where('participant_id', $participant_id);
         $this->db->where('training_id', $training_id);
         $query = $this->db->get('training_class');
         
