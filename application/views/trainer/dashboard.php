@@ -339,24 +339,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
 <script>
-    $(function () {
-        $('.select2').select2({
-            maximumSelectionLength: 2,
-            formatSelectionTooBig: function (limit) {
-                return 'Too many collaborators';
-            }
-        });
-        $('[data-toggles="tooltip"]').tooltip();
-        jQuery('#example1 tbody').on('click', '.add-collaborator-btn', function () {
-            jQuery('#training-id').val(jQuery(this).data('id'));
-        });
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-    });
 
-    $(document).ready(function() {
+    
+$(document).ready(function() {
         // When the message button is clicked, pass the training ID to the modal
         $('.message-btn').on('click', function() {
             var trainingId = $(this).data('training-id');
@@ -441,6 +426,25 @@
                 }
             });
         }
+    });
+
+</script>
+<script>
+    $(function () {
+        $('.select2').select2({
+            maximumSelectionLength: 2,
+            formatSelectionTooBig: function (limit) {
+                return 'Too many collaborators';
+            }
+        });
+        $('[data-toggles="tooltip"]').tooltip();
+        jQuery('#example1 tbody').on('click', '.add-collaborator-btn', function () {
+            jQuery('#training-id').val(jQuery(this).data('id'));
+        });
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
     });
 
 </script>
