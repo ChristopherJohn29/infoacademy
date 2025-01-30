@@ -714,7 +714,8 @@
                 });
 
                 $('#messageContainer').html(messageHtml);
-                $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
+                var messageContainer = $('#messageContainer')[0];
+                messageContainer.scrollTop = messageContainer.scrollHeight;
             },
             error: function() {
                 alert('Error fetching messages.');
