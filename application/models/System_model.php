@@ -576,16 +576,40 @@ class System_model extends CI_Model
     }
 
     public function sendMessage($sender_id, $receiver_id, $message, $training_id) {
-        // First, check if the sender (participant) is enrolled in the specific training
+        // Check if the sender is the trainer (author)
+        $this->db->select('author_id');
+        $this->db->where('id', $training_id);  // Get the training details by training_id
+        $query = $this->db->get('training');
+    
+        $trainer = $query->row();  // Fetch the result
+    
+        if (!$trainer) {
+            // If training doesn't exist, return error
+            return ['status' => 'error', 'message' => 'Training not found.'];
+        }
+    
+        // If the sender is the trainer (author), we skip the enrollment check
+        if ($sender_id == $trainer->author_id) {
+            // Trainer is always allowed to send messages
+            return $this->insertMessage($sender_id, $receiver_id, $message, $training_id);
+        }
+    
+        // If the sender is a participant, check if they are enrolled in the training
         if (!$this->isEnrolled($sender_id, $training_id)) {
             // If the participant is not enrolled, return an error
             return ['status' => 'error', 'message' => 'You must be enrolled in this training to send a message.'];
         }
     
+        // Otherwise, insert the message
+        return $this->insertMessage($sender_id, $receiver_id, $message, $training_id);
+    }
+    
+    // Helper method to insert the message into the database
+    private function insertMessage($sender_id, $receiver_id, $message, $training_id) {
         // Prepare data for insertion into the 'messages' table
         $data = [
-            'sender_id'   => $sender_id,   // ID of the sender (participant)
-            'receiver_id' => $receiver_id, // ID of the receiver (trainer)
+            'sender_id'   => $sender_id,   // ID of the sender (trainer or participant)
+            'receiver_id' => $receiver_id, // ID of the receiver (trainer or participant)
             'training_id' => $training_id, // ID of the training session
             'message'     => $message      // Message content
         ];
@@ -596,6 +620,4 @@ class System_model extends CI_Model
         // Return success response
         return ['status' => 'success', 'message' => 'Message sent successfully.'];
     }
-    
-    
 }
