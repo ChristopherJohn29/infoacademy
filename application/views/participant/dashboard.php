@@ -225,6 +225,7 @@
         $.ajax({
             url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
+            dataType: 'json',
             data: { training_id: trainingId },
             success: function(response) {
                 const messages = JSON.parse(response);
