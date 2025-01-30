@@ -585,5 +585,11 @@ class Control extends CI_Controller
         }
         
     }
+
+    public function fetchMessages($training_id) {
+        $messages = $this->System_model->getMessagesByTraining($training_id);
+        echo json_encode($messages);
+    }
+    
     
 }

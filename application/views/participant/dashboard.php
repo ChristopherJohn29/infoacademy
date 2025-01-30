@@ -76,6 +76,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="messageModalLabel">Message Trainer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="messageContainer" class="message-container">
+                                <!-- Messages will be dynamically loaded here -->
+                            </div>
+                            <textarea id="messageContent" class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row my-profile-row">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -119,10 +141,7 @@
                         endif;
 
 
-                        $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="' . base_url() . '"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
-
-
-
+                        $option .= '<a style="margin-left: 2px" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $trainer['author_id'] . ', ' . $value['training_id'] . ')"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
                         ?>
                         <tr>
                             <td><?= $training_title ?></td>
@@ -173,6 +192,96 @@
         // Open the certificate view page in a new tab
         window.open('/control/view_certificate/' + participantId + '/' + trainingId + '/' + authorId, '_blank');
     }
+
+    function openMessageModal(trainerId, trainingId) {
+        $.ajax({
+            url: '<?= base_url('messages/checkEnrollment') ?>',
+            type: 'POST',
+            data: {
+                participant_id: <?= $_SESSION['id'] ?>, 
+                training_id: trainingId
+            },
+            success: function(response) {
+                if (response.enrolled) {
+                    $('#messageModal').modal('show');
+                    $('#messageModal').data('trainerId', trainerId);
+                    $('#messageModal').data('trainingId', trainingId);
+                    fetchMessages(trainingId);  // Fetch messages for the training
+                } else {
+                    alert('You must be enrolled in the training to message the trainer.');
+                }
+            },
+            error: function() {
+                alert('Error checking enrollment.');
+            }
+        });
+    }
+
+    function fetchMessages(trainingId) {
+        $.ajax({
+            url: '<?= base_url('messages/fetchMessages') ?>',
+            type: 'POST',
+            data: { training_id: trainingId },
+            success: function(response) {
+                const messages = JSON.parse(response);
+                let messageHtml = '';
+
+                // Display each message in the modal
+                messages.forEach(function(message) {
+                    const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Trainer';
+                    messageHtml += `
+                        <div class="message">
+                            <strong>${sender}:</strong> ${message.message}
+                            <small>${message.timestamp}</small>
+                        </div>
+                    `;
+                });
+
+                $('#messageContainer').html(messageHtml);  // Assuming you have a container to show messages
+            },
+            error: function() {
+                alert('Error fetching messages.');
+            }
+        });
+    }
+
+    function sendMessage() {
+        const messageContent = $('#messageContent').val();
+        const trainerId = $('#messageModal').data('trainerId');
+        const trainingId = $('#messageModal').data('trainingId');
+        const participantId = <?= $_SESSION["id"] ?>;
+
+        if (messageContent.trim() === '') {
+            alert('Please type a message.');
+            return;
+        }
+
+        $.ajax({
+            url: '<?= base_url('messages/send') ?>',
+            type: 'POST',
+            data: {
+                sender_id: participantId,
+                receiver_id: trainerId,
+                message: messageContent,
+                training_id: trainingId
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('Message sent!');
+                    $('#messageModal').modal('hide');
+                    $('#messageContent').val('');
+                    fetchMessages(trainingId);  // Refresh messages after sending
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function() {
+                alert('Error sending message');
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>

@@ -553,4 +553,20 @@ class System_model extends CI_Model
             return false; // Update failed
         }
     }
+
+    public function sendMessage($sender_id, $receiver_id, $message, $training_id) {
+        $data = [
+            'sender_id' => $sender_id,
+            'receiver_id' => $receiver_id,
+            'training_id' => $training_id,
+            'message' => $message
+        ];
+        $this->db->insert('messages', $data);
+    }
+
+    public function getMessagesByTraining($training_id) {
+        $this->db->where('training_id', $training_id);
+        $query = $this->db->get('messages');
+        return $query->result_array();
+    }
 }
