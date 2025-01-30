@@ -352,7 +352,7 @@
                 setTimeout(function() {
                 var messageContainer = $('#messageContainer')[0];
                 messageContainer.scrollTop = messageContainer.scrollHeight;  // Scroll to the bottom
-                }, 10); 
+                }, 500);
             },
             error: function() {
                 alert('Error fetching messages.');
