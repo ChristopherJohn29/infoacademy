@@ -67,7 +67,6 @@
             margin-bottom: 15px;
             padding: 12px;
             border-radius: 15px;
-            max-width: 75%;
             word-wrap: break-word;
         }
 
