@@ -20,9 +20,19 @@
                                 </li>
                             </ul>
                             <div class="top_bar_login ml-auto">
-                                <div class="login_button"><a href="<?php echo base_url() . '/control/login' ?>">Login /
-                                        Sign up</a></div>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <!-- Display Logout Button if the user is logged in -->
+                                    <div class="login_button">
+                                        <a href="<?php echo base_url() . '/control/logout'; ?>">Logout</a>
+                                    </div>
+                                <?php else: ?>
+                                    <!-- Display Login / Sign Up Button if the user is not logged in -->
+                                    <div class="login_button">
+                                        <a href="<?php echo base_url() . '/control/login'; ?>">Login / Sign up</a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
+
                         </div>
                     </div>
                 </div>
