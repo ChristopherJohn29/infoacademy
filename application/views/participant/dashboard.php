@@ -394,12 +394,10 @@
             },
             success: function(response) {
                 if (response.status === 'success') {
-                    alert('Message sent!');
-                    $('#messageModal').modal('hide');
-                    $('#messageContent').val('');
-                    fetchMessages(trainingId);  // Refresh messages after sending
+                    $('#messageContent').val('');  // Clear the message input
+                    fetchMessages(trainingId);  // Refresh the messages
                 } else {
-                    alert(response.message);
+                    alert('Error sending message.');
                 }
             },
             error: function() {
