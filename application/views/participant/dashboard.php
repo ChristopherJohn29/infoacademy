@@ -197,6 +197,7 @@
         $.ajax({
             url: '<?= base_url('control/checkEnrollment') ?>',
             type: 'POST',
+            dataType: 'json',
             data: {
                 participant_id: <?= $_SESSION['id'] ?>, 
                 training_id: trainingId
@@ -221,6 +222,7 @@
         $.ajax({
             url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
+            dataType: 'json',
             data: { training_id: trainingId },
             success: function(response) {
                 const messages = JSON.parse(response);
@@ -259,6 +261,7 @@
         $.ajax({
             url: '<?= base_url('control/send') ?>',
             type: 'POST',
+            dataType: 'json',
             data: {
                 sender_id: participantId,
                 receiver_id: trainerId,
