@@ -165,7 +165,7 @@ ini_set('display_errors', 0);
  *  Resolve the system path for increased reliability
  * ---------------------------------------------------------------
  */
-
+	date_default_timezone_set('Asia/Manila');
 	// Set the current directory correctly for CLI requests
 	if (defined('STDIN'))
 	{
@@ -280,6 +280,7 @@ ini_set('display_errors', 0);
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+	
 
 /*
  * --------------------------------------------------------------------
