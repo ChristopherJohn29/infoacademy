@@ -555,10 +555,15 @@ class System_model extends CI_Model
     }
 
     public function getMessagesByTraining($training_id) {
+        // Retrieve all messages for the given training_id
         $this->db->where('training_id', $training_id);
+        $this->db->order_by('timestamp', 'ASC'); // Optional: Order messages by timestamp (oldest first)
         $query = $this->db->get('messages');
+        
+        // Return the result as an array
         return $query->result_array();
     }
+    
 
     public function isEnrolled($participant_id, $training_id) {
         // Check if the participant is enrolled in the specified training

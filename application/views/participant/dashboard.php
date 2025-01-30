@@ -222,13 +222,12 @@
         $.ajax({
             url: '<?= base_url('control/fetchMessages') ?>',
             type: 'POST',
-            dataType: 'json',
             data: { training_id: trainingId },
             success: function(response) {
                 const messages = JSON.parse(response);
                 let messageHtml = '';
 
-                // Display each message in the modal
+                // Loop through each message and create HTML content
                 messages.forEach(function(message) {
                     const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Trainer';
                     messageHtml += `
@@ -239,7 +238,8 @@
                     `;
                 });
 
-                $('#messageContainer').html(messageHtml);  // Assuming you have a container to show messages
+                // Update the message container with the new messages
+                $('#messageContainer').html(messageHtml);
             },
             error: function() {
                 alert('Error fetching messages.');

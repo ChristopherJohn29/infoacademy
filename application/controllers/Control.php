@@ -597,11 +597,22 @@ class Control extends CI_Controller
     }
 
     public function fetchMessages() {
+        // Get the training_id from the POST request
         $training_id = $this->input->post('training_id');
+    
+        if (!$training_id) {
+            echo json_encode(['status' => 'error', 'message' => 'Training ID is required.']);
+            return;
+        }
+    
+        // Fetch messages related to the specific training_id
         $messages = $this->System_model->getMessagesByTraining($training_id);
-        echo json_encode($messages);
+    
+        // Return the messages as a JSON response
+        echo json_encode(['status' => 'success', 'messages' => $messages]);
     }
-
+    
+    
     
     public function send() {
         $sender_id   = $this->input->post('sender_id');
