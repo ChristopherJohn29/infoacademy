@@ -339,93 +339,93 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/demo.js"></script>
 <script>
+    // When the message button is clicked, pass the training ID to the modal
+    $('.message-btn').on('click', function() {
+        var trainingId = $(this).data('training-id');
+        $('#messageModal').data('training-id', trainingId); // Store the training ID in the modal
+        fetchMessages(trainingId);  // Call the function to fetch messages
+    });
 
-        // When the message button is clicked, pass the training ID to the modal
-        $('.message-btn').on('click', function() {
-            var trainingId = $(this).data('training-id');
-            fetchMessages(trainingId);  // Call the function to fetch messages
-        });
+    // Function to fetch messages based on training ID
+    function fetchMessages(trainingId) {
+        $.ajax({
+            url: '<?= base_url('control/fetchMessages') ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: { training_id: trainingId },
+            success: function(response) {
+                const messages = response.messages;
+                let messageHtml = '';
 
-        // Function to fetch messages based on training ID
-        function fetchMessages(trainingId) {
-            $.ajax({
-                url: '<?= base_url('control/fetchMessages') ?>',
-                type: 'POST',
-                dataType: 'json',
-                data: { training_id: trainingId },
-                success: function(response) {
-                    const messages = response.messages;
-                    let messageHtml = '';
+                messages.forEach(function(message) {
+                    const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Participant';
+                    const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
 
-                    messages.forEach(function(message) {
-                        const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Participant';
-                        const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
-
-                        messageHtml += `
-                            <div class="message ${senderClass}">
-                                <div class="message-header">
-                                    <strong>${sender}</strong>
-                                    <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
-                                </div>
-                                <div class="message-body">${message.message}</div>
+                    messageHtml += `
+                        <div class="message ${senderClass}">
+                            <div class="message-header">
+                                <strong>${sender}</strong>
+                                <small class="text-muted">${formatTimestamp(message.timestamp)}</small>
                             </div>
-                        `;
-                    });
+                            <div class="message-body">${message.message}</div>
+                        </div>
+                    `;
+                });
 
-                    $('#messageContainer').html(messageHtml);
-                    $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
-                },
-                error: function() {
-                    alert('Error fetching messages.');
-                }
-            });
-        }
-
-        // Function to format timestamp (same as before)
-        function formatTimestamp(timestamp) {
-            const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
-            const minutes = Math.floor(diff / 60);
-            const hours = Math.floor(diff / 3600);
-            const days = Math.floor(diff / 86400);
-
-            if (days > 0) return days + " day(s) ago";
-            if (hours > 0) return hours + " hour(s) ago";
-            return minutes + " minute(s) ago";
-        }
-
-        // Function to send a new message
-        function sendMessage() {
-            const trainingId = $('#messageModal').data('training-id');  // Get the training ID
-            const message = $('#messageContent').val().trim();
-            
-            if (!message) {
-                alert('Please enter a message!');
-                return;
+                $('#messageContainer').html(messageHtml);
+                $('#messageContainer').scrollTop($('#messageContainer')[0].scrollHeight); // Scroll to the bottom
+            },
+            error: function() {
+                alert('Error fetching messages.');
             }
+        });
+    }
 
-            $.ajax({
-                url: '<?= base_url('control/sendMessage') ?>',
-                type: 'POST',
-                dataType: 'json',
-                data: { 
-                    training_id: trainingId, 
-                    message: message 
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        $('#messageContent').val('');  // Clear the message input
-                        fetchMessages(trainingId);  // Refresh the messages
-                    } else {
-                        alert('Error sending message.');
-                    }
-                },
-                error: function() {
+    // Function to format timestamp
+    function formatTimestamp(timestamp) {
+        const diff = Math.floor((new Date() - new Date(timestamp)) / 1000);
+        const minutes = Math.floor(diff / 60);
+        const hours = Math.floor(diff / 3600);
+        const days = Math.floor(diff / 86400);
+
+        if (days > 0) return days + " day(s) ago";
+        if (hours > 0) return hours + " hour(s) ago";
+        return minutes + " minute(s) ago";
+    }
+
+    // Function to send a new message
+    function send() {
+        const trainingId = $('#messageModal').data('training-id');  // Get the training ID from the modal's data attribute
+        const message = $('#messageContent').val().trim();
+        
+        if (!message) {
+            alert('Please enter a message!');
+            return;
+        }
+
+        $.ajax({
+            url: '<?= base_url('control/send') ?>',  // Updated to use the 'send' method in the controller
+            type: 'POST',
+            dataType: 'json',
+            data: { 
+                training_id: trainingId, 
+                message: message 
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#messageContent').val('');  // Clear the message input
+                    fetchMessages(trainingId);  // Refresh the messages
+                } else {
                     alert('Error sending message.');
                 }
-            });
-        }
-
+            },
+            error: function() {
+                alert('Error sending message.');
+            }
+        });
+    }
 </script>
+
 <script>
     $(function () {
         $('.select2').select2({
