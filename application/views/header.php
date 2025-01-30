@@ -20,7 +20,7 @@
                                 </li>
                             </ul>
                             <div class="top_bar_login ml-auto">
-                                <?php if (isset($_SESSION['user_id'])): ?>
+                                <?php if (isset($_SESSION['id'])): ?>
                                     <!-- Display Logout Button if the user is logged in -->
                                     <div class="login_button">
                                         <a href="<?php echo base_url() . '/control/logout'; ?>">Logout</a>
