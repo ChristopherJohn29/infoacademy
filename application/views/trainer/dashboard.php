@@ -31,6 +31,102 @@
         .option {
             display: inline-flex !important;
         }
+
+        /* General modal body styling */
+        .modal-body {
+            background-color: #fafafa; /* Light background for better contrast */
+            padding: 20px;
+        }
+
+        /* Message container styling */
+        .message-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9; /* Light grey background */
+            border-radius: 10px;
+            border: 1px solid #ddd; /* Subtle border for separation */
+            margin-bottom: 15px;
+        }
+
+        /* Individual message bubble styling */
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 15px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+
+        /* Sent message bubble styling */
+        .message-sent {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Received message bubble styling */
+        .message-received {
+            background-color: #e9ecef;
+            color: #495057;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+            box-shadow: 0 2px 8px rgba(233, 236, 239, 0.6);
+        }
+
+        /* Message header styling (sender name and timestamp) */
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Timestamp text styling */
+        .message small.text-muted {
+            font-size: 12px;
+            font-weight: normal;
+            color: darkslategray;
+        }
+
+        /* Message body text */
+        .message-body {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Input area styling for typing messages */
+        textarea#messageContent {
+            resize: none;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            padding: 10px;
+            background-color: #fff;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Footer button styling */
+        .modal-footer .btn {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+
+        /* Close button in modal header */
+        .close {
+            font-size: 1.5rem;
+            color: #aaa;
+        }
+        .close:hover {
+            color: #000;
+        }
     </style>
  
     <!-- Google Font: Source Sans Pro -->
