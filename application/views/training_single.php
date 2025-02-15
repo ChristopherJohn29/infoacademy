@@ -78,7 +78,7 @@
                                 <div class="tab_panel active">
                                     <div class="tab_panel_title">Description</div>
                                     <div class="tab_panel_content">
-                                        <div class="tab_panel_text">
+                                        <div class="tab_panel_text" style="text-align:justify;">
 
                                             <p><?= $description ?></p>
                                         </div>
