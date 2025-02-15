@@ -249,7 +249,23 @@
                             <td><?=$trainer_name?></td>
                             <td><?= $value['date_enrolled'] ?></td>
                             <td><?= $status ?></td>
-                            <td>test</td>
+                            <?php 
+                                // Decode the BLOB data (assuming it is stored as a JSON string)
+                                $instructions = json_decode($value['training_instruction'], true);
+
+                                // Initialize total percentage counter
+                                $total_percentage_completed = 0;
+
+                                // Check if decoding was successful and iterate over the data
+                                if (is_array($instructions)) {
+                                    foreach ($instructions as $instruction) {
+                                        if (isset($instruction['completed']) && $instruction['completed'] == 1) {
+                                            $total_percentage_completed += intval($instruction['percentage']);
+                                        }
+                                    }
+                                }
+                            ?>
+                            <td><?=$total_percentage_completed?></td>
                             <td><?= $option ?></td>
                         </tr>
                         <?php
