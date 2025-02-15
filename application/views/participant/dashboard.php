@@ -206,7 +206,7 @@
                         <th>Enrolled Training</th>
                         <th>Trainer</th>
                         <th>Date of Enrollment</th>
-                        <th>Status</th>
+                        <th>Payment Status</th>
                         <th>Progress</th>
                         <th>Options</th>
                     </tr>
