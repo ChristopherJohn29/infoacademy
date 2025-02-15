@@ -65,34 +65,18 @@
                 <!-- Course -->
                 <div class="col-lg-8">
                     <div class="course_container">
-                        <div class="course_title">Software Training</div>
-                        <div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-                            <!-- Course Info Item -->
-                            <div class="course_info_item">
-                                <div class="course_info_title">Trainer:</div>
-                                <?php $trainer = $this->System_model->fetchTrainer($author_id); ?>
-                                <div class="course_info_text"><a href="#"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></a></div>
-                            </div>
-         
-                            <!-- Course Info Item -->
-                            <div class="course_info_item">
-                                <div class="course_info_title">Categories:</div>
-                                <div class="course_info_text"><?=$category_name?> <?=$sub_category_name ? " - ".$sub_category_name : ""?></div>
-                            </div>
-                        </div>
+                  
                         <!-- Course Image -->
                         <div class="course_image">
                             <img src="<?= base_url() . '/uploads/training_blank.png'; ?>" style="background-image: url('<?= base_url() . '/uploads/' . $banner ?>'); background-size: cover; background-position: center;" alt="">
                         </div>
                         <!-- Course Tabs -->
                         <div class="course_tabs_container">
-                            <div class="tabs d-flex flex-row align-items-center justify-content-start">
-                                <div class="tab active">description</div>
-                            </div>
+                          
                             <div class="tab_panels">
                                 <!-- Description -->
                                 <div class="tab_panel active">
-                                    <div class="tab_panel_title">Software Training</div>
+                                    <div class="tab_panel_title">Description</div>
                                     <div class="tab_panel_content">
                                         <div class="tab_panel_text">
 
@@ -101,7 +85,7 @@
                                         <?php if ($requirements) {
                                             ?>
                                             <div class="tab_panel_section">
-                                            <div class="tab_panel_subtitle">Requirements</div>
+                                            <div class="tab_panel_subtitle">Course Objective</div>
                                             <ul class="tab_panel_text">
                                                 <p><?= $requirements ?></p>
                                             </ul>
@@ -110,7 +94,7 @@
                                         <?php if ($target_participant) {
                                             ?>
                                             <div class="tab_panel_section">
-                                                <div class="tab_panel_subtitle">Target participant?</div>
+                                                <div class="tab_panel_subtitle">Methodology</div>
                                                 <div class="tab_panel_text">
                                                     <p><?= $target_participant ?></p>
                                                 </div>
