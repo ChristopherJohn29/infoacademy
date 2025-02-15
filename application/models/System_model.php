@@ -147,16 +147,44 @@ class System_model extends CI_Model
 
     }
 
-    public function saveCompleted($tid = false){
-        $query = array(
-            'is_complete' => 1
-        );
+    public function saveCompleted($tid = false)
+    {
+        if (!$tid) {
+            return false; // Prevent processing if $tid is not provided
+        }
 
-        $this->db->set($query);
+        $participant_id = intval($_SESSION['id']);
+
+        // Check if the record is already marked as complete
+        $this->db->select('is_complete');
+        $this->db->from('training_class');
         $this->db->where('training_id', $tid);
-        $this->db->where('participant_id', intval($_SESSION['id']));
+        $this->db->where('participant_id', $participant_id);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            if ($row->is_complete == 1) {
+                return false; // Already marked as complete, no update needed
+            }
+        }
+
+        // Proceed with update if not already completed
+        $manilaTime = new DateTime("now", new DateTimeZone('Asia/Manila'));
+        $date = $manilaTime->format('Y-m-d');
+
+        $updateData = [
+            'is_complete' => 1,
+            'date_completed' => $date
+        ];
+
+        $this->db->set($updateData);
+        $this->db->where('training_id', $tid);
+        $this->db->where('participant_id', $participant_id);
+        
         return $this->db->update('training_class');
     }
+
 
     public function saveExamination($data = array()){
         if ($this->db->insert('examination_data', $data)) {

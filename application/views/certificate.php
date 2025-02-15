@@ -74,7 +74,7 @@
             <p><strong><?php echo $name; ?></strong></p>
             <p>For having successfully completed the</p>
             <p><strong><?php echo $course; ?></strong></p>
-            <p>on <?php echo $date; ?></p>
+            <p>on <?php echo $date_completed; ?></p>
         </div>
         <div class="certificate-footer">
             <p><?php echo $signatory; ?></p>
