@@ -83,20 +83,11 @@
                                             <h3 class="course_title">
                                                 <a href="<?= base_url() . '/control/detailsPage/?tid=' . $training['id'] ?>"><?= $training['training_title'] ?></a>
                                             </h3>
-                                            <div class="course_teacher"><?= $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'] ?></div>
-                                            <div class="course_text">
-                                                <p><?= substr($training['description'], 0, 74) . '...'; ?></p>
-                                            </div>
+                           
                                         </div>
                                         <div class="course_footer">
                                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i> <span>5 Ratings</span>
-                                                </div>
+                                  
                                                 <div class="course_price ml-auto">₱<?=number_format($training['training_fee'])?></div>
                                             </div>
                                         </div>
