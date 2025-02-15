@@ -113,7 +113,7 @@
                 </div>
                 <!-- Course Sidebar -->
                 <div class="col-lg-4">
-                    <div class="sidebar" style="padding-top: 0px;">
+                    <div class="sidebar" style="padding-top: 21px;">
                         <!-- Feature -->
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">Training Feature</div>
