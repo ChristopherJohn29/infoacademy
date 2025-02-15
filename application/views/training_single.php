@@ -82,21 +82,21 @@
 
                                             <p><?= $description ?></p>
                                         </div>
-                                        <?php if ($requirements) {
-                                            ?>
+                                        <?php if ($requirements) { ?>
                                             <div class="tab_panel_section">
-                                            <div class="tab_panel_subtitle">Course Objective</div>
-                                            <ul class="tab_panel_text">
-                                                <p><?= $requirements ?></p>
-                                            </ul>
-                                            </div><?php
-                                        } ?>
+                                                <div class="tab_panel_subtitle">Course Objective</div>
+                                                <ul class="tab_panel_text">
+                                                    <p><?= nl2br($requirements) ?></p>
+                                                </ul>
+                                            </div>
+                                        <?php } ?>
+
                                         <?php if ($target_participant) {
                                             ?>
                                             <div class="tab_panel_section">
                                                 <div class="tab_panel_subtitle">Methodology</div>
                                                 <div class="tab_panel_text">
-                                                    <p><?= $target_participant ?></p>
+                                                    <p><?= nl2br($target_participant) ?></p>
                                                 </div>
                                             </div>
                                             <?php
