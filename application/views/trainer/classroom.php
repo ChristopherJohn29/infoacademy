@@ -284,6 +284,7 @@
                                             <th>Payment Status</th>
                                             <th>Output</th>
                                             <th>Exam</th>
+                                            <th>Progress</th>
                                             <th>Date Completed</th>
                                             <th>Options</th>
                                         </tr>
@@ -329,6 +330,23 @@
                                                     }
                                                     ?>
                                                 </td>
+                                                <?php 
+                                                    // Decode the BLOB data (assuming it is stored as a JSON string)
+                                                    $instructions = json_decode($class['training_instruction'], true);
+
+                                                    // Initialize total percentage counter
+                                                    $total_percentage_completed = 0;
+
+                                                    // Check if decoding was successful and iterate over the data
+                                                    if (is_array($instructions)) {
+                                                        foreach ($instructions as $instruction) {
+                                                            if (isset($instruction['completed']) && $instruction['completed'] == 1) {
+                                                                $total_percentage_completed += intval($instruction['percentage']);
+                                                            }
+                                                        }
+                                                    }
+                                                ?>
+                                                <td><?=$total_percentage_completed?>%</td>
                                                 <td><?php echo html_escape($class['date_completed']); ?></td>
                                                 <td>
                                                     <?php if ($class['is_complete'] == 1): ?>
