@@ -221,10 +221,10 @@
                         $training_title = $training[0]['training_title'];
                         $option = '';
                         if ($value['status'] == 0) {
-                            $status = 'Payment Verification';
+                            $status = 'Payment Validation';
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/control/classroom/?tid='.$value['training_id'].'"> <i class="fa fa-university" aria-hidden="true"></i></a>';
                         } elseif($value['status'] == 1) {
-                            $status = 'active';
+                            $status = 'Paid';
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/control/classroom/?tid='.$value['training_id'].'"> <i class="fa fa-university" aria-hidden="true"></i></a>';
                         } elseif ($value['status'] == 2) {
                             $status = 'Payment Declined';

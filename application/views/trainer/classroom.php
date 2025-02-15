@@ -281,7 +281,7 @@
                                             <th>Participant</th>
                                             <th>Participant no.</th>
                                             <th>Date enrolled</th>
-                                            <th>Status</th>
+                                            <th>Payment Status</th>
                                             <th>Output</th>
                                             <th>Exam</th>
                                             <th>Date Completed</th>
@@ -294,7 +294,19 @@
                                                 <td><?php echo html_escape($class['first_name']) . ' ' . html_escape($class['last_name']); ?></td>
                                                 <td><?php echo html_escape($class['participant_id']); ?></td>
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td>
-                                                <td><?php echo html_escape($class['status']); ?></td>
+                                                <td>
+                                                    <?php 
+                                                        if ($class['status'] == 1) {
+                                                            echo "Paid";
+                                                        } elseif ($class['status'] == 2) {
+                                                            echo "Payment Declined";
+                                                        } elseif ($class['status'] == 0) {
+                                                            echo "Payment Validation";
+                                                        } else {
+                                                            echo "Unknown Status";
+                                                        }
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php 
                                                     if ($class['workshop_status'] == 'completed') {
