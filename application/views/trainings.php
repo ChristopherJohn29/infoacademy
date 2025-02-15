@@ -79,7 +79,7 @@
                                                 <img src="<?= base_url() . '/uploads/image_trans.png'; ?>" style="background-image: url('<?= base_url() . '/uploads/' . $banner ?>'); background-size: contain; background-position: center;" alt="">
                                             </a>
                                         </div>
-                                        <div class="course_body">
+                                        <div class="course_body" style="min-height:150px;">
                                             <h3 class="course_title">
                                                 <a href="<?= base_url() . '/control/detailsPage/?tid=' . $training['id'] ?>"><?= $training['training_title'] ?></a>
                                             </h3>
