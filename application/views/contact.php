@@ -47,19 +47,6 @@
 
 		<!-- Contact Map -->
 
-		<div class="contact_map">
-
-			<!-- Google Map -->
-
-			<div class="map">
-				<div id="google_map" class="google_map">
-					<div class="map_container">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.5255520228416!2d121.05788391499516!3d14.626082489786295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b79692889a91%3A0xe9d7e5685bf9f08e!2sGoldwell%20Building!5e0!3m2!1sen!2sph!4v1591017745150!5m2!1sen!2sph" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-					</div>
-				</div>
-			</div>
-
-		</div>
 
 		<!-- Contact Info -->
 
