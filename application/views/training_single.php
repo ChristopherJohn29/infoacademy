@@ -84,7 +84,7 @@
                                         </div>
                                         <?php if ($requirements) { ?>
                                             <div class="tab_panel_section">
-                                                <div class="tab_panel_subtitle">Course Objective</div>
+                                                <div class="tab_panel_title">Course Objective</div>
                                                 <ul class="tab_panel_text">
                                                     <p><?= nl2br($requirements) ?></p>
                                                 </ul>
@@ -94,7 +94,7 @@
                                         <?php if ($target_participant) {
                                             ?>
                                             <div class="tab_panel_section">
-                                                <div class="tab_panel_subtitle">Methodology</div>
+                                                <div class="tab_panel_title">Methodology</div>
                                                 <div class="tab_panel_text">
                                                     <p><?= nl2br($target_participant) ?></p>
                                                 </div>
