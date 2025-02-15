@@ -265,7 +265,7 @@
                                     }
                                 }
                             ?>
-                            <td><?=$total_percentage_completed?></td>
+                            <td><?=$total_percentage_completed?>%</td>
                             <td><?= $option ?></td>
                         </tr>
                         <?php
