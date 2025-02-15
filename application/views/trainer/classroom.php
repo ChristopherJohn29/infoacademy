@@ -285,7 +285,6 @@
                                             <th>Output</th>
                                             <th>Exam</th>
                                             <th>Date Completed</th>
-                                            <th>Question and answer</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -319,7 +318,6 @@
                                                     ?>
                                                 </td>
                                                 <td><?php echo html_escape($class['date_completed']); ?></td>
-                                                <td><?php echo html_escape($class['question_answer']); ?></td>
                                                 <td>
                                                     <?php if ($class['is_complete'] == 1): ?>
                                                         <!-- View Certificate Button with Icon -->
