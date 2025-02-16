@@ -582,21 +582,25 @@ class System_model extends CI_Model
         }
     }
 
-    public function getMessagesByTraining($training_id) {
+    public function getMessagesByTraining($training_id, $participant_id = null) {
         $user_id = intval($_SESSION['id']); // Store session user ID for cleaner code
     
         // Retrieve all messages for the given training_id where the user is either sender or receiver
         $this->db->where('training_id', $training_id);
-        
-        // Use manual grouping for OR conditions in CodeIgniter 3
-        $this->db->where("(sender_id = {$user_id} OR receiver_id = {$user_id})");
     
-        $this->db->order_by('timestamp', 'ASC'); // Optional: Order messages by timestamp (oldest first)
+        // Use proper condition grouping for participant filtering
+        if ($participant_id !== null) {
+            $this->db->where("((sender_id = {$participant_id} AND receiver_id = {$user_id}) OR (sender_id = {$user_id} AND receiver_id = {$participant_id}))");
+        } else {
+            $this->db->where("(sender_id = {$user_id} OR receiver_id = {$user_id})");
+        }
+    
+        $this->db->order_by('timestamp', 'ASC'); // Order messages by timestamp (oldest first)
         $query = $this->db->get('messages');
-        
+    
         // Return the result as an array
         return $query->result_array();
-    }    
+    }
     
     public function isEnrolled($participant_id, $training_id) {
         // Check if the participant is enrolled in the specified training

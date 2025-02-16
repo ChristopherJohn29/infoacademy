@@ -631,9 +631,16 @@ class Control extends CI_Controller
             echo json_encode(['status' => 'error', 'message' => 'Training ID is required.']);
             return;
         }
+
+        if(isset($_POST['participant_id'])){
+            $messages = $this->System_model->getMessagesByTraining($training_id, $_POST['participant_id']);
+
+        } else {
+            $messages = $this->System_model->getMessagesByTraining($training_id);
+
+        }
     
         // Fetch messages related to the specific training_id
-        $messages = $this->System_model->getMessagesByTraining($training_id);
     
         // Return the messages as a JSON response
         echo json_encode(['status' => 'success', 'messages' => $messages]);
