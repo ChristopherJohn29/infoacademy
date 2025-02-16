@@ -105,7 +105,7 @@ class Control extends CI_Controller
             }
         } else {
             if (isset($_GET['tid'])) {
-                $_SESSION['redirection'] = '/control/enroll' . html_escape($_GET['tid']);
+                $_SESSION['redirection'] = '/control/enroll/?tid=' . html_escape($_GET['tid']);
                 redirect('/control/login');
             } else {
                 redirect('control/trainings');

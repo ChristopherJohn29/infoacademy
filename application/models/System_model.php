@@ -327,7 +327,6 @@ class System_model extends CI_Model
         $this->db->select('*');
         $this->db->where('username', $data['username']);
         $this->db->where('account_status', '1');
-        $this->db->where('email_verify', '1');
         $this->db->from('user');
         $result = $this->db->get()->result_array();
 

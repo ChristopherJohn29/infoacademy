@@ -157,71 +157,63 @@
             </div>
             <div class="row my-profile-row">
                 <div class="col-md-6">
-                    <!-- general form elements disabled -->
+                    <!-- Landbank Card -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Bank deposit / Bank transfer</h3>
+                            <h3 class="card-title">Landbank of the Philippines (LBP)</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <!-- text input -->
                                     <div class="form-group">
-                                        <label>Account Name: Infoadvance</label>
+                                        <label><strong>Account Name:</strong> INFOADVANCE INC</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-12">
-                                    <!-- text input -->
                                     <div class="form-group">
-                                        <label>BDO Account #: 123 123 123</label>
+                                        <label><strong>Branch:</strong> Aurora Blvd., Cubao, Quezon City</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-12">
-                                    <!-- text input -->
                                     <div class="form-group">
-                                        <label>LBP Account #: 123 123 123</label>
+                                        <label><strong>Account #:</strong> 0581 1530 82</label>
                                     </div>
                                 </div>
                             </div>
-                            <!-- input states -->
                         </div>
                         <!-- /.card-body -->
                     </div>
+
+                    <!-- BDO Card -->
                     <div class="card card-warning" style="margin-top:20px;">
                         <div class="card-header">
-                            <h3 class="card-title">Gcash</h3>
+                            <h3 class="card-title">Banco de Oro (BDO)</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <!-- text input -->
                                     <div class="form-group">
-                                        <label>Account Name: Infoadvance</label>
+                                        <label><strong>Account Name:</strong> INFOADVANCE INC</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-12">
-                                    <!-- text input -->
                                     <div class="form-group">
-                                        <label>GCASH #: 123 123 123</label>
+                                        <label><strong>Branch:</strong> Robinsons Galleria, Ortigas, Pasig City</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label><strong>Account #:</strong> 0049 5802 6720</label>
                                     </div>
                                 </div>
                             </div>
-                            <!-- input states -->
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
-                    <!-- general form elements disabled -->
-                    <!-- /.card -->
                 </div>
+
                 <div class="col-md-6">
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
