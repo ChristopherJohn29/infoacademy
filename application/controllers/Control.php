@@ -509,37 +509,64 @@ class Control extends CI_Controller
 
     public function registerSubmit()
     {
-        if (isset($_POST)) {
-            $data = html_escape($_POST);
+        if ($this->input->post()) {
+            $data = html_escape($this->input->post());
             unset($data['retype_password']);
             unset($data['terms']);
+
+            // Default account settings
             $data['account_status'] = 0;
             $data['email_verify'] = 0;
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $data['verification_code'] = uniqid() . '-' . uniqid() . '-' . uniqid();
             $data['creation_date'] = date("Y-m-d h:i:s");
 
+            // Check for duplicate username
             if ($this->System_model->duplicateChecker(array('username' => $data['username']))) {
-                $this->register('<p style="color:red;">Username already exist! Please try again. </p>');
-            } elseif ($this->System_model->duplicateChecker(array('email_address' => $data['email_address']))) {
-                $this->register('<p style="color:red;">Email already exist! Please try again. </p>');
-            } else {
-                if ($this->System_model->registerModel($data)) {
-                    $this->email->from('infoacademy@infoadvance.com', 'InfoAcademy');
-                    $this->email->to($data['email_address']);
-                    $this->email->subject('User Verification Code');
-                    $this->email->message('To verify your account kindly click this link' . ' ' . base_url() . '/?v=' . $data['verification_code']);
-                    $this->email->send();
-                    $this->login('<p style="color:green;">Please check your email.</p>');
-                } else {
-                    $this->login('<p style="color:red;">Error! Please try again. </p>');
-                }
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Username already exists! Please try again."
+                ]);
+                return;
             }
 
+            // Check for duplicate email
+            if ($this->System_model->duplicateChecker(array('email_address' => $data['email_address']))) {
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Email already exists! Please try again."
+                ]);
+                return;
+            }
+
+            // Attempt to register the user
+            if ($this->System_model->registerModel($data)) {
+                // Send verification email
+                $this->email->from('infoacademy@infoadvance.com', 'InfoAcademy');
+                $this->email->to($data['email_address']);
+                $this->email->subject('User Verification Code');
+                $this->email->message('To verify your account, kindly click this link: ' . base_url() . '/?v=' . $data['verification_code']);
+                $this->email->send();
+
+                echo json_encode([
+                    "success" => true,
+                    "message" => "Registration successful! Please check your email to verify your account.",
+                    "redirect_url" => base_url() . "/control/login"
+                ]);
+            } else {
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Error! Please try again."
+                ]);
+            }
         } else {
-            redirect('control');
+            echo json_encode([
+                "success" => false,
+                "error" => "Invalid request."
+            ]);
         }
     }
+
 
     public function getSubCategories() {
         $categoryId = $this->input->post('category_id');

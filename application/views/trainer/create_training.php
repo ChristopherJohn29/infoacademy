@@ -181,7 +181,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Requirements</label>
+                                                    <label>Course Objective</label>
                                                     <textarea name="requirements" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                                 </div>
                                             </div>
@@ -189,7 +189,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Target Participant</label>
+                                                    <label>Methodology</label>
                                                     <textarea name="target_participant" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                                 </div>
                                             </div>

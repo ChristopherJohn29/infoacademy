@@ -65,7 +65,8 @@
     </div>
     <div class="card">
         <div class="card-body register-card-body">
-            <form action="<?php echo base_url() . '/control/registersubmit' ?>" method="post">
+            <div id="error-message" style="color: red; display: none;"></div>
+            <form id="register-form" action="<?php echo base_url() . '/control/registersubmit' ?>" method="post">
                 <p class="login-box-msg" style="text-align:left; padding:0px 0px 20px;">Personal Information</p>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="first_name" placeholder="*First name"
@@ -119,6 +120,7 @@
                     <select class="form-control" required="required" name="type_of_employment">
                         <option value="">*Type of Employment</option>
                         <option value="contractual">Contractual</option>
+                        <option value="full-time">Full-time</option>
                     </select>
                     <input type="text" class="form-control" placeholder="*Name of company" required="required"
                            name="name_of_company">
@@ -289,5 +291,31 @@
         app.init();
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $("#register-form").submit(function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            $.ajax({
+                url: $(this).attr("action"),
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.href = response.redirect_url; // Redirect to login page
+                    } else {
+                        $("#error-message").html(response.error).show(); // Show error message
+                    }
+                },
+                error: function() {
+                    $("#error-message").html("An unexpected error occurred. Please try again.").show();
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
