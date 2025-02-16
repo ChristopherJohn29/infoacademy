@@ -188,9 +188,18 @@ class Control extends CI_Controller
             $validate = array(
                 'username' => $data['username'],
             );
+
             if ($this->System_model->duplicateChecker($validate)) {
                 $result = $this->System_model->fetchLogin($data);
+
                 if (is_array($result) && !empty($result)) {
+                    // Check if the account is email verified
+                    if ($result[0]['email_verify'] != '1') {
+                        $this->login('<p style="color:red;">Account not Email Verified</p>');
+                        return;
+                    }
+
+                    // Validate password
                     if (password_verify($data['password'], $result[0]['password'])) {
                         $_SESSION['user_key'] = uniqid();
                         $_SESSION['first_name'] = $result[0]['first_name'];
@@ -204,20 +213,18 @@ class Control extends CI_Controller
                         $_SESSION['region'] = $result[0]['region'];
                         $_SESSION['zip_code'] = $result[0]['zip_code'];
                         $_SESSION['account_type'] = $result[0]['account_type'];
-                        if ($result[0]['account_type'] == '1') {
+                        $_SESSION['id'] = $result[0]['id'];
 
-                            $_SESSION['id'] = $result[0]['id'];
+                        // Redirect based on account type
+                        if ($result[0]['account_type'] == '1') {
                             if (isset($_SESSION['redirection'])) {
                                 redirect($_SESSION['redirection']);
                             } else {
                                 redirect('/control/participant');
                             }
-
                         } elseif ($result[0]['account_type'] == '2') {
-                            $_SESSION['id'] = $result[0]['id'];
                             redirect('/trainer/dashboard');
                         } else {
-                            $_SESSION['id'] = $result[0]['id'];
                             redirect('/control/admin');
                         }
                     } else {
@@ -231,6 +238,7 @@ class Control extends CI_Controller
             }
         }
     }
+
 
     public function logout(){
         session_destroy();
