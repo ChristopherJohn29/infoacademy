@@ -32,9 +32,11 @@
                                 <div class="footer_title">Email Us</div>
                                 <div class="footer_contact_info">
                                     <ul>
-                                        <li>Email: Info.academy@gmail.com</li>
-                                        <li>Phone: +(88) 111 555 666</li>
-                                        <li>40 Baria Sreet 133/2 New York City, United States</li>
+                                        <li>Email: infoadvancecompany@gmail.com  </li>
+                                        <li>+632 8583 - 0962  </li>
+                                        <li>Globe (0917) 1146015  </li>
+                                        <li> SUN (0923) 5790675  </li>
+                                        <li>Tower 6, Unit 3G Escalades, 20th Ave., Brgy. San Roque 1109 Cubao Quezon City</li>
                                     </ul>
                                 </div>
                             </div>

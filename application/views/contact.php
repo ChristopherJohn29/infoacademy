@@ -86,21 +86,15 @@
 								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
 							</div>
 							<div class="contact_info_location">
-								<div class="contact_info_location_title">New York Office</div>
 								<ul class="location_list">
-									<li>T8/480 Collins St, Melbourne VIC 3000, New York</li>
-									<li>1-234-567-89011</li>
-									<li>info.deercreative@gmail.com</li>
+									<li>Tower 6, Unit 3G Escalades, 20th Ave., Brgy. San Roque 1109 Cubao Quezon City</li>
+									<li>+632 8583 - 0962</li>
+									<li>Globe (0917) 1146015</li>
+									<li>SUN (0923) 5790675</li>
+									<li>infoadvancecompany@gmail.com</li>
 								</ul>
 							</div>
-							<div class="contact_info_location">
-								<div class="contact_info_location_title">Australia Office</div>
-								<ul class="location_list">
-									<li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
-									<li>1-234-567-89011</li>
-									<li>info.deercreative@gmail.com</li>
-								</ul>
-							</div>
+			
 						</div>
 					</div>
 				</div>
