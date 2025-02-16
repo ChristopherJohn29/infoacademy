@@ -550,6 +550,8 @@ class Control extends CI_Controller
             // Attempt to register the user
             if ($this->System_model->registerModel($data)) {
                 // Send verification email
+                $this->load->library(['email']);
+
                 $this->email->from('infoacademy@infoadvance.com', 'InfoAcademy');
                 $this->email->to($data['email_address']);
                 $this->email->subject('User Verification Code');
