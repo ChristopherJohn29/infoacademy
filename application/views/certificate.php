@@ -42,15 +42,15 @@
       font-weight: bolder;
       margin-bottom: 6.5rem;
       margin-top: 14.5rem;
-      margin-left: 7rem;
+      margin-left: 10rem;
     }
 
     .course-title {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: bold;
       margin-bottom: 1.5rem;
       line-height: 1.4;
-      margin-left: 9rem;
+      margin-left: 15rem;
     }
 
     .completion-info {
