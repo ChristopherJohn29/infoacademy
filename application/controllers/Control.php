@@ -118,41 +118,61 @@ class Control extends CI_Controller
     {
         if (isset($_SESSION['id'])) {
             if (isset($_POST['tid'])) {
-                $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'gif|jpg|png'; // Only allow non-executable image files
-                $config['max_size'] = 2000;
-                $config['max_width'] = 2000;
-                $config['max_height'] = 2000;
-                $this->load->library('upload', $config);
 
-                if (!$this->upload->do_upload('proof_of_payment')) {
-                    $error = array('error' => $this->upload->display_errors());
+                // Get the payment option and sanitize it
+                $payment_option = html_escape($_POST['payment_option']);
+
+                // If payment option is "Coupon", validate the coupon code
+                if ($payment_option === 'Coupon') {
+                    $coupon_code = html_escape($_POST['coupon_code']);
+
+                    // Check coupon validity. Ensure your System_model has a method like getCouponByCode().
+                    $coupon = $this->System_model->getCouponByCode($coupon_code);
+                    if (!$coupon) {
+                        // Coupon is not valid: show an alert and stop further processing.
+                        echo "<script>alert('Coupon code is not valid'); window.history.back();</script>";
+                        exit;
+                    }
+                    // Since payment is via coupon, there's no proof of payment image.
                     $proof_of_payment = '';
                 } else {
-                    // Get the uploaded file data
-                    $file = array('upload_data' => $this->upload->data());
-                    // Generate a unique name using uniqid() and keep the original file extension
-                    $proof_of_payment = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                    // Rename the file to the unique name
-                    rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $proof_of_payment);
+                    // Process file upload for non-coupon payments
+                    $config['upload_path']   = './uploads/';
+                    $config['allowed_types'] = 'gif|jpg|png'; // Only allow non-executable image files
+                    $config['max_size']      = 2000;
+                    $config['max_width']     = 2000;
+                    $config['max_height']    = 2000;
+                    $this->load->library('upload', $config);
+
+                    if (!$this->upload->do_upload('proof_of_payment')) {
+                        $error = array('error' => $this->upload->display_errors());
+                        $proof_of_payment = '';
+                    } else {
+                        // Get the uploaded file data
+                        $file = array('upload_data' => $this->upload->data());
+                        // Generate a unique name using uniqid() and keep the original file extension
+                        $proof_of_payment = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
+                        // Rename the file to the unique name
+                        rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $proof_of_payment);
+                    }
                 }
 
                 // Fetch training data
-                $training = $this->System_model->fetchSingleTraining(html_escape($_POST['tid']));
+                $training    = $this->System_model->fetchSingleTraining(html_escape($_POST['tid']));
                 $instruction = $training[0]['instruction'];
 
                 $data = [
-                    'proof_of_payment' => html_escape($proof_of_payment),
-                    'payment_option' => html_escape($_POST['payment_option']),
-                    'transaction_date' => html_escape($_POST['transaction_date']),
-                    'transaction_no' => html_escape($_POST['transaction_no']),
-                    'coupon_code' => html_escape($_POST['coupon_code']),
-                    'participant_id' => html_escape($_SESSION['id']),
-                    'training_id' => html_escape($_POST['tid']),
-                    'date_enrolled' => date('Y-m-d'),
+                    'proof_of_payment'     => html_escape($proof_of_payment),
+                    'payment_option'       => $payment_option,
+                    'transaction_date'     => html_escape($_POST['transaction_date']),
+                    'transaction_no'       => html_escape($_POST['transaction_no']),
+                    'coupon_code'          => html_escape($_POST['coupon_code']),
+                    'participant_id'       => html_escape($_SESSION['id']),
+                    'training_id'          => html_escape($_POST['tid']),
+                    'date_enrolled'        => date('Y-m-d'),
                     'training_instruction' => $instruction,
-                    'progress' => 0,
-                    'status' => 0
+                    'progress'             => 0,
+                    'status'               => 0
                 ];
 
                 // Save the data
@@ -164,7 +184,6 @@ class Control extends CI_Controller
             }
         }
     }
-
 
     public function detailsPage()
     {

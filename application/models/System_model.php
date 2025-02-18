@@ -663,4 +663,21 @@ class System_model extends CI_Model
         // Return success response
         return ['status' => 'success', 'message' => 'Message sent successfully.'];
     }
+
+    public function getCouponByCode($coupon_code)
+    {
+        // Query the coupon table for the given coupon code
+        $this->db->where('coupon_code', $coupon_code);
+        $this->db->where('status', 1);
+        $query = $this->db->get('coupon'); 
+        
+        if ($query->num_rows() > 0) {
+            // Coupon found, return its data as an associative array
+            return $query->row_array();
+        } else {
+            // Coupon not found, return false
+            return false;
+        }
+    }
+
 }
