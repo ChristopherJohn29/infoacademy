@@ -39,14 +39,14 @@
         }
 
         .username strong{
-            font-size:50px;
+            font-size:55px;
             margin-left: 10%;
+            margin-top:10px;
         }
 
         .training strong{
             font-size:40px;
             margin-left: 15%;
-            margin-top
         }
 
         .certificate-footer {
@@ -85,7 +85,6 @@
     <div class="certificate-container">
         <div class="certificate-body">
             <p class="username"><strong><?php echo $name; ?></strong></p>
-            <p class="training"><strong></strong></p>
             <p class="training"><strong></strong></p>
             <p class="training"><strong></strong></p>
             <p class="training"><strong><?php echo $course; ?></strong></p>
