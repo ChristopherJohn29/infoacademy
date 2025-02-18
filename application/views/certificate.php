@@ -58,7 +58,7 @@
       margin-bottom: 2rem;
       line-height: 1.4;
       font-weight: bold;
-      margin-top: 5.6rem;
+      margin-top: 5.7rem;
       margin-left: 23rem;
     }
 
