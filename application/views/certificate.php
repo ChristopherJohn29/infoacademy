@@ -61,6 +61,10 @@
       margin-top: 5.8rem;
       margin-left: 23rem;
     }
+    
+    .qr-code{
+        margin-left: 8rem;
+    }
 
   </style>
 </head>
@@ -94,7 +98,6 @@
         // Create the verification URL (adjust the route as needed)
         $verification_url = base_url('control/generate_certificate_pdf/' . $participantId.'/' .$second.'/' .$third);
 
-        echo $verification_url;
         // Generate QR code URL using QR Server API
         $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=' . urlencode($verification_url);
       ?>
