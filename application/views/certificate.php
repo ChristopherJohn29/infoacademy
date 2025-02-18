@@ -17,7 +17,7 @@
     .certificate-bg {
       width: 100%;
       height: 100vh; /* or a fixed height if you prefer */
-      background: url('<?= base_url() ?>/assets/unicat/images/certificate.png') no-repeat center center;
+      background: url('<?= base_url() ?>/assets/unicat/images/certificate.jpg') no-repeat center center;
       background-size: cover;
       position: relative;
     }
