@@ -4,24 +4,39 @@
   <meta charset="UTF-8">
   <title>Certificate of Training</title>
   <style>
-    /* Reset and basic styling */
-    * {
+    /* Tell Dompdf we want no margins and an A4 landscape page */
+    @page {
+      margin: 0;
+      size: A4 landscape;
+    }
+
+    /* Reset basic styling */
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    body {
       width: 100%;
-      height: 90vh; /* Adjust if you want a fixed height or auto */
+      height: 100%;
       font-family: Arial, sans-serif;
       color: #fff;
-      background: url('<?= base_url() ?>/assets/unicat/images/certificate.png') no-repeat center center;
-      background-size: cover;
+    }
+
+    /* A4 landscape dimensions: 297mm x 210mm */
+    .certificate-bg {
+      width: 297mm;
+      height: 210mm;
       position: relative;
+
+      /* Option A: Use a file:// path if you prefer local filesystem references:
+         background: url("file:///<?= FCPATH . 'assets/unicat/images/certificate.png' ?>") no-repeat center center; */
+
+      /* Option B: Use base_url() if you have isRemoteEnabled = true in Dompdf: */
+      background: url("<?= base_url('assets/unicat/images/certificate.png') ?>") no-repeat center center;
+
+      background-size: cover;
     }
 
     .certificate-container {
-      /* Use flex to center contents nicely */
+      /* Flex to center the text block */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,35 +47,13 @@
       padding: 2rem;
     }
 
-    /* Title: "Certificate of Training" */
-    .certificate-title {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    /* "Presented to" text */
-    .presented-to {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* Recipient name (large) */
+    /* Text styling */
     .recipient-name {
       font-size: 2.2rem;
       font-weight: bold;
       margin-bottom: 1.5rem;
     }
 
-    /* The line "for successfully completing..." */
-    .subtext {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Course title (large) */
     .course-title {
       font-size: 1.5rem;
       font-weight: bold;
@@ -68,53 +61,34 @@
       line-height: 1.4;
     }
 
-    /* Date and completion info */
     .completion-info {
       font-size: 1rem;
       margin-bottom: 2rem;
       line-height: 1.4;
     }
 
-    /* Footer text: "This is a system generated document..." */
-    .footer-text {
-      font-size: 0.9rem;
-      margin-top: 2rem;
-      opacity: 0.9;
-    }
-
-    /* Optional: QR code or logo placement */
-    /* 
-       Replace the URLs or use <img> tags if you prefer. 
-       If you have separate images for QR or a logo, you can 
-       absolutely position them as below.
-    */
-
   </style>
 </head>
 <body>
-  <div class="certificate-container">
+  <div class="certificate-bg">
+    <div class="certificate-container">
+      <!-- Recipient Name -->
+      <div class="recipient-name">
+        <?= isset($name) ? strtoupper($name) : 'RECIPIENT NAME' ?>
+      </div>
 
+      <!-- Course Title -->
+      <div class="course-title">
+        <?= isset($course) ? $course : 'Your Course Title Here' ?>
+      </div>
 
-    <!-- Name -->
-    <div class="recipient-name">
-      <?= isset($name) ? strtoupper($name) : 'RECIPIENT NAME' ?>
+      <!-- Completion Info -->
+      <div class="completion-info">
+        <?= isset($date_completed)
+             ? date('F d, Y', strtotime($date_completed))
+             : 'Date Here' ?>
+      </div>
     </div>
-
-    <!-- Course Title -->
-    <div class="course-title">
-      <?= isset($course) ? $course : 'Your Course Title Here' ?>
-    </div>
-
-    <!-- Completion Info -->
-    <div class="completion-info">
-
-        <?= isset($date_completed) ? date('F d, Y', strtotime($date_completed)) : 'Date Here' ?>
-
-    </div>
-
- 
-
-
   </div>
 </body>
 </html>

@@ -597,53 +597,57 @@ class Control extends CI_Controller
 
     public function generate_certificate_pdf($participantId, $trainingId, $author_id)
     {
-        // Using CI3 session library (assuming session is autoloaded or loaded in the constructor)
+        // 1. Check user session or permission
         $user_id = $this->session->userdata('id');
-
         if ($user_id == $participantId || $user_id == $author_id) {
-            $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
             
+            // 2. Fetch data
+            $participantData = $this->System_model->get_participant_data($participantId, $trainingId);
             if ($participantData) {
-                // Prepare data for the certificate view
+
+                // 3. Prepare data array for the view
                 $data = [
                     'name'           => $participantData['participant_name'],
                     'course'         => $participantData['training_title'],
-                    'date_enrolled'  => $participantData['date_enrolled'],
-                    'date_completed' => $participantData['date_completed'],
-                    'signatory'      => "Aurelio L. Ebita, CPA" // Or load this dynamically
+                    'date_completed' => $participantData['date_completed']
                 ];
 
-                // Load the view into a variable (third parameter true returns the HTML string)
+                // 4. Load the certificate view as a string
                 $html = $this->load->view('certificate', $data, true);
 
-                // Include Dompdf's autoload file
-                // If installed via Composer:
-                require_once FCPATH . 'vendor/autoload.php';
-                // If you placed Dompdf in third_party, use:
+                // 5. Include Dompdf
+                require_once FCPATH . 'vendor/autoload.php'; // if using Composer
+                // If placed in third_party, do something like:
                 // require_once APPPATH . 'third_party/dompdf/autoload.inc.php';
 
-                // Configure Dompdf options
-                $options = new \Dompdf\Options();
-                $options->set('isRemoteEnabled', true); // Allow external images if needed
+                // 6. Use Dompdf classes
+                use Dompdf\Dompdf;
+                use Dompdf\Options;
 
-                $dompdf = new \Dompdf\Dompdf($options);
+                // 7. Configure Dompdf
+                $options = new Options();
+                // Enable remote resources if using base_url for images
+                $options->set('isRemoteEnabled', true);
+
+                $dompdf = new Dompdf($options);
+
+                // 8. Load HTML
                 $dompdf->loadHtml($html);
 
-                // Set the paper size and orientation (A4 landscape)
+                // 9. Set paper size and orientation
                 $dompdf->setPaper('A4', 'landscape');
 
-                // Render the HTML as PDF
+                // 10. Render the PDF
                 $dompdf->render();
 
-                // Output the generated PDF to the browser (Attachment=false to open in browser)
-                $dompdf->stream("certificate.pdf", ["Attachment" => false]);
+                // 11. Stream the PDF to the browser
+                $dompdf->stream('certificate.pdf', ['Attachment' => false]);
+
             } else {
-                // Participant data not found
-                show_404();
+                show_404(); // No data found
             }
         } else {
-            // Unauthorized access
-            show_404();
+            show_404(); // Unauthorized
         }
     }
 
