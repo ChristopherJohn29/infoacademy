@@ -84,10 +84,18 @@
              : 'Date Here' ?>
       </div>
 
-      <?php if (isset($qr_code_url)) : ?>
-        <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
-      <?php endif; ?>
-      
+      <?php 
+        // Get the CodeIgniter instance to access URI segments
+        $CI =& get_instance();
+        // Assuming the participant ID is in the 3rd URI segment
+        $participantId = $CI->uri->segment(3);
+        // Create the verification URL (adjust the route as needed)
+        $verification_url = base_url('verify_certificate/' . $participantId);
+        // Generate QR code URL using QR Server API
+        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' . urlencode($verification_url);
+      ?>
+      <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
+
     </div>
   </div>
 </body>
