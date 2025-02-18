@@ -86,7 +86,7 @@
       <div class="completion-info">
         <?= isset($date_completed)
              ? date('F d, Y', strtotime($date_completed))
-             : 'Date Here' ?>
+             : '' ?>
       </div>
 
       <?php 
