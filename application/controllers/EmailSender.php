@@ -24,7 +24,7 @@ class EmailSender extends CI_Controller {
         $this->email->initialize($config);
 
         // Sender email
-        $this->email->from('konozubadoh@gmail.com', 'Global Medical Alliances');
+        $this->email->from('konozubadoh@gmail.com', 'Infoacademy');
 
         // Recipient email
         $this->email->to('christopherjohngamo@gmail.com'); // Change this to the recipient's email
