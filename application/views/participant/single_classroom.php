@@ -423,15 +423,15 @@
                                                 <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
                                                     <input name="step" type="hidden" value="<?= $count ?>">
-                                                    <div class="form-group">
+                                                    <div class="form-group hidden">
                                                         <label for="examinationLinkOrFile">Submit a File or Google Link (If form just click submit)</label>
                                                         <input type="text" name="examination_link" class="form-control" placeholder="Enter Google Link (Optional)" />
                                                     </div>
-                                                    <div class="custom-file">
+                                                    <div class="custom-file hidden">
                                                         <input type="file" name="examination_file" class="custom-file-input" accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,.jpg,.jpeg,.png" id="customFile-<?= $examination ?>">
                                                         <label class="custom-file-label" for="customFile-<?= $examination ?>">Choose file</label>
                                                     </div>
-                                                    <button type="submit" data-url="<?= base_url() ?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Submit Examination</button>
+                                                    <button type="submit" data-url="<?= base_url() ?>/control/finishwatching?tid=<?= $training[0]['id'] ?>&step=<?= $count ?>" class="counter_form_button button-enroll">Examination Completed</button>
                                                 </form>
                                             <?php } ?>
                         
