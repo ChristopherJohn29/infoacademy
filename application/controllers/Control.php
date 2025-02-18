@@ -566,7 +566,7 @@ class Control extends CI_Controller
                 $this->email->from('konozubadoh@gmail.com', 'InfoAcademy');
                 $this->email->to($data['email_address']);
                 $this->email->subject('User Verification Code');
-                $this->email->message('To verify your account, kindly click this link: ' . base_url() . 'login/?v=' . $data['verification_code']);
+                $this->email->message('To verify your account, kindly click this link: ' . base_url() . 'control/login/?v=' . $data['verification_code']);
    
 
 
