@@ -15,7 +15,7 @@
             width: 80%;
             margin: 50px auto;
             padding: 20px;
-            background: url('<?=base_url()?>/assets/unicat/images/certificate.jpg') no-repeat center center;
+            background: url('<?=base_url()?>/assets/unicat/images/certificate.png') no-repeat center center;
             background-size: cover;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -67,7 +67,7 @@
                 border: none;
                 box-shadow: none;
                 page-break-before: always;
-                background-image: url('<?=base_url()?>/assets/unicat/images/certificate.jpg');
+                background-image: url('<?=base_url()?>/assets/unicat/images/certificate.png');
                 background-size: cover;
                 height: 800px; /* Adjust height for printing */
             }
