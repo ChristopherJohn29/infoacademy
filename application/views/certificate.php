@@ -49,6 +49,11 @@
             margin-left: 15%;
         }
 
+        .date strong{
+            font-size:35px;
+            margin-left: 25%;
+        }
+
         .certificate-footer {
             font-size: 18px;
             margin-top: 60px;
@@ -88,7 +93,8 @@
             <p class="training"><strong></strong></p>
             <p class="training"><strong></strong></p>
             <p class="training"><strong><?php echo $course; ?></strong></p>
-            <p  class="date"> <?php echo $date_completed; ?></p>
+            <p  class="date"><strong> </strong></p>
+            <p  class="date"><strong> <?php echo $date_completed; ?></strong></p>
         </div>
     </div>
     <script>
