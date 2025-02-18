@@ -15,8 +15,8 @@
             width: 80%;
             margin: 50px auto;
             padding: 20px;
-            border: 10px solid #000;
-            background: #fff;
+            background: url('<?=base_url()?>/assets/unicat/images/certificate.jpg') no-repeat center center;
+            background-size: cover;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -56,6 +56,8 @@
                 border: none;
                 box-shadow: none;
                 page-break-before: always;
+                background-image: url('/mnt/data/Blank Certificate of Training Infoacademy.jpg');
+                background-size: cover;
             }
 
             @page {
