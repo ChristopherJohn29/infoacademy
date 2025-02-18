@@ -584,11 +584,11 @@
 
                         // Workshop File
                         if (workshop.status == "2" || workshop.status == "1" || workshop.status == "3") {
-                            if (workshop.workshopination_file === "Google Form Submitted") {
+                            if (workshop.workshop_file === "Google Form Submitted") {
                                 tableHtml += '<td>' + workshop.file_desc + ' (Google Form Submitted)' + '</td>';
                                 tableHtml += '<td>' + workshop.date_submitted + '</td>';
                             } else {
-                                tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshopination_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
+                                tableHtml += '<td><a href="' + '<?php echo base_url("uploads/"); ?>' + workshop.workshop_file + '" target="_blank">' + workshop.file_desc + '</a></td>';
                                 tableHtml += '<td>' + workshop.date_submitted + '</td>';
                             }
                         }
