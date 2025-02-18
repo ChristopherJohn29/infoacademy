@@ -595,7 +595,7 @@ class Control extends CI_Controller
         }
     }
 
-    public function generate_certificate_pdf($participantId, $trainingId, $author_id)
+    public function view_certificate($participantId, $trainingId, $author_id)
     {
         // Using CI3 session library (assuming session is autoloaded or loaded in the constructor)
         $user_id = $this->session->userdata('id');

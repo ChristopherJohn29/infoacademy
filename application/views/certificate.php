@@ -97,7 +97,7 @@
         $second = $CI->uri->segment(4);
         $third = $CI->uri->segment(5);
         // Create the verification URL (adjust the route as needed)
-        $verification_url = base_url('control/generate_certificate_pdf/' . $participantId.'/' .$second.'/' .$third);
+        $verification_url = base_url('control/view_certificate/' . $participantId.'/' .$second.'/' .$third);
 
         // Generate QR code URL using QR Server API
         $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=' . urlencode($verification_url);
