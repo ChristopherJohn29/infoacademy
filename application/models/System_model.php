@@ -315,7 +315,7 @@ class System_model extends CI_Model
     public function verifyUser($verification_code)
     {
         $query = array(
-            'account_status' => '1'
+            'email_verify' => '1'
         );
         $this->db->set($query);
         $this->db->where('verification_code', $verification_code);
