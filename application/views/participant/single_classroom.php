@@ -16,6 +16,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/assets/unicat/styles/' ?>/about.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/assets/unicat/styles/' ?>/about_responsive.css">
     <style>
+
+        .hidden{
+            display:none !important;
+        }
         #example1_wrapper {
             width: 100%;
             color: black;
@@ -419,7 +423,7 @@
                                                 </table>
                                             <?php } ?>
                                             <?php if ($value->completed != 1 && $checking != 1) { ?>
-                                                <br/><br/><label for="customFile">Submit Examination</label>
+                                                <br/><br/><label for="customFile" class="hidden">Submit Examination</label>
                                                 <form action="<?= base_url() . '/control/submitExamination' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">
                                                     <input name="step" type="hidden" value="<?= $count ?>">
