@@ -99,7 +99,7 @@
         $verification_url = base_url('control/generate_certificate_pdf/' . $participantId.'/' .$second.'/' .$third);
 
         // Generate QR code URL using QR Server API
-        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=' . urlencode($verification_url);
+        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=90x80&data=' . urlencode($verification_url);
       ?>
       <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
 
