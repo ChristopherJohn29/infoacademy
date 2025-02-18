@@ -63,7 +63,7 @@
     }
     
     .qr-code{
-        margin-left: 8rem;
+        margin-left: 3rem;
     }
 
   </style>
