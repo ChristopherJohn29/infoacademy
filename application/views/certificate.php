@@ -12,10 +12,6 @@
             background-color: #f9f9f9;
         }
         .certificate-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             width: 80%;
             margin: 50px auto;
             padding: 20px;
@@ -71,9 +67,6 @@
                 background-image: url('<?=base_url()?>/assets/unicat/images/certificate.png');
                 background-size: cover;
                 height: 800px; /* Adjust height for printing */
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
             }
 
             @page {
