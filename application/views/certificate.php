@@ -57,6 +57,9 @@
       font-size: 1rem;
       margin-bottom: 2rem;
       line-height: 1.4;
+      font-weight: bold;
+      margin-top: 14.5rem;
+      margin-left: 30rem;
     }
 
   </style>
