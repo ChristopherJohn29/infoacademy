@@ -75,45 +75,6 @@
 				</div>
 			</div>
 			</div>
-			<div class="row features_row">
-
-				<!-- Features Item -->
-				<div class="col-lg-3 feature_col">
-					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="<?php echo base_url().'/assets/unicat/images/'?>icon_1.png" alt=""></div>
-						<h3 class="feature_title">The Experts</h3>
-						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
-					</div>
-				</div>
-
-				<!-- Features Item -->
-				<div class="col-lg-3 feature_col">
-					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="<?php echo base_url().'/assets/unicat/images/'?>icon_2.png" alt=""></div>
-						<h3 class="feature_title">Book & Library</h3>
-						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
-					</div>
-				</div>
-
-				<!-- Features Item -->
-				<div class="col-lg-3 feature_col">
-					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="<?php echo base_url().'/assets/unicat/images/'?>icon_3.png" alt=""></div>
-						<h3 class="feature_title">Best Trainings</h3>
-						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
-					</div>
-				</div>
-
-				<!-- Features Item -->
-				<div class="col-lg-3 feature_col">
-					<div class="feature text-center trans_400">
-						<div class="feature_icon"><img src="<?php echo base_url().'/assets/unicat/images/'?>icon_4.png" alt=""></div>
-						<h3 class="feature_title">Award & Reward</h3>
-						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
-					</div>
-				</div>
-
-			</div>
 		</div>
 	</div>
 
