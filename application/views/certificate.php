@@ -35,17 +35,6 @@
       background-size: cover;
     }
 
-    .certificate-container {
-      /* Flex to center the text block */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      padding: 2rem;
-    }
 
     /* Text styling */
     .recipient-name {
