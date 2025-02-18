@@ -47,10 +47,11 @@
         .training strong{
             font-size:35px;
             margin-left: 15%;
+            max-width: 80%;
         }
 
         .date strong{
-            font-size:35px;
+            font-size:20px;
             margin-left: 25%;
         }
 
@@ -93,7 +94,7 @@
             <p class="training"><strong></strong></p>
             <p class="training"><strong></strong></p>
             <p class="training"><strong><?php echo $course; ?></strong></p>
-            <p  class="date"><strong> </strong></p>
+            <p  class="date"></p>
             <p  class="date"><strong> <?php echo $date_completed; ?></strong></p>
         </div>
     </div>
