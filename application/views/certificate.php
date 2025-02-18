@@ -23,7 +23,6 @@
     /* A4 landscape dimensions: 297mm x 210mm */
     .certificate-bg {
       width: 297mm;
-      height: 210mm;
       position: relative;
       background: url("<?= base_url('assets/unicat/images/certificate.png') ?>") no-repeat center center;
 
