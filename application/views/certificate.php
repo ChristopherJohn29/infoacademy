@@ -35,12 +35,18 @@
         .certificate-body {
             font-size: 20px;
             line-height: 1.6;
-            margin-top: 40px;
+            margin-top: 180px;
             width: 100%;
+            color: white;
         }
         .certificate-body strong {
             font-size: 24px;
         }
+
+        .username strong{
+            font-size:50px;
+        }
+
         .certificate-footer {
             font-size: 18px;
             margin-top: 60px;
@@ -65,7 +71,6 @@
                 background-image: url('<?=base_url()?>/assets/unicat/images/certificate.png');
                 background-size: cover;
                 height: 800px; /* Adjust height for printing */
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
