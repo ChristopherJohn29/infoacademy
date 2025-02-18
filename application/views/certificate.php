@@ -49,9 +49,10 @@
 
     /* Text styling */
     .recipient-name {
-      font-size: 5.2rem;
+      font-size: 3.2rem;
       font-weight: bolder;
       margin-bottom: 1.5rem;
+      margin-top: 4.5rem;
     }
 
     .course-title {
