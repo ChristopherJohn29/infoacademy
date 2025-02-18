@@ -552,7 +552,7 @@ class Control extends CI_Controller
                 // Send verification email
                 $this->load->library(['email']);
 
-                $this->email->from('infoacademy@infoadvance.com', 'InfoAcademy');
+                $this->email->from('konozubadoh@gmail.com', 'InfoAcademy');
                 $this->email->to($data['email_address']);
                 $this->email->subject('User Verification Code');
                 $this->email->message('To verify your account, kindly click this link: ' . base_url() . '/?v=' . $data['verification_code']);
