@@ -58,8 +58,8 @@
       margin-bottom: 2rem;
       line-height: 1.4;
       font-weight: bold;
-      margin-top: 5.5rem;
-      margin-left: 25rem;
+      margin-top: 5.6rem;
+      margin-left: 23rem;
     }
 
   </style>
