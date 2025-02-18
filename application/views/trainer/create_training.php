@@ -144,6 +144,8 @@
                                                     <label>Level</label>
                                                     <select name="level" class="form-control" required>
                                                         <option value="Easy">Easy</option>
+                                                        <option value="Intermediate">Intermediate</option>
+                                                        <option value="Hard">Hard</option>
                                                     </select>
                                                 </div>
                                             </div>
