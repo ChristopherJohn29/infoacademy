@@ -17,7 +17,6 @@
             padding: 20px;
             background: url('<?=base_url()?>/assets/unicat/images/certificate.png') no-repeat center center;
             background-size: cover;
-            text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             height: 800px; /* Adjust the height as per the image */
@@ -41,6 +40,7 @@
 
         .username strong{
             font-size:50px;
+            margin-left: 204px;
         }
 
         .certificate-footer {
