@@ -54,12 +54,12 @@
     }
 
     .completion-info {
-      font-size: 1rem;
+      font-size: 1.5rem;
       margin-bottom: 2rem;
       line-height: 1.4;
       font-weight: bold;
-      margin-top: 14.5rem;
-      margin-left: 30rem;
+      margin-top: 5.5rem;
+      margin-left: 25rem;
     }
 
   </style>
