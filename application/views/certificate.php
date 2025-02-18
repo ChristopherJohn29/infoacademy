@@ -88,24 +88,7 @@
        If you have separate images for QR or a logo, you can 
        absolutely position them as below.
     */
-    .qr-code {
-      position: absolute;
-      left: 2rem;
-      bottom: 2rem;
-      width: 100px;
-      height: 100px;
-      background: url('<?= base_url() ?>/path/to/qr.png') no-repeat center center;
-      background-size: contain;
-    }
-    .logo {
-      position: absolute;
-      right: 2rem;
-      bottom: 2rem;
-      width: 100px;
-      height: 100px;
-      background: url('<?= base_url() ?>/path/to/logo.png') no-repeat center center;
-      background-size: contain;
-    }
+
   </style>
 </head>
 <body>
