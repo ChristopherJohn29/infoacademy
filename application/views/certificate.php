@@ -45,7 +45,7 @@
         }
 
         .username{
-            margin-top:10px;
+            margin-top:30px;
         }
 
         .training strong{
@@ -55,7 +55,7 @@
         }
 
         .training{
-            margin-top:20px;
+            margin-top: 40px;
         }
         .date {
             margin-top:40px;
