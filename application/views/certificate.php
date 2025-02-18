@@ -40,8 +40,8 @@
     .recipient-name {
       font-size: 3.2rem;
       font-weight: bolder;
-      margin-bottom: 1.5rem;
-      margin-top: 10.5rem;
+      margin-bottom: 5.5rem;
+      margin-top: 15.5rem;
     }
 
     .course-title {
