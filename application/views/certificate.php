@@ -83,6 +83,11 @@
              ? date('F d, Y', strtotime($date_completed))
              : 'Date Here' ?>
       </div>
+
+      <?php if (isset($qr_code_url)) : ?>
+        <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
+      <?php endif; ?>
+      
     </div>
   </div>
 </body>

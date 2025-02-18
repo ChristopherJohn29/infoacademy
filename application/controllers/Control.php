@@ -614,6 +614,12 @@ class Control extends CI_Controller
                 ];
     
                 // Load the view into a variable (third parameter true returns the HTML string)
+
+                $verification_url = base_url('verify_certificate/' . $participantId);
+                // Generate QR code URL using Google Charts API
+                $data['qr_code_url'] = 'https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=' . urlencode($verification_url);
+
+                
                 $html = $this->load->view('certificate', $data, true);
     
                 // Include Dompdf's autoload file
