@@ -12,7 +12,7 @@
     }
     body {
       width: 100%;
-      height: 100vh; /* Adjust if you want a fixed height or auto */
+      height: 90vh; /* Adjust if you want a fixed height or auto */
       font-family: Arial, sans-serif;
       color: #fff;
       background: url('<?= base_url() ?>/assets/unicat/images/certificate.png') no-repeat center center;
