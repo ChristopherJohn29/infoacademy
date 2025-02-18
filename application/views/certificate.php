@@ -1,116 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        .certificate-container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            background: url('<?=base_url()?>/assets/unicat/images/certificate.png') no-repeat center center;
-            background-size: cover;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            height: 800px; /* Adjust the height as per the image */
-        }
-        .certificate-title {
-            font-size: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 50px;
-        }
-        .certificate-body {
-            font-size: 20px;
-            line-height: 1.6;
-            margin-top: 180px;
-            width: 100%;
-            color: white;
-        }
-        .certificate-body strong {
-            font-size: 24px;
-        }
-
-        .username strong{
-            font-size:55px;
-            margin-left: 10%;
-            margin-top:10px;
-        }
-
-        .username{
-            margin-top:30px;
-        }
-
-        .training strong{
-            font-size:35px;
-            margin-left: 15%;
-            max-width: 80%;
-        }
-
-        .training{
-            margin-top: 40px;
-        }
-        .date {
-            margin-top:40px;
-        }
-
-        .date strong{
-            font-size:20px;
-            margin-left: 25%;
-        }
-
-        .certificate-footer {
-            font-size: 18px;
-            margin-top: 60px;
-        }
-
-        /* Print specific styles */
-        @media print {
-            body {
-                width: 100%;
-                margin: 0;
-                -webkit-print-color-adjust: exact; /* Force background color/image in print */
-                print-color-adjust: exact; /* For newer browsers */
-            }
-
-            .certificate-container {
-                width: 100%;
-                margin: 0;
-                padding: 20px;
-                border: none;
-                box-shadow: none;
-                page-break-before: always;
-                background-image: url('<?=base_url()?>/assets/unicat/images/certificate.png');
-                background-size: cover;
-                height: 800px; /* Adjust height for printing */
-            }
-
-            @page {
-                size: landscape;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Certificate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .certificate-container {
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      background: url('<?= base_url() ?>/assets/unicat/images/certificate.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      height: 800px; /* Adjust as needed */
+    }
+    .certificate-body {
+      font-size: 20px;
+      color: white;
+      padding: 50px;
+    }
+    .username strong {
+      font-size: 55px;
+    }
+    .training strong {
+      font-size: 35px;
+    }
+    .date strong {
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="certificate-container">
-        <div class="certificate-body">
-            <p class="username"><strong><?php echo $name; ?></strong></p>
-            <p class="training"><strong></strong></p>
-            <p class="training"><strong><?php echo $course; ?></strong></p>
-            <p  class="date"></p>
-            <p  class="date"><strong> <?php echo $date_completed; ?></strong></p>
-        </div>
+  <div class="certificate-container">
+    <div class="certificate-body">
+      <p class="username"><strong><?= $name; ?></strong></p>
+      <p class="training"><strong><?= $course; ?></strong></p>
+      <p class="date"><strong><?= $date_completed; ?></strong></p>
     </div>
-    <script>
-        // Automatically trigger print dialog
-        window.print();
-    </script>
+  </div>
 </body>
 </html>
