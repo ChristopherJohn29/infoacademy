@@ -40,7 +40,13 @@
 
         .username strong{
             font-size:50px;
-            margin-left: 204px;
+            margin-left: 30%;
+        }
+
+        .training strong{
+            font-size:40px;
+            margin-left: 35%;
+            margin-top:50%;
         }
 
         .certificate-footer {
