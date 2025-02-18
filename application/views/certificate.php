@@ -94,19 +94,11 @@
 <body>
   <div class="certificate-container">
 
-    <!-- Title -->
-    <div class="certificate-title">Certificate of Training</div>
-
-    <!-- Presented to -->
-    <div class="presented-to">Presented to</div>
 
     <!-- Name -->
     <div class="recipient-name">
       <?= isset($name) ? strtoupper($name) : 'RECIPIENT NAME' ?>
     </div>
-
-    <!-- Subtext -->
-    <div class="subtext">for successfully completing the course on</div>
 
     <!-- Course Title -->
     <div class="course-title">
@@ -115,22 +107,13 @@
 
     <!-- Completion Info -->
     <div class="completion-info">
-      Completed this 
-      <strong>
+
         <?= isset($date_completed) ? date('F d, Y', strtotime($date_completed)) : 'Date Here' ?>
-      </strong>
-      <br>via INFOACADEMY E-LEARNING SYSTEM
+
     </div>
 
-    <!-- Footer Text -->
-    <div class="footer-text">
-      This is a system generated document.<br>
-      Signature is not required.
-    </div>
+ 
 
-    <!-- Optional QR code / logo elements -->
-    <!-- <div class="qr-code"></div> -->
-    <!-- <div class="logo"></div> -->
 
   </div>
 </body>
