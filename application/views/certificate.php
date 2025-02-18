@@ -90,8 +90,8 @@
 <body>
     <div class="certificate-container">
         <div class="certificate-body">
+            <p  class="date"></p>
             <p class="username"><strong><?php echo $name; ?></strong></p>
-            <p class="training"><strong></strong></p>
             <p class="training"><strong></strong></p>
             <p class="training"><strong><?php echo $course; ?></strong></p>
             <p  class="date"></p>
