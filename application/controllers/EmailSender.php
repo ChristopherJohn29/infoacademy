@@ -14,7 +14,7 @@ class EmailSender extends CI_Controller {
         // SMTP Email configuration
         $config['wordwrap'] = TRUE;
         $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_host'] = 'ssl://smtp.gmail.com';
         $config['smtp_user'] = 'konozubadoh@gmail.com';
         $config['smtp_pass'] = 'dacdznqsvhxgqclp';
         $config['smtp_port'] = '465';
