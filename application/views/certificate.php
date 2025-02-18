@@ -56,7 +56,7 @@
                 border: none;
                 box-shadow: none;
                 page-break-before: always;
-                background-image: url('/mnt/data/Blank Certificate of Training Infoacademy.jpg');
+                background-image: url('<?=base_url()?>/assets/unicat/images/certificate.jpg');
                 background-size: cover;
             }
 
