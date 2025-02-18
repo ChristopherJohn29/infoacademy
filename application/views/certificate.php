@@ -12,6 +12,10 @@
             background-color: #f9f9f9;
         }
         .certificate-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             width: 80%;
             margin: 50px auto;
             padding: 20px;
@@ -25,32 +29,21 @@
         .certificate-title {
             font-size: 30px;
             font-weight: bold;
-            margin-top: 50px;
             text-transform: uppercase;
-            position: absolute;
-            top: 150px;
-            width: 100%;
+            margin-top: 50px;
         }
         .certificate-body {
             font-size: 20px;
             line-height: 1.6;
-            position: absolute;
-            top: 250px;
+            margin-top: 40px;
             width: 100%;
         }
         .certificate-body strong {
             font-size: 24px;
         }
         .certificate-footer {
-            margin-top: 30px;
             font-size: 18px;
-            position: absolute;
-            bottom: 100px;
-            width: 100%;
-        }
-        .signature {
-            margin-top: 50px;
-            font-size: 16px;
+            margin-top: 60px;
         }
 
         /* Print specific styles */
@@ -58,6 +51,8 @@
             body {
                 width: 100%;
                 margin: 0;
+                -webkit-print-color-adjust: exact; /* Force background color/image in print */
+                print-color-adjust: exact; /* For newer browsers */
             }
 
             .certificate-container {
@@ -70,6 +65,10 @@
                 background-image: url('<?=base_url()?>/assets/unicat/images/certificate.png');
                 background-size: cover;
                 height: 800px; /* Adjust height for printing */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
 
             @page {
