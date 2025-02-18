@@ -79,19 +79,10 @@
 </head>
 <body>
     <div class="certificate-container">
-        <div class="certificate-title">
-            Certificate of Training
-        </div>
         <div class="certificate-body">
-            <p>Presented to</p>
-            <p><strong><?php echo $name; ?></strong></p>
-            <p>For having successfully completed the</p>
-            <p><strong><?php echo $course; ?></strong></p>
-            <p>on <?php echo $date_completed; ?></p>
-        </div>
-        <div class="certificate-footer">
-            <p><?php echo $signatory; ?></p>
-            <p>Authorized Signatory</p>
+            <p class="username"><strong><?php echo $name; ?></strong></p>
+            <p class="training"><strong><?php echo $course; ?></strong></p>
+            <p  class="date"> <?php echo $date_completed; ?></p>
         </div>
     </div>
     <script>
