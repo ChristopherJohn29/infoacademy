@@ -45,7 +45,7 @@
         }
 
         .training strong{
-            font-size:40px;
+            font-size:35px;
             margin-left: 15%;
         }
 
