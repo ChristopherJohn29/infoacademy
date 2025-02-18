@@ -172,10 +172,8 @@
                     <select name="account_type" class="form-control" required="required">
                         <option value="" disabled selected>*Account Type</option>
                         <option value="1">Participant</option>
-                        <option value="2">Trainor
-                        <option>
                     </select>
-                    <input type="text" class="form-control" placeholder="*Username" required="required" name="username">
+                    <input type="text" class="form-control" placeholder="*Username" required="required" name="username" pattern="^\S+$" title="Username must not contain spaces">
                     <input type="password" id="password" class="form-control" placeholder="*Password"
                            required="required" name="password">
                     <input type="password" id="retype-password" class="form-control" placeholder="*Confirm password"
