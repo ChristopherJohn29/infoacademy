@@ -49,8 +49,8 @@
 
     /* Text styling */
     .recipient-name {
-      font-size: 2.2rem;
-      font-weight: bold;
+      font-size: 5.2rem;
+      font-weight: bolder;
       margin-bottom: 1.5rem;
     }
 
