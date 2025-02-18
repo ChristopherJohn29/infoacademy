@@ -135,11 +135,11 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Street no." name="office_street_number">
                     <input type="text" class="form-control" placeholder="Street name" name="office_street_name">
-                    <input type="text" class="form-control" placeholder="*Region"
+                    <input type="text" class="form-control" placeholder="Region"
                            name="office_region">
-                    <input type="text" class="form-control" placeholder="*City / Municipality"
+                    <input type="text" class="form-control" placeholder="City / Municipality"
                            name="office_city">
-                    <input type="text" class="form-control" placeholder="*Barangay"
+                    <input type="text" class="form-control" placeholder="Barangay"
                            name="office_barangay">
                     <input type="text" class="form-control" placeholder="Zip Code" name="office_zip_code">
                     <div class="input-group-append">
@@ -154,7 +154,7 @@
                            name="email_address">
                     <input type="text" class="form-control" placeholder="*Mobile number" required="required"
                            name="mobile_number">
-                    <input type="text" class="form-control" placeholder="*Telephone number"
+                    <input type="text" class="form-control" placeholder="Telephone number"
                            name="telephone_number">
                     <div class="input-group-append">
                         <div class="input-group-text">
