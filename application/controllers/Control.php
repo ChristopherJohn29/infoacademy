@@ -552,17 +552,37 @@ class Control extends CI_Controller
                 // Send verification email
                 $this->load->library(['email']);
 
+                $config['wordwrap'] = TRUE;
+                $config['protocol'] = 'smtp';
+                $config['smtp_host'] = 'ssl://smtp.gmail.com';
+                $config['smtp_user'] = 'konozubadoh@gmail.com';
+                $config['smtp_pass'] = 'dacdznqsvhxgqclp';
+                $config['smtp_port'] = '465';
+                $config['mailtype'] = 'html';
+        
+                // Load email library and initialize configuration
+                $this->email->initialize($config);
+
                 $this->email->from('konozubadoh@gmail.com', 'InfoAcademy');
                 $this->email->to($data['email_address']);
                 $this->email->subject('User Verification Code');
                 $this->email->message('To verify your account, kindly click this link: ' . base_url() . '/?v=' . $data['verification_code']);
-                $this->email->send();
+   
 
-                echo json_encode([
-                    "success" => true,
-                    "message" => "Registration successful! Please check your email to verify your account.",
-                    "redirect_url" => base_url() . "/control/login"
-                ]);
+
+                if( $this->email->send()){
+                    echo json_encode([
+                        "success" => true,
+                        "message" => "Registration successful! Please check your email to verify your account.",
+                        "redirect_url" => base_url() . "/control/login"
+                    ]);
+                } else {
+                    echo json_encode([
+                        "success" => false,
+                        "error" => "Error! Sending Email."
+                    ]);
+                }
+          
             } else {
                 echo json_encode([
                     "success" => false,
