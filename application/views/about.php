@@ -53,7 +53,7 @@
 				<div class="col">
 					<div class="section_title_container text-center">
 						<h2 class="section_title">Welcome To InfoAcademy</h2>
-						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu Vestibulum</p></div>
+						<div class="section_subtitle"><p>"We preach quality, we practice quality At lnfoAdvance, our profession is our passion..”</p></div>
 					</div>
 				</div>
 			</div>
@@ -63,9 +63,9 @@
 				<div class="col-lg-4 about_col about_col_left">
 					<div class="about_item">
 						<div class="about_item_image"><img src="<?php echo base_url().'/assets/unicat/images'?>/about_1.jpg" alt=""></div>
-						<div class="about_item_title"><a href="#">Our Stories</a></div>
+						<div class="about_item_title"><a href="#">Our People</a></div>
 						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+							<p>Our people are comprised of trainers and consultants having vast experience assisting clients from establishment to continual improvement of management systems. Most of our consultants are also third-party auditors with extensive experience in auditing different management systems from various industries. We manifest our core values of honesty, integrity and professionalism in all our engagements</p>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,10 @@
 						<div class="about_item_image"><img src="<?php echo base_url().'/assets/unicat/images'?>/about_2.jpg" alt=""></div>
 						<div class="about_item_title"><a href="#">Our Mission</a></div>
 						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+							<p>We commit to provide quality and excellent services to our clients by:
+								<br>1.Providing effective and value-adding management system training and consultancy;
+								<br>2.Developing and implementing innovative and manageable automated and online systems and solutions; and
+								<br>3.Enhancing organizational competencies through leadership and staff development training</p>
 						</div>
 					</div>
 				</div>
@@ -87,7 +90,7 @@
 						<div class="about_item_image"><img src="<?php echo base_url().'/assets/unicat/images'?>/about_3.jpg" alt=""></div>
 						<div class="about_item_title"><a href="#">Our Vision</a></div>
 						<div class="about_item_text">
-							<p>Lorem ipsum dolor sit , consectet adipisi elit, sed do eiusmod tempor for enim en consectet adipisi elit, sed do consectet adipisi elit, sed doadesg.</p>
+							<p>We aim to be the esteemed partner for organizational success through value-adding training, consultancy and solutions</p>
 						</div>
 					</div>
 				</div>
@@ -105,7 +108,7 @@
 				<div class="col">
 					<div class="section_title_container text-center">
 						<h2 class="section_title">Why Choose Us</h2>
-						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
+				
 					</div>
 				</div>
 			</div>
@@ -120,30 +123,30 @@
 							<div class="elements_accordions">
 
 								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Award for Best School 2017</div></div>
+									<div class="accordion d-flex flex-row align-items-center"><div>Expert Trainers</div></div>
 									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p>Learn from industry professionals with years of hands-on experience.</p>
 									</div>
 								</div>
 
 								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>You’re learning from the best.</div></div>
+									<div class="accordion d-flex flex-row align-items-center"><div>Comprehensive Curriculum</div></div>
 									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p>Structured programs designed to meet current market demands.</p>
 									</div>
 								</div>
 
 								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Our degrees are recognized worldwide.</div></div>
+									<div class="accordion d-flex flex-row align-items-center"><div>Commitment to Excellence</div></div>
 									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p>A reputation for delivering high-quality training programs.</p>
 									</div>
 								</div>
 
 								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>We encourage our students to go global.</div></div>
+									<div class="accordion d-flex flex-row align-items-center"><div>We Focus on Skill Development</div></div>
 									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p>Emphasis on both technical and soft skills for holistic growth.</p>
 									</div>
 								</div>
 
@@ -169,9 +172,11 @@
 
 	<!-- Team -->
 
+	
 
 	<!-- Counter -->
 
+	
 
 	<!-- Partners -->
 
