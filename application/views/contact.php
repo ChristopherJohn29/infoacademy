@@ -47,6 +47,7 @@
 
 		<!-- Contact Map -->
 
+		
 
 		<!-- Contact Info -->
 
@@ -82,19 +83,21 @@
 					<div class="col-lg-6">
 						<div class="contact_info">
 							<div class="contact_info_title">Contact Info</div>
-							<div class="contact_info_text">
-								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
-							</div>
+							
 							<div class="contact_info_location">
+								
 								<ul class="location_list">
+
 									<li>Tower 6, Unit 3G Escalades, 20th Ave., Brgy. San Roque 1109 Cubao Quezon City</li>
 									<li>+632 8583 - 0962</li>
 									<li>Globe (0917) 1146015</li>
 									<li>SUN (0923) 5790675</li>
 									<li>infoadvancecompany@gmail.com</li>
+		
 								</ul>
 							</div>
-			
+							
+							</div>
 						</div>
 					</div>
 				</div>
@@ -104,7 +107,7 @@
 
 	<!-- Newsletter -->
 
-
+	
 
 	<!-- Footer -->
 

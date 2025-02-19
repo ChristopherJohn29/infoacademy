@@ -14,7 +14,7 @@
                                     </a>
                                 </div>
                                 <div class="footer_about_text">
-                                    <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+                                <!--   <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p> -->
                                 </div>
                                 <div class="footer_social">
                                     <ul>
@@ -32,7 +32,7 @@
                                 <div class="footer_title">Email Us</div>
                                 <div class="footer_contact_info">
                                     <ul>
-                                        <li>infoadvancecompany@gmail.com  </li>
+                                        <li>infoadvancecompany@gmail.com</li>
                                         <li>+632 8583-0962</li>
                                         <li>Globe (0917)1146015</li>
                                         <li>SUN (0923)5790675</li>
@@ -65,7 +65,7 @@
         <div class="row copyright_row">
             <div class="col">
                 <div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
-                    Copyright &copy;2020 All rights reserved
+                    Copyright &copy;InfoAdvance 2025 All rights reserved
                 </div>
                 <div class="ml-lg-auto cr_links"></div>
             </div>

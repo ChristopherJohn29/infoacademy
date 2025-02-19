@@ -12,11 +12,11 @@
                                 </li>
                                 <li>
                                     <i class="fa fa-phone" aria-hidden="true"></i>
-                                    <div>001-1234-88888</div>
+                                    <div>+632 8583-0962</div>
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                    <div>info.academy@gmail.com</div>
+                                    <div>infoadvancecompany@gmail.com</div>
                                 </li>
                             </ul>
                             <div class="top_bar_login ml-auto">

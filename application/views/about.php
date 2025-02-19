@@ -100,75 +100,8 @@
 	</div>
 
 	<!-- Feature -->
-
-	<div class="feature">
-		<div class="feature_background" style="background-image:url(<?php echo base_url().'/assets/unicat/images'?>/courses_background.jpg)"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Why Choose Us</h2>
-				
-					</div>
-				</div>
-			</div>
-			<div class="row feature_row">
-
-				<!-- Feature Content -->
-				<div class="col-lg-6 feature_col">
-					<div class="feature_content">
-						<!-- Accordions -->
-						<div class="accordions">
-
-							<div class="elements_accordions">
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Expert Trainers</div></div>
-									<div class="accordion_panel">
-										<p>Learn from industry professionals with years of hands-on experience.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Comprehensive Curriculum</div></div>
-									<div class="accordion_panel">
-										<p>Structured programs designed to meet current market demands.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Commitment to Excellence</div></div>
-									<div class="accordion_panel">
-										<p>A reputation for delivering high-quality training programs.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>We Focus on Skill Development</div></div>
-									<div class="accordion_panel">
-										<p>Emphasis on both technical and soft skills for holistic growth.</p>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-						<!-- Accordions End -->
-					</div>
-				</div>
-
-				<!-- Feature Video -->
-				<div class="col-lg-6 feature_col">
-					<div class="feature_video d-flex flex-column align-items-center justify-content-center">
-						<div class="feature_video_background" style="background-image:url(<?php echo base_url().'/assets/unicat/images'?>/video.jpg)"></div>
-						<a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
-							<img src="<?php echo base_url().'/assets/unicat/images'?>/play.png" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	
 
 	<!-- Team -->
 

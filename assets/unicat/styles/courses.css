@@ -268,7 +268,7 @@ section
 .top_bar
 {
 	width: 100%;
-	background: #1e2434;
+	background: #212529;
 }
 .header.scrolled .top_bar
 {
@@ -382,7 +382,7 @@ section
 	font-size: 36px;
 	font-weight: 700;
 	line-height: 0.75;
-	color: #384158;
+	color: #3821ce;
 	vertical-align: middle;
 	margin-left: 4px;
 	-webkit-transition: all 200ms ease;
@@ -393,7 +393,7 @@ section
 }
 .logo_text span
 {
-	color: #14bdee;
+	color: #e11b09;
 }
 .header.scrolled .logo
 {
@@ -1532,7 +1532,7 @@ section
 }
 .footer_logo_text span
 {
-	color: #14bdee;
+	color: #FFFFFF;
 }
 .footer_title
 {
