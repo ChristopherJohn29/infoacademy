@@ -50,7 +50,8 @@
       font-weight: bold;
       margin-bottom: 1.5rem;
       line-height: 1.4;
-      margin-left: 12rem;
+      margin-left: 9rem;
+      max-width:50px;
     }
 
     .completion-info {
