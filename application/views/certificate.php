@@ -41,6 +41,8 @@
       font-size: 3.2rem;
       font-weight: bolder;
       position: absolute;
+      top: 420px;
+      left: 340px;
     }
 
     .course-title {
