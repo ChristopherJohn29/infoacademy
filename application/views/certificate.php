@@ -51,6 +51,8 @@
       line-height: 1.4;
       max-width:55%;
       position: absolute;
+      top: 440px;
+      left: 150px;
     }
 
     .completion-info {
