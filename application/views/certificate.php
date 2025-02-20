@@ -62,7 +62,7 @@
       font-weight: bold;
       position: absolute;
       top: 570px;
-      left: 400px;
+      left: 450px;
     }
     
     .qr-code{
