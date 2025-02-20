@@ -61,7 +61,7 @@
       line-height: 1.4;
       font-weight: bold;
       position: absolute;
-      top: 560px;
+      top: 566px;
       left: 480px;
     }
     
