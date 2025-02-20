@@ -40,18 +40,15 @@
     .recipient-name {
       font-size: 3.2rem;
       font-weight: bolder;
-      margin-bottom: 6.5rem;
-      margin-top: 14.5rem;
-      margin-left: 7rem;
+      position: absolute;
     }
 
     .course-title {
       font-size: 2rem;
       font-weight: bold;
-      margin-bottom: 1.5rem;
       line-height: 1.4;
-      margin-left: 9rem;
       max-width:55%;
+      position: absolute;
     }
 
     .completion-info {
@@ -59,15 +56,11 @@
       margin-bottom: 2rem;
       line-height: 1.4;
       font-weight: bold;
-      margin-top: 5.8rem;
-      margin-left: 23rem;
-      float: left;
+      position: absolute;
     }
     
     .qr-code{
-        margin-left: 3rem;
-        margin-top: .5rem;
-        float: left;
+        position: absolute;
     }
 
   </style>
