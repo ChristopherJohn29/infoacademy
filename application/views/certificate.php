@@ -41,7 +41,7 @@
       font-size: 3.2rem;
       font-weight: bolder;
       position: absolute;
-      top: 220px;
+      top: 240px;
       left: 120px;
     }
 
