@@ -61,11 +61,13 @@
       font-weight: bold;
       margin-top: 5.8rem;
       margin-left: 23rem;
+      float: left;
     }
     
     .qr-code{
         margin-left: 3rem;
         margin-top: .5rem;
+        float: left;
     }
 
   </style>
