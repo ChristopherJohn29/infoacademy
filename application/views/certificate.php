@@ -42,7 +42,7 @@
       font-weight: bolder;
       position: absolute;
       top: 220px;
-      left: 240px;
+      left: 140px;
     }
 
     .course-title {
