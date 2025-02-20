@@ -293,7 +293,7 @@
                                         <?php foreach ($training_class as $class): ?>
                                             <tr>
                                                 <td><?php echo html_escape($class['first_name']) . ' ' . html_escape($class['last_name']); ?></td>
-                                                <td><?php echo html_escape($class['participant_id']); ?></td>
+                                                <td><?php echo html_escape($class['participant_code']); ?></td>
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td>
                                                 <td>
                                                     <?php 

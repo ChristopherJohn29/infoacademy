@@ -161,6 +161,8 @@ class Control extends CI_Controller
                 $training    = $this->System_model->fetchSingleTraining(html_escape($_POST['tid']));
                 $instruction = $training[0]['instruction'];
 
+
+
                 $data = [
                     'proof_of_payment'     => html_escape($proof_of_payment),
                     'payment_option'       => $payment_option,
@@ -179,6 +181,17 @@ class Control extends CI_Controller
                 $success = $this->System_model->enrollSubmit($data);
 
                 if ($success) {
+
+                    $insertedId = $this->db->insert_id();
+
+                    // Build the participant code using the training code, current month, two-digit year, and the inserted ID (formatted to 4 digits)
+                    $participantCode = $training[0]['training_code'] . '-' . date('m') . date('y') . '-' . sprintf('%04d', $insertedId);
+                
+                    // Update the record with the generated participant code
+                    $updateData = ['participant_code' => $participantCode];
+                    $this->db->where('id', $insertedId);
+                    $this->db->update('training_class', $updateData);
+                    
                     redirect('control/participant');
                 }
             }
