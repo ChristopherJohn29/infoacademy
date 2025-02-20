@@ -70,7 +70,8 @@ class System_model extends CI_Model
         $this->db->select('
             training_class.*,
             CONCAT(user.first_name, " ", user.last_name) as participant_name,
-            training.training_title
+            training.training_title,
+            training.required_no_of_hours
         ');
         $this->db->from('training_class');
         $this->db->where('participant_id', $participantId);

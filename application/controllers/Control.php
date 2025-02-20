@@ -191,7 +191,7 @@ class Control extends CI_Controller
                     $updateData = ['participant_code' => $participantCode];
                     $this->db->where('id', $insertedId);
                     $this->db->update('training_class', $updateData);
-                    
+
                     redirect('control/participant');
                 }
             }
@@ -662,6 +662,7 @@ class Control extends CI_Controller
                     'course'         => $participantData['training_title'],
                     'date_enrolled'  => $participantData['date_enrolled'],
                     'date_completed' => $participantData['date_completed'],
+                    'required_no_of_hours' => $participantData['required_no_of_hours'],
                     'signatory'      => "Aurelio L. Ebita, CPA" // Or load this dynamically
                 ];
     
