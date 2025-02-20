@@ -61,8 +61,8 @@
     
     .qr-code{
         position: absolute;
-        top: 220px;
-        left: 220px;
+        top: 520px;
+        left: 420px;
     }
 
   </style>
