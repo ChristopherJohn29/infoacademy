@@ -159,12 +159,14 @@ class Admin extends CI_Controller
     public function submit_training() {
         // Get form data
         $training_id = $this->input->post('tid');
+        $training_code = $this->input->post('training_code');
         $training_fee = $this->input->post('training_fee');
         $approval_status = $this->input->post('approval_status');
         $notes = $this->input->post('notes');
 
         // Prepare data for insertion/update
         $data = [
+            'training_code' => $training_code,
             'training_fee' => $training_fee,
             'status' => $approval_status,
             'notes' => $notes,

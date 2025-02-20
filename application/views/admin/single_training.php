@@ -492,6 +492,12 @@
                                         <form action="<?=base_url('admin/submit_training')?>" method="post">
                                            <input type="hidden" name="tid" value="<?=$_GET['tid']?>">
                                             <!-- Training Fee -->
+
+                                            <div class="form-group">
+                                                <label for="trainingCode">Training Code</label>
+                                                <input type="text"  class="form-control" id="trainingCode" name="training_code" value="<?= $training_data['training_code'] ?>" placeholder="Enter training code" required>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="trainingFee">Training Fee (in PHP):</label>
                                                 <input type="number" step="0.01" class="form-control" id="trainingFee" name="training_fee" value="<?= $training_data['training_fee'] ?>" placeholder="Enter training fee" required>
