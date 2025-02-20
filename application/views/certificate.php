@@ -51,7 +51,7 @@
       margin-bottom: 1.5rem;
       line-height: 1.4;
       margin-left: 9rem;
-      max-width:40rem;
+      max-width:30rem;
     }
 
     .completion-info {
