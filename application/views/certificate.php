@@ -61,8 +61,8 @@
       line-height: 1.4;
       font-weight: bold;
       position: absolute;
-      top: 570px;
-      left: 500px;
+      top: 560px;
+      left: 480px;
     }
     
     .qr-code{
