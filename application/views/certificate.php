@@ -51,7 +51,7 @@
       line-height: 1.4;
       max-width:55%;
       position: absolute;
-      top: 440px;
+      top: 435px;
       left: 150px;
     }
 
