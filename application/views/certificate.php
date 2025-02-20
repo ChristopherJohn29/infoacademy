@@ -51,7 +51,7 @@
       line-height: 1.4;
       max-width:55%;
       position: absolute;
-      top: 435px;
+      top: 430px;
       left: 150px;
     }
 
@@ -61,6 +61,8 @@
       line-height: 1.4;
       font-weight: bold;
       position: absolute;
+      top: 530px;
+      left: 250px;
     }
     
     .qr-code{
