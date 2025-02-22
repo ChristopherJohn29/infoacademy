@@ -10,7 +10,7 @@ class Notification extends CI_Controller {
 
     // Returns notifications as JSON (for AJAX calls)
     public function get_notifications() {
-        $user_id = $this->session->userdata('user_id'); // adjust according to your auth system
+        $user_id = $this->session->userdata('id'); // adjust according to your auth system
         $notifications = $this->notification_model->get_notifications($user_id);
         echo json_encode($notifications);
     }

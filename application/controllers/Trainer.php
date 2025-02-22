@@ -599,6 +599,22 @@ class Trainer extends CI_Controller
             ];
 
             if ($this->System_model->saveTraining($data)) {
+
+                $admins = $this->db->get_where('users', array('account_type' => 3))->result();
+
+                    foreach ($admins as $admin) {
+                        $data = array(
+                            'user_id'     => $admin->id, // Assumes your primary key is 'id'
+                            'title'       => 'Training',
+                            'message'     => "Training module submitted by " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . " " . $_POST['training_title'] . " Awaiting for verification.",
+                            'link'        => base_url('admin/trainings'),
+                            'read_status' => 0,
+                            'created_at'  => date('Y-m-d H:i:s')
+                        );
+
+                        $this->notification_model->add_notification($data);
+                    }
+
                 $this->session->set_flashdata('success_message', 'Create successful!');
                 redirect('trainer/dashboard');
             } else {

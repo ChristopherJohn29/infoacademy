@@ -217,6 +217,23 @@ class Control extends CI_Controller
                         'created_at'  => date('Y-m-d H:i:s')
                     );
 
+                    $this->notification_model->add_notification($data);
+
+                    $admins = $this->db->get_where('users', array('account_type' => 3))->result();
+
+                    foreach ($admins as $admin) {
+                        $data = array(
+                            'user_id'     => $admin->id, // Assumes your primary key is 'id'
+                            'title'       => 'Payment',
+                            'message'     => "Payment submitted by " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . " " . $participantCode . " Awaiting for verification.",
+                            'link'        => base_url('admin/payments'),
+                            'read_status' => 0,
+                            'created_at'  => date('Y-m-d H:i:s')
+                        );
+
+                        $this->notification_model->add_notification($data);
+                    }
+
                     redirect('control/participant');
                 }
             }
@@ -442,6 +459,20 @@ class Control extends CI_Controller
             $saveWorkshop = $this->System_model->saveWorkshop(html_escape($data));
 
             if ($training_class && $saveWorkshop) {
+
+                $training = $this->System_model->get_training_by_training_id($training_id);
+                
+                $data = array(
+                    'user_id'     => $training->author_id,
+                    'title'       => 'Submittion',
+                    'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has submitted the workshop for ".$training->training_title.".",
+                    'link'        => base_url('trainer/classroom/?tid=').$training_id,  // Adjust link as needed
+                    'read_status' => 0,
+                    'created_at'  => date('Y-m-d H:i:s')
+                );
+
+                $this->notification_model->add_notification($data);
+
                 redirect('control/classroom/?tid=' . $training_id);
             } else {
                 redirect('control');
@@ -515,8 +546,24 @@ class Control extends CI_Controller
 
             // Save examination data
             $saveExamination = $this->System_model->saveExamination(html_escape($data));
+            
 
             if ($training_class && $saveExamination) {
+
+                $training = $this->System_model->get_training_by_training_id($training_id);
+                
+                $data = array(
+                    'user_id'     => $training->author_id,
+                    'title'       => 'Submittion',
+                    'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has submitted the exam for ".$training->training_title.".",
+                    'link'        => base_url('trainer/classroom/?tid=').$training_id,  // Adjust link as needed
+                    'read_status' => 0,
+                    'created_at'  => date('Y-m-d H:i:s')
+                );
+
+                $this->notification_model->add_notification($data);
+
+
                 redirect('control/classroom/?tid=' . $training_id);
             } else {
                 redirect('control');
@@ -774,10 +821,10 @@ class Control extends CI_Controller
         $training = $this->System_model->get_training_by_training_id($training_id);
 
         $data = array(
-            'user_id'     => $participant_id,
+            'user_id'     => $receiver_id,
             'title'       => 'New Message',
             'message'     => "New message on ".$training->training_title."",
-            'link'        => base_url('control/classroom/?tid=').$training_id,  // Adjust link as needed
+            'link'        => "#",  // Adjust link as needed
             'read_status' => 0,
             'created_at'  => date('Y-m-d H:i:s')
         );
