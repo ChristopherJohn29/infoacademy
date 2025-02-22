@@ -115,3 +115,8 @@
         
     </div>
 </nav>
+
+<script>
+  // Define the base site URL
+  var SITE_URL = "<?php echo site_url(); ?>";
+</script>
