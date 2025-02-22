@@ -174,6 +174,20 @@ class Admin extends CI_Controller
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
+        $training = $this->System_model->get_training_by_training_id($training_id);
+
+        $data = array(
+            'user_id'     => $training->author_id,
+            'title'       => 'Approval',
+            'message'     => "Your training module, ".$training->training_title.", has been access by the admin on ".date('Y-m-d H:i:s')."",
+            'link'        => base_url('trainer/dashboard'),  // Adjust link as needed
+            'read_status' => 0,
+            'created_at'  => date('Y-m-d H:i:s')
+        );
+
+        // Call the model to insert the notification
+        $this->notification_model->add_notification($data);
+
         // Save to database
         if ($this->System_model->updateTraining($training_id, $data)) {
             // Success message

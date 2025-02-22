@@ -207,6 +207,16 @@ class Control extends CI_Controller
                     // Call the model to insert the notification
                     $this->notification_model->add_notification($data);
 
+
+                    $data = array(
+                        'user_id'     => $training[0]['author_id'],
+                        'title'       => 'Enrollment',
+                        'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has enrolled in your training course, ".$training[0]['training_title'].".",
+                        'link'        => base_url('trainer/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
+                        'read_status' => 0,
+                        'created_at'  => date('Y-m-d H:i:s')
+                    );
+
                     redirect('control/participant');
                 }
             }
