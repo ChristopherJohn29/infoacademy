@@ -196,7 +196,7 @@ class Control extends CI_Controller
 
                      // Prepare the notification data
                     $data = array(
-                        'user_id'     => $user_id,
+                        'user_id'     => $_SESSION['id'],
                         'title'       => 'Enrollment',
                         'message'     => 'You have been successfully enrolled in '.$training[0]['training_title'].'. Finish the Training within '.$training[0]['validity'].'.',
                         'link'        => base_url('control/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
@@ -760,6 +760,20 @@ class Control extends CI_Controller
     
         // Call sendMessage method
         $response = $this->System_model->sendMessage($sender_id, $receiver_id, $message, $training_id);
+
+        $training = $this->System_model->get_training_by_training_id($training_id);
+
+        $data = array(
+            'user_id'     => $participant_id,
+            'title'       => 'New Message',
+            'message'     => "New message on ".$training->training_title."",
+            'link'        => base_url('control/classroom/?tid=').$training_id,  // Adjust link as needed
+            'read_status' => 0,
+            'created_at'  => date('Y-m-d H:i:s')
+        );
+
+        // Call the model to insert the notification
+        $this->notification_model->add_notification($data);
     
         // Return the response to the front end
         echo json_encode($response);

@@ -108,6 +108,18 @@ class Trainer extends CI_Controller
                 }
             }
 
+            $data = array(
+                'user_id'     => $participant_id,
+                'title'       => 'Accessment',
+                'message'     => "Your exam/workshop results have been assessed by the trainer on ".date('Y-m-d H:i:s').". Please check your student portal for details.",
+                'link'        => base_url('control/classroom/?tid=').$training_id,  // Adjust link as needed
+                'read_status' => 0,
+                'created_at'  => date('Y-m-d H:i:s')
+            );
+
+            // Call the model to insert the notification
+            $this->notification_model->add_notification($data);
+
             // Respond with success
             echo json_encode(['success' => true]);
         } else {

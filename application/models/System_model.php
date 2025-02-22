@@ -583,6 +583,23 @@ class System_model extends CI_Model
         }
     }
 
+    public function get_training_class_by_training_id($training_id)
+    {
+        $this->db->where('training_id', $training_id);
+        $query = $this->db->get('training_class');
+        return $query->row();  // returns a single row (object) or null if not found
+    }
+
+    public function get_training_by_training_id($training_id)
+    {
+        $this->db->where('id', $training_id);
+        $query = $this->db->get('training');
+        return $query->row();  // returns a single row (object) or null if not found
+    }
+
+    
+
+
     public function getMessagesByTraining($training_id, $participant_id = null) {
         $user_id = intval($_SESSION['id']); // Store session user ID for cleaner code
     

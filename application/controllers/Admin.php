@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Manila');
         $this->load->model('System_model');
+        $this->load->model('notification_model');
         if (isset($_SESSION['account_type'])) {
             if ($_SESSION['account_type'] == 3) {
             } else {
@@ -215,6 +216,22 @@ class Admin extends CI_Controller
         $update_result = $this->System_model->update_payment_status($payment_id, $update_data);
 
         if ($update_result) {
+
+            $training_class = $this->System_model->get_training_class_by_training_id($payment_id);
+            $participant_id = ($training_class) ? $training_class->participant_id : null;
+
+            $data = array(
+                'user_id'     => $participant_id,
+                'title'       => 'Payment Verification',
+                'message'     => "Your payment (ID: ".$payment_id.") has been verified by the admin on ".date('Y-m-d H:i:s').".",
+                'link'        => base_url('control/classroom/?tid=').$training_class->training_id,  // Adjust link as needed
+                'read_status' => 0,
+                'created_at'  => date('Y-m-d H:i:s')
+            );
+
+            // Call the model to insert the notification
+            $this->notification_model->add_notification($data);
+
             $response = [
                 'status' => true,
                 'message' => 'Payment status updated successfully.'
