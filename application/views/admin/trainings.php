@@ -38,33 +38,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <!-- SEARCH FORM -->
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-
-        <!-- Notifications Menu -->
-            <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i>
-                <span class="label label-warning" id="notification_count">0</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="header" id="notification_header">You have 0 notifications</li>
-                <li>
-                <!-- Inner Menu: contains the notifications -->
-                <ul class="menu" id="notification_list">
-                    <!-- Dynamic notifications will be loaded here -->
-                </ul>
-                </li>
-                <li class="footer"><a href="#">View all</a></li>
-            </ul>
-            </li>
-
-            <!-- Messages Dropdown Menu -->
-        </ul>
-    </nav>
+    <?php $this->load->view('admin/header') ?>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light elevation-4">
