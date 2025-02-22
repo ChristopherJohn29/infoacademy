@@ -45,14 +45,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <!-- SEARCH FORM -->
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Messages Dropdown Menu -->
-        </ul>
-    </nav>
+    <?php $this->load->view('admin/header') ?>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light elevation-4">
@@ -575,6 +568,7 @@
 <script src="<?= base_url() . '/assets/template' ?>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url() . '/assets/template' ?>/dist/js/demo.js"></script>
+<script src="<?= base_url() . '/assets/template' ?>/dist/js/notification.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable({

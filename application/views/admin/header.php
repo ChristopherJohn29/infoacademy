@@ -8,10 +8,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge" id="notification_count">15</span>
+            <span class="badge badge-warning navbar-badge" id="notification_count">0</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header" id="notification_header">15 Notifications</span>
+            <span class="dropdown-item dropdown-header" id="notification_header">0 Notifications</span>
             <div class="dropdown-divider"></div>
             <div id="notification_items">
                 <!-- Dynamic notification items will be appended here -->
