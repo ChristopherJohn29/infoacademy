@@ -220,6 +220,7 @@
 <script src="<?php echo base_url() . '/assets/unicat/plugins/' ?>parallax-js-master/parallax.min.js"></script>
 <script src="<?php echo base_url() . '/assets/unicat/plugins/' ?>colorbox/jquery.colorbox-min.js"></script>
 <script src="<?php echo base_url() . '/assets/unicat/js/' ?>course.js"></script>
+<script src="<?php echo base_url() . '/assets/template/dist' ?>/js/notification.js"></script>
 <script>
     jQuery(document).ready(function () {
         jQuery('.button-enroll').click(function () {

@@ -121,5 +121,6 @@
 <script src="<?php echo base_url().'/assets/unicat/plugins/'?>parallax-js-master/parallax.min.js"></script>
 <script src="<?php echo base_url().'/assets/unicat/plugins/'?>marker_with_label/marker_with_label.js"></script>
 <script src="<?php echo base_url().'/assets/unicat/js/'?>contact.js"></script>
+<script src="<?php echo base_url() . '/assets/template/dist' ?>/js/notification.js"></script>
 </body>
 </html>

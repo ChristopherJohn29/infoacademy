@@ -95,5 +95,6 @@
 <script src="<?php echo base_url().'/assets/unicat/plugins/'?>easing/easing.js"></script>
 <script src="<?php echo base_url().'/assets/unicat/plugins/'?>parallax-js-master/parallax.min.js"></script>
 <script src="<?php echo base_url().'/assets/unicat/js/'?>custom.js"></script>
+<script src="<?php echo base_url() . '/assets/template/dist' ?>/js/notification.js"></script>
 </body>
 </html>
