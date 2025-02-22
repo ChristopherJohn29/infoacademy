@@ -8,6 +8,7 @@ class Control extends CI_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Manila');
         $this->load->model('System_model');
+        $this->load->model('notification_model');
     }
 
     public function index()
@@ -191,6 +192,20 @@ class Control extends CI_Controller
                     $updateData = ['participant_code' => $participantCode];
                     $this->db->where('id', $insertedId);
                     $this->db->update('training_class', $updateData);
+
+
+                     // Prepare the notification data
+                    $data = array(
+                        'user_id'     => $user_id,
+                        'title'       => 'Enrollment',
+                        'message'     => 'You have been successfully enrolled in '.$training[0]['training_title'].'. Finish the Training within '.$training[0]['validity'].'.',
+                        'link'        => base_url('control/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
+                        'read_status' => 0,
+                        'created_at'  => date('Y-m-d H:i:s')
+                    );
+
+                    // Call the model to insert the notification
+                    $this->notification_model->add_notification($data);
 
                     redirect('control/participant');
                 }
