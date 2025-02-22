@@ -108,32 +108,22 @@
                                 if (isset($_SESSION['account_type'])) {
                                     if ($_SESSION['account_type'] == 1) {
                                         ?>
-                                    <div class="notification-module dropdown ml-auto">
-                                        <a href="#" class="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-bell" style="font-size:27px;" aria-hidden="true"></i>
-                                            <span class="notification-badge">15</span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right notification-dropdown">
-                                            <h6 class="dropdown-header">15 Notifications</h6>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                            <i class="fa fa-envelope mr-2"></i> 4 new messages
-                                            <span class="float-right text-muted text-sm">3 mins</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                            <i class="fa fa-users mr-2"></i> 8 friend requests
-                                            <span class="float-right text-muted text-sm">12 hours</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
-                                            <i class="fa fa-file mr-2"></i> 3 new reports
-                                            <span class="float-right text-muted text-sm">2 days</span>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item text-center" href="#">See All Notifications</a>
+                                   <div class="notification-module dropdown ml-auto">
+                                    <a href="#" class="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bell" style="font-size:27px;" aria-hidden="true"></i>
+                                        <span id="notification_count" class="notification-badge">15</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right notification-dropdown">
+                                        <h6 id="notification_header" class="dropdown-header">15 Notifications</h6>
+                                        <div class="dropdown-divider"></div>
+                                        <div id="notification_items">
+                                        <!-- Dynamic notifications will be loaded here -->
                                         </div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-center" href="#">See All Notifications</a>
                                     </div>
+                                    </div>
+
                                         <?php
                                     }
                                 }
