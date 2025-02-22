@@ -66,8 +66,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Right navbar links -->
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            <!-- Messages Dropdown Menu -->
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -88,13 +89,29 @@
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link user user-menu" data-toggle="dropdown" href="#">
+                    <img src="<?= $photo ?>" class="user-image" alt="User Image">
+                    <span class="ml-2"><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('trainer/profile') ?>" class="dropdown-item">
+                        <i class="fas fa-user mr-2"></i> Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('trainer/dashboard') ?>" class="dropdown-item">
+                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('control/logout') ?>" class="dropdown-item">
+                        <i class="nav-icon fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </li>
         </ul>
 
         
     </div>
 </nav>
-
-<script>
-  // Define the base site URL
-  var SITE_URL = "<?php echo site_url(); ?>";
-</script>
