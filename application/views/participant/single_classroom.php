@@ -463,12 +463,12 @@
                             if ($value->completed == 1) {
                                 $saved = $this->System_model->saveCompleted($training[0]['id']);
                                 if($saved){
-                                    $training = $this->System_model->get_training_by_training_id($training[0]['id']);
+                                    $training_table = $this->System_model->get_training_by_training_id($training[0]['id']);
                 
                                     $data = array(
-                                        'user_id'     => $training->author_id,
+                                        'user_id'     => $training_table->author_id,
                                         'title'       => 'Completion',
-                                        'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has completed the course on ".$training->training_title.".",
+                                        'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has completed the course on ".$training_table->training_title.".",
                                         'link'        => base_url('trainer/classroom/?tid=').$training[0]['id'],  // Adjust link as needed
                                         'read_status' => 0,
                                         'created_at'  => date('Y-m-d H:i:s')
