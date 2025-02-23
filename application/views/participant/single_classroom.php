@@ -469,12 +469,25 @@
                                         'user_id'     => $training_table->author_id,
                                         'title'       => 'Completion',
                                         'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has completed the course on ".$training_table->training_title.".",
-                                        'link'        => base_url('trainer/classroom/?tid=').$training[0]['id'],  // Adjust link as needed
+                                        'link'        => base_url('trainer/classroom/?id=').$training[0]['id'],  // Adjust link as needed
                                         'read_status' => 0,
                                         'created_at'  => date('Y-m-d H:i:s')
                                     );
                     
                                     $this->notification_model->add_notification($data);
+
+                                    $data = array(
+                                        'user_id'     => $_SESSION['id'],
+                                        'title'       => 'Completion',
+                                        'message'     => "Congratulations! You have successfully completed the course on ".$training_table->training_title.".",
+                                        'link'        => base_url('control/classroom/?tid=').$training[0]['id'],  // Adjust link as needed
+                                        'read_status' => 0,
+                                        'created_at'  => date('Y-m-d H:i:s')
+                                    );
+                    
+                                    $this->notification_model->add_notification($data);
+
+                                    
                                 }
                                 ?>
                                 <div class="section_title_container text-center" style="margin-top: 80px">
