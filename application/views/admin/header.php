@@ -49,8 +49,6 @@
                     <!-- Dynamic notification items will be appended here -->
 
                 </div>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
     </ul>

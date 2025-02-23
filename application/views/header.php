@@ -120,8 +120,7 @@
                                         <div id="notification_items">
                                         <!-- Dynamic notifications will be loaded here -->
                                         </div>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-center" href="#">See All Notifications</a>
+                       
                                     </div>
                                     </div>
 
