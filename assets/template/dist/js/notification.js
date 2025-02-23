@@ -64,6 +64,9 @@ $(document).on('click', '.notification-item', function(e) {
     url: SITE_URL + "/notification/mark_read/" + notificationId,
     type: "POST",
     success: function(response) {
+
+      console.log(response);
+      return false;
       // Optionally, update the UI or refetch notifications after marking as read.
       fetchNotifications();
       // Now navigate to the notification's link.
