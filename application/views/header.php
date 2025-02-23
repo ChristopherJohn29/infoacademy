@@ -19,7 +19,7 @@
   width: 300px; /* Adjust as desired */
 }
 
-.notification-count {
+.notification-badge {
   position: absolute;
   top: -8px;            /* Position the badge above the icon */
   right: -8px;          /* Position the badge to the right of the icon */
