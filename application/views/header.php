@@ -10,7 +10,7 @@
   white-space: normal;        /* Allow text to wrap */
   word-wrap: break-word;      /* Break words that exceed container width */
   overflow-wrap: break-word;  /* Modern property for word wrapping */
-  font-size: 14px;            /* Adjust as needed */
+  font-size: 12px;            /* Adjust as needed */
   line-height: 1.2;           /* Tighten or loosen line spacing */
 }
 

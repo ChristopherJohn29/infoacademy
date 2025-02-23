@@ -52,7 +52,7 @@
 
     /* Style for the header text */
     .nav-item.dropdown .dropdown-menu .dropdown-header {
-    font-size: 14px;
+    font-size: 12px;
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -63,7 +63,7 @@
     white-space: normal;          /* Allow text to wrap */
     word-wrap: break-word;        /* Break words when necessary */
     overflow-wrap: break-word;    /* Modern word wrap */
-    font-size: 14px;              /* Smaller font size */
+    font-size: 12px;              /* Smaller font size */
     line-height: 1.2;             /* Adjust line spacing */
     }
 
