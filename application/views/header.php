@@ -4,18 +4,19 @@
   position: relative;
   color: #333; /* or your theme color */
 }
-.notification-module .notification-badge {
-  background: #f39c12;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  position: absolute;
-  top: -5px;
-  right: -10px;
+
+/* Wrap text and use a smaller font for the notification items */
+.notification-dropdown .dropdown-item {
+  white-space: normal;        /* Allow text to wrap */
+  word-wrap: break-word;      /* Break words that exceed container width */
+  overflow-wrap: break-word;  /* Modern property for word wrapping */
+  font-size: 14px;            /* Adjust as needed */
+  line-height: 1.2;           /* Tighten or loosen line spacing */
 }
+
+/* Optionally set a fixed or max-width so the wrapping is more visible */
 .notification-dropdown {
-  width: 300px;
+  width: 300px; /* Adjust as desired */
 }
 
 </style>

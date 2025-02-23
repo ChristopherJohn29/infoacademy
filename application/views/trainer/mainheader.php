@@ -44,6 +44,36 @@
     }
 
 
+    /* Set a max-width for the dropdown to force wrapping */
+    .nav-item.dropdown .dropdown-menu {
+    max-width: 350px;  /* Adjust width as needed */
+    width: auto;
+    }
+
+    /* Style for the header text */
+    .nav-item.dropdown .dropdown-menu .dropdown-header {
+    font-size: 14px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    }
+
+    /* Style for each notification item */
+    .nav-item.dropdown .dropdown-menu .dropdown-item {
+    white-space: normal;          /* Allow text to wrap */
+    word-wrap: break-word;        /* Break words when necessary */
+    overflow-wrap: break-word;    /* Modern word wrap */
+    font-size: 14px;              /* Smaller font size */
+    line-height: 1.2;             /* Adjust line spacing */
+    }
+
+    /* Optional: Adjust footer font size */
+    .nav-item.dropdown .dropdown-menu .dropdown-footer {
+    font-size: 13px;
+    }
+
+
+
 </style>
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
