@@ -219,7 +219,7 @@ class Control extends CI_Controller
 
                     $this->notification_model->add_notification($data);
 
-                    $admins = $this->db->get_where('users', array('account_type' => 3))->result();
+                    $admins = $this->db->get_where('user', array('account_type' => 3))->result();
 
                     foreach ($admins as $admin) {
                         $data = array(

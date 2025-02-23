@@ -600,7 +600,7 @@ class Trainer extends CI_Controller
 
             if ($this->System_model->saveTraining($data)) {
 
-                $admins = $this->db->get_where('users', array('account_type' => 3))->result();
+                $admins = $this->db->get_where('user', array('account_type' => 3))->result();
 
                     foreach ($admins as $admin) {
                         $data = array(
