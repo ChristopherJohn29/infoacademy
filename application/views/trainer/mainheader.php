@@ -110,10 +110,7 @@
                 <div class="dropdown-divider"></div>
                 <div id="notification_items">
                     <!-- Dynamic notification items will be appended here -->
-                    <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 0 new messages
-                    <span class="float-right text-muted text-sm">0 mins</span>
-                    </a>
+ 
                 </div>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
