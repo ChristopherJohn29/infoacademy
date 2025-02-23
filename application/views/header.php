@@ -19,14 +19,7 @@
   width: 300px; /* Adjust as desired */
 }
 
-.notification-badge {
-    font-size: .6rem;
-    font-weight: 300;
-    padding: 2px 4px;
-    position: absolute;
-    right: 5px;
-    top: 9px;
-}
+
 
 </style>
 
@@ -121,7 +114,7 @@
                                    <div class="notification-module dropdown ml-auto">
                                     <a href="#" class="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-bell" style="font-size:12px;" aria-hidden="true"></i>
-                                        <span id="notification_count" class="notification-badge">15</span>
+                                        <span class="badge badge-warning navbar-badge" id="notification_count">0</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right notification-dropdown">
                                         <h6 id="notification_header" class="dropdown-header">15 Notifications</h6>
