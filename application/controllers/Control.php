@@ -890,7 +890,7 @@ class Control extends CI_Controller
                 $this->email->to('konozubadoh@gmail.com');
                 $this->email->subject('Contact Us form!');
                 // Customize your email message as needed
-                $this->email->message("Dear " . $data['name'] . ",<br><br>Thank you for your message:<br>" . nl2br($data['message']) . "<br><br>Best regards,<br>InfoAcademy");
+                $this->email->message("Dear InfoAcademy,<br><br>Thank you for your message:<br>" . nl2br($data['message']) . "<br><br>Best regards,<br>".$data['name']."<br>".$data['email']);
     
                 if($this->email->send()){
                     $response['success'] = true;
