@@ -818,20 +818,6 @@ class Control extends CI_Controller
         // Call sendMessage method
         $response = $this->System_model->sendMessage($sender_id, $receiver_id, $message, $training_id);
 
-        $training = $this->System_model->get_training_by_training_id($training_id);
-
-        $data = array(
-            'user_id'     => $receiver_id,
-            'title'       => 'New Message',
-            'message'     => "New message on ".$training->training_title."",
-            'link'        => "#",  // Adjust link as needed
-            'read_status' => 0,
-            'created_at'  => date('Y-m-d H:i:s')
-        );
-
-        // Call the model to insert the notification
-        $this->notification_model->add_notification($data);
-    
         // Return the response to the front end
         echo json_encode($response);
     }
