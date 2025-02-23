@@ -12,6 +12,51 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/unicat/styles/'?>contact_responsive.css">
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
+<style>
+  .comment_form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form_title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .comment_input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+      box-sizing: border-box;
+    }
+    .comment_button {
+      padding: 10px 20px;
+      background: #007bff;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .comment_button:hover {
+      background: #0056b3;
+    }
+    .message {
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
+    .error {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+</style>
 <body>
 
 <div class="super_container">
@@ -134,33 +179,33 @@
 
 <script>
 $(document).ready(function(){
-  $('#comment_form').on('submit', function(e){
+$('#comment_form').on('submit', function(e){
 	e.preventDefault(); // Prevent the default form submission
 
 	// Clear any previous messages
 	$('#form_message').html('');
 
 	$.ajax({
-	  type: 'POST',
-	  url: $(this).attr('action'),
-	  data: $(this).serialize(),
-	  dataType: 'json',
-	  success: function(response){
+	type: 'POST',
+	url: $(this).attr('action'),
+	data: $(this).serialize(),
+	dataType: 'json',
+	success: function(response){
 		if(response.success){
-		  $('#form_message').html('<div class="success">'+response.message+'</div>');
-		  // Optionally reset the form fields
-		  $('#comment_form')[0].reset();
-		  // Reset the reCAPTCHA widget
-		  grecaptcha.reset();
+		$('#form_message').html('<div class="message success">'+response.message+'</div>');
+		// Optionally reset the form fields
+		$('#comment_form')[0].reset();
+		// Reset the reCAPTCHA widget
+		grecaptcha.reset();
 		} else {
-		  $('#form_message').html('<div class="error">'+response.error+'</div>');
+		$('#form_message').html('<div class="message error">'+response.error+'</div>');
 		}
-	  },
-	  error: function(xhr, status, error){
-		$('#form_message').html('<div class="error">An error occurred. Please try again later.</div>');
-	  }
+	},
+	error: function(xhr, status, error){
+		$('#form_message').html('<div class="message error">An error occurred. Please try again later.</div>');
+	}
 	});
-  });
+});
 });
 </script>
 
