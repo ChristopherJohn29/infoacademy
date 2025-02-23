@@ -20,18 +20,12 @@
 }
 
 .notification-badge {
-  position: absolute;
-  top: -8px;            /* Position the badge above the icon */
-  right: -8px;          /* Position the badge to the right of the icon */
-  background-color: #dc3545; /* Red background */
-  color: #fff;          /* White text */
-  font-size: 12px;      /* Adjust badge font size */
-  font-weight: bold;
-  padding: 2px 6px;     /* Spacing inside the badge */
-  border-radius: 50%;   /* Makes the badge circular */
-  min-width: 20px;      /* Ensures a circular shape if the number is single-digit */
-  text-align: center;
-  box-sizing: border-box;
+    font-size: .6rem;
+    font-weight: 300;
+    padding: 2px 4px;
+    position: absolute;
+    right: 5px;
+    top: 9px;
 }
 
 </style>
