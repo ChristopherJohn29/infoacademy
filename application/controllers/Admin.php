@@ -231,7 +231,7 @@ class Admin extends CI_Controller
 
         if ($update_result) {
 
-            $training_class = $this->System_model->get_training_class_by_training_id($payment_id);
+            $training_class = $this->System_model->get_training_class_by_training_class_id($payment_id);
             $participant_id = ($training_class) ? $training_class->participant_id : null;
 
             $data = array(
