@@ -19,6 +19,21 @@
   width: 300px; /* Adjust as desired */
 }
 
+.notification-count {
+  position: absolute;
+  top: -8px;            /* Position the badge above the icon */
+  right: -8px;          /* Position the badge to the right of the icon */
+  background-color: #dc3545; /* Red background */
+  color: #fff;          /* White text */
+  font-size: 12px;      /* Adjust badge font size */
+  font-weight: bold;
+  padding: 2px 6px;     /* Spacing inside the badge */
+  border-radius: 50%;   /* Makes the badge circular */
+  min-width: 20px;      /* Ensures a circular shape if the number is single-digit */
+  text-align: center;
+  box-sizing: border-box;
+}
+
 </style>
 
 <header class="header">
@@ -111,7 +126,7 @@
                                         ?>
                                    <div class="notification-module dropdown ml-auto">
                                     <a href="#" class="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-bell" style="font-size:27px;" aria-hidden="true"></i>
+                                        <i class="fa fa-bell" style="font-size:12px;" aria-hidden="true"></i>
                                         <span id="notification_count" class="notification-badge">15</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right notification-dropdown">
