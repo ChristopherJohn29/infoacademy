@@ -12,7 +12,7 @@ function fetchNotifications() {
         }
       });
       $('#notification_count').text(unreadCount);
-      $('#notification_header').text(unreadCount + ' Notification' + (unreadCount !== 1 ? 's' : ''));
+      $('#notification_header').text(unreadCount + ' Unread Notification' + (unreadCount !== 1 ? 's' : ''));
 
       // Build the notification list dynamically
       var notificationList = '';
