@@ -48,3 +48,22 @@ function fetchNotifications() {
     return Math.floor(seconds) + " secs";
   }
   
+$(document).on('click', '.notification-item', function(e) {
+  // Prevent default link behavior if desired (or allow navigation)
+  // e.preventDefault();
+
+  var notificationId = $(this).data('id');
+  
+  $.ajax({
+    url: SITE_URL + "/notification/mark_read/" + notificationId, // Assuming a RESTful URL scheme
+    type: "POST",
+    success: function(response) {
+      // Optionally, update the UI or refetch notifications after marking as read.
+      fetchNotifications();
+    },
+    error: function(xhr, status, error) {
+      console.error("Error marking notification as read:", error);
+    }
+  });
+});
+  
