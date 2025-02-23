@@ -116,7 +116,9 @@
                                             data-enrolled="<?= (new DateTime($class['date_enrolled']))->format('F j, Y g:iA') ?>"
                                             data-payment="<?= $class['payment_option'] ?>"
                                             data-transaction="<?= $class['transaction_no'] ?>"
-                                            data-date="<?= (new DateTime($class['payment_date']))->format('F j, Y g:iA') ?>"
+                                            data-date="<?= !empty($class['payment_date']) 
+                                            ? (new DateTime($class['payment_date']))->format('F j, Y g:iA') 
+                                            : 'null' ?>"
                                             data-proof="<?= base_url('uploads/'.$class['proof_of_payment']) ?>"
                                         >
                                             <i class="fas fa-eye"></i>
