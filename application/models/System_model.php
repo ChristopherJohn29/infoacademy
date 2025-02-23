@@ -703,7 +703,7 @@ class System_model extends CI_Model
     }
 
     public function getUserByEmail($email) {
-        $query = $this->db->get_where('user', array('email' => $email));
+        $query = $this->db->get_where('user', array('email_address' => $email));
         return $query->row_array();  // Returns a single row as an associative array
     }
 
