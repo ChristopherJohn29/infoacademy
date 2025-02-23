@@ -11,7 +11,7 @@ function fetchNotifications() {
         // Build the notification list dynamically
         var notificationList = '';
         $.each(data, function(index, notification) {
-          notificationList += '<a href="' + notification.link + '" class="dropdown-item">';
+          notificationList += '<a href="' + notification.link + '" class="dropdown-item notification-item">';
           notificationList += '<i class="fa fa-info-circle mr-2"></i> ' + notification.message;
           notificationList += '<span class="float-right text-muted text-sm">' + timeSince(new Date(notification.created_at)) + '</span>';
           notificationList += '</a>';
@@ -48,7 +48,7 @@ function fetchNotifications() {
     return Math.floor(seconds) + " secs";
   }
   
-$(document).on('click', '.notification-item', function(e) {
+$(document).on('click', '.dropdown-item', function(e) {
   // Prevent default link behavior if desired (or allow navigation)
   // e.preventDefault();
 
