@@ -246,7 +246,6 @@ class Admin extends CI_Controller
             // Call the model to insert the notification
             $this->notification_model->add_notification($data);
 
-   
 
             $response = [
                 'status' => true,

@@ -583,7 +583,7 @@ class System_model extends CI_Model
         }
     }
 
-    public function get_training_class_by_training_id($training_id)
+    public function get_training_class_by_training_class_id($training_id)
     {
         $this->db->where('id', $training_id);
         $query = $this->db->get('training_class');
