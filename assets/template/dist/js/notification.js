@@ -39,10 +39,17 @@ function buildNotificationList() {
                    
   var notificationList = '';
   $.each(listData, function(index, notification) {
-    notificationList += '<a href="' + notification.link + '" class="dropdown-item notification-item" data-id="' + notification.id + '">';
+    var background_color = "transparent";
+
+    if(notification.read_status == 0){
+      background_color = "darkseagreen";
+    }
+
+    notificationList += '<a style="background-color:'+background_color+';" href="' + notification.link + '" class="dropdown-item notification-item" data-id="' + notification.id + '">';
     notificationList += '<i class="fa fa-info-circle mr-2"></i> ' + notification.message;
     notificationList += '<span class="float-right text-muted text-sm">' + timeSince(new Date(notification.created_at)) + '</span>';
     notificationList += '</a>';
+
     if(index < listData.length - 1) {
       notificationList += '<div class="dropdown-divider"></div>';
     }
