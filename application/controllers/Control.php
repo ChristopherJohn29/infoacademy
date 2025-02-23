@@ -9,6 +9,7 @@ class Control extends CI_Controller
         date_default_timezone_set('Asia/Manila');
         $this->load->model('System_model');
         $this->load->model('notification_model');
+        $this->load->library('form_validation');
     }
 
     public function index()
