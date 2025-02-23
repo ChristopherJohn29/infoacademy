@@ -54,20 +54,25 @@ function timeSince(date) {
 
 // Bind click event to notification items to mark them as read
 $(document).on('click', '.notification-item', function(e) {
-// Optionally prevent default navigation if you want to handle it differently:
-// e.preventDefault();
+  // Prevent the default action of following the link immediately.
+  e.preventDefault();
 
-var notificationId = $(this).data('id');
+  var notificationId = $(this).data('id');
+  var link = $(this).attr('href');
 
-$.ajax({
-  url: SITE_URL + "/notification/mark_read/" + notificationId,
-  type: "POST",
-  success: function(response) {
-    // Optionally update the UI or refetch notifications after marking as read.
-    fetchNotifications();
-  },
-  error: function(xhr, status, error) {
-    console.error("Error marking notification as read:", error);
-  }
-});
+  $.ajax({
+    url: SITE_URL + "/notification/mark_read/" + notificationId,
+    type: "POST",
+    success: function(response) {
+      // Optionally, update the UI or refetch notifications after marking as read.
+      fetchNotifications();
+      // Now navigate to the notification's link.
+      window.location.href = link;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error marking notification as read:", error);
+      // Optionally, still navigate to the link even if there's an error.
+      window.location.href = link;
+    }
+  });
 });
