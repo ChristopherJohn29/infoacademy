@@ -42,10 +42,10 @@
       
       <?php
       // Display errors or success messages if they exist
-      if (isset($error)) {
+      if (isset($error) && !empty($error)) {
           echo '<div class="alert alert-danger">'.$error.'</div>';
       }
-      if (isset($message)) {
+      if (isset($message) && !empty($message)) {
           echo '<div class="alert alert-success">'.$message.'</div>';
       }
       ?>
