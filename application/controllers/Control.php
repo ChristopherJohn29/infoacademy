@@ -97,6 +97,142 @@ class Control extends CI_Controller
         }
     }
 
+    public function forgotpass($err = false)
+    {
+        $data['error'] = $err;
+        if (isset($_SESSION['login'])) {
+            if ($_SESSION['login'] == 1) {
+            } elseif ($_SESSION['login'] == 2) {
+            } elseif ($_SESSION['login'] == 3) {
+            } else {
+                echo 'Invalid Session';
+                exit;
+            }
+        } else {
+            $this->load->view('admin/forgotpass', $data);
+        }
+    }
+
+    public function forgotpassSubmit(){
+        // Set validation rules for the email input
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+        if ($this->form_validation->run() == FALSE) {
+            // Validation failed – send back error messages
+            $data['error'] = validation_errors();
+            $this->load->view('forgotpass', $data);
+        } else {
+            $email = $this->input->post('email');
+            // Check if a user with this email exists
+            $user = $this->System_model->getUserByEmail($email);
+            if (!$user) {
+                $data['error'] = 'The email address is not registered.';
+                $this->load->view('forgotpass', $data);
+            } else {
+                // Generate a secure token (using 100 hex characters)
+                $token = bin2hex(random_bytes(50));
+                // Set the token expiration time (e.g., 1 hour from now)
+                $expiration = date("Y-m-d H:i:s", strtotime("+1 hour"));
+
+                // Update the user record with the reset token and expiration
+                $update = $this->System_model->updateResetToken($user['id'], $token, $expiration);
+
+                if ($update) {
+                    // Load email library and configure SMTP settings
+                    $this->load->library('email');
+
+                    $config['wordwrap']   = TRUE;
+                    $config['protocol']   = 'smtp';
+                    $config['smtp_host']  = 'ssl://smtp.gmail.com';
+                    $config['smtp_user']  = 'konozubadoh@gmail.com';
+                    $config['smtp_pass']  = 'dacdznqsvhxgqclp';
+                    $config['smtp_port']  = '465';
+                    $config['mailtype']   = 'html';
+
+                    $this->email->initialize($config);
+
+                    $this->email->from('konozubadoh@gmail.com', 'InfoAcademy');
+                    $this->email->to($email);
+                    $this->email->subject('Password Reset Request');
+
+                    // Create the reset link (adjust the URL as needed)
+                    $resetLink = base_url().'control/resetPassword?token='.$token;
+                    $message  = "<p>Dear ".$user['last_name'].",</p>";
+                    $message .= "<p>We received a request to reset your password. Click the link below to reset your password:</p>";
+                    $message .= "<p><a href='".$resetLink."'>Reset Password</a></p>";
+                    $message .= "<p>This link will expire in 1 hour.</p>";
+                    $message .= "<p>If you did not request a password reset, please ignore this email.</p>";
+
+                    $this->email->message($message);
+
+                    if ($this->email->send()) {
+                        $data['message'] = 'Please check your email for further instructions.';
+                        $this->load->view('forgotpass', $data);
+                    } else {
+                        $data['error'] = 'Failed to send email. Please try again later.';
+                        $this->load->view('forgotpass', $data);
+                    }
+                } else {
+                    $data['error'] = 'Failed to generate reset token. Please try again later.';
+                    $this->load->view('forgotpass', $data);
+                }
+            }
+        }
+    }
+
+    public function resetPassword(){
+        $data = array();
+        // Retrieve the reset token from the GET parameter
+        $token = $this->input->get('token');
+        if(empty($token)){
+            $data['error'] = 'Invalid or missing token.';
+            $this->load->view('reset_password_view', $data);
+            return;
+        }
+
+        // Get the user record using the token
+        $user = $this->System_model->getUserByResetToken($token);
+        if(!$user){
+            $data['error'] = 'Invalid token.';
+            $this->load->view('reset_password_view', $data);
+            return;
+        }
+
+        // Check if the token has expired
+        if($user['reset_expiration'] < date('Y-m-d H:i:s')){
+            $data['error'] = 'Token has expired.';
+            $this->load->view('reset_password_view', $data);
+            return;
+        }
+
+        // If form is submitted, process the new password
+        if($this->input->post()){
+            // Set form validation rules
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+            
+            if($this->form_validation->run() == FALSE){
+                $data['error'] = validation_errors();
+            } else {
+                // Hash the new password
+                $newPassword   = $this->input->post('password');
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+                
+                // Update the user's password
+                if($this->System_model->updatePassword($user['id'], $hashedPassword)){
+                    // Clear the reset token and expiration
+                    $this->System_model->clearResetToken($user['id']);
+                    $data['message'] = 'Your password has been successfully updated. You can now <a href="'.base_url().'control/login">login</a>.';
+                } else {
+                    $data['error'] = 'Failed to update password. Please try again.';
+                }
+            }
+        }
+        
+        // Load the reset password view
+        $this->load->view('reset_password_view', $data);
+    }
+
     public function enroll()
     {
         if (isset($_SESSION['id'])) {

@@ -702,4 +702,44 @@ class System_model extends CI_Model
         }
     }
 
+    public function getUserByEmail($email) {
+        $query = $this->db->get_where('user', array('email' => $email));
+        return $query->row_array();  // Returns a single row as an associative array
+    }
+
+    // Update the user record with a reset token and expiration time
+    public function updateResetToken($user_id, $token, $expiration) {
+        $data = array(
+            'reset_token'      => $token,
+            'reset_expiration' => $expiration
+        );
+        $this->db->where('id', $user_id);
+        return $this->db->update('user', $data);
+    }
+
+    public function getUserByResetToken($token){
+        $this->db->where('reset_token', $token);
+        $query = $this->db->get('user');  // Adjust table name if needed
+        return $query->row_array();
+    }
+
+    // Update the user's password (assumes a password column exists)
+    public function updatePassword($user_id, $password) {
+        $data = array(
+            'password' => $password
+        );
+        $this->db->where('id', $user_id);
+        return $this->db->update('user', $data);
+    }
+
+    // Clear the reset token and its expiration once the password is updated
+    public function clearResetToken($user_id){
+        $data = array(
+            'reset_token'      => NULL,
+            'reset_expiration' => NULL
+        );
+        $this->db->where('id', $user_id);
+        return $this->db->update('user', $data);
+    }
+
 }

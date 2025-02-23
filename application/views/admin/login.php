@@ -83,9 +83,7 @@
       <!-- /.social-auth-links -->
 
 
-        <a href="forgot-password.html" style="display:block;">I forgot my password</a>
-
-
+        <a href="<?php echo base_url().'/control/forgotpass' ?>" style="display:block;">I forgot my password</a>
         <a href="<?php echo base_url().'/control/register' ?>" class="text-center">Register a new membership</a>
 
     </div>
