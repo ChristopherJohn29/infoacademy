@@ -113,7 +113,7 @@
                                         ?>
                                    <div class="notification-module dropdown ml-auto">
                                     <a href="#" class="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-bell" style="font-size:12px;" aria-hidden="true"></i>
+                                        <i class="fa fa-bell" style="font-size:16px;" aria-hidden="true"></i>
                                         <span class="badge badge-warning navbar-badge" id="notification_count">0</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right notification-dropdown">
