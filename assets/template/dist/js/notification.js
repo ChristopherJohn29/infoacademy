@@ -12,7 +12,7 @@ function fetchNotifications() {
         var notificationList = '';
         $.each(data, function(index, notification) {
           notificationList += '<a href="' + notification.link + '" class="dropdown-item">';
-          notificationList += '<i class="fas fa-info-circle mr-2"></i> ' + notification.message;
+          notificationList += '<i class="fa fa-info-circle mr-2"></i> ' + notification.message;
           notificationList += '<span class="float-right text-muted text-sm">' + timeSince(new Date(notification.created_at)) + '</span>';
           notificationList += '</a>';
           if(index < data.length - 1) {
