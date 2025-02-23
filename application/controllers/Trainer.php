@@ -8,6 +8,7 @@ class Trainer extends CI_Controller
         parent::__construct();
         date_default_timezone_set('Asia/Manila');
         $this->load->model('System_model');
+        $this->load->model('notification_model');
         if (isset($_SESSION['account_type'])) {
             if ($_SESSION['account_type'] == 2) {
             } else {
