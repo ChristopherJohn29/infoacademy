@@ -212,7 +212,7 @@ class Control extends CI_Controller
                         'user_id'     => $training[0]['author_id'],
                         'title'       => 'Enrollment',
                         'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has enrolled in your training course, ".$training[0]['training_title'].".",
-                        'link'        => base_url('trainer/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
+                        'link'        => base_url('trainer/classroom/?id=').$_POST['tid'],  // Adjust link as needed
                         'read_status' => 0,
                         'created_at'  => date('Y-m-d H:i:s')
                     );
@@ -466,7 +466,7 @@ class Control extends CI_Controller
                     'user_id'     => $training->author_id,
                     'title'       => 'Submittion',
                     'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has submitted the workshop for ".$training->training_title.".",
-                    'link'        => base_url('trainer/classroom/?tid=').$training_id,  // Adjust link as needed
+                    'link'        => base_url('trainer/classroom/?id=').$training_id,  // Adjust link as needed
                     'read_status' => 0,
                     'created_at'  => date('Y-m-d H:i:s')
                 );
@@ -556,7 +556,7 @@ class Control extends CI_Controller
                     'user_id'     => $training->author_id,
                     'title'       => 'Submittion',
                     'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has submitted the exam for ".$training->training_title.".",
-                    'link'        => base_url('trainer/classroom/?tid=').$training_id,  // Adjust link as needed
+                    'link'        => base_url('trainer/classroom/?id=').$training_id,  // Adjust link as needed
                     'read_status' => 0,
                     'created_at'  => date('Y-m-d H:i:s')
                 );
