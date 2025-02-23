@@ -28,13 +28,13 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <div class="logo_container">
+    <div class="login-logo">
+        <div class="logo_container">
         <a href="#">
             <div class="logo_text">Info<span>Academy</span></div>
         </a>
         </div>
-  </div>
+    </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
