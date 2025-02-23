@@ -10,6 +10,7 @@
 <link href="<?php echo base_url().'/assets/unicat/plugins/'?>font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/unicat/styles/'?>contact.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/unicat/styles/'?>contact_responsive.css">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -59,21 +60,29 @@
 					<div class="col-lg-6">
 						<div class="contact_form">
 							<div class="contact_info_title">Contact Form</div>
-							<form action="#" class="comment_form">
+							  <!-- Message container for displaying success/error messages -->
+							<div id="form_message"></div>
+
+							<!-- Form with id for AJAX handling -->
+							<form id="comment_form" action="<?php echo site_url('control/submit'); ?>" method="post">
 								<div>
 									<div class="form_title">Name</div>
-									<input type="text" class="comment_input" required="required">
+									<input type="text" class="comment_input" name="name" required="required">
 								</div>
 								<div>
 									<div class="form_title">Email</div>
-									<input type="text" class="comment_input" required="required">
+									<input type="email" class="comment_input" name="email" required="required">
 								</div>
 								<div>
 									<div class="form_title">Message</div>
-									<textarea class="comment_input comment_textarea" required="required"></textarea>
+									<textarea class="comment_input comment_textarea" name="message" required="required"></textarea>
+								</div>
+								<!-- Google reCAPTCHA widget -->
+								<div>
+									<div class="g-recaptcha" data-sitekey="6Lf_498qAAAAANrgHmHxFcK7HMcSUyA2Sf2ondIw"></div>
 								</div>
 								<div>
-									<button type="submit" class="comment_button trans_200">submit now</button>
+									<button type="submit" class="comment_button trans_200">Submit Now</button>
 								</div>
 							</form>
 						</div>
@@ -122,5 +131,38 @@
 <script src="<?php echo base_url().'/assets/unicat/plugins/'?>marker_with_label/marker_with_label.js"></script>
 <script src="<?php echo base_url().'/assets/unicat/js/'?>contact.js"></script>
 <script src="<?php echo base_url() . '/assets/template/dist' ?>/js/notification.js"></script>
+
+<script>
+$(document).ready(function(){
+  $('#comment_form').on('submit', function(e){
+	e.preventDefault(); // Prevent the default form submission
+
+	// Clear any previous messages
+	$('#form_message').html('');
+
+	$.ajax({
+	  type: 'POST',
+	  url: $(this).attr('action'),
+	  data: $(this).serialize(),
+	  dataType: 'json',
+	  success: function(response){
+		if(response.success){
+		  $('#form_message').html('<div class="success">'+response.message+'</div>');
+		  // Optionally reset the form fields
+		  $('#comment_form')[0].reset();
+		  // Reset the reCAPTCHA widget
+		  grecaptcha.reset();
+		} else {
+		  $('#form_message').html('<div class="error">'+response.error+'</div>');
+		}
+	  },
+	  error: function(xhr, status, error){
+		$('#form_message').html('<div class="error">An error occurred. Please try again later.</div>');
+	  }
+	});
+  });
+});
+</script>
+
 </body>
 </html>

@@ -821,6 +821,94 @@ class Control extends CI_Controller
         // Return the response to the front end
         echo json_encode($response);
     }
+
+    public function submit(){
+        $response = array();
+
+        // Set validation rules
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('message', 'Message', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            // Return validation errors
+            $response['success'] = false;
+            $response['error']   = validation_errors();
+        } else {
+            // Retrieve reCAPTCHA response
+            $recaptchaResponse = $this->input->post('g-recaptcha-response');
+            $secretKey         = '6Lf_498qAAAAACxIkIAGCCNzfAqDweDlE_tBOrvY'; // Replace with your actual secret key
+            $userIP            = $this->input->ip_address();
+
+            // Prepare data for verification
+            $postData = http_build_query([
+                'secret'   => $secretKey,
+                'response' => $recaptchaResponse,
+                'remoteip' => $userIP
+            ]);
+
+            $opts = [
+                'http' => [
+                    'method'  => 'POST',
+                    'header'  => 'Content-type: application/x-www-form-urlencoded',
+                    'content' => $postData
+                ]
+            ];
+
+            $context  = stream_context_create($opts);
+            $result   = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+            $resultJson = json_decode($result);
+
+            if (!$resultJson->success) {
+                // reCAPTCHA verification failed
+                $response['success'] = false;
+                $response['error']   = 'reCAPTCHA verification failed. Please try again.';
+            } else {
+                // reCAPTCHA is valid: Process form data (e.g., save to database)
+                $data = [
+                    'name'       => $this->input->post('name'),
+                    'email'      => $this->input->post('email'),
+                    'message'    => $this->input->post('message'),
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+
+                // Send verification email
+                $this->load->library(['email']);
+
+                $config['wordwrap'] = TRUE;
+                $config['protocol'] = 'smtp';
+                $config['smtp_host'] = 'ssl://smtp.gmail.com';
+                $config['smtp_user'] = 'konozubadoh@gmail.com';
+                $config['smtp_pass'] = 'dacdznqsvhxgqclp';
+                $config['smtp_port'] = '465';
+                $config['mailtype'] = 'html';
+        
+                // Load email library and initialize configuration
+                $this->email->initialize($config);
+
+                $this->email->from('konozubadoh@gmail.com', 'InfoAcademy');
+                $this->email->to($data['email']);
+                $this->email->subject('Contact Us form!');
+                $this->email->message('message');
+
+
+
+                if( $this->email->send()){
+                
+                }
+
+                // Optionally, insert $data into your database:
+                // $this->Comment_model->insert($data);
+
+                $response['success'] = true;
+                $response['message'] = 'Thank you for your comment!';
+            }
+        }
+
+        // Return JSON response
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
     
     
 }
