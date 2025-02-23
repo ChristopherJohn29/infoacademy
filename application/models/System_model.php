@@ -69,7 +69,11 @@ class System_model extends CI_Model
         // Query to fetch the participant's data
         $this->db->select('
             training_class.*,
-            CONCAT(user.first_name, " ", LEFT(user.middle_name, 1), ". ", user.last_name) as participant_name,
+            CONCAT(
+                user.first_name, " ",
+                IF(user.middle_name IS NOT NULL AND user.middle_name != "", CONCAT(LEFT(user.middle_name, 1), ". "), ""),
+                user.last_name
+            ) as participant_name,
             training.training_title,
             training.required_no_of_hours
         ');
@@ -84,7 +88,7 @@ class System_model extends CI_Model
         
         // Return the result as an associative array
         return $query->row_array();
-    }
+    }    
 
     public function fetchFromTrainingClass($id = false){
         $this->db->select('*');
