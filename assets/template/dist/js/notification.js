@@ -4,10 +4,16 @@ function fetchNotifications() {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      var count = data.length;
-      $('#notification_count').text(count);
-      $('#notification_header').text(count + ' Notification' + (count !== 1 ? 's' : ''));
-      
+
+      var unreadCount = 0;
+      $.each(data, function(index, notification) {
+        if(notification.read_status == 0) {
+          unreadCount++;
+        }
+      });
+      $('#notification_count').text(unreadCount);
+      $('#notification_header').text(unreadCount + ' Notification' + (unreadCount !== 1 ? 's' : ''));
+
       // Build the notification list dynamically
       var notificationList = '';
       $.each(data, function(index, notification) {

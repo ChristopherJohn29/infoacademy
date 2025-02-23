@@ -17,7 +17,6 @@ class Notification extends CI_Controller {
 
     // Mark a notification as read (triggered via user action)
     public function mark_read($id) {
-        var_dump($id);
         $this->notification_model->mark_as_read($id);
         echo json_encode(['status' => 'success']);
     }
