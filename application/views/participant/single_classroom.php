@@ -469,7 +469,7 @@
                                         'user_id'     => $training->author_id,
                                         'title'       => 'Completion',
                                         'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has completed the course on ".$training->training_title.".",
-                                        'link'        => base_url('trainer/classroom/?tid=').$training_id,  // Adjust link as needed
+                                        'link'        => base_url('trainer/classroom/?tid=').$training[0]['id'],  // Adjust link as needed
                                         'read_status' => 0,
                                         'created_at'  => date('Y-m-d H:i:s')
                                     );
