@@ -105,8 +105,6 @@ $(document).on('click', '.notification-item', function(e) {
     type: "POST",
     success: function(response) {
 
-      console.log(response);
-      return false;
       // Optionally, update the UI or refetch notifications after marking as read.
       fetchNotifications();
       // Now navigate to the notification's link.
