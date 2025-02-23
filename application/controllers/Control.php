@@ -120,14 +120,14 @@ class Control extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             // Validation failed – send back error messages
             $data['error'] = validation_errors();
-            $this->load->view('forgotpass', $data);
+            $this->load->view('admin/forgotpass', $data);
         } else {
             $email = $this->input->post('email');
             // Check if a user with this email exists
             $user = $this->System_model->getUserByEmail($email);
             if (!$user) {
                 $data['error'] = 'The email address is not registered.';
-                $this->load->view('forgotpass', $data);
+                $this->load->view('admin/forgotpass', $data);
             } else {
                 // Generate a secure token (using 100 hex characters)
                 $token = bin2hex(random_bytes(50));
@@ -167,14 +167,14 @@ class Control extends CI_Controller
 
                     if ($this->email->send()) {
                         $data['message'] = 'Please check your email for further instructions.';
-                        $this->load->view('forgotpass', $data);
+                        $this->load->view('admin/forgotpass', $data);
                     } else {
                         $data['error'] = 'Failed to send email. Please try again later.';
-                        $this->load->view('forgotpass', $data);
+                        $this->load->view('admin/forgotpass', $data);
                     }
                 } else {
                     $data['error'] = 'Failed to generate reset token. Please try again later.';
-                    $this->load->view('forgotpass', $data);
+                    $this->load->view('admin/forgotpass', $data);
                 }
             }
         }
