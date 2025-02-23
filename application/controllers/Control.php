@@ -892,17 +892,12 @@ class Control extends CI_Controller
                 $this->email->subject('Contact Us form!');
                 $this->email->message('message');
 
-
-
                 if( $this->email->send()){
-                
+                    $response['success'] = true;
+                    $response['message'] = 'Thank you for your comment!';
                 }
 
-                // Optionally, insert $data into your database:
-                // $this->Comment_model->insert($data);
 
-                $response['success'] = true;
-                $response['message'] = 'Thank you for your comment!';
             }
         }
 
