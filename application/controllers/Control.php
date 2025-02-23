@@ -186,7 +186,7 @@ class Control extends CI_Controller
         $token = $this->input->get('token');
         if(empty($token)){
             $data['error'] = 'Invalid or missing token.';
-            $this->load->view('reset_password_view', $data);
+            $this->load->view('admin/reset_password_view', $data);
             return;
         }
 
@@ -194,14 +194,14 @@ class Control extends CI_Controller
         $user = $this->System_model->getUserByResetToken($token);
         if(!$user){
             $data['error'] = 'Invalid token.';
-            $this->load->view('reset_password_view', $data);
+            $this->load->view('admin/reset_password_view', $data);
             return;
         }
 
         // Check if the token has expired
         if($user['reset_expiration'] < date('Y-m-d H:i:s')){
             $data['error'] = 'Token has expired.';
-            $this->load->view('reset_password_view', $data);
+            $this->load->view('admin/reset_password_view', $data);
             return;
         }
 
@@ -230,7 +230,7 @@ class Control extends CI_Controller
         }
         
         // Load the reset password view
-        $this->load->view('reset_password_view', $data);
+        $this->load->view('admin/reset_password_view', $data);
     }
 
     public function enroll()
