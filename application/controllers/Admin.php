@@ -246,9 +246,7 @@ class Admin extends CI_Controller
             // Call the model to insert the notification
             $this->notification_model->add_notification($data);
 
-            var_dump($payment_id);
-            var_dump($participant_id);
-            exit;
+   
 
             $response = [
                 'status' => true,
