@@ -257,7 +257,7 @@ class Control extends CI_Controller
         if (isset($_SESSION['id'])) {
             if (isset($_POST['tid'])) {
 
-                // Get the payment option and sanitize it
+              // Get the payment option and sanitize it
                 $payment_option = html_escape($_POST['payment_option']);
 
                 // If payment option is "Coupon", validate the coupon code
@@ -299,8 +299,7 @@ class Control extends CI_Controller
                 $training    = $this->System_model->fetchSingleTraining(html_escape($_POST['tid']));
                 $instruction = $training[0]['instruction'];
 
-
-
+                // Data for insert or update
                 $data = [
                     'proof_of_payment'     => html_escape($proof_of_payment),
                     'payment_option'       => $payment_option,
@@ -309,73 +308,106 @@ class Control extends CI_Controller
                     'coupon_code'          => html_escape($_POST['coupon_code']),
                     'participant_id'       => html_escape($_SESSION['id']),
                     'training_id'          => html_escape($_POST['tid']),
-                    'date_enrolled'        => date('Y-m-d'),
-                    'training_instruction' => $instruction,
-                    'progress'             => 0,
                     'status'               => 0
                 ];
 
-                // Save the data
-                $success = $this->System_model->enrollSubmit($data);
+                // Check if a record already exists
+                $existing = $this->System_model->checkEnrollmentExists($_SESSION['id'], $_POST['tid']);
 
-                if ($success) {
-
-                    $insertedId = $this->db->insert_id();
-
-                    // Build the participant code using the training code, current month, two-digit year, and the inserted ID (formatted to 4 digits)
-                    $participantCode = $training[0]['training_code'] . '-' . date('m') . date('y') . '-' . sprintf('%04d', $insertedId);
-                
-                    // Update the record with the generated participant code
-                    $updateData = ['participant_code' => $participantCode];
-                    $this->db->where('id', $insertedId);
-                    $this->db->update('training_class', $updateData);
+                if ($existing) {
+                    // Update existing record
+                    $success = $this->System_model->updateEnrollment($data, $_SESSION['id'], $_POST['tid']);
 
 
-                     // Prepare the notification data
-                    $data = array(
-                        'user_id'     => $_SESSION['id'],
-                        'title'       => 'Enrollment',
-                        'message'     => 'You have been successfully enrolled in '.$training[0]['training_title'].'. Finish the Training within '.$training[0]['validity'].'.',
-                        'link'        => base_url('control/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
-                        'read_status' => 0,
-                        'created_at'  => date('Y-m-d H:i:s')
-                    );
+                    if ($success) {
 
-                    // Call the model to insert the notification
-                    $this->notification_model->add_notification($data);
+                        $admins = $this->db->get_where('user', array('account_type' => 3))->result();
+    
+                        foreach ($admins as $admin) {
+                            $data = array(
+                                'user_id'     => $admin->id, // Assumes your primary key is 'id'
+                                'title'       => 'Payment',
+                                'message'     => "Payment resubmitted by " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . " " . $participantCode . " Awaiting for verification.",
+                                'link'        => base_url('admin/payments'),
+                                'read_status' => 0,
+                                'created_at'  => date('Y-m-d H:i:s')
+                            );
+    
+                            $this->notification_model->add_notification($data);
+                        }
+    
+                        redirect('control/participant');
+                    }
+                } else {
+                    // Save the data by inserting a new record
+                    $data['date_enrolled'] = date('Y-m-d');
+                    $data['training_instruction'] = $instruction;
+                    $data['progress'] = 0;
+                    $success = $this->System_model->enrollSubmit($data);
 
+                    if ($success) {
 
-                    $data = array(
-                        'user_id'     => $training[0]['author_id'],
-                        'title'       => 'Enrollment',
-                        'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has enrolled in your training course, ".$training[0]['training_title'].".",
-                        'link'        => base_url('trainer/classroom/?id=').$_POST['tid'],  // Adjust link as needed
-                        'read_status' => 0,
-                        'created_at'  => date('Y-m-d H:i:s')
-                    );
-
-                    $this->notification_model->add_notification($data);
-
-                    $admins = $this->db->get_where('user', array('account_type' => 3))->result();
-
-                    foreach ($admins as $admin) {
+                        $insertedId = $this->db->insert_id();
+    
+                        // Build the participant code using the training code, current month, two-digit year, and the inserted ID (formatted to 4 digits)
+                        $participantCode = $training[0]['training_code'] . '-' . date('m') . date('y') . '-' . sprintf('%04d', $insertedId);
+                    
+                        // Update the record with the generated participant code
+                        $updateData = ['participant_code' => $participantCode];
+                        $this->db->where('id', $insertedId);
+                        $this->db->update('training_class', $updateData);
+    
+    
+                         // Prepare the notification data
                         $data = array(
-                            'user_id'     => $admin->id, // Assumes your primary key is 'id'
-                            'title'       => 'Payment',
-                            'message'     => "Payment submitted by " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . " " . $participantCode . " Awaiting for verification.",
-                            'link'        => base_url('admin/payments'),
+                            'user_id'     => $_SESSION['id'],
+                            'title'       => 'Enrollment',
+                            'message'     => 'You have been successfully enrolled in '.$training[0]['training_title'].'. Finish the Training within '.$training[0]['validity'].'.',
+                            'link'        => base_url('control/classroom/?tid=').$_POST['tid'],  // Adjust link as needed
                             'read_status' => 0,
                             'created_at'  => date('Y-m-d H:i:s')
                         );
-
+    
+                        // Call the model to insert the notification
                         $this->notification_model->add_notification($data);
+    
+    
+                        $data = array(
+                            'user_id'     => $training[0]['author_id'],
+                            'title'       => 'Enrollment',
+                            'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has enrolled in your training course, ".$training[0]['training_title'].".",
+                            'link'        => base_url('trainer/classroom/?id=').$_POST['tid'],  // Adjust link as needed
+                            'read_status' => 0,
+                            'created_at'  => date('Y-m-d H:i:s')
+                        );
+    
+                        $this->notification_model->add_notification($data);
+    
+                        $admins = $this->db->get_where('user', array('account_type' => 3))->result();
+    
+                        foreach ($admins as $admin) {
+                            $data = array(
+                                'user_id'     => $admin->id, // Assumes your primary key is 'id'
+                                'title'       => 'Payment',
+                                'message'     => "Payment submitted by " . $_SESSION['first_name'] . " " . $_SESSION['last_name'] . " " . $participantCode . " Awaiting for verification.",
+                                'link'        => base_url('admin/payments'),
+                                'read_status' => 0,
+                                'created_at'  => date('Y-m-d H:i:s')
+                            );
+    
+                            $this->notification_model->add_notification($data);
+                        }
+    
+                        redirect('control/participant');
                     }
-
-                    redirect('control/participant');
                 }
+
+                
             }
         }
     }
+
+    
 
     public function detailsPage()
     {

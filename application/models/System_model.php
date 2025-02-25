@@ -414,6 +414,24 @@ class System_model extends CI_Model
 
     }
 
+    // Check if an enrollment record already exists for the participant and training
+    public function checkEnrollmentExists($participant_id, $training_id)
+    {
+        $this->db->where('participant_id', $participant_id);
+        $this->db->where('training_id', $training_id);
+        $query = $this->db->get('training_class');
+        return $query->row(); // Returns the row if found, or null if not found
+    }
+
+    // Update the enrollment record if it exists
+    public function updateEnrollment($data, $participant_id, $training_id)
+    {
+        $this->db->where('participant_id', $participant_id);
+        $this->db->where('training_id', $training_id);
+        return $this->db->update('training_class', $data);
+    }
+
+
     public function saveTraining($data = array())
     {
         if ($this->db->insert('training', $data)) {

@@ -228,7 +228,7 @@
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Go to Classroom" class="btn btn-default btn-sm" href="' . base_url() . '/control/classroom/?tid='.$value['training_id'].'"> <i class="fa fa-university" aria-hidden="true"></i></a>';
                         } elseif ($value['status'] == 2) {
                             $status = 'Payment Declined';
-                            $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Payment" class="btn btn-default btn-sm" href="' . base_url() . '"> <i class="fa fa-money" aria-hidden="true"></i></a>';
+                            $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Payment" class="btn btn-default btn-sm" href="' . base_url() . '/control/enroll/?tid='.$value['training_id'].'"> <i class="fa fa-money" aria-hidden="true"></i></a>';
                         } elseif ($value['status'] == 3) {
                             $status = 'Completed';
                             $option .= '<a style="margin-left: 2px" data-toggles="tooltip" data-placement="top" title="Certificate" class="btn btn-default btn-sm" href="' . base_url() . '"> <i class="fa fa-file" aria-hidden="true"></i></a>';
