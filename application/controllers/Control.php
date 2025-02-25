@@ -314,10 +314,12 @@ class Control extends CI_Controller
                 // Check if a record already exists
                 $existing = $this->System_model->checkEnrollmentExists($_SESSION['id'], $_POST['tid']);
 
+    
                 if ($existing) {
                     // Update existing record
                     $success = $this->System_model->updateEnrollment($data, $_SESSION['id'], $_POST['tid']);
 
+                    $participantCode = $existing->participant_code;
 
                     if ($success) {
 
@@ -349,8 +351,6 @@ class Control extends CI_Controller
 
                         $insertedId = $this->db->insert_id();
     
-                        // Build the participant code using the training code, current month, two-digit year, and the inserted ID (formatted to 4 digits)
-                        $participantCode = $training[0]['training_code'] . '-' . date('m') . date('y') . '-' . sprintf('%04d', $insertedId);
                     
                         // Update the record with the generated participant code
                         $updateData = ['participant_code' => $participantCode];
