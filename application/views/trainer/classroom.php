@@ -705,41 +705,38 @@
 
 <script>
     
-    $(document).ready(function() {
+    
         // Function to fetch unread messages count
-        function fetchUnreadMessageCount() {
-            $('.message-btn').each(function() {
-                var trainingId = $(this).data('training-id');
-                var participantId = $(this).data('participant-id');
-                var badge = $(this).find('.unread-count');
+    function fetchUnreadMessageCount() {
+        $('.message-btn').each(function() {
+            var trainingId = $(this).data('training-id');
+            var participantId = $(this).data('participant-id');
+            var badge = $(this).find('.unread-count');
 
-                $.ajax({
-                    url: "<?= base_url('control/getUnreadMessageCount') ?>",
-                    type: "POST",
-                    data: { training_id: trainingId, participant_id: participantId },
-                    success: function(response) {
-                        var data = JSON.parse(response);
-                        var unreadCount = data.unread_count;
+            $.ajax({
+                url: "<?= base_url('control/getUnreadMessageCount') ?>",
+                type: "POST",
+                data: { training_id: trainingId, participant_id: participantId },
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    var unreadCount = data.unread_count;
 
-                        if (unreadCount > 0) {
-                            badge.text(unreadCount);
-                            badge.show();
-                        } else {
-                            badge.hide();
-                        }
+                    if (unreadCount > 0) {
+                        badge.text(unreadCount);
+                        badge.show();
+                    } else {
+                        badge.hide();
                     }
-                });
+                }
             });
-        }
+        });
+    }
 
-        // Fetch unread message count when the page loads
-        fetchUnreadMessageCount();
+    // Fetch unread message count when the page loads
+    fetchUnreadMessageCount();
 
-        // Refresh unread count every 10 seconds
-        setInterval(fetchUnreadMessageCount, 10000);
-    });
-
-
+    // Refresh unread count every 10 seconds
+    setInterval(fetchUnreadMessageCount, 10000);
 
     // Open the modal and load messages when the "Message" button is clicked
     $('.message-btn').on('click', function() {
