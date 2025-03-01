@@ -244,10 +244,14 @@
                         endif;
 
 
-                        $option .= '<a style="margin-left: 2px; position: relative;" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $training[0]['author_id'] . ', ' . $value['training_id'] . ')">
+                        $option .= '<a id="messageButton-' . $value['training_id'] . '" style="margin-left: 2px; position: relative;" 
+                            data-toggle="tooltip" data-placement="top" title="Message trainer" 
+                            class="btn btn-default btn-sm" href="javascript:void(0)" 
+                            onclick="openMessageModal(' . $training[0]['author_id'] . ', ' . $value['training_id'] . ')">
                             <i class="fa fa-comment" aria-hidden="true"></i>
-                            ' . ($unread_count > 0 ? '<span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px;">' . $unread_count . '</span>' : '') . '
+                            ' . ($unread_count > 0 ? '<span class="badge badge-danger message-badge" style="position: absolute; top: -5px; right: -5px;">' . $unread_count . '</span>' : '') . '
                         </a>';
+        
                         ?>
                         <tr>
                             <td><?= $training_title ?></td>
@@ -309,6 +313,37 @@
             "autoWidth": false,
         });
     });
+
+    function updateUnreadMessageCounts() {
+        $.ajax({
+            url: '<?= base_url('control/fetchUnreadCounts') ?>',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Reset all badges to 0
+                $('.message-badge').remove(); 
+
+                response.forEach(function(entry) {
+                    const trainingId = entry.training_id;
+                    const unreadCount = entry.unread_count;
+
+                    if (unreadCount > 0) {
+                        const badgeHtml = `<span class="badge badge-danger message-badge" style="position: absolute; top: -5px; right: -5px;">${unreadCount}</span>`;
+                        $(`#messageButton-${trainingId}`).append(badgeHtml);
+                    }
+                });
+            },
+            error: function() {
+                console.error('Error fetching unread message counts.');
+            }
+        });
+    }
+
+    // Run update every 5 seconds
+    setInterval(updateUnreadMessageCounts, 5000);
+
+
+
     $('[data-toggles="tooltip"]').tooltip();
 
     function viewCertificate(participantId, trainingId, authorId) {
