@@ -275,7 +275,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Participant</th>
@@ -363,7 +363,12 @@
                                                             data-toggle="modal" 
                                                             data-target="#messageModal">
                                                         <i class="fa fa-comment" aria-hidden="true"></i> <!-- Font Awesome Comment Icon -->
+                                                        <span class="badge badge-danger unread-count" 
+                                                            data-training-id="<?php echo $class['training_id']; ?>" 
+                                                            data-participant-id="<?php echo $class['participant_id']; ?>" 
+                                                            style="display:none;">0</span> <!-- Unread message count -->
                                                     </button>
+
                                                 </td>
 
                                             </tr>
@@ -699,18 +704,66 @@
 </script>
 
 <script>
+    
+    $(document).ready(function() {
+        // Function to fetch unread messages count
+        function fetchUnreadMessageCount() {
+            $('.message-btn').each(function() {
+                var trainingId = $(this).data('training-id');
+                var participantId = $(this).data('participant-id');
+                var badge = $(this).find('.unread-count');
+
+                $.ajax({
+                    url: "<?= base_url('control/getUnreadMessageCount') ?>",
+                    type: "POST",
+                    data: { training_id: trainingId, participant_id: participantId },
+                    success: function(response) {
+                        var data = JSON.parse(response);
+                        var unreadCount = data.unread_count;
+
+                        if (unreadCount > 0) {
+                            badge.text(unreadCount);
+                            badge.show();
+                        } else {
+                            badge.hide();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Fetch unread message count when the page loads
+        fetchUnreadMessageCount();
+
+        // Refresh unread count every 10 seconds
+        setInterval(fetchUnreadMessageCount, 10000);
+    });
+
+
+
     // Open the modal and load messages when the "Message" button is clicked
     $('.message-btn').on('click', function() {
         var trainingId = $(this).data('training-id');
         var participantId = $(this).data('participant-id');
-        
+
         // Store the training ID and participant ID in the modal for later use
         $('#messageModal').data('training-id', trainingId);
         $('#messageModal').data('participant-id', participantId);
 
         // Fetch messages for this training and participant
         fetchMessages(trainingId, participantId);
+
+        // Mark messages as read
+        $.ajax({
+            url: "<?= base_url('control/markMessagesAsRead') ?>",
+            type: "POST",
+            data: { training_id: trainingId, participant_id: participantId },
+            success: function() {
+                fetchUnreadMessageCount(); // Refresh unread count
+            }
+        });
     });
+
 
     // Function to fetch messages based on training ID and participant ID
     function fetchMessages(trainingId, participantId) {

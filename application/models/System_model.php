@@ -26,6 +26,24 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function markMessagesAsRead($participant_id, $training_id) {
+        $this->db->where('sender_id', $participant_id);
+        $this->db->where('receiver_id', $_SESSION['id']);
+        $this->db->where('training_id', $training_id);
+        $this->db->where('read_status', 0); // Only update unread messages
+        $this->db->update('messages', ['read_status' => 1]);
+    }
+
+    public function countUnreadMessages($participant_id, $training_id) {
+        $this->db->where('sender_id', $participant_id);
+        $this->db->where('receiver_id', $_SESSION['id']);
+        $this->db->where('training_id', $training_id);
+        $this->db->where('read_status', 0); // Only unread messages
+        $this->db->from('messages');
+    
+        return $this->db->count_all_results();
+    }
+
     public function fetchTrainingByAuthorAndID($author = false,$id = false)
     {
         $this->db->select('*');
@@ -694,6 +712,7 @@ class System_model extends CI_Model
             'receiver_id' => $receiver_id, // ID of the receiver (trainer or participant)
             'training_id' => $training_id, // ID of the training session
             'message'     => $message,      // Message content
+            'read_status' => 0,
             'timestamp'   => $timestamp
         ];
     

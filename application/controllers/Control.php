@@ -975,8 +975,24 @@ class Control extends CI_Controller
         // Return the messages as a JSON response
         echo json_encode(['status' => 'success', 'messages' => $messages]);
     }
+
+    public function getUnreadMessageCount() {
+        $training_id = $this->input->post('training_id');
+        $participant_id = $this->input->post('participant_id');
     
+        // Get unread messages count
+        $unread_count = $this->System_model->countUnreadMessages($participant_id, $training_id);
     
+        echo json_encode(['unread_count' => $unread_count]);
+    }
+
+    public function markMessagesAsRead() {
+        $training_id = $this->input->post('training_id');
+        $participant_id = $this->input->post('participant_id');
+    
+        // Mark messages as read
+        $this->System_model->markMessagesAsRead($participant_id, $training_id);
+    }
     
     public function send() {
         $sender_id   = $this->input->post('sender_id');
