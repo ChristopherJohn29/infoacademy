@@ -991,7 +991,7 @@ class Control extends CI_Controller
     
         // Query to count unread messages per training
         $this->db->select('training_id, COUNT(*) as unread_count');
-        $this->db->where('recipient_id', $participant_id);
+        $this->db->where('receiver_id', $participant_id);
         $this->db->where('read_status', 0);
         $this->db->group_by('training_id');
         $query = $this->db->get('messages')->result_array();
