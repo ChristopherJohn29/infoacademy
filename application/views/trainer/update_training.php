@@ -430,7 +430,7 @@
                                                                         <label style="margin-right:10px; margin-top:10px;">
                                                                             <a href="<?= $examination['file'] ?>" target="_blank"><?= $examination['file'] ?></a>
                                                                         </label>
-                                                                        <input type="url" name="google_docs_link_<?= $index + 1 ?>" class="form-control mt-2" placeholder="Google Docs Link" value="<?= $examination['file'] ?>">
+                                                                        <input type="url" name="google_docs_link_examination_<?= $index + 1 ?>" class="form-control mt-2" placeholder="Google Docs Link" value="<?= $examination['file'] ?>">
                                                                     <?php } else { ?>
                                                                         <!-- Display file upload if file is not a URL -->
                                                                         <label style="margin-right:10px; margin-top:10px;">

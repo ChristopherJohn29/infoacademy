@@ -699,7 +699,7 @@ class Trainer extends CI_Controller
                     $workshop[$index]['title'] = $workshop_value;
             
                     // Check if a Google Docs link is provided
-                    $googleDocsLink = $_POST['google_docs_link_' . ($index + 1)] ?? null;
+                    $googleDocsLink = $_POST['google_docs_link_workshop_' . ($index + 1)] ?? null;
             
                     if (!empty($googleDocsLink) && filter_var($googleDocsLink, FILTER_VALIDATE_URL)) {
                         // Save the Google Docs link if it's valid
@@ -733,7 +733,7 @@ class Trainer extends CI_Controller
                     $examination[$index]['title'] = $examination_value;
             
                     // Check if a Google Docs link is provided
-                    $googleDocsLink = $_POST['google_docs_link_' . ($index + 1)] ?? null;
+                    $googleDocsLink = $_POST['google_docs_link_examination_' . ($index + 1)] ?? null;
             
                     if (!empty($googleDocsLink) && filter_var($googleDocsLink, FILTER_VALIDATE_URL)) {
                         // Save the Google Docs link if it's valid
