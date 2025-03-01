@@ -697,9 +697,9 @@
         }
 
         $('form').on('submit', function (e) {
-            if (!validateForm()) {
+            // if (!validateForm()) {
                 e.preventDefault(); // Prevent form submission if validation fails
-            }
+            // }
         });
 
         
