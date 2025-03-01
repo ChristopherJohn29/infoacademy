@@ -696,11 +696,11 @@
             return isValid;
         }
 
-        $('form').on('submit', function (e) {
-            // if (!validateForm()) {
-                e.preventDefault(); // Prevent form submission if validation fails
-            // }
-        });
+        // $('form').on('submit', function (e) {
+        //     // if (!validateForm()) {
+        //         // e.preventDefault(); // Prevent form submission if validation fails
+        //     // }
+        // });
 
         
         $("#additional-step").click(function (e) {
