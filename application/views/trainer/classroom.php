@@ -279,6 +279,7 @@
                                     <thead>
                                         <tr>
                                             <th>Participant</th>
+                                            <th>Name of Company</th>
                                             <th>Participant no.</th>
                                             <th>Date enrolled</th>
                                             <th>Payment Status</th>
@@ -293,6 +294,7 @@
                                         <?php foreach ($training_class as $class): ?>
                                             <tr>
                                                 <td><?php echo html_escape($class['first_name']) . ' ' . html_escape($class['last_name']); ?></td>
+                                                <td><?php echo html_escape($class['name_of_company']); ?></td>
                                                 <td><?php echo html_escape($class['participant_code']); ?></td>
                                                 <td><?php echo html_escape($class['date_enrolled']); ?></td>
                                                 <td>
