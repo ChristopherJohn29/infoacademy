@@ -424,6 +424,7 @@
             data: { training_id: trainingId },
             success: function(response) {
                 console.log('Messages marked as read.');
+                updateUnreadMessageCounts();
             },
             error: function() {
                 console.error('Error marking messages as read.');
