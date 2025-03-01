@@ -219,6 +219,8 @@
                         $trainer = $this->System_model->fetchTrainer($training[0]['author_id']);
                         $trainer_name = $trainer[0]['first_name'] . ' ' . $trainer[0]['last_name'];
                         $training_title = $training[0]['training_title'];
+                        $unread_count = $this->System_model->getUnreadMessagesCount($training[0]['author_id'], $value['training_id']);
+
                         $option = '';
                         if ($value['status'] == 0) {
                             $status = 'Payment Validation';
@@ -242,7 +244,10 @@
                         endif;
 
 
-                        $option .= '<a style="margin-left: 2px" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $training[0]['author_id'] . ', ' . $value['training_id'] . ')"> <i class="fa fa-comment" aria-hidden="true"></i></a>';
+                        $option .= '<a style="margin-left: 2px; position: relative;" data-toggle="tooltip" data-placement="top" title="Message trainer" class="btn btn-default btn-sm" href="javascript:void(0)" onclick="openMessageModal(' . $training[0]['author_id'] . ', ' . $value['training_id'] . ')">
+                            <i class="fa fa-comment" aria-hidden="true"></i>
+                            ' . ($unread_count > 0 ? '<span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px;">' . $unread_count . '</span>' : '') . '
+                        </a>';
                         ?>
                         <tr>
                             <td><?= $training_title ?></td>
@@ -346,7 +351,6 @@
                 const messages = response.messages;
                 let messageHtml = '';
 
-                // Loop through each message and create HTML content
                 messages.forEach(function(message) {
                     const sender = message.sender_id == <?= $_SESSION['id'] ?> ? 'You' : 'Trainer';
                     const senderClass = message.sender_id == <?= $_SESSION['id'] ?> ? 'message-sent' : 'message-received';
@@ -362,19 +366,36 @@
                     `;
                 });
 
-                // Update the message container with the new messages
                 $('#messageContainer').html(messageHtml);
 
                 setTimeout(function() {
-                var messageContainer = $('#messageContainer')[0];
-                messageContainer.scrollTop = messageContainer.scrollHeight;  // Scroll to the bottom
+                    var messageContainer = $('#messageContainer')[0];
+                    messageContainer.scrollTop = messageContainer.scrollHeight;  // Scroll to the bottom
                 }, 500);
+
+                // Call function to mark messages as read
+                markMessagesAsRead(trainingId);
             },
             error: function() {
                 alert('Error fetching messages.');
             }
         });
     }
+
+    function markMessagesAsRead(trainingId) {
+        $.ajax({
+            url: '<?= base_url('control/markMessagesAsReadParticipant') ?>',
+            type: 'POST',
+            data: { training_id: trainingId },
+            success: function(response) {
+                console.log('Messages marked as read.');
+            },
+            error: function() {
+                console.error('Error marking messages as read.');
+            }
+        });
+    }
+
 
 
     // Format timestamp to "X minutes ago"

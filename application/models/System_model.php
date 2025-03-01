@@ -26,6 +26,14 @@ class System_model extends CI_Model
         return $result;
     }
 
+    public function getUnreadMessagesCount($trainer_id, $training_id) {
+        $this->db->where('receiver_id', $_SESSION['id']);
+        $this->db->where('sender_id', $trainer_id);
+        $this->db->where('training_id', $training_id);
+        $this->db->where('read_status', 0); // Assuming you have an `is_read` column
+        return $this->db->count_all_results('messages');
+    }
+
     public function markMessagesAsRead($participant_id, $training_id) {
         $this->db->where('sender_id', $participant_id);
         $this->db->where('receiver_id', $_SESSION['id']);

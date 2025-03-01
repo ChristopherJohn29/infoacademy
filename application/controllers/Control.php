@@ -993,6 +993,19 @@ class Control extends CI_Controller
         // Mark messages as read
         $this->System_model->markMessagesAsRead($participant_id, $training_id);
     }
+
+    public function markMessagesAsReadParticipant() {
+        $participant_id = $_SESSION['id']; // Get logged-in user ID
+        $training_id = $this->input->post('training_id');
+    
+        // Update all unread messages to read
+        $this->db->where('receiver_id', $_SESSION['id']);
+        $this->db->where('training_id', $training_id);
+        $this->db->where('read_status', 0);
+        $this->db->update('messages', ['read_status' => 1]);
+    
+        echo json_encode(["status" => "success"]);
+    }
     
     public function send() {
         $sender_id   = $this->input->post('sender_id');
