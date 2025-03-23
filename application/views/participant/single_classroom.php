@@ -181,6 +181,37 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Training References and Example</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <?php
+                            $count = 0;
+                            foreach ($references as $value) {
+                                $count++;
+                                ?>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label><?= $count ?>: <a target="_blank" href="<?= $value->url ?>"><?= $value->title ?></a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+
+                            ?>
+                            <!-- input states -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+
+                    
                     <?php
 
                     $count = 0;
