@@ -183,7 +183,7 @@
                         <!-- /.card-body -->
                     </div>
 
-                    <div class="card card-warning" class="margin-top:20px;">
+                    <div class="card card-warning" style="margin-top:20px;">
                         <div class="card-header">
                             <h3 class="card-title">Training References</h3>
                         </div>
