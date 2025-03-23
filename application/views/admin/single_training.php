@@ -97,7 +97,7 @@
                                     </div>
                                 <?php endif; ?>
                                 </div>
-                                <input type="hidden" name="tid" value="<?=$_GET['id']?>">
+                                <input type="hidden" name="tid" value="<?=$_GET['tid']?>">
                                 <div class="card">
                                     <div class="card-header">
                                         <strong> Training Information </strong>
