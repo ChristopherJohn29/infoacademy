@@ -199,7 +199,7 @@
                                     <div class="col-sm-12">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label><?= $count ?>: <a target="_blank" href="<?= $value->reference_url ?>"><?= $value->reference_title ?></a></label>
+                                            <label><?= $count ?>: <a target="_blank" href="<?= $value->url ?>"><?= $value->title ?></a></label>
                                         </div>
                                     </div>
                                 </div>
