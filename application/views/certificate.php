@@ -43,7 +43,7 @@
       position: absolute;
       top: 240px;
       left: 120px;
-      max-width:55%;
+      max-width:60%;
     }
 
     .course-title {
