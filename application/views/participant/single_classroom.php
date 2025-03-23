@@ -150,6 +150,7 @@
                 <?php
                 $training_class = $this->System_model->fetchFromTrainingClass($_GET['tid']);
                 $instruction = json_decode($training_class[0]['training_instruction']);
+                $references = json_decode($training[0]['ref']);
 
                 ?>
                 <div class="col-md-12">
@@ -211,7 +212,7 @@
                     </div>
 
 
-                    
+
                     <?php
 
                     $count = 0;
