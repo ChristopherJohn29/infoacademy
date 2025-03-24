@@ -352,6 +352,8 @@ class Control extends CI_Controller
                         $insertedId = $this->db->insert_id();
     
                     
+                        $participantCode = $training[0]['training_code'] . '-' . date('m') . date('y') . '-' . sprintf('%04d', $insertedId);
+                        
                         // Update the record with the generated participant code
                         $updateData = ['participant_code' => $participantCode];
                         $this->db->where('id', $insertedId);
