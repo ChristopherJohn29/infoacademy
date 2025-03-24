@@ -176,7 +176,7 @@ class Admin extends CI_Controller
 
         $training = $this->System_model->get_training_by_training_id($training_id);
 
-        $data = array(
+        $data_notification = array(
             'user_id'     => $training->author_id,
             'title'       => 'Approval',
             'message'     => "Your training module, ".$training->training_title.", has been access by the admin on ".date('Y-m-d H:i:s')."",
@@ -186,7 +186,7 @@ class Admin extends CI_Controller
         );
 
         // Call the model to insert the notification
-        $this->notification_model->add_notification($data);
+        $this->notification_model->add_notification($data_notification);
 
         // Save to database
         if ($this->System_model->updateTraining($training_id, $data)) {
