@@ -55,10 +55,15 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" required="required" name="password" placeholder="Password" autocomplete="false">
+          <input type="password" class="form-control" required="required" name="password" id="password" placeholder="Password" autocomplete="false">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></span>
             </div>
           </div>
         </div>
@@ -102,10 +107,9 @@
 <script>
 var login = {
 	remember_me: function(){
-
-			if ( localStorage.username ) {
-				jQuery('#username').val(localStorage.username);
-			}
+		if ( localStorage.username ) {
+			jQuery('#username').val(localStorage.username);
+		}
 
 		jQuery('.submit-login').click(function(e){
       e.preventDefault();
@@ -113,13 +117,20 @@ var login = {
 				localStorage.username = jQuery('#username').val();
 			}
       jQuery('#login_form').submit();
-
-
 		});
 	}
 }
+
 jQuery(document).ready(function(){
 	login.remember_me();
+	
+	// Password toggle functionality
+	jQuery('#togglePassword').click(function() {
+		const password = jQuery('#password');
+		const type = password.attr('type') === 'password' ? 'text' : 'password';
+		password.attr('type', type);
+		jQuery(this).toggleClass('fa-eye fa-eye-slash');
+	});
 });
 </script>
 
