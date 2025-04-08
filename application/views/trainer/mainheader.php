@@ -72,7 +72,36 @@
     font-size: 13px;
     }
 
+    /* Notification dropdown container */
+    .nav-item.dropdown .dropdown-menu {
+        max-height: 400px;         /* Set maximum height */
+        overflow-y: auto;          /* Enable vertical scrolling */
+        width: 300px;             /* Set fixed width */
+    }
 
+    /* Style the scrollbar */
+    .nav-item.dropdown .dropdown-menu::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .nav-item.dropdown .dropdown-menu::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .nav-item.dropdown .dropdown-menu::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+
+    .nav-item.dropdown .dropdown-menu::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Notification items container */
+    #notification_items {
+        max-height: 300px;        /* Set maximum height for items */
+        overflow-y: auto;         /* Enable vertical scrolling */
+    }
 
 </style>
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
