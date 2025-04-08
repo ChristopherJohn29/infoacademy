@@ -65,24 +65,45 @@ class Trainer extends CI_Controller
             
             // Check if all sections are completed
             $allCompleted = true;
-            foreach ($trainingInstruction as $instruction) {
-                if ($instruction['completed'] != 1) {
+            foreach ($trainingInstruction as $section) {
+                if (!isset($section['completed']) || $section['completed'] != 1) {
                     $allCompleted = false;
                     break;
                 }
             }
 
-            // If all sections are completed, trigger saveCompleted
+            // If all sections are completed, mark the training as complete
             if ($allCompleted) {
-                $saved = $this->System_model->saveCompleted($training_id);
-                if ($saved) {
-                    $training_table = $this->System_model->get_training_by_training_id($training_id);
+                // Update the training_class record directly
+                $manilaTime = new DateTime("now", new DateTimeZone('Asia/Manila'));
+                $date = $manilaTime->format('Y-m-d');
+
+                $updateData = [
+                    'is_complete' => 1,
+                    'date_completed' => $date
+                ];
+
+                $this->db->set($updateData);
+                $this->db->where('training_id', $training_id);
+                $this->db->where('participant_id', $participant_id);
+                $this->db->update('training_class');
+
+                // Get training details for notification
+                $training = $this->System_model->get_training_by_training_id($training_id);
+                
+                // Fetch participant details
+                $this->db->select('first_name, last_name');
+                $this->db->where('id', $participant_id);
+                $participant = $this->db->get('user')->row_array();
+                
+                if ($training && $participant) {
+                    $participantName = $participant['first_name'] . ' ' . $participant['last_name'];
                     
                     // Send notification to trainer
                     $data = array(
-                        'user_id'     => $training_table->author_id,
+                        'user_id'     => $training->author_id,
                         'title'       => 'Completion',
-                        'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has completed the course on ".$training_table->training_title.".",
+                        'message'     => $participantName . " has completed the course on ".$training->training_title.".",
                         'link'        => base_url('trainer/classroom/?id=').$training_id,
                         'read_status' => 0,
                         'created_at'  => date('Y-m-d H:i:s')
@@ -93,17 +114,15 @@ class Trainer extends CI_Controller
                     $data = array(
                         'user_id'     => $participant_id,
                         'title'       => 'Completion',
-                        'message'     => "Congratulations! You have successfully completed the course on ".$training_table->training_title.".",
+                        'message'     => "Congratulations! You have successfully completed the course on ".$training->training_title.".",
                         'link'        => base_url('control/classroom/?tid=').$training_id,
                         'read_status' => 0,
                         'created_at'  => date('Y-m-d H:i:s')
                     );
                     $this->notification_model->add_notification($data);
-                    return true;
                 }
             }
         }
-        return false;
     }
 
     public function updateExamStatus() {
