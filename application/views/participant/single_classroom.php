@@ -350,6 +350,11 @@
                                             <?php } ?>
                         
                                             <?php if ($value->completed != 1 && $checking != 1) { ?>
+                                                <?php if ($this->session->flashdata('error')): ?>
+                                                    <div class="alert alert-danger">
+                                                        <?php echo $this->session->flashdata('error'); ?>
+                                                    </div>
+                                                <?php endif; ?>
                                                 <br/><br/><label for="customFile">Submit Workshop</label>
                                                 <form action="<?= base_url() . '/control/submitWorkshop' ?>" method="POST" enctype="multipart/form-data">
                                                     <input name="tid" type="hidden" value="<?= $training[0]['id'] ?>">

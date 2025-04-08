@@ -575,6 +575,8 @@ class Control extends CI_Controller
             $config['max_size'] = 2000;
             $config['max_width'] = 2000;
             $config['max_height'] = 2000;
+            $config['overwrite'] = false; // Prevent overwriting existing files
+            $config['encrypt_name'] = true; // Encrypt the filename for security
 
             // Load the upload library with the new config
             $this->load->library('upload', $config);
@@ -582,19 +584,29 @@ class Control extends CI_Controller
             $error_check = 0;
 
             // Check if a file is uploaded
-            if ($this->upload->do_upload('workshop_file')) {
+            if (isset($_FILES['workshop_file']) && $_FILES['workshop_file']['error'] != 4) { // 4 means no file was uploaded
+                if (!$this->upload->do_upload('workshop_file')) {
+                    // Get the upload error
+                    $error = $this->upload->display_errors();
+                    log_message('error', 'Workshop file upload failed: ' . $error);
+                    
+                    // Set error message in session
+                    $this->session->set_flashdata('error', 'File upload failed: ' . $error);
+                    redirect('control/classroom/?tid=' . $_POST['tid']);
+                    return;
+                }
+                
                 // Get the uploaded file data
                 $file = array('upload_data' => $this->upload->data());
-                // Generate a unique name without prefix by using uniqid() and keep the original file extension
-                $workshop_file = uniqid() . '.' . pathinfo($file['upload_data']['file_name'], PATHINFO_EXTENSION);
-                // Rename the file to the unique name
-                rename($file['upload_data']['full_path'], $file['upload_data']['file_path'] . $workshop_file);
+                $workshop_file = $file['upload_data']['file_name'];
             } elseif (!empty($_POST['workshop_link']) && filter_var($_POST['workshop_link'], FILTER_VALIDATE_URL)) {
                 // Validate and use the provided link
                 $workshop_file = $_POST['workshop_link'];
             } else {
-                // Redirect if neither file nor valid link is provided
-                redirect('control');
+                // Set error message in session
+                $this->session->set_flashdata('error', 'Please provide either a file or a valid URL');
+                redirect('control/classroom/?tid=' . $_POST['tid']);
+                return;
             }
 
             $training_id = $_POST['tid'];
@@ -602,6 +614,12 @@ class Control extends CI_Controller
 
             // Fetch training class data and instructions
             $training_class = $this->System_model->fetchFromTrainingClass($training_id);
+            if (!$training_class) {
+                $this->session->set_flashdata('error', 'Training class not found');
+                redirect('control');
+                return;
+            }
+
             $instruction = json_decode($training_class[0]['training_instruction']);
 
             // Check if the step corresponds to workshop
@@ -609,7 +627,9 @@ class Control extends CI_Controller
                 $file_desc = $instruction[$step]->description;
                 $instruction[$step]->completed = 2;
             } else {
+                $this->session->set_flashdata('error', 'Invalid step type');
                 redirect('control');
+                return;
             }
 
             $new_instruction = json_encode($instruction);
@@ -630,26 +650,28 @@ class Control extends CI_Controller
             $saveWorkshop = $this->System_model->saveWorkshop(html_escape($data));
 
             if ($training_class && $saveWorkshop) {
-
                 $training = $this->System_model->get_training_by_training_id($training_id);
                 
                 $data = array(
                     'user_id'     => $training->author_id,
                     'title'       => 'Submittion',
                     'message'     => "". $_SESSION['first_name']." ".$_SESSION['last_name']." has submitted the workshop for ".$training->training_title.".",
-                    'link'        => base_url('trainer/classroom/?id=').$training_id,  // Adjust link as needed
+                    'link'        => base_url('trainer/classroom/?id=').$training_id,
                     'read_status' => 0,
                     'created_at'  => date('Y-m-d H:i:s')
                 );
 
                 $this->notification_model->add_notification($data);
 
+                $this->session->set_flashdata('success', 'Workshop submitted successfully');
                 redirect('control/classroom/?tid=' . $training_id);
             } else {
+                $this->session->set_flashdata('error', 'Failed to save workshop data');
                 redirect('control');
             }
 
         } else {
+            $this->session->set_flashdata('error', 'No data submitted');
             redirect('control');
         }
     }
