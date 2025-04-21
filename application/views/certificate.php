@@ -69,7 +69,7 @@
       font-size: 1.3rem;
       font-weight: bold;
       position: absolute;
-      top: 470px; /* Adjusted to match the image */
+      top: 467px; /* Adjusted to match the image */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -78,7 +78,7 @@
 
     .qr-code {
       position: absolute;
-      top: 900px;
+      top: 600px;
       left: 50px;
       width: 80px;
       height: 80px;
