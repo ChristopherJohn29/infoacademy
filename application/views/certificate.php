@@ -78,7 +78,7 @@
 
     .qr-code {
       position: absolute;
-      top: 600px;
+      top: 650px;
       left: 50px;
       width: 80px;
       height: 80px;
@@ -111,7 +111,7 @@
         $data = "Training Title: " . $course . "\nDate Accomplished: " . $date_completed . "\nNo. of Hours: " . $required_no_of_hours;
 
         // Generate QR code URL using QR Server API
-        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=' . urlencode($data);
+        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . urlencode($data);
       ?>
       <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
 
