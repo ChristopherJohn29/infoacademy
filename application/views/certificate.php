@@ -44,21 +44,21 @@
       font-size: 2.5rem;
       font-weight: bold;
       position: absolute;
-      top: 170px; /* Adjusted to match the image */
+      top: 180px; /* Adjusted to match the image */
       left: 0;
       width: 100%;
       text-align: center;
-      color: #FFD700; /* Brighter gold color for the name */
+      color: #f3cf83; /* Brighter gold color for the name */
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
     .course-title {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: bold;
       line-height: 1.4;
       max-width: 80%;
       position: absolute;
-      top: 280px; /* Adjusted to match the image */
+      top: 300px; /* Adjusted to match the image */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -69,7 +69,7 @@
       font-size: 1.3rem;
       font-weight: bold;
       position: absolute;
-      top: 380px; /* Adjusted to match the image */
+      top: 400px; /* Adjusted to match the image */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
