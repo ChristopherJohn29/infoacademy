@@ -69,7 +69,7 @@
       font-size: 1.3rem;
       font-weight: bold;
       position: absolute;
-      top: 450px; /* Adjusted to match the image */
+      top: 475px; /* Adjusted to match the image */
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
