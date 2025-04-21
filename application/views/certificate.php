@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Certificate of Training</title>
+  <title>InfoAcademy Certificate of Training</title>
   <style>
     /* Tell Dompdf we want no margins and an A4 landscape page */
     @page {
@@ -16,9 +16,12 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', 'Arial', sans-serif;
       color: #fff;
     }
+
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
     /* A4 landscape dimensions: 297mm x 210mm */
     .certificate-bg {
@@ -27,10 +30,10 @@
       position: relative;
 
       /* Option A: Use a file:// path if you prefer local filesystem references:
-         background: url("file:///<?= FCPATH . 'assets/unicat/images/certificate.png' ?>") no-repeat center center; */
+         background: url("file:///<?= FCPATH . 'assets/unicat/images/newcert.jpg' ?>") no-repeat center center; */
 
       /* Option B: Use base_url() if you have isRemoteEnabled = true in Dompdf: */
-      background: url("<?= base_url('assets/unicat/images/certificate.png') ?>") no-repeat center center;
+      background: url("<?= base_url('assets/unicat/images/newcert.jpg') ?>") no-repeat center center;
 
       background-size: cover;
     }
@@ -38,38 +41,47 @@
 
     /* Text styling */
     .recipient-name {
-      font-size: 3.2rem;
-      font-weight: bolder;
+      font-size: 2.5rem;
+      font-weight: bold;
       position: absolute;
-      top: 240px;
-      left: 120px;
-      max-width:60%;
+      top: 170px; /* Adjusted to match the image */
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #FFD700; /* Brighter gold color for the name */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
     .course-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       line-height: 1.4;
-      max-width:55%;
+      max-width: 80%;
       position: absolute;
-      top: 430px;
-      left: 150px;
+      top: 280px; /* Adjusted to match the image */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
     }
 
     .completion-info {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      line-height: 1.4;
+      font-size: 1.3rem;
       font-weight: bold;
       position: absolute;
-      top: 566px;
-      left: 480px;
+      top: 380px; /* Adjusted to match the image */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
     }
-    
-    .qr-code{
-        position: absolute;
-        top: 620px;
-        left: 940px;
+
+    .qr-code {
+      position: absolute;
+      bottom: 120px;
+      right: 120px;
+      width: 80px;
+      height: 80px;
     }
 
   </style>
@@ -94,12 +106,12 @@
              : '' ?>
       </div>
 
-      <?php 
+      <?php
         // Get the CodeIgniter instance to access URI segments
         $data = "Training Title: " . $course . "\nDate Accomplished: " . $date_completed . "\nNo. of Hours: " . $required_no_of_hours;
 
         // Generate QR code URL using QR Server API
-        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=' . urlencode($data);
+        $qr_code_url = 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=' . urlencode($data);
       ?>
       <img src="<?= $qr_code_url ?>" alt="QR Code" class="qr-code">
 
