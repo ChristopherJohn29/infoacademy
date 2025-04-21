@@ -78,7 +78,7 @@
 
     .qr-code {
       position: absolute;
-      top: 650px;
+      top: 600px;
       left: 62px;
       width: 160px;
       height: 160px;
