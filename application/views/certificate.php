@@ -80,8 +80,8 @@
       position: absolute;
       top: 610px;
       left: 65px;
-      width: 150px;
-      height: 150px;
+      width: 147px;
+      height: 147px;
     }
 
   </style>
