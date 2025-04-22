@@ -53,7 +53,7 @@
     }
 
     .course-title {
-      font-size: 1.7rem;
+      font-size: 1.9rem;
       font-weight: bold;
       line-height: 1.4;
       max-width: 95%;
@@ -69,8 +69,8 @@
       font-size: 1.3rem;
       font-weight: bold;
       position: absolute;
-      top: 467px; /* Adjusted to match the image */
-      left: 50%;
+      top: 458px; /* Adjusted to match the image */
+      left: 49%;
       transform: translateX(-50%);
       text-align: center;
       color: white;
