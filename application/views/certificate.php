@@ -78,10 +78,10 @@
 
     .qr-code {
       position: absolute;
-      top: 600px;
-      left: 62px;
-      width: 160px;
-      height: 160px;
+      top: 610px;
+      left: 65px;
+      width: 150px;
+      height: 150px;
     }
 
   </style>
