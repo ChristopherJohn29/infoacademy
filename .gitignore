@@ -1,26 +1,52 @@
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
+# CodeIgniter specific files
 application/cache/*
 !application/cache/index.html
+!application/cache/.htaccess
 
 application/logs/*
 !application/logs/index.html
+!application/logs/.htaccess
 
 !application/*/.htaccess
 
-composer.lock
-tests/mocks/database/ci_test.sqlite
+# Database configuration file (to prevent local database settings from being committed)
+application/config/database.php
 
+# Environment-specific configuration
+application/config/development
+application/config/testing
+application/config/production
+.env
+.env.*
+!.env.example
+
+# Composer files
+composer.lock
+/vendor/
+
+# Test files
+tests/mocks/database/ci_test.sqlite
+/tests/tests/
+/tests/results/
+
+# User guide
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
 
 # IDE Files
 #-------------------------
 /nbproject/
 .idea/*
+.vscode/
+*.phpintel/
 
 ## Sublime Text cache files
 *.tmlanguage.cache
@@ -28,5 +54,25 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-/tests/tests/
-/tests/results/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.log
+logs/
+*.sqlite
+*.sqlite3
+
+# SQL files (except the original database dump)
+*.sql
+!dbzfblarujwe8k.sql
+
+# Local configuration files
+local-config.php
+config.local.php
+
+# Laragon/XAMPP/WAMP specific files
+.phpunit.result.cache
+.php_cs.cache
+.php-cs-fixer.cache
