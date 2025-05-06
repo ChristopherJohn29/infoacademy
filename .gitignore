@@ -15,8 +15,9 @@ application/logs/*
 
 !application/*/.htaccess
 
-# Database configuration file (to prevent local database settings from being committed)
+# Configuration files (to prevent local settings from being committed)
 application/config/database.php
+application/config/config.php
 
 # Environment-specific configuration
 application/config/development
