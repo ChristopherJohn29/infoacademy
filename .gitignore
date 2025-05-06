@@ -65,9 +65,8 @@ logs/
 *.sqlite
 *.sqlite3
 
-# SQL files (except the original database dump)
+# SQL files
 *.sql
-!dbzfblarujwe8k.sql
 
 # Local configuration files
 local-config.php
