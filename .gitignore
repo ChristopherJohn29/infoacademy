@@ -85,6 +85,10 @@ setup_phpswitcher.bat
 start_server.bat
 switch_php.bat
 test_connection.php
+backup_database.bat
+db_test.php
+phpinfo.php
+.htaccess.example
 
 # Laragon/XAMPP/WAMP specific files
 .phpunit.result.cache
