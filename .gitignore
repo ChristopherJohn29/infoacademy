@@ -72,6 +72,19 @@ logs/
 # Local configuration files
 local-config.php
 config.local.php
+application/config/database.php.example
+application/config/database.php.local
+application/config/database.php.template
+
+# Local development tools
+configure_php.bat
+import_database.bat
+LOCAL_SETUP_GUIDE.md
+setup_local_config.bat
+setup_phpswitcher.bat
+start_server.bat
+switch_php.bat
+test_connection.php
 
 # Laragon/XAMPP/WAMP specific files
 .phpunit.result.cache
