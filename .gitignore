@@ -18,6 +18,7 @@ application/logs/*
 # Configuration files (to prevent local settings from being committed)
 application/config/database.php
 application/config/config.php
+.htaccess
 
 # Environment-specific configuration
 application/config/development
